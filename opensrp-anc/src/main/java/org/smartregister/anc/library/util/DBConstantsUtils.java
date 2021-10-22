@@ -19,6 +19,7 @@ public class DBConstantsUtils {
         public static final String STEPNAME = "stepName";
         public static final String NUMBER_PICKER = "number_picker";
         public static final String FIRST_NAME = "first_name";
+        public static final String MAIDEN_NAME = "maiden_name";
         public static final String LAST_NAME = "last_name";
         public static final String BASE_ENTITY_ID = "base_entity_id";
         public static final String DOB = "dob";//Date Of Birth
@@ -32,7 +33,11 @@ public class DBConstantsUtils {
         public static final String ALT_NAME = "alt_name";
         public static final String ALT_PHONE_NUMBER = "alt_phone_number";
         public static final String HOME_ADDRESS = "home_address";
+        public static final String LANDMARK = "landmark";
+        public static final String NRC_NUMBER = "nrc";
+        public static final String RELATION_NK = "relation_NK";
         public static final String AGE = "age";
+        public static final String ORIGIN = "origin";
         public static final String REMINDERS = "reminders";
         public static final String RED_FLAG_COUNT = "red_flag_count";
         public static final String YELLOW_FLAG_COUNT = "yellow_flag_count";
@@ -45,5 +50,6 @@ public class DBConstantsUtils {
         public static final String VISIT_START_DATE = "visit_start_date";
         public static final String IS_FIRST_VISIT = "is_first_visit";
         public static final String COHABITANTS = "cohabitants";
+        public static final String OTHER_RELATIONS = "other_relation_to_client";
     }
 }

@@ -43,6 +43,13 @@
           }
         },
         {
+          "column_name": "origin",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.origin"
+          }
+        },
+        {
           "column_name": "cohabitants",
           "type": "Event",
           "json_mapping": {
@@ -128,6 +135,34 @@
           "json_mapping": {
             "field": "attributes.visit_start_date"
           }
+        },
+        {
+          "column_name": "nrc",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.nrc"
+          }
+        },
+        {
+          "column_name": "maiden_name",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.maiden_name"
+          }
+        },
+        {
+          "column_name": "relation_NK",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.relation_NK"
+          }
+        },
+        {
+          "column_name": "other_relation_to_client",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.other_relation_to_client"
+          }
         }
       ]
     },
@@ -195,6 +230,13 @@
           "type": "Client",
           "json_mapping": {
             "field": "addresses.address2"
+          }
+        },
+        {
+          "column_name": "landmark",
+          "type": "Client",
+          "json_mapping": {
+            "field": "addresses.landmark"
           }
         }
       ]

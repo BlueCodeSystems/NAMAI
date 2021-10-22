@@ -184,13 +184,6 @@
             "text": "{{anc_profile.step1.educ_level.options.none.text}}"
           },
           {
-            "key": "dont_know",
-            "text": "{{anc_profile.step1.educ_level.options.dont_know.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
             "key": "primary",
             "text": "{{anc_profile.step1.educ_level.options.primary.text}}",
             "openmrs_entity_parent": "",
@@ -253,6 +246,20 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "separated",
+            "text": "Separated",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "separated"
+          },
+          {
+            "key": "cohabiting",
+            "text": "Living with a partner(Cohabiting)",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "cohabiting"
           }
         ],
         "v_required": {
@@ -291,13 +298,6 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "165219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "informal_employment_sex_worker",
-            "text": "{{anc_profile.step1.occupation.options.informal_employment_sex_worker.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "informal_employment_other",
@@ -693,7 +693,7 @@
         "openmrs_entity_id": "1439AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "label_info_text": "If LMP is unknown and ultrasound wasn't done or it wasn't done early (before 24 weeks), then assess GA based on Symphysis Fundal Height (SFH) or abdominal palpation. Compare this GA against ultrasound GA (if done).",
-        "label_info_title": "GA from SFH or abdominal palpation - weeks",
+        "label_info_title": "GA from SFH or HOF - weeks",
         "hint": "{{anc_profile.step2.sfh_gest_age.hint}}",
         "v_required": {
           "value": true,
@@ -701,15 +701,15 @@
         },
         "v_numeric_integer": {
           "value": true,
-          "err": "Enter a Valid GA from SFH or abdominal palpation - weeks value"
+          "err": "Enter a Valid GA from SFH or HOF - weeks value"
         },
         "v_min": {
           "value": "4",
-          "err": "GA from SFH or abdominal palpation - weeks should 4 or greater"
+          "err": "GA from SFH or HOF - weeks should 4 or greater"
         },
         "v_max": {
           "value": "40",
-          "err": "GA from SFH or abdominal palpation - weeks should be 40 or less"
+          "err": "GA from SFH or HOF - weeks should be 40 or less"
         },
         "relevance": {
           "rules-engine": {
@@ -757,7 +757,7 @@
         "key": "select_gest_age_edd_label",
         "type": "label",
         "text": "{{anc_profile.step2.select_gest_age_edd_label.text}}",
-        "label_info_text": "If the difference between GA from LMP and early ultrasound is one week or less, then use GA from LMP. If the difference is more than 7 days, use the early ultrasound GA. If ultrasound was done late, use GA from LMP. Between late ultrasound and SFH or abdominal palpation, use your best judgment to select GA.",
+        "label_info_text": "If the difference between GA from LMP and early ultrasound is one week or less, then use GA from LMP. If the difference is more than 7 days, use the early ultrasound GA. If ultrasound was done late, use GA from LMP. Between late ultrasound and SFH or HOF, use your best judgment to select GA.",
         "label_text_style": "bold",
         "text_color": "#000000",
         "v_required": {
@@ -1216,6 +1216,62 @@
         "spacer_height": "24dp"
       },
       {
+        "key": "miscarriages_lost_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "No. of miscarriages (before 28 weeks / 7 months)",
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "miscarriages_lost",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "miscarriages_lost",
+        "type": "numbers_selector",
+        "number_of_selectors": "5",
+        "start_number": "0",
+        "max_value": "15",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
+        "v_required": {
+          "value": true,
+          "err": "{{anc_profile.step3.miscarriages_abortions.v_required.err}}"
+        },
+        "constraints": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_constraint_rules.yml"
+            }
+          }
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "24dp"
+      },
+      {
         "key": "live_births_label",
         "type": "label",
         "label_text_style": "bold",
@@ -1445,13 +1501,13 @@
         "spacer_height": "24dp"
       },
       {
-        "key": "prev_preg_comps",
+        "key": "prev_preg_probs",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "1430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "select multiple",
         "type": "check_box",
-        "label": "{{anc_profile.step3.prev_preg_comps.label}}",
+        "label": "{{anc_profile.step3.prev_preg_probs.label}}",
         "label_text_style": "bold",
         "exclusive": [
           "none",
@@ -1464,34 +1520,6 @@
             "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "key": "none",
             "text": "{{anc_profile.step3.prev_preg_comps.options.none.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "key": "dont_know",
-            "text": "{{anc_profile.step3.prev_preg_comps.options.dont_know.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "129251AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "key": "pre_eclampsia",
-            "text": "{{anc_profile.step3.prev_preg_comps.options.pre_eclampsia.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "118744AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "key": "eclampsia",
-            "text": "{{anc_profile.step3.prev_preg_comps.options.eclampsia.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "113054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "key": "convulsions",
-            "text": "{{anc_profile.step3.prev_preg_comps.options.convulsions.text}}"
           },
           {
             "openmrs_entity_parent": "",
@@ -1521,6 +1549,64 @@
             "key": "illicit_substance",
             "text": "{{anc_profile.step3.prev_preg_comps.options.illicit_substance.text}}"
           },
+
+          {
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "140951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "key": "macrosomia",
+            "text": "{{anc_profile.step3.prev_preg_comps.options.macrosomia.text}}"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_profile.step3.prev_preg_comps.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "prev_preg_comps",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "1430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_data_type": "select multiple",
+        "type": "check_box",
+        "label": "{{anc_profile.step3.prev_preg_comps.label}}",
+        "label_text_style": "bold",
+        "exclusive": [
+          "none",
+          "dont_know"
+        ],
+        "options": [
+
+          {
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "129251AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "key": "pre_eclampsia",
+            "text": "{{anc_profile.step3.prev_preg_comps.options.pre_eclampsia.text}}"
+          },
+          {
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "118744AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "key": "eclampsia",
+            "text": "{{anc_profile.step3.prev_preg_comps.options.eclampsia.text}}"
+          },
+          {
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "113054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "key": "convulsions",
+            "text": "{{anc_profile.step3.prev_preg_comps.options.convulsions.text}}"
+          },
+
           {
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -2109,13 +2195,6 @@
           {
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "151286AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "key": "cancer",
-            "text": "{{anc_profile.step4.health_conditions.options.cancer.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
             "openmrs_entity_id": "",
             "key": "cancer_other",
             "text": "{{anc_profile.step4.health_conditions.options.cancer_other.text}}"
@@ -2125,28 +2204,14 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
             "key": "gest_diabetes",
-            "text": "{{anc_profile.step4.health_conditions.options.gest_diabetes.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "key": "diabetes_other",
-            "text": "{{anc_profile.step4.health_conditions.options.diabetes_other.text}}"
+            "text": "Diabetes Mellitus (gestational)"
           },
           {
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "key": "diabetes",
-            "text": "{{anc_profile.step4.health_conditions.options.diabetes.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "key": "diabetes_type2",
-            "text": "{{anc_profile.step4.health_conditions.options.diabetes_type2.text}}"
+            "text": "Diabetes Mellitus (pre-existing)"
           },
           {
             "openmrs_entity_parent": "",
@@ -2198,7 +2263,7 @@
         "hint": "{{anc_profile.step4.health_conditions_cancer_other.hint}}",
         "edit_type": "edit_text",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step4.health_conditions_cancer_other.v_required.err}}"
         },
         "relevance": {
@@ -2401,6 +2466,31 @@
         }
       },
       {
+        "key": "underimmunized_doses",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "underimmunized_doses",
+        "type": "edit_text",
+        "edit_type": "number",
+        "hint": "How many doses ?",
+        "v_required": {
+          "value": true,
+          "err": "Please enter the number of doses"
+        },
+        "relevance": {
+          "step5:tt_immun_status": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "1-4_doses"
+
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "tt_immunisation_toaster",
         "openers_entity_parent": "",
         "openmrs_entity": "",
@@ -2526,6 +2616,50 @@
               }
             ]
           }
+        }
+      },
+      {
+        "key": "hepatitis_immun_status",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "hepatitis_immun_status",
+        "type": "native_radio",
+        "label": "{{anc_profile.step5.hepatitis_immun_status.label}}",
+        "label_text_style": "bold",
+        "multi_relevance": true,
+        "options": [
+          {
+            "key": "3_doses",
+            "text": "{{anc_profile.step5.tt_immun_status.options.3_doses.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "164134AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "1-4_doses",
+            "text": "{{anc_profile.step5.tt_immun_status.options.1-4_doses.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165226AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "ttcv_not_received",
+            "text": "{{anc_profile.step5.tt_immun_status.options.ttcv_not_received.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165227AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "unknown",
+            "text": "{{anc_profile.step5.tt_immun_status.options.unknown.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_profile.step5.hepatitis_immun_status.v_required.err}}"
         }
       }
     ]
@@ -2848,13 +2982,6 @@
           {
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "165242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "key": "more_than_48_pieces_squares_of_chocolate",
-            "text": "{{anc_profile.step7.caffeine_intake.options.more_than_48_pieces_squares_of_chocolate.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
             "openmrs_entity_id": "",
             "key": "soda",
             "text": "{{anc_profile.step7.caffeine_intake.options.soda.text}}"
@@ -2905,6 +3032,43 @@
         "openmrs_entity_id": "163731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "native_radio",
         "label": "{{anc_profile.step7.tobacco_user.label}}",
+        "label_text_style": "bold",
+        "multi_relevance": true,
+        "options": [
+          {
+            "key": "yes",
+            "text": "{{anc_profile.step7.tobacco_user.options.yes.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "159450AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "no",
+            "text": "{{anc_profile.step7.tobacco_user.options.no.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "recently_quit",
+            "text": "{{anc_profile.step7.tobacco_user.options.recently_quit.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
+        }
+      },
+      {
+        "key": "tobacco_user",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "native_radio",
+        "label": "Tobacco use - Sniffing(Insunko)",
         "label_text_style": "bold",
         "multi_relevance": true,
         "options": [

@@ -126,7 +126,7 @@ public abstract class ConstantsUtils {
         public static final String ANC_TEST_ENCOUNTER_TYPE = "Tests";
         public static final String ANC_COUNSELLING_TREATMENT_ENCOUNTER_TYPE = "Counselling and Treatment";
         public static final String ANC_SITE_CHARACTERISTICS = "anc_site_characteristics";
-        public static final String ANC_QUICK_CHECK = "anc_quick_check";
+        public static final String ANC_QUICK_CHECK = "quick_check";
         public static final String ANC_TEST_TASKS = "anc_test_tasks";
         public static final String ANC_TEST_TASKS_ENCOUNTER_TYPE = "Contact Tasks";
     }
@@ -172,6 +172,7 @@ public abstract class ConstantsUtils {
         public static final String DEFAULT = "default";
         public static final String PHOTO = "photo";
         public static final String AGE_ENTERED = "age_entered";
+        public static final String ORIGIN = "origin";
         public static final String STEP = "step";
         public static final String FORM = "form";
         public static final String CONTACT_NO = "contact_no";

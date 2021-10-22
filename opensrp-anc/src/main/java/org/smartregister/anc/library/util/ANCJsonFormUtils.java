@@ -485,7 +485,6 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             }
 
             Timber.d("Form is %s", form.toString());
-
             if (form != null) {
                 form.put(ANCJsonFormUtils.ENTITY_ID, womanClient.get(DBConstantsUtils.KeyUtils.BASE_ENTITY_ID));
                 form.put(ANCJsonFormUtils.ENCOUNTER_TYPE, ConstantsUtils.EventTypeUtils.UPDATE_REGISTRATION);
@@ -537,6 +536,26 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.HOME_ADDRESS)) {
             String homeAddress = womanClient.get(DBConstantsUtils.KeyUtils.HOME_ADDRESS);
             jsonObject.put(ANCJsonFormUtils.VALUE, homeAddress);
+
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.ORIGIN))
+    {
+        String origin = womanClient.get(DBConstantsUtils.KeyUtils.ORIGIN);
+        jsonObject.put(ANCJsonFormUtils.VALUE, origin);
+    }
+        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.OTHER_RELATIONS))
+        {
+            String otherRelationsToClient = womanClient.get(DBConstantsUtils.KeyUtils.OTHER_RELATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, otherRelationsToClient);
+        }
+
+        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.WOM_IMAGE)) {
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.NRC_NUMBER)) {
+            String nrcNumber = womanClient.get(DBConstantsUtils.KeyUtils.NRC_NUMBER);
+            jsonObject.put(ANCJsonFormUtils.VALUE, nrcNumber);
+
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.RELATION_NK)) {
+            String relationNK = womanClient.get(DBConstantsUtils.KeyUtils.RELATION_NK);
+            jsonObject.put(ANCJsonFormUtils.VALUE, relationNK);
 
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.WOM_IMAGE)) {
             getPhotoFieldValue(womanClient, jsonObject);
@@ -763,7 +782,6 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
                             StringUtils.isBlank(fields.getJSONObject(i).getString(ConstantsUtils.KeyUtils.VALUE)) ? "0" :
                                     fields.getJSONObject(i).getString(ConstantsUtils.KeyUtils.VALUE));
                 }
-
             }
 
             return settings;
@@ -777,7 +795,7 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
                                                                            Map<String, String> characteristics) {
         try {
             JSONObject form = FormUtils.getInstance(context).getFormJson(ConstantsUtils.JsonFormUtils.ANC_SITE_CHARACTERISTICS);
-            Timber.d("Form is " + form.toString());
+            Timber.d("Form is %s", form.toString());
             if (form != null) {
                 form.put(ANCJsonFormUtils.ENCOUNTER_TYPE, ConstantsUtils.EventTypeUtils.SITE_CHARACTERISTICS);
 
