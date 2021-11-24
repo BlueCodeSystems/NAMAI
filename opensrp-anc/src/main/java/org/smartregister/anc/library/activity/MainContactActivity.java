@@ -28,6 +28,7 @@ import org.smartregister.anc.library.util.ConstantsUtils;
 import org.smartregister.anc.library.util.DBConstantsUtils;
 import org.smartregister.anc.library.util.FilePathUtils;
 import org.smartregister.anc.library.util.Utils;
+import org.smartregister.util.FormUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -42,6 +43,9 @@ import java.util.Map;
 import java.util.Set;
 
 import timber.log.Timber;
+
+import java.util.UUID;
+
 
 public class MainContactActivity extends BaseContactActivity implements ContactContract.View {
     private TextView patientNameView;
@@ -61,6 +65,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP, ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM,
             ConstantsUtils.JsonFormUtils.ANC_TEST, ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT, ConstantsUtils.JsonFormUtils.ANC_TEST_TASKS};
     private String formInvalidFields = null;
+    public JSONObject formObject;
 
     @Override
     protected void onResume() {
@@ -155,6 +160,16 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             setRequiredFields(tests);
             tests.setFormName(ConstantsUtils.JsonFormUtils.ANC_TEST);
             contacts.add(tests);
+
+            Contact hivTests = new Contact();
+            hivTests.setName(getString(R.string.hiv_tests));
+            hivTests.setContactNumber(contactNo);
+            hivTests.setBackground(R.drawable.tests_bg);
+            hivTests.setActionBarBackground(R.color.contact_tests_actionbar);
+            hivTests.setNavigationBackground(R.color.contact_tests_navigation);
+            setRequiredFields(hivTests);
+            hivTests.setFormName(ConstantsUtils.JsonFormUtils.HIV_TEST_AND_RESULTS);
+            contacts.add(hivTests);
 
             Contact counsellingAndTreatment = new Contact();
             counsellingAndTreatment.setName(getString(R.string.counselling_treatment));

@@ -187,6 +187,8 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     @Override
     public void startFormActivity(String formName, String entityId, String metaData) {
+
+        String smNumber = entityId + "9";
         try {
             if (mBaseFragment instanceof HomeRegisterFragment) {
                 String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
@@ -196,7 +198,6 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             Timber.e(e, "%s --> startFormActivity()", this.getClass().getCanonicalName());
             displayToast(getString(R.string.error_unable_to_start_form));
         }
-
     }
 
     @Override
@@ -209,7 +210,6 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == AllConstants.BARCODE.BARCODE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 Barcode barcode = data.getParcelableExtra(AllConstants.BARCODE.BARCODE_KEY);

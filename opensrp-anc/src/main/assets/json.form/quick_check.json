@@ -65,9 +65,6 @@
         "value": "today",
         "hint": "Contact Date",
         "expanded": false,
-        "duration": {
-          "label": "Contact Date"
-        },
         "min_date": "today-20y",
         "max_date": "today",
         "v_required": {
@@ -219,7 +216,7 @@
           },
           {
             "key": "fluid_loss",
-            "text": "{{anc_quick_check.step1.specific_complaint.options.fluid_loss.text}}",
+            "text": "Fluid loss(draining)",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -379,7 +376,7 @@
           },
           {
             "key": "leg_pain",
-            "text": "{{anc_quick_check.step1.specific_complaint.options.leg_pain.text}}",
+            "text": "Leg pain",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",

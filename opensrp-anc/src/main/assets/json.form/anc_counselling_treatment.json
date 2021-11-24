@@ -2,7 +2,7 @@
   "validate_on_submit": true,
   "display_scroll_bars": true,
   "skip_blank_steps": true,
-  "count": "12",
+  "count": "14",
   "encounter_type": "Counselling and Treatment",
   "entity_id": "",
   "relational_id": "",
@@ -1976,7 +1976,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "",
-        "type": "check_box",
+        "type": "native_radio",
         "label": "{{anc_counselling_treatment.step4.eat_exercise_counsel_notdone.label}}",
         "hint": "{{anc_counselling_treatment.step4.eat_exercise_counsel_notdone.hint}}",
         "label_text_style": "bold",
@@ -2017,13 +2017,9 @@
         "edit_type": "name",
         "relevance": {
           "step4:eat_exercise_counsel_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
+              "type": "string",
+            "ex": "equalTo(., \"other\")"
+
           }
         }
       },
@@ -3085,7 +3081,7 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165336AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "check_box",
+        "type": "native_radio",
         "label": "{{anc_counselling_treatment.step6.hiv_prep_notdone.label}}",
         "label_text_style": "bold",
         "options": [
@@ -3139,13 +3135,8 @@
         "edit_type": "name",
         "relevance": {
           "step6:hiv_prep_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
           }
         }
       },
@@ -3352,20 +3343,6 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "155886AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "home",
-            "text": "{{anc_counselling_treatment.step7.delivery_place.options.home.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "other",
-            "text": "{{anc_counselling_treatment.step7.delivery_place.options.other.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ]
       },
@@ -4164,7 +4141,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "",
-        "type": "check_box",
+        "type": "native_radio",
         "label": "{{anc_counselling_treatment.step9.ifa_high_prev_notdone.label}}",
         "hint": "{{anc_counselling_treatment.step9.ifa_high_prev_notdone.hint}}",
         "label_text_style": "bold",
@@ -4205,13 +4182,8 @@
         "edit_type": "name",
         "relevance": {
           "step9:ifa_high_prev_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
           }
         }
       },
@@ -4259,7 +4231,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "",
-        "type": "check_box",
+        "type": "native_radio",
         "label": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone.label}}",
         "hint": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone.hint}}",
         "label_text_style": "bold",
@@ -4300,13 +4272,8 @@
         "edit_type": "name",
         "relevance": {
           "step9:ifa_low_prev_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
           }
         }
       },
@@ -4465,7 +4432,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "",
-        "type": "check_box",
+        "type": "native_radio",
         "label": "{{anc_counselling_treatment.step9.calcium_supp_notdone.label}}",
         "hint": "{{anc_counselling_treatment.step9.calcium_supp_notdone.hint}}",
         "label_text_style": "bold",
@@ -4506,13 +4473,8 @@
         "edit_type": "name",
         "relevance": {
           "step9:calcium_supp_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
           }
         }
       },
@@ -4530,101 +4492,6 @@
             "ex-rules": {
               "rules-file": "ct_calculation_rules.yml"
             }
-          }
-        }
-      },
-      {
-        "key": "vita_supp",
-        "openmrs_entity_parent": "164804AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step9.vita_supp.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step9.vita_supp.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step9.vita_supp.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "{{anc_counselling_treatment.step9.vita_supp.options.done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "{{anc_counselling_treatment.step9.vita_supp.options.not_done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step9.vita_supp.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "vita_supp_notdone",
-        "openmrs_entity_parent": "164804AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "",
-        "type": "check_box",
-        "label": "{{anc_counselling_treatment.step9.vita_supp_notdone.label}}",
-        "hint": "{{anc_counselling_treatment.step9.vita_supp_notdone.hint}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "referred_instead",
-            "text": "{{anc_counselling_treatment.step9.vita_supp_notdone.options.referred_instead.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "other",
-            "text": "{{anc_counselling_treatment.step9.vita_supp_notdone.options.other.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step9.vita_supp_notdone.v_required.err}}"
-        },
-        "relevance": {
-          "step9:vita_supp": {
-            "type": "string",
-            "ex": "equalTo(., \"not_done\")"
-          }
-        }
-      },
-      {
-        "key": "vita_supp_notdone_other",
-        "openmrs_entity_parent": "164804AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "edit_text",
-        "hint": "{{anc_counselling_treatment.step9.vita_supp_notdone_other.hint}}",
-        "edit_type": "name",
-        "relevance": {
-          "step9:vita_supp_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
           }
         }
       },
@@ -5528,6 +5395,7 @@
   },
   "step12": {
     "title": "{{anc_counselling_treatment.step12.title}}",
+    "next": "step13",
     "fields": [
       {
         "key": "prep_toaster",
@@ -5541,5 +5409,377 @@
       }
     ]
   },
+
+  "step13": {
+    "title": "HIV Treatment",
+    "next": "step14",
+    "fields": [
+      {
+        "key": "initiate_ctx",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "Initiate CTX?",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          }
+        ]
+      },
+      {
+        "key": "started_art",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "Started on ART in ANC?",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          }
+        ]
+      },
+      {
+        "key": "art_number",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "ART Number",
+        "edit_type": "name"
+      },
+      {
+        "key": "viral_load",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Viral Load result",
+        "edit_type": "name"
+      }
+    ],
+    "relevance": {
+      "test_hiv_sub_form:hiv_test_result": {
+        "ex": "positive"
+      }
+    }
+  },
+    "step14": {
+      "title": "Preventive Therapy",
+      "fields": [
+        {
+          "key": "mebendazole",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "mebendazole",
+          "type": "native_radio",
+          "label": "Mebendazole",
+          "options": [
+            {
+              "key": "yes",
+              "text": "Yes"
+            },
+            {
+              "key": "no",
+              "text": "No"
+            }
+          ]
+        },
+        {
+          "key": "reason_mebendazole_no",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "161641AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "openmrs_data_type": "select one",
+          "type": "native_radio",
+          "label": "Reasons no mebendazole",
+          "hint": "Reasons no mebendazole",
+          "exclusive": [
+            "none"
+          ],
+          "options": [
+            {
+              "key": "expired",
+              "text": "Expired",
+              "value": false
+            },
+            {
+              "key": "out_of_stock",
+              "text": "Out of stock",
+              "value": false
+            },
+            {
+              "key": "other",
+              "text": "Other (specify)",
+              "value": false
+            }
+          ],
+          "relevance": {
+            "step14:mebendazole": {
+              "type": "string",
+              "ex": "equalTo(., \"no\")"
+            }
+          }
+        },
+        {
+          "key": "other_reason_mebendazole_no",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "other_reason_mebendazole_no",
+          "type": "edit_text",
+          "hint": "Other reason(Specify)",
+          "edit_type": "name",
+          "v_regex": {
+            "value": "[A-Za-z\\s\\.\\-]*",
+            "err": " can only contain letters"
+          },
+          "relevance": {
+            "step14:reason_mebendazole_no": {
+                "type": "string",
+                "ex": "equalTo(., \"other\")"
+                }
+          }
+        },
+        {
+          "key": "fansidar",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "fansidar",
+          "type": "native_radio",
+          "label": "Fansidar - IPTp SP (for HIV- pregnant women)?",
+          "options": [
+            {
+              "key": "yes",
+              "text": "Yes"
+            },
+            {
+              "key": "no",
+              "text": "No"
+            }
+          ]
+        },
+        {
+          "key": "reason_fansider_no",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "reason_fansider_no",
+          "openmrs_data_type": "select one",
+          "type": "native_radio",
+          "label": "Reasons no Fansider",
+          "hint": "Reasons no Fansider",
+          "exclusive": [
+            "none"
+          ],
+          "options": [
+            {
+              "key": "expired",
+              "text": "Expired",
+              "value": false
+            },
+            {
+              "key": "out_of_stock",
+              "text": "Out of stock",
+              "value": false
+            },
+            {
+              "key": "other",
+              "text": "Other (specify)",
+              "value": false
+            }
+          ],
+          "relevance": {
+            "step14:fansidar": {
+              "type": "string",
+              "ex": "equalTo(., \"no\")"
+            }
+          }
+        },
+        {
+          "key": "other_reason_fansider_no",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "other_reason_fansider_no",
+          "type": "edit_text",
+          "hint": "Other reason(Specify)",
+          "edit_type": "name",
+          "v_regex": {
+            "value": "[A-Za-z\\s\\.\\-]*",
+            "err": " can only contain letters"
+          },
+          "relevance": {
+            "step14:reason_fansider_no": {
+              "type": "string",
+              "ex": "equalTo(., \"other\")"
+            }
+            }
+          },
+        {
+          "key": "co_trimoxazole",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "co_trimoxazole",
+          "type": "native_radio",
+          "label": "Co-trimoxazole - CPT (for HIV+ pregnant women)",
+          "options": [
+            {
+              "key": "yes",
+              "text": "Yes"
+            },
+            {
+              "key": "no",
+              "text": "No"
+            }
+          ]
+        },
+        {
+          "key": "reason_co_trimoxazole_no",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "161642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "openmrs_data_type": "select one",
+          "type": "native_radio",
+          "label": "Reasons no Co-trimoxazole",
+          "hint": "Reasons no Co-trimoxazole",
+          "exclusive": [
+            "none"
+          ],
+          "options": [
+            {
+              "key": "expired",
+              "text": "Expired",
+              "value": false
+            },
+            {
+              "key": "out_of_stock",
+              "text": "Out of stock",
+              "value": false
+            },
+            {
+              "key": "other",
+              "text": "Other (specify)",
+              "value": false
+            }
+          ],
+          "relevance": {
+            "step14:co_trimoxazole": {
+              "type": "string",
+              "ex": "equalTo(., \"no\")"
+            }
+          }
+        },
+        {
+          "key": "other_reason_co_trimoxazole_no",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "other_reason_mebendazole_no",
+          "type": "edit_text",
+          "hint": "Other reason(Specify)",
+          "edit_type": "name",
+          "v_regex": {
+            "value": "[A-Za-z\\s\\.\\-]*",
+            "err": " can only contain letters"
+          },
+          "relevance": {
+            "step14:reason_co_trimoxazole_no": {
+              "type": "string",
+              "ex": "equalTo(., \"other\")"
+            }
+          }
+        },
+        {
+          "key": "itn_issued",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "itn_issued",
+          "type": "native_radio",
+          "label": "ITN Issued?",
+          "options": [
+            {
+              "key": "yes",
+              "text": "Yes"
+            },
+            {
+              "key": "no",
+              "text": "No"
+            }
+          ]
+        },
+        {
+          "key": "prep",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "prep",
+          "type": "native_radio",
+          "label": "Prep issued?",
+          "options": [
+            {
+              "key": "yes",
+              "text": "Yes"
+            },
+            {
+              "key": "no",
+              "text": "No"
+            }
+          ],
+          "relevance": {
+            "rules-engine": {
+              "ex-rules": {
+                "rules-file": "hiv_test_relevance.yml"
+              }
+            }
+          }
+        },
+        {
+          "key": "regimen",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "itn_issued",
+          "type": "native_radio",
+          "label": "Regimen",
+          "options": [
+            {
+              "key": "tdf_ftc",
+              "text": "TDF+FTC"
+            },
+            {
+              "key": "tdf_3tc",
+              "text": "TDF +3TC"
+            }
+          ],
+          "relevance": {
+            "step14:prep": {
+              "type": "string",
+              "ex": "equalTo(., \"yes\")"
+            }
+          }
+        }
+      ]
+
+    },
   "properties_file_name": "anc_counselling_treatment"
 }

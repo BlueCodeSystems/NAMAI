@@ -72,21 +72,21 @@ actions:
 name: step3_pulse_rate_repeat
 description: Pulse rate measurement
 priority: 1
-condition: "step3_pulse_rate > 0 && (step3_pulse_rate < 60 || step3_pulse_rate > 100)"
+condition: "((step3_pulse_rate > 0 && step3_pulse_rate < 60) || (step3_pulse_rate > 60)) "
 actions:
   - "isRelevant = true"
 ---
 name: step3_pulse_rate_repeat_label
 description: Pulse rate measurement
 priority: 1
-condition: "step3_pulse_rate > 0 && (step3_pulse_rate < 60 || step3_pulse_rate > 100) "
+condition: "((step3_pulse_rate > 0 && step3_pulse_rate < 60) || (step3_pulse_rate > 90))"
 actions:
   - "isRelevant = true"
 ---
 name: step3_toaster18
 description: Pulse rate measurement
 priority: 1
-condition: "step3_pulse_rate_repeat > 0 && (step3_pulse_rate_repeat < 60 || step3_pulse_rate_repeat > 100) "
+condition: "step3_pulse_rate_repeat > 0 && (step3_pulse_rate_repeat < 60 || step3_pulse_rate_repeat > 90) "
 actions:
   - "isRelevant = true"
 ---
@@ -100,7 +100,7 @@ actions:
 name: step4_toaster28
 description: Fetal heart beat rate
 priority: 1
-condition: "(step4_fetal_heart_rate > 0 && (step4_fetal_heart_rate < 100 || step4_fetal_heart_rate > 180))"
+condition: "(step4_fetal_heart_rate > 0 && step4_fetal_heart_rate < 120 ) || (step4_fetal_heart_rate > 160)"
 actions:
   - "isRelevant = true"
 ---
@@ -114,14 +114,14 @@ actions:
 name: step4_fetal_heart_rate_repeat_label
 description: Fetal heart beat rate
 priority: 1
-condition: "(step4_fetal_heart_rate > 0 && (step4_fetal_heart_rate < 100 || step4_fetal_heart_rate > 180))"
+condition: "(step4_fetal_heart_rate > 0 && step4_fetal_heart_rate < 120 ) || (step4_fetal_heart_rate > 160)"
 actions:
   - "isRelevant = true"
 ---
 name: step4_fetal_heart_rate_repeat
 description: Fetal heart beat rate
 priority: 1
-condition: "(step4_fetal_heart_rate > 0 && (step4_fetal_heart_rate < 100 || step4_fetal_heart_rate > 180))"
+condition: "(step4_fetal_heart_rate > 0 && step4_fetal_heart_rate < 120 ) || (step4_fetal_heart_rate > 160)"
 actions:
   - "isRelevant = true"
 ---
@@ -135,7 +135,7 @@ actions:
 name: step4_toaster29
 description: Fetal heart beat rate repeat toaster
 priority: 1
-condition: "(step4_fetal_heart_rate_repeat > 0 && (step4_fetal_heart_rate_repeat < 100 || step4_fetal_heart_rate_repeat > 180))"
+condition: "(step4_fetal_heart_rate_repeat > 0 && step4_fetal_heart_rate_repeat < 120 ) || (step4_fetal_heart_rate_repeat > 160)"
 actions:
   - "isRelevant = true"
 ---
@@ -305,7 +305,7 @@ description: cant_record_bp
 priority: 1
 condition: "((step2_bp_diastolic_repeat > 0 && step2_bp_diastolic_repeat < 20 ) || (bp_systolic_repeat > 0 && bp_systolic_repeat < 60))"
 actions:
-  - "isRelevant = false"
+  - "isRelevant = true"
 ---
 name: fetal_heart_rate_repeat
 description: Second heartrate
@@ -320,3 +320,66 @@ priority: 1
 condition: "((fetal_heart_rate > 0 && fetal_heart_rate < 120 ) || (fetal_heart_rate > 160))"
 actions:
   - "isRelevant = false"
+---
+name: step3_unrecordable_pulse
+description: cant_record_bp
+priority: 1
+condition: "step3_pulse_rate_repeat > 0 && step3_pulse_rate_repeat < 50 "
+actions:
+  - "isRelevant = true"
+---
+name: step3_repeat_bpm_toaster
+description: repeat_bpm_toaster
+priority: 1
+condition: "((step3_bpm > 0 && step3_bpm < 12) || (step3_bpm > 18))"
+actions:
+  - "isRelevant = true"
+---
+name: step3_bpm_repeat_label
+description: bpm_repeat_label
+priority: 1
+condition: "((step3_bpm > 0 && step3_bpm < 12) || (step3_bpm > 18))"
+actions:
+  - "isRelevant = true"
+---
+name: step3_bpm_repeat
+description: bpm_repeat
+priority: 1
+condition: "((step3_bpm > 0 && step3_bpm < 12) || (step3_bpm > 18))"
+actions:
+  - "isRelevant = true"
+---
+name: step3_suspected_anemia_toaster
+description: bpm_repeat
+priority: 1
+condition: "((step3_bpm_repeat > 0 && step3_bpm_repeat < 12) || (step3_bpm_repeat > 18))"
+actions:
+  - "isRelevant = true"
+---
+name: step3_body_temp_repeat
+description: body_temp_repeat
+priority: 1
+condition: "((step3_body_temp > 0 && step3_body_temp < 35) || (step3_body_temp > 38))"
+actions:
+  - "isRelevant = true"
+---
+name: step3_toaster15
+description: toaster15
+priority: 1
+condition: "((step3_body_temp > 0 && step3_body_temp < 35) || (step3_body_temp > 38))"
+actions:
+  - "isRelevant = true"
+---
+name: step3_body_temp_repeat_label
+description: body_temp_repeat_label
+priority: 1
+condition: "((step3_body_temp > 0 && step3_body_temp < 35) || (step3_body_temp > 38))"
+actions:
+  - "isRelevant = true"
+---
+name: step3_hypothermia_toaster
+description: hypothermia_toaster
+priority: 1
+condition: " step3_body_temp_repeat > 0 && step3_body_temp_repeat < 35"
+actions:
+  - "isRelevant = true"
