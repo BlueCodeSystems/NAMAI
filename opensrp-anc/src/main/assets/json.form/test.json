@@ -2,7 +2,7 @@
   "validate_on_submit": false,
   "display_scroll_bars": true,
   "count": "2",
-  "encounter_type": "Diagnostic Tests and Imaging",
+  "encounter_type": "Tests",
   "entity_id": "",
   "relational_id": "",
   "form_version": "0.0.1",
@@ -74,7 +74,8 @@
     "hepc_positive",
     "syph_test_status",
     "ultrasound",
-    "hepb_positive"
+    "hepb_positive",
+    "partner_hepb_positive"
   ],
   "step1": {
     "title": "Laboratory tests",
@@ -88,7 +89,7 @@
         "text": "{{anc_test.step1.accordion_blood_type.text}}",
         "type": "expansion_panel",
         "content_form": "tests_blood_type_sub_form",
-        "container": "test"
+        "container": "anc_test"
       },
       {
         "key": "accordion_hiv",
@@ -100,7 +101,7 @@
         "accordion_info_title": "{{anc_test.step2.accordion_hiv.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_hiv_sub_form",
-        "container": "test",
+        "container": "anc_test",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -121,7 +122,7 @@
         "text": "{{anc_test.step2.accordion_partner_hiv.text}}",
         "type": "expansion_panel",
         "content_form": "tests_partner_hiv_sub_form",
-        "container": "test"
+        "container": "anc_test"
       },
       {
         "key": "accordion_partner_hepatitis_b",
@@ -133,7 +134,7 @@
         "accordion_info_title": "Partner Hepatitis B test",
         "type": "expansion_panel",
         "content_form": "partner_tests_hepatitis_b_sub_form",
-        "container": "test"
+        "container": "anc_test"
       },
       {
         "key": "accordion_hepatitis_b",
@@ -145,7 +146,7 @@
         "accordion_info_title": "{{anc_test.step1.accordion_hepatitis_b.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_hepatitis_b_sub_form",
-        "container": "test",
+        "container": "anc_test",
         "v_required": {
           "value": "true",
           "err": "Please test for Hepatitis B"
@@ -162,26 +163,7 @@
         "accordion_info_title": "{{anc_test.step1.accordion_tb_screening.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_tb_screening_sub_form",
-        "container": "test"
-      },
-      {
-        "key": "accordion_hepatitis_c",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "{{anc_test.step1.accordion_hepatitis_c.text}}",
-        "accordion_info_text": "{{anc_test.step1.accordion_hepatitis_c.accordion_info_text}}",
-        "accordion_info_title": "{{anc_test.step1.accordion_hepatitis_c.accordion_info_title}}",
-        "type": "expansion_panel",
-        "content_form": "tests_hepatitis_c_sub_form",
-        "container": "test",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
+        "container": "anc_test"
       },
       {
         "key": "accordion_syphilis",
@@ -193,7 +175,7 @@
         "accordion_info_title": "{{anc_test.step1.accordion_syphilis.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_syphilis_sub_form",
-        "container": "test",
+        "container": "anc_test",
         "v_required": {
           "value": "true",
           "err": "Please test for Syphilis"
@@ -209,7 +191,7 @@
         "accordion_info_title": "Partner Syphilis test",
         "type": "expansion_panel",
         "content_form": "partner_tests_syphilis_sub_form",
-        "container": "test"
+        "container": "anc_test"
       },
       {
         "key": "accordion_urine",
@@ -221,7 +203,7 @@
         "accordion_info_title": "{{anc_test.step1.accordion_urine.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_urine_sub_form",
-        "container": "test",
+        "container": "anc_test",
         "v_required": {
           "value": "true",
           "err": "Please test Urine"
@@ -237,7 +219,7 @@
         "accordion_info_title": "{{anc_test.step1.accordion_blood_haemoglobin.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_blood_haemoglobin_sub_form",
-        "container": "test",
+        "container": "anc_test",
         "v_required": {
           "value": "true",
           "err": "Please test for haemoglobin"
@@ -252,7 +234,7 @@
         "type": "expansion_panel",
         "display_bottom_section": true,
         "content_form": "tests_blood_glucose_sub_form",
-        "container": "test"
+        "container": "anc_test"
       }
     ]
   },
@@ -269,7 +251,7 @@
         "accordion_info_title": "{{anc_test.step1.accordion_ultrasound.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_ultrasound_sub_form",
-        "container": "test"
+        "container": "anc_test"
 
       },
       {
@@ -282,7 +264,7 @@
         "accordion_info_title": "{{anc_test.step1.accordion_tb_imaging.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_tb_imaging_sub_form",
-        "container": "test"
+        "container": "anc_test"
       },
       {
         "key": "accordion_imaging",
@@ -294,7 +276,7 @@
         "accordion_info_title": "{{anc_test.step2.accordion_tb_screening.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_tb_screening_sub_form",
-        "container": "test",
+        "container": "anc_test",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -314,7 +296,7 @@
         "type": "expansion_panel",
         "display_bottom_section": true,
         "content_form": "tests_other_tests_sub_form",
-        "container": "test"
+        "container": "anc_test"
       }
     ]
   },
