@@ -125,7 +125,7 @@ public abstract class ConstantsUtils {
         public static final String ANC_TEST = "test";
         public static final String HIV_TEST_AND_RESULTS = "hiv_test";
         public static final String ANC_COUNSELLING_TREATMENT = "anc_counselling_treatment";
-        public static final String ANC_TEST_ENCOUNTER_TYPE = "Tests";
+        public static final String ANC_TEST_ENCOUNTER_TYPE = "Diagnostic Tests and Imaging";
         public static final String ANC_COUNSELLING_TREATMENT_ENCOUNTER_TYPE = "Counselling and Treatment";
         public static final String ANC_SITE_CHARACTERISTICS = "anc_site_characteristics";
         public static final String ANC_QUICK_CHECK = "quick_check";
