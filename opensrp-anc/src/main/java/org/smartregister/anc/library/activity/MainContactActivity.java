@@ -223,7 +223,6 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
         try {
 
-            requiredFieldsMap.clear();
             loadContactGlobalsConfig();
 
             process(contactForms);

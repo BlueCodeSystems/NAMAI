@@ -74,7 +74,8 @@
     "hepc_positive",
     "syph_test_status",
     "ultrasound",
-    "hepb_positive"
+    "hepb_positive",
+    "partner_hepb_positive"
   ],
   "step1": {
     "title": "Laboratory tests",
@@ -163,25 +164,6 @@
         "type": "expansion_panel",
         "content_form": "tests_tb_screening_sub_form",
         "container": "test"
-      },
-      {
-        "key": "accordion_hepatitis_c",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "{{anc_test.step1.accordion_hepatitis_c.text}}",
-        "accordion_info_text": "{{anc_test.step1.accordion_hepatitis_c.accordion_info_text}}",
-        "accordion_info_title": "{{anc_test.step1.accordion_hepatitis_c.accordion_info_title}}",
-        "type": "expansion_panel",
-        "content_form": "tests_hepatitis_c_sub_form",
-        "container": "test",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
       },
       {
         "key": "accordion_syphilis",
