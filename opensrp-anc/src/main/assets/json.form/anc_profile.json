@@ -8367,9 +8367,10 @@
         "hint": "Unprotected",
         "type": "hidden",
         "relevance": {
-          "step4:underimmunized_doses": {
-            "type": "numeric",
-            "ex": "lessThan(.,\"2\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         }
       },
@@ -8384,9 +8385,10 @@
         "hint": "Protected",
         "type": "hidden",
         "relevance": {
-          "step4:underimmunized_doses": {
-            "type": "numeric",
-            "ex": "greaterThan(.,\"1\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         }
       },
@@ -8401,15 +8403,10 @@
         "hint": "Fully Protected",
         "type": "hidden",
         "relevance": {
-          "step4:underimmunized_doses": {
-            "type": "numeric",
-            "ex": "greaterThan(.,\"1\")"
-          }
-        },
-        "relevance": {
-          "step4:tt_immun_status": {
-            "type": "string",
-            "ex": "equalTo(., \"3_doses\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         }
       },
