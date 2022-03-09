@@ -2004,6 +2004,13 @@
         "has_extra_rel": "1",
         "options": [
           {
+            "key": "2",
+            "text": "{{anc_physical_exam.step3.cervical_exam.options.2.text}}",
+            "openmrs_entity_parent": "165374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
             "key": "1",
             "text": "{{anc_physical_exam.step3.cervical_exam.options.1.text}}",
             "openmrs_entity_parent": "165374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2014,13 +2021,6 @@
             "specify_info_color": "#8C8C8C",
             "secondary_suffix": "cm",
             "content_form": "cervical_exam_sub_form"
-          },
-          {
-            "key": "2",
-            "text": "{{anc_physical_exam.step3.cervical_exam.options.2.text}}",
-            "openmrs_entity_parent": "165374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "openmrs_entity": "",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "3",
