@@ -1,19 +1,18 @@
 package org.smartregister.anc.library.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 
 import org.smartregister.anc.library.R;
 import org.smartregister.p2p.activity.P2pModeSelectActivity;
 import org.smartregister.util.LangUtils;
 
 public class AncP2pModeSelectActivity extends P2pModeSelectActivity {
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.peer_to_peer_activity_title);
     }
