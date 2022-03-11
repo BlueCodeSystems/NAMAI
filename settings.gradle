@@ -1,1 +1,3 @@
 include ':reference-app', ':sample', ':opensrp-anc'
+include ':p2p-sync'
+project(":p2p-sync").projectDir = new File("../android-p2p-sync/p2p-sync")
