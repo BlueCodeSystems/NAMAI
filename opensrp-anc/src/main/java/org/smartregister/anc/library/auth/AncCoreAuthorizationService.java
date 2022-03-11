@@ -3,6 +3,7 @@ package org.smartregister.anc.library.auth;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+
 import org.smartregister.AllConstants;
 import org.smartregister.CoreLibrary;
 import org.smartregister.anc.library.constants.CoreP2pConstants;
@@ -17,7 +18,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-
 
 public class AncCoreAuthorizationService implements P2PAuthorizationService {
 
