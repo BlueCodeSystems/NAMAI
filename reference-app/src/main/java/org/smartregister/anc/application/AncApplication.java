@@ -1,5 +1,8 @@
 package org.smartregister.anc.application;
 
+import static org.smartregister.util.Log.logError;
+import static org.smartregister.util.Log.logInfo;
+
 import android.content.Intent;
 import android.util.Log;
 
@@ -37,9 +40,6 @@ import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
-import static org.smartregister.util.Log.logError;
-import static org.smartregister.util.Log.logInfo;
-
 /**
  * Created by ndegwamartin on 21/06/2018.
  */
@@ -50,12 +50,10 @@ public class AncApplication extends DrishtiApplication implements TimeChangedBro
     public void onCreate() {
         super.onCreate();
 
-
         mInstance = this;
         context = Context.getInstance();
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject());
-
 
         //Initialize Modules
         P2POptions p2POptions = new P2POptions(true);
@@ -86,6 +84,7 @@ public class AncApplication extends DrishtiApplication implements TimeChangedBro
         NativeFormLibrary
                 .getInstance()
                 .setClientFormDao(CoreLibrary.getInstance().context().getClientFormRepository());
+
     }
 
     private void setDefaultLanguage() {
