@@ -1111,11 +1111,31 @@ priority: 1
 condition: "(step2_preg_fifteen_gestational_age > 6) && (!step2_preg_fifteen_sex_infant.isEmpty())"
 actions:
   - "isRelevant = true"
-
 ---
 name: step2_preg_fifteen_outcome_early
 description: preg_fifteen_outcome_early
 priority: 1
 condition: "(step2_preg_fifteen_gestational_age > 0) && (step2_preg_fifteen_gestational_age < 7)"
+actions:
+  - "isRelevant = true"
+---
+name: step4_ttcv_unprotected
+description: ttcv_unprotected
+priority: 1
+condition: "(((global_underimmunized_doses < 2)||(step4_tt_immun_status == 'ttcv_not_received')) && (!step4_tt_immun_status.isEmpty()))"
+actions:
+  - "isRelevant = true"
+---
+name: step4_ttcv_protected
+description: ttcv_protected
+priority: 1
+condition: "((global_underimmunized_doses > 1) && (global_underimmunized_doses < 4))"
+actions:
+  - "isRelevant = true"
+---
+name: step4_ttcv_full_protected
+description: ttcv_full_protected
+priority: 1
+condition: "(((global_underimmunized_doses > 3)||(step4_tt_immun_status == '3_doses')) && (!step4_tt_immun_status.isEmpty()))"
 actions:
   - "isRelevant = true"
