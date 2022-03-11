@@ -3,7 +3,6 @@ package org.smartregister.anc.library.auth;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
 import org.smartregister.AllConstants;
 import org.smartregister.CoreLibrary;
 import org.smartregister.anc.library.constants.CoreP2pConstants;
