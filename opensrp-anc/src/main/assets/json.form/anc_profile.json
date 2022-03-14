@@ -55,7 +55,7 @@
     }
   },
   "editable_fields": [
-    "discordant",
+    "discordant_label",
     "educ_level",
     "marital_status",
     "occupation",
@@ -102,7 +102,7 @@
     "ttcv_full_protected"
   ],
   "default_values": [
-    "discordant",
+    "discordant_label",
     "educ_level",
     "marital_status",
     "occupation",
@@ -154,7 +154,7 @@
   ],
   "global_previous": [
     "age",
-    "discordant",
+    "discordant_label",
     "underimmunized_doses",
     "ttcv_unprotected",
     "ttcv_protected",
@@ -8255,12 +8255,14 @@
         }
       },
       {
-        "key": "discordant",
+        "key": "discordant_label",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "discordant",
-        "type": "hidden",
-        "text_color": "#FF0000",
+        "openmrs_entity_id": "discordant_label",
+        "type": "edit_text",
+        "value": "No",
+        "label": "Discordant",
+        "hidden": "true",
         "label_text_style": "bold",
         "calculation": {
           "rules-engine": {

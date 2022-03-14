@@ -202,12 +202,12 @@ condition: "(step7_partner_hiv_status == 'positive') || (global_hiv_test_partner
 actions:
   - "calculation = 1"
 ---
-name: step3_discordant
-description: discordant
+name: step3_discordant_label
+description: discordant_label
 priority: 1
 condition: "(global_hiv_test_result == 'positive')"
 actions:
-  - "calculation = 'yes' "
+  - "calculation = ['yes'] "
 ---
 name: step2_delivery_termination
 description: delivery_termination
