@@ -55,7 +55,7 @@
     }
   },
   "editable_fields": [
-    "discordant_label",
+    "discordant_out",
     "educ_level",
     "marital_status",
     "occupation",
@@ -102,7 +102,7 @@
     "ttcv_full_protected"
   ],
   "default_values": [
-    "discordant_label",
+    "discordant_out",
     "educ_level",
     "marital_status",
     "occupation",
@@ -154,7 +154,7 @@
   ],
   "global_previous": [
     "age",
-    "discordant_label",
+    "discordant_out",
     "underimmunized_doses",
     "ttcv_unprotected",
     "ttcv_protected",
@@ -8255,15 +8255,31 @@
         }
       },
       {
-        "key": "discordant_label",
+        "key": "discordant_out",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "discordant_label",
-        "type": "edit_text",
-        "value": "No",
-        "label": "Discordant",
+        "openmrs_entity_id": "discordant_out",
+        "type": "native_radio",
+        "value": "no",
         "hidden": "true",
+        "label": "Discordant",
         "label_text_style": "bold",
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "yes"
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "no"
+          }
+        ],
         "calculation": {
           "rules-engine": {
             "ex-rules": {

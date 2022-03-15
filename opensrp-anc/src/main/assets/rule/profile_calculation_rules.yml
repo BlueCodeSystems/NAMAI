@@ -198,16 +198,16 @@ actions:
 name: step7_partner_hiv_positive
 description: HIV Risk
 priority: 1
-condition: "(step7_partner_hiv_status == 'positive') || (global_hiv_test_partner_result != null && global_hiv_test_partner_result != '' && global_hiv_test_partner_result == 'positive')"
+condition: "(step8_partner_hiv_status == 'positive') || (global_hiv_test_partner_result != null && global_hiv_test_partner_result != '' && global_hiv_test_partner_result == 'positive')"
 actions:
   - "calculation = 1"
 ---
-name: step3_discordant_label
-description: discordant_label
+name: step3_discordant_out
+description: discordant_out
 priority: 1
-condition: "(global_hiv_test_result == 'positive')"
+condition: " ((global_hiv_test_partner_result == 'positive'  || step8_partner_hiv_status == 'positive' ) && (global_hiv_test_result == 'negative' || step7_hiv_test_result == 'negative')) || ((global_hiv_test_partner_result == 'negative'  || step8_partner_hiv_status == 'negative' ) && (global_hiv_test_result == 'positive' || step7_hiv_test_result == 'positive')) "
 actions:
-  - "calculation = ['yes'] "
+  - "calculation = 'yes' "
 ---
 name: step2_delivery_termination
 description: delivery_termination
