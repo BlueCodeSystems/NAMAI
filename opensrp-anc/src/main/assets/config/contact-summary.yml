@@ -109,6 +109,7 @@ fields:
 
 - template: "{{contact_summary.demographic_info.discordant}}: {discordant_out}"
   relevance: "hiv_test_result != ''"
+
 ---
 group: current_pregnancy
 fields:
@@ -656,6 +657,33 @@ fields:
 - template: "{{contact_summary.hepatitis_b_test.hepatitis_b_positive_counseling_not_done}}"
   relevance: "hepb_positive_counsel == 'not_done'"
 ---
+group: partner_hepatitis_b_test
+fields:
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_hepatitis_b_test_ordered}}"
+    relevance: "partner_hepb_test_status == 'ordered'"
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_hepatitis_b_test_not_done}}: {hepb_test_notdone_value}"
+    relevance: "partner_hepb_test_status == 'not_done'"
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_hepatitis_b_test_date}}: {hepb_test_date}"
+    relevance: "partner_hepb_test_date != ''"
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_hbsag_laboratory_based_immunoassay_result}}: {hbsag_lab_ima_value}"
+    relevance: "partner_hbsag_lab_ima != ''"
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_hbsag_rapid_diagnostic_test_rdt_result}}: {hbsag_rdt_value}"
+    relevance: "partner_hbsag_rdt != ''"
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_dried_blood_spot_dbs_hbsag_test_result}}: {hbsag_dbs_value}"
+    relevance: "partner_hbsag_dbs != ''"
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_hepatitis_b_positive_counseling_done}}"
+    relevance: "partner_hepb_positive_counsel == 'done'"
+
+  - template: "{{contact_summary.partner_hepatitis_b_test.partner_hepatitis_b_positive_counseling_not_done}}"
+    relevance: "partner_hepb_positive_counsel == 'not_done'"
+---
 group: hepatitis_c_test
 fields:
 
@@ -715,6 +743,40 @@ fields:
 
 - template: "{{contact_summary.syphilis_test.syphilis_counselling_and_further_testing_not_done}}"
   relevance: "syphilis_high_prev_counsel == 'not_done'"
+---
+group: partner_syphilis_test
+fields:
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_syphilis_test_ordered}}"
+    relevance: "partner_syph_test_status == 'ordered'"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_syphilis_test_not_done}}: {syph_test_notdone_value}"
+    relevance: "partner_syph_test_status == 'not_done'"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_syphilis_test_date}}: {syphilis_test_date}"
+    relevance: "partner_syphilis_test_date != ''"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_rapid_syphilis_test_rst_result}}: {rapid_syphilis_test}"
+    relevance: "partner_rapid_syphilis_test != ''"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_rapid_plasma_reagin_rpr_test_result}}: {rpr_syphilis_test}"
+    relevance: "partner_rpr_syphilis_test != ''"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_Off_site_lab_test_for_syphilis_result}}: {lab_syphilis_test}"
+    relevance: "partner_lab_syphilis_test != ''"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_syphilis_counselling_and_treatment_done}}"
+    relevance: "partner_syphilis_low_prev_counsel == 'done'"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_syphilis_counselling_and_treatment_not_done}}"
+    relevance: "partner_syphilis_low_prev_counsel == 'not_done'"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_syphilis_counselling_and_further_testing_done}}"
+    relevance: "partner_syphilis_high_prev_counsel == 'done'"
+
+  - template: "{{contact_summary.partner_syphilis_test.partner_syphilis_counselling_and_further_testing_not_done}}"
+    relevance: "partner_syphilis_high_prev_counsel == 'not_done'"
+
 ---
 group: urine_test
 fields:
@@ -847,6 +909,27 @@ fields:
 
 - template: "{{contact_summary.tb_screening_test.tb_screening_positive_counseling_not_done}}"
   relevance: "tb_positive_counseling == 'not_done'"
+---
+group: tb_test
+fields:
+
+  - template: "{{contact_summary.tb_test.tb_test_ordered}}"
+    relevance: "tb_test_status == 'ordered'"
+
+  - template: "{{contact_summary.tb_test.tb_test_not_done}}: {tb_test_notdone_value}"
+    relevance: "tb_test_status == 'not_done'"
+
+  - template: "{{contact_summary.tb_test.tb_test_date}}: {tb_test_date}"
+    relevance: "tb_screening_date != ''"
+
+  - template: "{{contact_summary.tb_test.tb_test_result}}: {tb_test_result}"
+    relevance: "tb_test_result != ''"
+
+  - template: "{{contact_summary.tb_test.tb_test_positive_counseling_done}}"
+    relevance: "tb_positive_counseling == 'done'"
+
+  - template: "{{contact_summary.tb_test.tb_test_positive_counseling_not_done}}"
+    relevance: "tb_positive_counseling == 'not_done'"
 ---
 group: other_tests
 fields:
