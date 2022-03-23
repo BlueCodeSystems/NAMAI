@@ -382,10 +382,6 @@ condition: "(step2_pregnancy_two_gestational_age > 0) && (step2_pregnancy_two_ge
 actions:
   - "isRelevant = true"
 
-
-
-
-
 ---
 name: step2_preg_three_delivery_termination
 description: preg_three_delivery_termination

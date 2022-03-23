@@ -16,7 +16,7 @@ actions:
 name: step1_accordion_partner_hepatitis_b
 description: partner Hepatitis B test
 priority: 1
-condition: "global_contact_no > 1 && (global_previous_partner_hepb_test_status != '' && (global_previous_partner_hepb_test_status == 'done_earlier' || global_previous_partner_hepb_test_status == 'done_today')) && global_previous_partner_hepb_positive == '0'"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
@@ -30,7 +30,7 @@ actions:
 name: step1_accordion_partner_syphilis
 description: partner syph_test_status
 priority: 1
-condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs != 29) && (global_contact_no > 1 && (global_previous_partner_syph_test_status != '' && global_previous_partner_syphilis_positive != '' && global_previous_partner_syphilis_positive == 0))"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
@@ -44,14 +44,14 @@ actions:
 name: step1_accordion_tb_screening
 description: tb_screening_status
 priority: 1
-condition: "(helper.getValueFromAccordion('accordion_hiv', 'step1_hiv_positive') == '1' || global_pop_tb == true) && (global_contact_no == 1 || (global_contact_no > 1 && (global_previous_tb_screening_status == '' || global_previous_tb_screening_status == 'ordered' || global_previous_tb_screening_status == 'not_done')))"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step1_accordion_tb_screening
 description: tb_screening_status
 priority: 1
-condition: "(global_contact_no > 1 && (global_previous_tb_screening_status != '' && (global_previous_tb_screening_status == 'done_earlier' || global_previous_tb_screening_status == 'done_today')))"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
@@ -65,7 +65,7 @@ actions:
 name: step1_accordion_partner_hiv
 description: Partner HIV test
 priority: 1
-condition: "(global_partner_hiv_status == 'dont_know' || global_partner_hiv_status == '') && (global_contact_no == 1 || (global_contact_no > 1 && ((global_previous_hiv_test_partner_status == 'done_earlier' || global_previous_hiv_test_partner_status == 'done_today') && global_previous_hiv_test_partner_result == 'inconclusive') || global_previous_hiv_test_partner_status == ''))"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---

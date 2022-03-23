@@ -88,8 +88,17 @@
         "openmrs_entity_id": "",
         "text": "{{anc_test.step1.accordion_blood_type.text}}",
         "type": "expansion_panel",
+        "accordion_info_text": "Blood Type",
+        "accordion_info_title": "Blood Group test",
         "content_form": "tests_blood_type_sub_form",
-        "container": "test"
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
       },
       {
         "key": "accordion_hiv",
@@ -122,7 +131,14 @@
         "text": "{{anc_test.step2.accordion_partner_hiv.text}}",
         "type": "expansion_panel",
         "content_form": "tests_partner_hiv_sub_form",
-        "container": "test"
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
       },
       {
         "key": "accordion_partner_hepatitis_b",
@@ -134,7 +150,14 @@
         "accordion_info_title": "Partner Hepatitis B test",
         "type": "expansion_panel",
         "content_form": "partner_tests_hepatitis_b_sub_form",
-        "container": "test"
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
       },
       {
         "key": "accordion_hepatitis_b",
@@ -147,6 +170,13 @@
         "type": "expansion_panel",
         "content_form": "tests_hepatitis_b_sub_form",
         "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        },
         "v_required": {
           "value": "true",
           "err": "Please test for Hepatitis B"
@@ -163,7 +193,14 @@
         "accordion_info_title": "{{anc_test.step1.accordion_tb_screening.accordion_info_title}}",
         "type": "expansion_panel",
         "content_form": "tests_tb_screening_sub_form",
-        "container": "test"
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
       },
       {
         "key": "accordion_syphilis",
@@ -179,6 +216,13 @@
         "v_required": {
           "value": "true",
           "err": "Please test for Syphilis"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
         }
       },
       {
@@ -191,7 +235,14 @@
         "accordion_info_title": "Partner Syphilis test",
         "type": "expansion_panel",
         "content_form": "partner_tests_syphilis_sub_form",
-        "container": "test"
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
       },
       {
         "key": "accordion_urine",
@@ -207,6 +258,13 @@
         "v_required": {
           "value": "true",
           "err": "Please test Urine"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
         }
       },
       {
@@ -223,6 +281,13 @@
         "v_required": {
           "value": "true",
           "err": "Please test for haemoglobin"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
         }
       },
       {
@@ -234,7 +299,14 @@
         "type": "expansion_panel",
         "display_bottom_section": true,
         "content_form": "tests_blood_glucose_sub_form",
-        "container": "test"
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
       }
     ]
   },
