@@ -502,3 +502,10 @@ condition: "step4_sfh >= 40"
 actions:
   - "isRelevant = true"
 
+---
+name: step8_discordant_out
+description: discordant_out
+priority: 1
+condition: "step8_discordant_set != null"
+actions:
+  - "isRelevant = true"
