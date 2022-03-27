@@ -5824,7 +5824,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "native_radio",
-        "label": "Initiate CTX?",
+        "label": "Initiate CPT?",
         "label_text_style": "bold",
         "options": [
           {
