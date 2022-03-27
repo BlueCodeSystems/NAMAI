@@ -202,8 +202,8 @@ condition: "(step8_partner_hiv_status == 'positive') || (global_hiv_test_partner
 actions:
   - "calculation = 1"
 ---
-name: step3_discordant_out
-description: discordant_out
+name: step8_discordant_set
+description: discordant_set
 priority: 1
 condition: " ((global_hiv_test_partner_result == 'positive'  || step8_partner_hiv_status == 'positive' ) && (global_hiv_test_result == 'negative' || step7_hiv_test_result == 'negative')) || ((global_hiv_test_partner_result == 'negative'  || step8_partner_hiv_status == 'negative' ) && (global_hiv_test_result == 'positive' || step7_hiv_test_result == 'positive')) "
 actions:
@@ -266,3 +266,18 @@ priority: 1
 condition: " global_hiv_test_result == 'positive'"
 actions:
   - "calculation = 'positive' "
+
+---
+name: step8_discordant_set
+description: discordant_set
+priority: 2
+condition: " ((global_hiv_test_partner_result == 'positive'  || step8_partner_hiv_status == 'positive' ) && (global_hiv_test_result == 'positive' || step7_hiv_test_result == 'positive')) || ((global_hiv_test_partner_result == 'negative'  || step8_partner_hiv_status == 'negative' ) && (global_hiv_test_result == 'negative' || step7_hiv_test_result == 'negative')) "
+actions:
+  - "calculation = 'no' "
+---
+name: step8_discordant_out
+description: discordant_out
+priority: 1
+condition: "step8_discordant_set != null"
+actions:
+  - "calculation = step8_discordant_set"
