@@ -9,28 +9,28 @@ actions:
 name: step1_bp_systolic_repeat_label
 description: BP measurement
 priority: 1
-condition: "((step1_bp_systolic >= 140) || (step1_bp_systolic < 90 && step1_bp_systolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
 name: step1_bp_systolic_repeat
 description: BP measurement
 priority: 1
-condition: "((step1_bp_systolic >= 140) || (step1_bp_systolic < 90 && step1_bp_systolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
 name: step1_bp_diastolic_repeat_label
 description: BP measurement
 priority: 1
-condition: "((step1_bp_diastolic >= 90) || (step1_bp_diastolic < 60 && step1_bp_diastolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
 name: step1_bp_diastolic_repeat
 description: BP measurement
 priority: 1
-condition: "((step1_bp_diastolic >= 90) || (step1_bp_diastolic < 60 && step1_bp_diastolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
@@ -501,3 +501,4 @@ priority: 1
 condition: "step4_sfh >= 40"
 actions:
   - "isRelevant = true"
+
