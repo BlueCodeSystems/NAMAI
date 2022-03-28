@@ -4983,7 +4983,7 @@
           },
           {
             "key": "already_on_prep",
-            "text": "Already on Prep",
+            "text": "Already on PrEP",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
