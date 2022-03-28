@@ -23,7 +23,7 @@ actions:
 name: step1_sfh_gest_age
 description: sfh_gest_age
 priority: 1
-condition: "(step1_lmp_known == 'no' && step1_ultrasound_done == 'no') || (step1_lmp_known == 'no' && step1_ultrasound_gest_age_wks >= 24)"
+condition: "step1_sfh_gest_age_selection.contains('sfh')"
 actions:
   - "isRelevant = true"
 ---
