@@ -591,7 +591,7 @@ fields:
   - template: "{{contact_summary.blood_type_test.rh_factor_negative_counseling_not_done}}"
     relevance: "rh_negative_counsel == 'not_done'"
 ---
-group: hiv_test
+group: "HIV STATUS"
 fields:
 
   - template: "{{contact_summary.hiv_tests.hiv_test_ordered}}"
@@ -612,7 +612,7 @@ fields:
   - template: "{{contact_summary.hiv_tests.hiv_positive_counseling_not_done}}"
     relevance: "hiv_positive_counsel == 'not_done'"
 ---
-group: partner_hiv_test
+group: "PARTNER HIV STATUS"
 fields:
 
   - template: "{{contact_summary.partner_hiv_test.partner_hiv_test_status}}: {partner_hiv_status_value}"
