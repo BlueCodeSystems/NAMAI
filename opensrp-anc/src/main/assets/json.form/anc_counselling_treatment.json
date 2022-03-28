@@ -2624,14 +2624,14 @@
         "options": [
           {
             "key": "done",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia.options.done.text}}",
+            "text": "Given",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "not_done",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia.options.not_done.text}}",
+            "text": "Not given",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
