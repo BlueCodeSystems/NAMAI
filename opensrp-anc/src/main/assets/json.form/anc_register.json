@@ -149,8 +149,8 @@
           "err": "{{anc_register.step1.nrc.v_required.err}}"
         },
         "v_regex": {
-          "value": "([0-9]{6}/[0-9]{2}/[0-9]{1})|s*",
-          "err": "{{anc_register.step1.nrc.v_regex.err}}"
+          "value": "([0-9]{6}/[0-9]{2}/[0-9])|\\s*",
+          "err": "Number must take the format of ######/##/#"
         }
       },
       {
