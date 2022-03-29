@@ -19,6 +19,7 @@ import org.smartregister.anc.library.contract.RegisterFragmentContract;
 import org.smartregister.anc.library.cursor.AdvancedMatrixCursor;
 import org.smartregister.anc.library.event.SyncEvent;
 import org.smartregister.anc.library.helper.DBQueryHelper;
+import org.smartregister.anc.library.model.MeModel;
 import org.smartregister.anc.library.presenter.RegisterFragmentPresenter;
 import org.smartregister.anc.library.provider.RegisterProvider;
 import org.smartregister.anc.library.task.AttentionFlagsTask;
@@ -35,6 +36,7 @@ import org.smartregister.job.DocumentConfigurationServiceJob;
 import org.smartregister.job.SyncSettingsServiceJob;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.view.activity.BaseRegisterActivity;
+import org.smartregister.view.contract.MeContract;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 import org.smartregister.view.fragment.SecuredNativeSmartRegisterFragment;
 
@@ -54,6 +56,7 @@ public class HomeRegisterFragment extends BaseRegisterFragment implements Regist
     public static final String CLICK_VIEW_ALERT_STATUS = "click_view_alert_status";
     public static final String CLICK_VIEW_SYNC = "click_view_sync";
     public static final String CLICK_VIEW_ATTENTION_FLAG = "click_view_attention_flag";
+    private MeContract.Model model;
 
     @Override
     protected void initializePresenter() {
@@ -148,6 +151,9 @@ public class HomeRegisterFragment extends BaseRegisterFragment implements Regist
             return;
         }
 
+        model = new MeModel();
+        String name = model.getName();
+
         final BaseHomeRegisterActivity baseHomeRegisterActivity = (BaseHomeRegisterActivity) getActivity();
         final CommonPersonObjectClient pc = (CommonPersonObjectClient) view.getTag();
 
@@ -160,7 +166,7 @@ public class HomeRegisterFragment extends BaseRegisterFragment implements Regist
                 String baseEntityId = Utils.getValue(pc.getColumnmaps(), DBConstantsUtils.KeyUtils.BASE_ENTITY_ID, false);
 
                 if (StringUtils.isNotBlank(baseEntityId)) {
-                    Utils.proceedToContact(baseEntityId, (HashMap<String, String>) pc.getColumnmaps(), getActivity());
+                    Utils.proceedToContact(baseEntityId, (HashMap<String, String>) pc.getColumnmaps(), getActivity(), name);
                 }
             }
         } else if (view.getTag() != null && view.getTag(R.id.VIEW_ID) == CLICK_VIEW_ATTENTION_FLAG) {
@@ -184,8 +190,7 @@ public class HomeRegisterFragment extends BaseRegisterFragment implements Regist
 
     @Override
     public void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
-        RegisterProvider registerProvider =
-                new RegisterProvider(getActivity(), commonRepository(), visibleColumns, registerActionHandler,
+        RegisterProvider registerProvider = new RegisterProvider(getActivity(), commonRepository(), visibleColumns, registerActionHandler,
                         paginationViewHandler);
         clientAdapter = new RecyclerViewPaginatedAdapter(null, registerProvider, context().commonrepository(this.tablename));
         clientAdapter.setCurrentlimit(20);

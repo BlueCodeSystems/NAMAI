@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,6 +49,7 @@ import org.smartregister.anc.library.domain.ButtonAlertStatus;
 import org.smartregister.anc.library.domain.Contact;
 import org.smartregister.anc.library.event.BaseEvent;
 import org.smartregister.anc.library.model.ContactModel;
+import org.smartregister.anc.library.model.MeModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.Task;
 import org.smartregister.anc.library.repository.ContactTasksRepository;
@@ -57,6 +59,7 @@ import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.util.JsonFormUtils;
 import org.smartregister.view.activity.DrishtiApplication;
+import org.smartregister.view.contract.MeContract;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -88,6 +91,7 @@ public class Utils extends org.smartregister.util.Utils {
     public static final String HOME_ADDRESS = "Home Address";
     private static final DateTimeFormatter SQLITE_DATE_DF = DateTimeFormat.forPattern(ConstantsUtils.SQLITE_DATE_TIME_FORMAT);
     private static final String OTHER_SUFFIX = ", other]";
+
 
     static {
         ALLOWED_LEVELS = new ArrayList<>();
@@ -183,7 +187,7 @@ public class Utils extends org.smartregister.util.Utils {
      * @param context            {@link Context}
      * @author martinndegwa
      */
-    public static void proceedToContact(String baseEntityId, HashMap<String, String> personObjectClient, Context context) {
+    public static void proceedToContact(String baseEntityId, HashMap<String, String> personObjectClient, Context context, String name) {
         try {
 
             Intent intent = new Intent(context.getApplicationContext(), ContactJsonFormActivity.class);
@@ -210,11 +214,18 @@ public class Utils extends org.smartregister.util.Utils {
             ContactModel baseContactModel = new ContactModel();
             JSONObject form = baseContactModel.getFormAsJson(quickCheck.getFormName(), baseEntityId, locationId);
 
+
+
             if (ConstantsUtils.DueCheckStrategy.CHECK_FOR_FIRST_CONTACT.equals(Utils.getDueCheckStrategy())) {
                 JSONObject globals = new JSONObject();
                 globals.put(ConstantsUtils.IS_FIRST_CONTACT, PatientRepository.isFirstVisit(personObjectClient.get(DBConstantsUtils.KeyUtils.BASE_ENTITY_ID)));
                 form.put(ConstantsUtils.GLOBAL, globals);
             }
+
+            ////////
+            JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+
+            ccname.put(JsonFormUtils.VALUE, name);
 
             String processedForm = ANCFormUtils.getFormJsonCore(partialContactRequest, form).toString();
 

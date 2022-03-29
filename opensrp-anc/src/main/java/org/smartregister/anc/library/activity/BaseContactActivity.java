@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.activity;
 
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -26,12 +28,15 @@ import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.adapter.ContactAdapter;
 import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
+import org.smartregister.anc.library.model.MeModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.Task;
 import org.smartregister.anc.library.util.ANCJsonFormUtils;
 import org.smartregister.anc.library.util.ConstantsUtils;
 import org.smartregister.anc.library.util.Utils;
+import org.smartregister.util.JsonFormUtils;
 import org.smartregister.view.activity.SecuredActivity;
+import org.smartregister.view.contract.MeContract;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +52,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
     protected ContactActionHandler contactActionHandler = new ContactActionHandler();
     protected ContactContract.Presenter presenter;
     protected Integer contactNo;
+    private MeContract.Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
         initializePresenter();
         presenter.setBaseEntityId(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID));
         setupViews();
+        model = new MeModel();
     }
 
     @Override
@@ -112,6 +119,14 @@ public abstract class BaseContactActivity extends SecuredActivity {
 
     private String getUpdatedForm(JSONObject form, Contact contact, PartialContact partialContactRequest) throws JSONException {
         JSONObject jsonForm = new JSONObject(getFormJson(partialContactRequest, form));
+
+
+        ////////
+        String name = model.getName();
+        JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+
+        ccname.put(JsonFormUtils.VALUE, name);
+
         if (ConstantsUtils.JsonFormUtils.ANC_TEST.equals(contact.getFormName()) && contact.getContactNumber() > 1) {
             List<Task> currentTasks = AncLibrary.getInstance().getContactTasksRepository().getClosedTasks(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID));
             jsonForm = removeDueTests(jsonForm, currentTasks);

@@ -14,6 +14,8 @@ import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
 import org.smartregister.anc.library.interactor.ContactInteractor;
 import org.smartregister.anc.library.model.ContactModel;
+import org.smartregister.anc.library.model.MeModel;
+import org.smartregister.view.contract.MeContract;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -27,16 +29,19 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
     private WeakReference<ContactContract.View> viewReference;
     private ContactContract.Interactor interactor;
     private ContactContract.Model model;
+    private MeContract.Model meModel;
 
     private String baseEntityId;
 
     private Map<String, String> details;
     private JSONObject defaultGlobals;
 
+
     public ContactPresenter(ContactContract.View contactView) {
         viewReference = new WeakReference<>(contactView);
         interactor = new ContactInteractor();
         model = new ContactModel();
+        meModel = new MeModel();
         defaultGlobals = getAncLibrary().getDefaultContactFormGlobals();
     }
 
@@ -126,6 +131,10 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
             try {
                 String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
                 JSONObject form = model.getFormAsJson(contact.getFormName(), baseEntityId, locationId);
+
+
+
+
                 if (contact.getGlobals() != null) {
                     for (Map.Entry<String, String> entry : contact.getGlobals().entrySet()) {
                         defaultGlobals.put(entry.getKey(), entry.getValue());
@@ -134,6 +143,10 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
 
                 if (form != null) {
                     form.put(JsonFormConstants.JSON_FORM_KEY.GLOBAL, defaultGlobals);
+                    String myname = meModel.getName();
+
+                   // form.getJSONObject("step1").getJSONArray("fields").getJSONObject(15).put("value", myname);
+
                     getView().startFormActivity(form, contact);
                 }
             } catch (JSONException e) {
