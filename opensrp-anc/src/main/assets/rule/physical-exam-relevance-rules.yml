@@ -345,28 +345,28 @@ actions:
 name: step3_repeat_bpm_toaster
 description: repeat_bpm_toaster
 priority: 1
-condition: "((step3_bpm > 0 && step3_bpm < 12) || (step3_bpm > 18))"
+condition: "((step3_bpm > 0 && step3_bpm < 16) || (step3_bpm > 24))"
 actions:
   - "isRelevant = true"
 ---
 name: step3_bpm_repeat_label
 description: bpm_repeat_label
 priority: 1
-condition: "((step3_bpm > 0 && step3_bpm < 12) || (step3_bpm > 18))"
+condition: "((step3_bpm > 0 && step3_bpm < 16) || (step3_bpm > 24))"
 actions:
   - "isRelevant = true"
 ---
 name: step3_bpm_repeat
 description: bpm_repeat
 priority: 1
-condition: "((step3_bpm > 0 && step3_bpm < 12) || (step3_bpm > 18))"
+condition: "((step3_bpm > 0 && step3_bpm < 16) || (step3_bpm > 24))"
 actions:
   - "isRelevant = true"
 ---
 name: step3_suspected_anemia_toaster
 description: bpm_repeat
 priority: 1
-condition: "((step3_bpm_repeat > 0 && step3_bpm_repeat < 12) || (step3_bpm_repeat > 18))"
+condition: "((step3_bpm_repeat > 0 && step3_bpm_repeat < 16) || (step3_bpm_repeat > 24))"
 actions:
   - "isRelevant = true"
 ---

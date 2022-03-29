@@ -213,6 +213,54 @@
       }
     },
     {
+      "key": "no_of_fetuses_label",
+      "type": "label",
+      "label_text_style": "bold",
+      "text": "{{tests_ultrasound_sub_form.step1.no_of_fetuses_label.text}}",
+      "text_color": "#000000",
+      "v_required": {
+        "value": true
+      },
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
+          }
+        }
+      }
+    },
+    {
+      "key": "no_of_fetuses",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "165387AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "type": "numbers_selector",
+      "label": "{{tests_ultrasound_sub_form.step1.no_of_fetuses.label}}",
+      "number_of_selectors": "5",
+      "start_number": "1",
+      "max_value": "15",
+      "text_size": "16px",
+      "text_color": "#000000",
+      "selected_text_color": "#ffffff",
+      "v_required": {
+        "value": true
+      },
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
+          }
+        }
+      },
+      "calculation": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "ultrasound_sub_form_calculation_rules.yml"
+          }
+        }
+      }
+    },
+    {
       "key": "fetal_heartbeat",
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
@@ -333,54 +381,6 @@
       "v_max": {
         "value": "8000",
         "err": "Weight must be equal or less than 8000 grams"
-      }
-    },
-    {
-      "key": "no_of_fetuses_label",
-      "type": "label",
-      "label_text_style": "bold",
-      "text": "{{tests_ultrasound_sub_form.step1.no_of_fetuses_label.text}}",
-      "text_color": "#000000",
-      "v_required": {
-        "value": true
-      },
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
-          }
-        }
-      }
-    },
-    {
-      "key": "no_of_fetuses",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "165387AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "numbers_selector",
-      "label": "{{tests_ultrasound_sub_form.step1.no_of_fetuses.label}}",
-      "number_of_selectors": "5",
-      "start_number": "1",
-      "max_value": "15",
-      "text_size": "16px",
-      "text_color": "#000000",
-      "selected_text_color": "#ffffff",
-      "v_required": {
-        "value": true
-      },
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
-          }
-        }
-      },
-      "calculation": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_calculation_rules.yml"
-          }
-        }
       }
     },
     {
