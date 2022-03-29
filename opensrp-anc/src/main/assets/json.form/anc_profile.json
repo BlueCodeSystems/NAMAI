@@ -8342,7 +8342,7 @@
         "edit_type": "name",
         "value": "Unprotected",
         "hint": "Unprotected",
-        "type": "hidden",
+        "hidden": "true",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -8360,7 +8360,7 @@
         "edit_type": "name",
         "value": "Protected",
         "hint": "Protected",
-        "type": "hidden",
+        "hidden": "true",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -8378,7 +8378,7 @@
         "edit_type": "name",
         "value": "Fully Protected",
         "hint": "Fully Protected",
-        "type": "hidden",
+        "hidden": "true",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
