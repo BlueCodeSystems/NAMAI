@@ -616,13 +616,13 @@ group: "PARTNER HIV STATUS"
 fields:
 
   - template: "{{contact_summary.partner_hiv_test.partner_hiv_test_status}}: {partner_hiv_status_value}"
-    relevance: "partner_hiv_status != ''"
-
-  - template: "{{contact_summary.partner_hiv_test.partner_hiv_test_date}}: {hiv_test_partner_date}"
-    relevance: "hiv_test_partner_date != ''"
+    relevance: "(partner_hiv_status != '') && (hiv_test_partner_result == '') "
 
   - template: "{{contact_summary.partner_hiv_test.partner_hiv_test_result}}: {hiv_test_partner_result_value}"
     relevance: "hiv_test_partner_result != ''"
+
+  - template: "{{contact_summary.partner_hiv_test.partner_hiv_test_date}}: {hiv_test_partner_date}"
+    relevance: "hiv_test_partner_date != ''"
 
   - template: "{{contact_summary.partner_hiv_test.partner_hiv_test_ordered}}"
     relevance: "hiv_test_partner_status == 'ordered'"
