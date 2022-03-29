@@ -2624,14 +2624,14 @@
         "options": [
           {
             "key": "done",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia.options.done.text}}",
+            "text": "Given",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "not_done",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia.options.not_done.text}}",
+            "text": "Not given",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -4983,7 +4983,7 @@
           },
           {
             "key": "already_on_prep",
-            "text": "Already on Prep",
+            "text": "Already on PrEP",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
@@ -5824,7 +5824,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "native_radio",
-        "label": "Initiate CTX?",
+        "label": "Initiate CPT?",
         "label_text_style": "bold",
         "options": [
           {

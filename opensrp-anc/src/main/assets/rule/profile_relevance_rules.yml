@@ -23,7 +23,7 @@ actions:
 name: step1_sfh_gest_age
 description: sfh_gest_age
 priority: 1
-condition: "(step1_lmp_known == 'no' && step1_ultrasound_done == 'no') || (step1_lmp_known == 'no' && step1_ultrasound_gest_age_wks >= 24)"
+condition: "step1_sfh_gest_age_selection.contains('sfh')"
 actions:
   - "isRelevant = true"
 ---
@@ -381,10 +381,6 @@ priority: 1
 condition: "(step2_pregnancy_two_gestational_age > 0) && (step2_pregnancy_two_gestational_age < 7)"
 actions:
   - "isRelevant = true"
-
-
-
-
 
 ---
 name: step2_preg_three_delivery_termination
@@ -1139,3 +1135,11 @@ priority: 1
 condition: "(((global_underimmunized_doses > 3)||(step4_tt_immun_status == '3_doses')) && (!step4_tt_immun_status.isEmpty()))"
 actions:
   - "isRelevant = true"
+
+---
+name: step8_discordant_out
+description: discordant_out
+priority: 1
+condition: "step8_discordant_set != null"
+actions:
+  - "isRelevant = step8_discordant_set"

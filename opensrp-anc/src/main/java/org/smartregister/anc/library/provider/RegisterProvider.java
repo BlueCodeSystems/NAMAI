@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vijay.jsonwizard.views.CustomTextView;
@@ -211,7 +212,7 @@ public class RegisterProvider implements RecyclerViewProvider<RegisterProvider.R
         view.setTag(R.id.VIEW_ID, HomeRegisterFragment.CLICK_VIEW_NORMAL);
     }
 
-    private void attachAlertButtonOnclickListener(View view, SmartRegisterClient client) {
+    private void attachAlertButtonOnclickListener(@NonNull View view, SmartRegisterClient client) {
         view.setOnClickListener(onClickListener);
         view.setTag(client);
         view.setTag(R.id.VIEW_ID, HomeRegisterFragment.CLICK_VIEW_ALERT_STATUS);

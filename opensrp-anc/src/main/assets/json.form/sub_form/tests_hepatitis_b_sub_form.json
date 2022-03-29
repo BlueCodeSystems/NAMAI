@@ -4,7 +4,7 @@
       "key": "hepb_test_status",
       "openmrs_entity_parent": "161475AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "openmrs_entity": "concept",
-      "openmrs_entity_id": "163725AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity_id": "hep",
       "label": "Hepatitis B test",
       "label_text_style": "bold",
       "text_color": "#000000",

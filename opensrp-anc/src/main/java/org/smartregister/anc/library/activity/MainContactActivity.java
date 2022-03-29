@@ -32,6 +32,7 @@ import org.smartregister.anc.library.util.DBConstantsUtils;
 import org.smartregister.anc.library.util.FilePathUtils;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.util.FormUtils;
+import org.smartregister.view.contract.MeContract;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -74,6 +75,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public JSONObject formObject;
     public boolean removeMainC = false;
     public boolean startUp = true;
+
 
     @Override
     protected void onResume() {
@@ -625,6 +627,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         }
         contact.setHiddenFields(hiddenFields);
         contact.setDisabledFields(disabledFields);
+
         super.startFormActivity(form, contact);
     }
 

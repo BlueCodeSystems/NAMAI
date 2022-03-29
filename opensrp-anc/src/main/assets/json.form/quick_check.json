@@ -928,16 +928,9 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "provider_name",
         "type": "edit_text",
-        "hint": "Providers name",
+        "hint": "Name of Provider",
         "edit_type": "name",
-        "read_only": "true",
-        "value": "James",
-        "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
-          }
-        }
+        "read_only": "true"
       },
       {
         "key": "provider_phone_number",

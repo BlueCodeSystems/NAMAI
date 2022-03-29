@@ -141,7 +141,7 @@ fields:
   - "alcohol_substance_use_value"
   - "occupation"
   - "occupation_value"
-  - "discordant"
+  - "discordant_out"
   - "lmp_known_date"
   - "ttcv_unprotected"
   - "ttcv_protected"

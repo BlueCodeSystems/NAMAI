@@ -36,6 +36,7 @@ import org.smartregister.anc.library.event.PatientRemovedEvent;
 import org.smartregister.anc.library.fragment.ProfileContactsFragment;
 import org.smartregister.anc.library.fragment.ProfileOverviewFragment;
 import org.smartregister.anc.library.fragment.ProfileTasksFragment;
+import org.smartregister.anc.library.model.MeModel;
 import org.smartregister.anc.library.presenter.ProfilePresenter;
 import org.smartregister.anc.library.util.ANCJsonFormUtils;
 import org.smartregister.anc.library.util.ConstantsUtils;
@@ -45,6 +46,7 @@ import org.smartregister.anc.library.view.CopyToClipboardDialog;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.PermissionUtils;
 import org.smartregister.view.activity.BaseProfileActivity;
+import org.smartregister.view.contract.MeContract;
 
 import java.util.HashMap;
 
@@ -69,6 +71,7 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
     private Button dueButton;
     private TextView taskTabCount;
     private String contactNo;
+    private MeContract.Model model;
 
     @Override
     protected void onCreation() {
@@ -147,11 +150,15 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
 
     @Override
     public void onClick(View view) {
+
+        model = new MeModel();
+        String name = model.getName();
+        
         if (view.getId() == R.id.profile_overview_due_button) {
             String baseEntityId = getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID);
 
             if (StringUtils.isNotBlank(baseEntityId)) {
-                Utils.proceedToContact(baseEntityId, detailMap, getActivity());
+                Utils.proceedToContact(baseEntityId, detailMap, getActivity(), name);
             }
 
         } else {
@@ -257,11 +264,15 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
     }
 
     private void continueToContact() {
+
+        model = new MeModel();
+        String name = model.getName();
+
         if (!buttonAlertStatus.equals(ConstantsUtils.AlertStatusUtils.TODAY)) {
             String baseEntityId = detailMap.get(DBConstantsUtils.KeyUtils.BASE_ENTITY_ID);
 
             if (StringUtils.isNotBlank(baseEntityId)) {
-                Utils.proceedToContact(baseEntityId, detailMap, ProfileActivity.this);
+                Utils.proceedToContact(baseEntityId, detailMap, ProfileActivity.this, name);
             }
         }
     }

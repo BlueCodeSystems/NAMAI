@@ -9,28 +9,28 @@ actions:
 name: step1_bp_systolic_repeat_label
 description: BP measurement
 priority: 1
-condition: "((step1_bp_systolic >= 140) || (step1_bp_systolic < 90 && step1_bp_systolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
 name: step1_bp_systolic_repeat
 description: BP measurement
 priority: 1
-condition: "((step1_bp_systolic >= 140) || (step1_bp_systolic < 90 && step1_bp_systolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
 name: step1_bp_diastolic_repeat_label
 description: BP measurement
 priority: 1
-condition: "((step1_bp_diastolic >= 90) || (step1_bp_diastolic < 60 && step1_bp_diastolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
 name: step1_bp_diastolic_repeat
 description: BP measurement
 priority: 1
-condition: "((step1_bp_diastolic >= 90) || (step1_bp_diastolic < 60 && step1_bp_diastolic > 0))"
+condition: "(step1_bp_diastolic >= 90) || (step1_bp_diastolic !=null && step1_bp_diastolic < 60 && step1_bp_diastolic > 0) || (step1_bp_systolic >= 140) || (step1_bp_systolic != null && step1_bp_systolic > 0 && step1_bp_systolic < 90 )"
 actions:
   - "isRelevant = true"
 ---
@@ -408,14 +408,14 @@ actions:
 name: step4_sfh_label
 description: SFH label
 priority: 1
-condition: "(global_gest_age_openmrs >= 22 && global_gest_age_openmrs <= 45)"
+condition: "(global_gest_age_openmrs >= 20 && global_gest_age_openmrs <= 45)"
 actions:
   - "isRelevant = true"
 ---
 name: step4_sfh
 description: SFH
 priority: 1
-condition: "(global_gest_age_openmrs >= 22 && global_gest_age_openmrs <= 45)"
+condition: "(global_gest_age_openmrs >= 20 && global_gest_age_openmrs <= 45)"
 actions:
   - "isRelevant = true"
 ---
@@ -499,5 +499,13 @@ name: step4_sfh_big_toaster
 description: sfh_big_toaster
 priority: 1
 condition: "step4_sfh >= 40"
+actions:
+  - "isRelevant = true"
+
+---
+name: step8_discordant_out
+description: discordant_out
+priority: 1
+condition: "step8_discordant_set != null"
 actions:
   - "isRelevant = true"
