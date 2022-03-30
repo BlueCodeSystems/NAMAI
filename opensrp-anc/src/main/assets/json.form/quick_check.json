@@ -697,84 +697,91 @@
             "text": "Asthma",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "165269AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "asthma"
           },
           {
             "key": "cardiac_condition",
             "text": " Cardiac condition",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "cardiac_condition"
           },
           {
             "key": "diabetes_mellitus",
             "text": "Diabetes mellitus",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "diabetes_mellitus"
           },
           {
             "key": "renal_failure",
             "text": "Renal failure",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "renal_failure"
           },
           {
             "key": "epilepsy",
             "text": "Epilepsy",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "epilepsy"
           },
           {
             "key": "hypertension",
             "text": "Hypertension",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "hypertension"
           },
           {
             "key": "hyperthyroidism",
             "text": "Hyperthyroidism",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "hyperthyroidism"
           },
           {
             "key": "moderate_anaemia",
             "text": "Moderate to severe anaemia (< 8g/dl)",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "moderate_anaemia"
           },
           {
             "key": "previous_coagulopathy",
             "text": "Previous or current coagulopathy (eg. DVT)",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "previous_coagulopathy"
           },
           {
-            "key": "renal disease",
+            "key": "renal_disease",
             "text": "Renal disease",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "renal_disease"
           },
           {
             "key": "sickle_cell_disease",
             "text": "Sickle cell disease",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "sickle_cell_disease"
           },
           {
             "key": "rh_negative",
             "text": "RH negative",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "rh_negative"
+          },
+          {
+            "key": "other",
+            "text": "Other (Specify)",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "other"
           }
         ],
         "v_required": {
@@ -789,6 +796,21 @@
         }
       },
       {
+        "key": "other_reason_pre",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "other_reason_pre",
+        "type": "edit_text",
+        "hint": "Specify",
+        "edit_type": "name",
+        "relevance": {
+          "step1:pre_existing_medic": {
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
+          }
+        }
+      },
+      {
         "key": "other_complications",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -796,6 +818,9 @@
         "type": "check_box",
         "label": "Other complications",
         "label_text_style": "bold",
+        "exclusive": [
+          "none_comp"
+        ],
         "options": [
           {
             "key": "none_comp",
