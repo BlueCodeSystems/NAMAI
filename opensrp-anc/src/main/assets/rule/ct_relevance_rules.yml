@@ -301,7 +301,7 @@ actions:
   - "isRelevant = true"
 ---
 name: step5_ifa_anaemia
-description: Prescribe daily dose of 120 mg iron and 2.8 mg folic acid
+description: Prescribe daily dose of 200 mg Ferrous sulphate and 2.8 mg folic acid
 priority: 1
 condition: "global_anaemic == 1"
 actions:
