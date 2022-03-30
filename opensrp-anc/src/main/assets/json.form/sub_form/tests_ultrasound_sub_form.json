@@ -344,12 +344,6 @@
       "v_required": {
         "value": "false",
         "err": "Fetal weight required"
-      },
-      "relevance": {
-        "step2:fetal_heartbeat": {
-          "type": "string",
-          "ex": "equalTo(., \"yes\")"
-        }
       }
     },
     {
@@ -360,12 +354,6 @@
       "type": "normal_edit_text",
       "edit_text_style": "bordered",
       "edit_type": "number",
-      "relevance": {
-        "step2:fetal_heartbeat": {
-          "type": "string",
-          "ex": "equalTo(., \"yes\")"
-        }
-      },
       "v_required": {
         "value": "false",
         "err": "Enter fetal weight"
