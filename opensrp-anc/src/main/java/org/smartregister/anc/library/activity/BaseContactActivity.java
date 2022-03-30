@@ -123,9 +123,10 @@ public abstract class BaseContactActivity extends SecuredActivity {
 
         ////////
         String name = model.getName();
-        JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
-
-        ccname.put(JsonFormUtils.VALUE, name);
+        if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
+            JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+            ccname.put(JsonFormUtils.VALUE, name);
+        }
 
         if (ConstantsUtils.JsonFormUtils.ANC_TEST.equals(contact.getFormName()) && contact.getContactNumber() > 1) {
             List<Task> currentTasks = AncLibrary.getInstance().getContactTasksRepository().getClosedTasks(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID));

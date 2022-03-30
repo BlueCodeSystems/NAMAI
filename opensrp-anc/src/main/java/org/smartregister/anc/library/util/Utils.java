@@ -223,9 +223,11 @@ public class Utils extends org.smartregister.util.Utils {
             }
 
             ////////
-            JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+            if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
+                JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+                ccname.put(JsonFormUtils.VALUE, name);
+            }
 
-            ccname.put(JsonFormUtils.VALUE, name);
 
             String processedForm = ANCFormUtils.getFormJsonCore(partialContactRequest, form).toString();
 

@@ -143,9 +143,6 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
 
                 if (form != null) {
                     form.put(JsonFormConstants.JSON_FORM_KEY.GLOBAL, defaultGlobals);
-                    String myname = meModel.getName();
-
-                   // form.getJSONObject("step1").getJSONArray("fields").getJSONObject(15).put("value", myname);
 
                     getView().startFormActivity(form, contact);
                 }
