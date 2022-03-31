@@ -1099,3 +1099,27 @@ priority: 1
 condition: "step1_ogtt_2 > 0"
 actions:
   - "isRelevant = true"
+
+---
+name: step1_referral_date
+description: referral_date
+priority: 1
+condition: "step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_referral_feedback
+description: referral_feedback
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_referral_date_today
+description: Referral date today
+priority: 1
+condition: "step1_referral_test_status == 'done_today'"
+actions:
+  - "isRelevant = true"

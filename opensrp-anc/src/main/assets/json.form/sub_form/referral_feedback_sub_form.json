@@ -1,0 +1,150 @@
+{
+  "content_form": [
+    {
+      "key": "referral_test_status",
+      "openmrs_entity_parent": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "referral_test_status",
+      "label": "Referral feedback",
+      "label_text_style": "bold",
+      "text_color": "#000000",
+      "type": "extended_radio_button",
+      "options": [
+        {
+          "key": "done_today",
+          "text": "Done today",
+          "type": "done_today",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165383AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "done_earlier",
+          "text": "Done earlier",
+          "type": "done_earlier",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165385AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "ordered",
+          "text": "Ordered",
+          "type": "ordered",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165384AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "not_done",
+          "text": "Not done",
+          "type": "not_done",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ],
+      "v_required": {
+        "value": true
+      }
+    },
+    {
+      "key": "spacer",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "",
+      "openmrs_entity_id": "spacer",
+      "type": "spacer",
+      "spacer_height": "10dp"
+    },
+    {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "",
+      "openmrs_entity_id": "",
+      "key": "feedback_date_today_hidden",
+      "type": "hidden",
+      "label_text_style": "bold",
+      "text_color": "#000000",
+      "calculation": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_calculation_rules.yml"
+          }
+        }
+      }
+    },
+    {
+      "key": "referral_date_today",
+      "openmrs_entity_parent": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "type": "date_picker",
+      "hint": "Referral Date",
+      "expanded": "false",
+      "max_date": "today",
+      "read_only": "true",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      },
+      "calculation": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_calculation_rules.yml"
+          }
+        }
+      }
+    },
+    {
+      "key": "referral_date",
+      "openmrs_entity_parent": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "type": "date_picker",
+      "hint": "Referral Date",
+      "expanded": "false",
+      "max_date": "today",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      },
+      "calculation": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_calculation_rules.yml"
+          }
+        }
+      },
+      "v_required": {
+        "value": true,
+        "err": "Please specify the date of referral"
+      }
+    },
+    {
+      "key": "referral_feedback",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "referral_feedback",
+      "type": "edit_text",
+      "hint": "Referral feedback",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      },  "calculation": {
+      "rules-engine": {
+        "ex-rules": {
+          "rules-file": "tests_calculation_rules.yml"
+        }
+      }
+    }
+    }
+  ],
+  "count": 1
+}
