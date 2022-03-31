@@ -344,42 +344,6 @@
       }
     },
     {
-      "key": "fetal_weight_label",
-      "type": "label",
-      "label_text_style": "bold",
-      "text": "Fetal weight (grams)",
-      "text_color": "#000000",
-      "v_required": {
-        "value": "false",
-        "err": "Fetal weight required"
-      }
-    },
-    {
-      "key": "fetal_weight",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "fetal_weight",
-      "type": "normal_edit_text",
-      "edit_text_style": "bordered",
-      "edit_type": "number",
-      "v_required": {
-        "value": "false",
-        "err": "Enter fetal weight"
-      },
-      "v_numeric": {
-        "value": "true",
-        "err": ""
-      },
-      "v_min": {
-        "value": "0",
-        "err": "Weight must be equal or greater than 0 grams"
-      },
-      "v_max": {
-        "value": "8000",
-        "err": "Weight must be equal or less than 8000 grams"
-      }
-    },
-    {
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -471,6 +435,56 @@
           "openmrs_entity_id": "undetermined"
         }
       ],
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
+          }
+        }
+      }
+    },
+    {
+      "key": "fetal_weight_label",
+      "type": "label",
+      "label_text_style": "bold",
+      "text": "Fetal weight (grams)",
+      "text_color": "#000000",
+      "v_required": {
+        "value": "false",
+        "err": "Fetal weight required"
+      },
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
+          }
+        }
+      }
+    },
+    {
+      "key": "fetal_weight",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "fetal_weight",
+      "type": "normal_edit_text",
+      "edit_text_style": "bordered",
+      "edit_type": "number",
+      "v_required": {
+        "value": "false",
+        "err": "Enter fetal weight"
+      },
+      "v_numeric": {
+        "value": "true",
+        "err": ""
+      },
+      "v_min": {
+        "value": "0",
+        "err": "Weight must be equal or greater than 0 grams"
+      },
+      "v_max": {
+        "value": "8000",
+        "err": "Weight must be equal or less than 8000 grams"
+      },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
