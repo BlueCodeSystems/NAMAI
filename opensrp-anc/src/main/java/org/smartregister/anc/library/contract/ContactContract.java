@@ -32,7 +32,7 @@ public interface ContactContract {
 
         String getPatientName();
 
-        void startForm(Object tag);
+        void startForm(Contact contact);
 
         void onDestroy(boolean isChangingConfiguration);
 
