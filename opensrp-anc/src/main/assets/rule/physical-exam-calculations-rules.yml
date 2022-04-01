@@ -79,7 +79,7 @@ actions:
 name: step1_hypertension
 description: Hypertension Diognosis
 priority: 1
-condition: "step1_urine_protein == 'none' ||  step1_urine_protein == '+'"
+condition: "step1_urine_protein == 'none' ||  step1_urine_protein == '+' || global_health_conditions.contains('hypertension')"
 actions:
   - "calculation = 1"
 ---
