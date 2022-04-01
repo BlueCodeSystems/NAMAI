@@ -121,19 +121,13 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
 
 
     @Override
-    public void startForm(Object tag) {
+    public void startForm(Contact contact) {
         try {
-            if (!(tag instanceof Contact) && getView() == null) {
-                return;
-            }
-            Contact contact = (Contact) tag;
+
             getView().loadGlobals(contact);
             try {
                 String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
                 JSONObject form = model.getFormAsJson(contact.getFormName(), baseEntityId, locationId);
-
-
-
 
                 if (contact.getGlobals() != null) {
                     for (Map.Entry<String, String> entry : contact.getGlobals().entrySet()) {
