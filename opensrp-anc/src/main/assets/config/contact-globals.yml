@@ -311,3 +311,5 @@ fields:
   - "partner_hepb_positive"
   - "lmp_known"
   - "ultrasound_done"
+  - "emergency_referal"
+  - "referral_feedback"

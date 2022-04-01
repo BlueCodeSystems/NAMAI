@@ -136,6 +136,9 @@ fields:
   - template: "{{profile_overview.hospital_referral_reasons.woman_referred_to_hospital}}"
     relevance: "referred_hosp == 'Yes'"
 
+  - template: "Referral feedback: {referral_feedback}"
+    relevance: "referral_feedback != ''"
+
   - template: "{{profile_overview.hospital_referral_reasons.woman_not_referred_to_hospital}}: {referred_hosp_notdone}"
     relevance: "referred_hosp == 'No'"
     isRedFont: "true"
