@@ -87,6 +87,6 @@ actions:
 name: step1_accordion_feedback
 description: accordion_feedback
 priority: 1
-condition: "true"
+condition: "global_emergency_referal.contains('yes') && global_referral_feedback == ''"
 actions:
   - "isRelevant = true"
