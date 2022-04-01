@@ -5,6 +5,9 @@ fields:
   - template: "{{contact_summary.hospital_referral.woman_referred_to_hospital}}"
     relevance: "referred_hosp == 'yes'"
 
+  - template: "Referral feedback: {referral_feedback}"
+    relevance: "referral_feedback != ''"
+
   - template: "{{contact_summary.hospital_referral.woman_not_referred_to_hospital}}: {referred_hosp_notdone_value}"
     relevance: "referred_hosp == 'no'"
 

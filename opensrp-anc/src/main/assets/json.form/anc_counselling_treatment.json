@@ -4124,13 +4124,6 @@
         "v_required": {
           "value": true,
           "err": "{{anc_counselling_treatment.step9.ifa_high_prev.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
         }
       },
       {
@@ -4470,10 +4463,6 @@
             "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
-        "v_required": {
-          "value": false,
-          "err": "{{anc_counselling_treatment.step9.calcium_supp.v_required.err}}"
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {

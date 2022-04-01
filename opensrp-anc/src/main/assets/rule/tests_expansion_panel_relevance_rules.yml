@@ -82,3 +82,11 @@ priority: 1
 condition: "global_contact_no == 1  || ((global_contact_no > 1 || (global_gest_age_openmrs != '' && (global_gest_age_openmrs > 26  || global_gest_age_openmrs > 36)) )  && (global_previous_hb_test_status == '' || global_previous_hb_test_status == 'ordered' || global_previous_hb_test_status == 'not_done')) || (global_gest_age_openmrs != '' && (global_gest_age_openmrs == 26  || global_gest_age_openmrs == 36))"
 actions:
   - "isRelevant = true"
+
+---
+name: step1_accordion_feedback
+description: accordion_feedback
+priority: 1
+condition: "global_emergency_referal.contains('yes') && global_referral_feedback == ''"
+actions:
+  - "isRelevant = true"
