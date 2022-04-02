@@ -5,6 +5,7 @@ import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -81,20 +82,14 @@ public abstract class BaseContactActivity extends SecuredActivity {
     protected abstract void initializePresenter();
 
     protected void setupViews() {
-        initializeRecyclerView();
+
         View cancelButton = findViewById(R.id.undo_button);
         cancelButton.setOnClickListener(v -> contactActionHandler.onClick(v));
         findViewById(R.id.finalize_contact).setOnClickListener(contactActionHandler);
+
     }
 
-    protected void initializeRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        contactAdapter = new ContactAdapter(this, new ArrayList<>(), contactActionHandler);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(contactAdapter);
-    }
 
     protected void startFormActivity(JSONObject form, Contact contact) {
         Intent intent = new Intent(this, ContactJsonFormActivity.class);
@@ -159,7 +154,9 @@ public abstract class BaseContactActivity extends SecuredActivity {
                         if (field != null && field.has(JsonFormConstants.KEY)) {
                             String fieldKey = field.getString(JsonFormConstants.KEY);
                             if (keys.containsKey(fieldKey) && ANCJsonFormUtils.checkIfTaskIsComplete(keys.get(fieldKey))) {
-                                fields.remove(i);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                    fields.remove(i);
+                                }
                             }
                         }
                     }
@@ -274,10 +271,6 @@ public abstract class BaseContactActivity extends SecuredActivity {
         return this;
     }
 
-    public void startForms(View view) {
-        presenter.startForm(view.getTag());
-    }
-
     ////////////////////////////////////////////////////////////////
     // Inner classesC
     ////////////////////////////////////////////////////////////////
@@ -289,9 +282,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
             int i = view.getId();
             if (i == R.id.undo_button) {
                 displayContactSaveDialog();
-            } else if (i == R.id.card_layout) {
-                startForms(view);
-            } else if (i == R.id.finalize_contact) {
+            }  else if (i == R.id.finalize_contact) {
                 Utils.finalizeForm(getActivity(),
                         (HashMap<String, String>) getIntent().getSerializableExtra(ConstantsUtils.IntentKeyUtils.CLIENT_MAP),
                         false);
