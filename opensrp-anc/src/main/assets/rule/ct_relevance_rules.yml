@@ -408,7 +408,7 @@ actions:
 name: step9_calcium_supp
 description: calcium_supp
 priority: 1
-condition: "(global_hypertension == 1) || (global_pop_low_calcium == true) || global_health_conditions.contains('hypertension')"
+condition: "(global_hypertension == 1) || global_health_conditions.contains('hypertension')"
 actions:
   - "isRelevant = true"
 ---
