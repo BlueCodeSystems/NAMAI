@@ -83,6 +83,11 @@ public class PreviousContactDetailsPresenter implements PreviousContactsDetails.
             if (!TextUtils.isEmpty(contactScheduleString)) {
                 scheduleList = Utils.getListFromString(contactScheduleString);
             }
+
+
+            int lastItem  = scheduleList.size() - 1;
+            scheduleList.remove(lastItem);
+
             List<ContactSummaryModel> schedule = new ArrayList<>();
             if (!TextUtils.isEmpty(edd)) {
                 Date lastContactEdd = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(edd);
