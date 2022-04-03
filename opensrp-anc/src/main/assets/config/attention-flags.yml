@@ -65,6 +65,8 @@ fields:
 ---
 group: red_attention_flag
 fields:
+  - template: "Provide viral load results"
+    relevance: "(hiv_test_date != '') && (helper.formatDate(viral_load_testdate,'d') < 90)  && ( hiv_test_result == 'positive' )"
 
   - template: "{{attention_flags.red.danger_sign}}: {danger_signs_value}"
     relevance: "!danger_signs.isEmpty() && !danger_signs.contains('danger_none')"
