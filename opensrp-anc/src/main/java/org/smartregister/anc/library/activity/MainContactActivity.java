@@ -308,7 +308,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
             if ((contact3.getRequiredFields() == null || contact3.getRequiredFields() == 0) && (contact4.getRequiredFields() == null || contact4.getRequiredFields() == 0) ) {
                 requiredFieldsx.setVisibility(View.GONE);
-                completeLayoutx.setVisibility(View.VISIBLE);
+                completeLayoutx.setVisibility(View.GONE);
             } else {
 
                 int c3 = 0;
@@ -326,7 +326,13 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
                 requiredFieldsx.setText(String.format(this.getString(R.string.required_fields), fc));
                 requiredFieldsx.setVisibility(View.VISIBLE);
-                completeLayoutx.setVisibility(View.GONE);
+
+                if(fc == 0){
+                    completeLayoutx.setVisibility(View.VISIBLE);
+                } else {
+                    completeLayoutx.setVisibility(View.GONE);
+                }
+
             }
 
 
