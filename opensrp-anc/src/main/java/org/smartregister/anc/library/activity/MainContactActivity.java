@@ -99,9 +99,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         setFields(contacts);
         int finished = getRequiredCountTotal();
 
-        if (finished == 0) {
-            finalizeBtn.setEnabled(true);
-        }
+        finalizeBtn.setEnabled(true);
 
     }
 

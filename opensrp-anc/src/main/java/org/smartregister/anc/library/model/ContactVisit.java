@@ -354,7 +354,7 @@ public class ContactVisit {
                     JSONArray givenValue = value.getJSONArray(JsonFormConstants.VALUES);
                     if (givenValue.length() > 0) {
                         String firstValue = givenValue.optString(0);
-                        if (StringUtils.isNotBlank(firstValue) && (firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.ORDERED) || firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.NOT_DONE))) {
+                        if (StringUtils.isNotBlank(firstValue) && (firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.ORDERED))) {
                             isTask = true;
                         }
                     }
