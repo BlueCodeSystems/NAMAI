@@ -121,7 +121,7 @@ public class ContactSummarySendActivity extends AppCompatActivity
         if (StringUtils.isNotBlank(maxContactToDisplay)) {
             try {
                 int count = Integer.parseInt(maxContactToDisplay);
-                contactSummaryAdapter.setContactDates(models.size() > count ? models.subList(0, (count + 3)) : models);
+                contactSummaryAdapter.setContactDates(models.size() > count ? models.subList(0, (count + 2)) : models);
             } catch (NumberFormatException e) {
                 contactSummaryAdapter.setContactDates(models);
                 Timber.e(e);
