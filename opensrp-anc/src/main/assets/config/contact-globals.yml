@@ -146,6 +146,7 @@ fields:
   - "ttcv_unprotected"
   - "ttcv_protected"
   - "ttcv_full_protected"
+  - "tt1_dose_no"
 ---
 form: anc_physical_exam
 fields:

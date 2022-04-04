@@ -725,3 +725,11 @@ condition: "!(global_hiv_positive == 1) && (global_partner_hiv_status == 'positi
 actions:
   - "isRelevant = true"
 
+---
+name: step11_tt1_dose_no
+description: tt1_dose_no
+priority: 1
+condition: "step11_tt1_date.contains('done_earlier) || step11_tt1_date.contains('done_today)"
+actions:
+  - "isRelevant = true"
+

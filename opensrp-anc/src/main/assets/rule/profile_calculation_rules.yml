@@ -233,7 +233,7 @@ actions:
 name: step4_underimmunized_doses
 description: underimmunized_doses
 priority: 1
-condition: "!(global_tt1_date == 'not_done')"
+condition: "!(global_tt1_dose_no.contain(''))"
 actions:
   - "calculation = global_underimmunized_doses + 1"
 ---
