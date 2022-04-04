@@ -8303,13 +8303,13 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "underimmunized_doses",
-        "type": "edit_text",
-        "edit_type": "number",
-        "hint": "How many doses",
-        "v_regex": {
-          "value": "([1-4]{1})|s*",
-          "err": "Number of Vaccinations cannot be over 4"
-        },
+        "type": "numbers_selector",
+        "number_of_selectors": "6",
+        "start_number": "0",
+        "max_value": "5",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "v_required": {
           "value": true,
           "err": "Please enter the number of doses"
