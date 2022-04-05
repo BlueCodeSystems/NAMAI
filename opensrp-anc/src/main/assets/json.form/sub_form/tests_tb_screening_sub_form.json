@@ -193,33 +193,33 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "160108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_tb_screening_sub_form.step1.tb_screening_result.label}}",
+      "label": "Record result",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.positive.text}}",
+          "text": "Positive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.negative.text}}",
+          "text": "Negative",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "inconclusive",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.inconclusive.text}}",
+          "text": "Inconclusive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "incomplete",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.incomplete.text}}",
+          "text": "Incomplete",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
