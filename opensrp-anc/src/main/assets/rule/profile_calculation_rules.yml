@@ -233,9 +233,9 @@ actions:
 name: step4_underimmunized_doses
 description: underimmunized_doses
 priority: 1
-condition: "!(global_tt1_dose_no.contain(''))"
+condition: "!global_tt1_dose_no.contains('')"
 actions:
-  - "calculation = global_underimmunized_doses + 1"
+  - "calculation = step4_underimmunized_doses + 1"
 ---
 name: step4_tt_immun_status
 description: tt_immun_status
