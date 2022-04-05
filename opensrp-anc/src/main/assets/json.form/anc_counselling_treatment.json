@@ -5805,9 +5805,6 @@
         "type": "date_picker",
         "hint": "Viral load test date",
         "expanded": false,
-        "duration": {
-          "label": "Date"
-        },
         "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
