@@ -350,7 +350,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_hepatitis_b_sub_form.step1.hepatitis_b_info_toaster.text}}",
+      "text": "Hep B negative. Please follow national policy regarding Hep B vaccination.",
       "toaster_type": "info",
       "relevance": {
         "rules-engine": {
