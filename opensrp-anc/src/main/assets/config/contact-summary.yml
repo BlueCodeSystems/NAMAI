@@ -213,11 +213,13 @@ fields:
     relevance: "underimmunized_doses != ''  && underimmunized_doses >= 2"
 
   - template: "TTVC protection status: Not protected"
-    relevance: "underimmunized_doses <= '1'"
+    relevance: "tt_immun_status.contains('ttcv_not_received')"
+
+  - template: "Number of TTVC doses: 0"
+    relevance: "tt_immun_status.contains('ttcv_not_received')"
 
   - template: "Number of TTVC doses: {underimmunized_doses}"
     relevance: "underimmunized_doses != ''  && underimmunized_doses <= 1"
-
 
   - template: "{{contact_summary.immunisation_status.tt_dose_1}}: {tt1_date_done_date_today_hidden} {tt1_date_done}"
     relevance: "tt1_date == 'done_today' || tt1_date == 'done_earlier'"
