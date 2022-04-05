@@ -8299,12 +8299,33 @@
         }
       },
       {
+        "key": "no_of_doses_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "Select number of doses",
+        "text_color": "#000000",
+        "v_required": {
+          "value": false
+        },
+        "relevance": {
+          "step4:tt_immun_status": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "1-4_doses"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "underimmunized_doses",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "underimmunized_doses",
         "type": "numbers_selector",
-        "number_of_selectors": "6",
+        "label": "Select number of doses",
         "start_number": "0",
         "max_value": "5",
         "text_size": "16px",
@@ -8333,6 +8354,7 @@
           }
         }
       },
+
       {
         "key": "ttcv_unprotected",
         "openmrs_entity_parent": "",
