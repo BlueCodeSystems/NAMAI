@@ -24,9 +24,9 @@ jacoco {
 }
 // This variables are used by the version code & name generators
 ext.versionMajor = 1
-ext.versionMinor = 6
-ext.versionPatch = 11
-ext.versionClassifier = null
+ext.versionMinor = 0
+ext.versionPatch = 0
+ext.versionClassifier =
 ext.isSnapshot = false
 ext.minimumSdkVersion = androidMinSdkVersion
 
@@ -288,7 +288,7 @@ private Integer generateVersionCode() {
  * @return version name
  */
 private String generateVersionName() {
-    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+    String versionName = "who_anc"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta8"
     if (ext.versionClassifier == null && ext.isSnapshot) {
         ext.versionClassifier = "SNAPSHOT"
     }
