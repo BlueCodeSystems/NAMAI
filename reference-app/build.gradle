@@ -288,12 +288,12 @@ private Integer generateVersionCode() {
  * @return version name
  */
 private String generateVersionName() {
-    String versionName = "who_anc"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta8"
+    String versionName = "who_anc_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta8"
     if (ext.versionClassifier == null && ext.isSnapshot) {
         ext.versionClassifier = "SNAPSHOT"
     }
 
-    if (ext.versionClassifier != null) {
+    if (ext.versionClassifier != null && ext.isSnapshot != false) {
         versionName += "-" + ext.versionClassifier
     }
     return versionName;
