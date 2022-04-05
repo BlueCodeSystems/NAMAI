@@ -598,7 +598,8 @@
                   "danger_fever",
                   "convulsing",
                   "central_cyanosis",
-                  "danger_bleeding"
+                  "danger_bleeding",
+                  "draining"
                 ]
               }
             ]
