@@ -442,12 +442,12 @@
             "openmrs_entity_id": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
-            "key": "draining",
+            "key": "drainin",
             "text": "Draining",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "draining"
+            "openmrs_entity_id": "drainin"
           },
           {
             "key": "severe_headache",
@@ -599,7 +599,7 @@
                   "convulsing",
                   "central_cyanosis",
                   "danger_bleeding",
-                  "draining"
+                  "drainin"
                 ]
               }
             ]
