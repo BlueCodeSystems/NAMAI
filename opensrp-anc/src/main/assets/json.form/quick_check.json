@@ -971,7 +971,7 @@
         },
         "v_regex": {
           "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
-          "err": "Number must must be a total of 10 digits in length"
+          "err": "Number must start with 097|096|095|077|076 and must have be 10 digits in length"
         },
         "relevance": {
           "step1:emergency_referal": {
