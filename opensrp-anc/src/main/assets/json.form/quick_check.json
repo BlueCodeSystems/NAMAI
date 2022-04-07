@@ -1114,9 +1114,10 @@
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1145,9 +1146,10 @@
           "err": "can not be more than 10"
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1161,9 +1163,10 @@
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1192,9 +1195,10 @@
           "err": "can not be more than 10"
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1208,9 +1212,10 @@
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1239,9 +1244,10 @@
           "err": "can not be more than 10"
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1252,7 +1258,6 @@
         "openmrs_entity_id": "pregnancy_comp",
         "type": "edit_text",
         "hint": "Any pregnancy complications",
-        "edit_type": "name",
         "relevance": {
           "step1:emergency_referal": {
             "type": "string",
