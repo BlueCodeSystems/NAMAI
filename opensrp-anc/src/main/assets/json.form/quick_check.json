@@ -1090,7 +1090,7 @@
         "type": "numbers_selector",
         "number_of_selectors": "5",
         "start_number": "0",
-        "max_value": "8",
+        "max_value": "16",
         "text_size": "16px",
         "text_color": "#000000",
         "selected_text_color": "#ffffff",
@@ -1114,42 +1114,48 @@
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
       {
         "key": "live_births",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "",
         "openmrs_entity_id": "live_births",
-        "type": "normal_edit_text",
-        "edit_text_style": "bordered",
-        "edit_type": "number",
+        "type": "numbers_selector",
+        "start_number": "0",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "v_required": {
-          "value": "true",
-          "err": "Enter number of live births"
+          "value": false
         },
-        "v_numeric": {
-          "value": "true",
-          "err": ""
-        },
-        "v_min": {
-          "value": "0",
-          "err": "cannot be less than 0"
-        },
-        "v_max": {
-          "value": "10",
-          "err": "can not be more than 10"
+        "constraints": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_constraint_rules.yml"
+            }
+          }
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
       },
       {
         "key": "still_label",
@@ -1161,87 +1167,91 @@
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
       {
         "key": "still_births",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "",
         "openmrs_entity_id": "still_births",
-        "type": "normal_edit_text",
-        "edit_text_style": "bordered",
-        "edit_type": "number",
+        "type": "numbers_selector",
+        "start_number": "0",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "v_required": {
-          "value": "true",
-          "err": "Enter number of still births"
+          "value": false
         },
-        "v_numeric": {
-          "value": "true",
-          "err": ""
-        },
-        "v_min": {
-          "value": "0",
-          "err": "cannot be less than 0"
-        },
-        "v_max": {
-          "value": "10",
-          "err": "can not be more than 10"
+        "constraints": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_constraint_rules.yml"
+            }
+          }
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
       },
       {
         "key": "miscarriage_label",
         "type": "label",
         "label_text_style": "bold",
-        "text": " No. of Miscarriage",
+        "text": " No. of Miscarriages",
         "text_color": "#000000",
         "v_required": {
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
       {
         "key": "miscarriage",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "",
         "openmrs_entity_id": "miscarriage",
-        "type": "normal_edit_text",
-        "edit_text_style": "bordered",
-        "edit_type": "number",
+        "type": "numbers_selector",
+        "start_number": "0",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "v_required": {
-          "value": "true",
-          "err": "Enter number of Miscarriages/ Abortions"
+          "value": false
         },
-        "v_numeric": {
-          "value": "true",
-          "err": ""
-        },
-        "v_min": {
-          "value": "0",
-          "err": "cannot be less than 0"
-        },
-        "v_max": {
-          "value": "10",
-          "err": "can not be more than 10"
+        "constraints": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_constraint_rules.yml"
+            }
+          }
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1252,7 +1262,6 @@
         "openmrs_entity_id": "pregnancy_comp",
         "type": "edit_text",
         "hint": "Any pregnancy complications",
-        "edit_type": "name",
         "relevance": {
           "step1:emergency_referal": {
             "type": "string",
