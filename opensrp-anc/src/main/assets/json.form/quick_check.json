@@ -1206,7 +1206,7 @@
         "key": "miscarriage_label",
         "type": "label",
         "label_text_style": "bold",
-        "text": " No. of Miscarriage",
+        "text": " No. of Miscarriages",
         "text_color": "#000000",
         "v_required": {
           "value": true
