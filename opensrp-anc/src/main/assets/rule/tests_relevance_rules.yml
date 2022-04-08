@@ -779,14 +779,14 @@ actions:
 name: step1_hb_test_type
 description: hb_test_type
 priority: 1
-condition: "step1_hb_test_status == 'done_today' || step1_hb_test_status == 'done_earlier' || step1_hb_test_status == 'ordered'"
+condition: "step1_hb_test_status == 'done_today' || step1_hb_test_status == 'done_earlier'"
 actions:
 - "isRelevant = true"
 ---
 name: step2_hb_test_type
 description: hb_test_type
 priority: 1
-condition: "step2_hb_test_status == 'done_today' || step2_hb_test_status == 'done_earlier' || step2_hb_test_status == 'ordered'"
+condition: "step2_hb_test_status == 'done_today' || step2_hb_test_status == 'done_earlier'"
 actions:
 - "isRelevant = true"
 ---
