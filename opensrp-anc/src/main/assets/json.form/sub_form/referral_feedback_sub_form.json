@@ -28,7 +28,7 @@
         },
         {
           "key": "ordered",
-          "text": "Ordered",
+          "text": "Requested",
           "type": "ordered",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -36,7 +36,7 @@
         },
         {
           "key": "not_done",
-          "text": "Not done",
+          "text": "Not provided",
           "type": "not_done",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -77,7 +77,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "Referral Date",
+      "hint": "Date feedback received",
       "expanded": "false",
       "max_date": "today",
       "read_only": "true",
@@ -102,7 +102,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "Referral Date",
+      "hint": "Date feedback received",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
