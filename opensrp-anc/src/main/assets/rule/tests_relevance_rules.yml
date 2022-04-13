@@ -1123,3 +1123,132 @@ priority: 1
 condition: "step1_referral_test_status == 'done_today'"
 actions:
   - "isRelevant = true"
+
+---
+name: step1_referal_reason
+description: referral_feedback
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_treatment
+description: treatment
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_receiving
+description: receiving
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_provider_name
+description: provider_name
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_provider_phone_number
+description: provider_phone_number
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_referral_notes
+description: referral_notes
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_client_history_label
+description: client_history_label
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_no_of_prev_pregnancies
+description: no_of_prev_pregnancies
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+
+---
+name: step1_no_of_prev_preg
+description: no_of_prev_preg
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_pregnancy_comp
+description: pregnancy_comp
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_live_label
+description: live_label
+priority: 1
+condition: " step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_live_births
+description: live_label
+priority: 1
+condition: " step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_still_label
+description: still_label
+priority: 1
+condition: " step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_still_births
+description: still_label
+priority: 1
+condition: " step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_miscarriage_label
+description: miscarriage_label
+priority: 1
+condition: "step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_miscarriage
+description: miscarriage
+priority: 1
+condition: " step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
