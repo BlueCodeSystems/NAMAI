@@ -218,9 +218,6 @@
       "label_text_style": "bold",
       "text": "{{tests_ultrasound_sub_form.step1.no_of_fetuses_label.text}}",
       "text_color": "#000000",
-      "v_required": {
-        "value": true
-      },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
@@ -313,10 +310,6 @@
       "label_text_style": "bold",
       "text": "Fetal heartrate",
       "text_color": "#000000",
-      "v_required": {
-        "value": "true",
-        "err": "Fetal heart rate"
-      },
       "relevance": {
         "step2:fetal_heartbeat": {
           "type": "string",
@@ -328,7 +321,7 @@
       "key": "fetal_heart_rate",
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
-      "openmrs_entity_id": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity_id": "fetal_heart_rate",
       "type": "normal_edit_text",
       "edit_text_style": "bordered",
       "edit_type": "number",
@@ -339,7 +332,7 @@
         }
       },
       "v_required": {
-        "value": "true",
+        "value": "false",
         "err": "enter fetal heartrate"
       }
     },
@@ -351,9 +344,6 @@
       "type": "hidden",
       "label_text_style": "bold",
       "text_color": "#FF0000",
-      "v_required": {
-        "value": false
-      },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
@@ -449,10 +439,6 @@
       "label_text_style": "bold",
       "text": "Fetal weight (grams)",
       "text_color": "#000000",
-      "v_required": {
-        "value": "false",
-        "err": "Fetal weight required"
-      },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
@@ -469,10 +455,6 @@
       "type": "normal_edit_text",
       "edit_text_style": "bordered",
       "edit_type": "number",
-      "v_required": {
-        "value": "false",
-        "err": "Enter fetal weight"
-      },
       "v_numeric": {
         "value": "true",
         "err": ""
