@@ -77,7 +77,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "{{tests_blood_glucose_sub_form.step1.glucose_test_date.hint}}",
+      "hint": "Blood glucose test date",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
@@ -105,26 +105,26 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165394AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_blood_glucose_sub_form.step1.glucose_test_type.label}}",
+      "label": "Blood glucose test type",
       "label_text_style": "bold",
       "options": [
         {
           "key": "fasting_plasma",
-          "text": "{{tests_blood_glucose_sub_form.step1.glucose_test_type.options.fasting_plasma.text}}",
+          "text": "Fasting plasma glucose",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "160053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "ogtt_75",
-          "text": "{{tests_blood_glucose_sub_form.step1.glucose_test_type.options.ogtt_75.text}}",
+          "text": "75g OGTT",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "163594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "random_plasma",
-          "text": "{{tests_blood_glucose_sub_form.step1.glucose_test_type.options.random_plasma.text}}",
+          "text": "Random plasma glucose",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"

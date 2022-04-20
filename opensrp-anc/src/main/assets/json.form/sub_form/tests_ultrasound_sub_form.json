@@ -218,9 +218,6 @@
       "label_text_style": "bold",
       "text": "{{tests_ultrasound_sub_form.step1.no_of_fetuses_label.text}}",
       "text_color": "#000000",
-      "v_required": {
-        "value": true
-      },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
@@ -338,9 +335,6 @@
       "type": "hidden",
       "label_text_style": "bold",
       "text_color": "#FF0000",
-      "v_required": {
-        "value": false
-      },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
