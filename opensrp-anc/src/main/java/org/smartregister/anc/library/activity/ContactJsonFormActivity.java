@@ -216,7 +216,6 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
                             }
 
                             if (em_ref_array.getString(JsonFormConstants.KEY).equals(ConstantsUtils.EM_REF_YES)) {
-                                none = true;
                                 other = true;
                             }
                         }
