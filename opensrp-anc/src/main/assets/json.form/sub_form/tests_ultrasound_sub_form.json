@@ -308,30 +308,13 @@
       }
     },
     {
-      "key": "fetal_heart_rate_label",
-      "type": "label",
-      "label_text_style": "bold",
-      "text": "Fetal heartrate",
-      "text_color": "#000000",
-      "v_required": {
-        "value": "true",
-        "err": "Fetal heart rate"
-      },
-      "relevance": {
-        "step2:fetal_heartbeat": {
-          "type": "string",
-          "ex": "equalTo(., \"yes\")"
-        }
-      }
-    },
-    {
       "key": "fetal_heart_rate",
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "normal_edit_text",
-      "edit_text_style": "bordered",
+      "type": "edit_text",
       "edit_type": "number",
+      "hint": "Fetal heart rate",
       "relevance": {
         "step2:fetal_heartbeat": {
           "type": "string",
@@ -340,7 +323,11 @@
       },
       "v_required": {
         "value": "true",
-        "err": "enter fetal heartrate"
+        "err": "enter fetal heart rate"
+      },
+      "v_numeric": {
+        "value": "true",
+        "err": "Enter number"
       }
     },
     {
@@ -444,38 +431,20 @@
       }
     },
     {
-      "key": "fetal_weight_label",
-      "type": "label",
-      "label_text_style": "bold",
-      "text": "Fetal weight (grams)",
-      "text_color": "#000000",
-      "v_required": {
-        "value": "false",
-        "err": "Fetal weight required"
-      },
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
-          }
-        }
-      }
-    },
-    {
       "key": "fetal_weight",
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "fetal_weight",
-      "type": "normal_edit_text",
-      "edit_text_style": "bordered",
+      "type": "edit_text",
       "edit_type": "number",
+      "hint": "Fetal weight",
       "v_required": {
         "value": "false",
         "err": "Enter fetal weight"
       },
       "v_numeric": {
         "value": "true",
-        "err": ""
+        "err": "Enter number"
       },
       "v_min": {
         "value": "0",
