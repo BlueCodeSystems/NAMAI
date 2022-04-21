@@ -209,13 +209,13 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
 
                     for (int k = 0; k < jsonArray.length(); k++) {
                         JSONObject item = jsonArray.getJSONObject(k);
-                        JSONObject em_ref_array = emjsonArray.getJSONObject(1);
+                        String em_ref_array = emjsonArray.getJSONObject(0).optString("value");
                         if (item != null && item.getBoolean(JsonFormConstants.VALUE)) {
-                            if (item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE)) {
+                            if ((item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE))||(!item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE))) {
                                 none = true;
                             }
 
-                            if (em_ref_array.getString(JsonFormConstants.KEY).equals(ConstantsUtils.EM_REF_YES)) {
+                            if (((item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE))||(!item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE)))&&(em_ref_array.equals(ConstantsUtils.EM_REF_YES))) {
                                 other = true;
                             }
                         }
