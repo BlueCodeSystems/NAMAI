@@ -559,9 +559,12 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "emergency_referal",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "Emergency referral",
         "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",
@@ -664,8 +667,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -928,8 +936,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -943,8 +956,13 @@
         "edit_type": "name",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -975,8 +993,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -990,8 +1013,13 @@
         "edit_type": "name",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1004,8 +1032,13 @@
         "hint": "Referral feedback",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1026,8 +1059,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1048,8 +1086,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1061,8 +1104,13 @@
         "text_color": "#000000",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1077,8 +1125,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1099,8 +1152,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1264,8 +1322,13 @@
         "hint": "Any pregnancy complications",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       }

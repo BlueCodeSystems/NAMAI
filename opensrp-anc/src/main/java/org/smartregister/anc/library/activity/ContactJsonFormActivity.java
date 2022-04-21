@@ -198,19 +198,24 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
 
         Fragment fragment = getVisibleFragment();
         if (fragment instanceof ContactWizardJsonFormFragment) {
-            for (int i = 0; i < fields.length(); i++) {
-                JSONObject jsonObject = fields.getJSONObject(i);
+            for (int i = 7; i < fields.length(); i++) {
+                int x = 5;
+                JSONObject jsonObject = fields.getJSONObject(x);
+                JSONObject emjsonObject = fields.getJSONObject(7);
                 if (jsonObject != null && jsonObject.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_SIGNS)) {
 
                     JSONArray jsonArray = jsonObject.getJSONArray(JsonFormConstants.OPTIONS_FIELD_NAME);
+                    JSONArray emjsonArray = emjsonObject.getJSONArray(JsonFormConstants.OPTIONS_FIELD_NAME);
+
                     for (int k = 0; k < jsonArray.length(); k++) {
                         JSONObject item = jsonArray.getJSONObject(k);
+                        String em_ref_array = emjsonArray.getJSONObject(0).optString("value");
                         if (item != null && item.getBoolean(JsonFormConstants.VALUE)) {
-                            if (item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE)) {
+                            if ((item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE))||(!item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE))) {
                                 none = true;
                             }
 
-                            if (!item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE)) {
+                            if (((item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE))||(!item.getString(JsonFormConstants.KEY).equals(ConstantsUtils.DANGER_NONE)))&&(em_ref_array.equals(ConstantsUtils.EM_REF_YES))) {
                                 other = true;
                             }
                         }
