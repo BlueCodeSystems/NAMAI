@@ -4,7 +4,7 @@ description: live_births
 priority: 1
 condition: "true"
 actions:
-- "constraint = step1_no_of_prev_preg - step1_still_births - step1_miscarriage  + 1"
+  - "constraint = step1_no_of_prev_preg - step1_still_births - step1_miscarriage + 1"
 
 ---
 name: step1_still_births
@@ -20,4 +20,4 @@ description: miscarriage
 priority: 1
 condition: "true"
 actions:
-  - "constraint = step1_no_of_prev_preg - step1_live_births - step1_still_births  + 1"
+  - "constraint = step1_no_of_prev_preg - step1_live_births - step1_still_births + 1"
