@@ -3467,7 +3467,7 @@
           },
           {
             "key": "cu_iud",
-            "text": "{{anc_counselling_treatment.step7.family_planning_type.options.cu_iud.text}}",
+            "text": "Cu IUD",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
