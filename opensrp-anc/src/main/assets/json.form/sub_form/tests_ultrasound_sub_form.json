@@ -431,7 +431,7 @@
       "openmrs_entity_id": "fetal_weight",
       "type": "edit_text",
       "edit_type": "number",
-      "hint": "Fetal weight",
+      "hint": "Fetal weight (grams)",
       "v_required": {
         "value": "false",
         "err": "Enter fetal weight"
