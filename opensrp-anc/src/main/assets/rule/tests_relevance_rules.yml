@@ -1059,7 +1059,7 @@ actions:
 name: step2_other_test_name
 description: other_test_name
 priority: 1
-condition: "step2_other_test == 'done_earlier' || step2_other_test == 'done_today'"
+condition: "step2_other_test == 'done_earlier' || step2_other_test == 'done_today' || step2_other_test == 'ordered'"
 actions:
 - "isRelevant = true"
 ---
