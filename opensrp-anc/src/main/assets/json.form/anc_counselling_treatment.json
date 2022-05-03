@@ -3457,6 +3457,9 @@
         "type": "check_box",
         "label": "{{anc_counselling_treatment.step7.family_planning_type.label}}",
         "label_text_style": "bold",
+        "exclusive": [
+          "none"
+        ],
         "options": [
           {
             "key": "none",

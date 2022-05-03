@@ -445,7 +445,8 @@
           }
         ],
         "v_required": {
-          "value": false
+          "value": true,
+          "err": "please state occupation"
         },
         "relevance": {
           "step1:educ_level": {
