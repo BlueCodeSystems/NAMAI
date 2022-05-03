@@ -198,6 +198,9 @@ fields:
     relevance: "caffeine_intake != '' && !caffeine_intake.contains('none')"
     isRedFont: "true"
 
+  - template: "High daily consumption of caffeine: {caffeine_intake_value}"
+    relevance: "caffeine_intake != '' && caffeine_intake.contains('none')"
+    isRedFont: "false"
   - template: "Tobacco user or recently quit: {tobacco_user}"
     relevance: "tobacco_user != '' && tobacco_user != 'no'"
     isRedFont: "true"
