@@ -720,6 +720,30 @@
         }
       },
       {
+        "key": "other_cant_record_bp_reason",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "160132AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "hint": "Enter other reason ",
+        "edit_type": "name",
+        "v_required": {
+          "value": true,
+          "err": "Please enter the other reason pulse rate was unrecordable"
+        },
+        "relevance": {
+          "step1:cant_record_bp_reason": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "unrecordable_bp",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -1393,7 +1417,6 @@
             ]
           }
         }
-
       },
       {
         "key": "spacer",

@@ -985,7 +985,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -3075,7 +3075,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -3493,7 +3493,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -3931,7 +3931,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -4349,7 +4349,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -4768,7 +4768,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -5186,7 +5186,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -5604,7 +5604,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -6022,7 +6022,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -6440,7 +6440,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -6858,7 +6858,7 @@
         "options": [
           {
             "key": "dt_unknown",
-            "text": "Unknown Date of delivery/termination unknown",
+            "text": "Estimated date of Delivery/Termination",
             "text_size": "18px",
             "value": "false",
             "openmrs_entity_parent": "",
@@ -7693,6 +7693,30 @@
         }
       },
       {
+        "key": "health_conditions_cancer_other",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "{{anc_profile.step4.health_conditions_cancer_other.hint}}",
+        "edit_type": "edit_text",
+        "v_required": {
+          "value": true,
+          "err": "{{anc_profile.step4.health_conditions_cancer_other.v_required.err}}"
+        },
+        "relevance": {
+          "step3:health_conditions": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "cancer_other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "health_conditions_other",
         "openmrs_entity_parent": "1628AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
@@ -8080,30 +8104,6 @@
               {
                 "or": [
                   "other"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      {
-        "key": "health_conditions_cancer_other",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "",
-        "type": "edit_text",
-        "hint": "{{anc_profile.step4.health_conditions_cancer_other.hint}}",
-        "edit_type": "edit_text",
-        "v_required": {
-          "value": true,
-          "err": "{{anc_profile.step4.health_conditions_cancer_other.v_required.err}}"
-        },
-        "relevance": {
-          "step3:health_conditions": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "cancer_other"
                 ]
               }
             ]
