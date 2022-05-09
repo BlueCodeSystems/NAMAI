@@ -308,7 +308,7 @@ public class ContactVisit {
                 String key = field.optString(JsonFormConstants.KEY);
                 if (jsonArray == null || (jsonArray.length() == 0)) {
                     if (getCurrentClientTasks() != null && !getCurrentClientTasks().containsKey(key)) {
-                        saveTasks(field);
+                        //saveTasks(field);
                     }
                 } else {
                     if (StringUtils.isNotBlank(key) && getCurrentClientTasks() != null) {
@@ -354,12 +354,21 @@ public class ContactVisit {
                     JSONArray givenValue = value.getJSONArray(JsonFormConstants.VALUES);
                     if (givenValue.length() > 0) {
                         String firstValue = givenValue.optString(0);
-                        if (StringUtils.isNotBlank(firstValue) && (firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.ORDERED))) {
+                        if (firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.ORDERED)) {
                             isTask = true;
                         }
                     }
                     break;
                 }
+
+                /*if (value == null)
+                {
+                    JSONArray testValue = value.getJSONArray(JsonFormConstants.VALUES);
+                    if (testValue.length() == 0) {
+                        isTask = false;
+                    }
+                }
+                break;*/
             }
         } catch (JSONException e) {
             Timber.e(e, " --> checkTestsStatus");
