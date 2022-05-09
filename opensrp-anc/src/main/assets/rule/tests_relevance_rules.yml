@@ -527,14 +527,14 @@ actions:
 name: step1_urine_test_type
 description: Urine test type
 priority: 1
-condition: "step1_urine_test_status == 'done_today' || step1_urine_test_status == 'done_earlier' || step1_urine_test_status == 'ordered'"
+condition: "step1_urine_test_status == 'done_today' || step1_urine_test_status == 'done_earlier'"
 actions:
 - "isRelevant = true"
 ---
 name: step2_urine_test_type
 description: Urine test type
 priority: 1
-condition: "step2_urine_test_status == 'done_today' || step2_urine_test_status == 'done_earlier' || step2_urine_test_status == 'ordered'"
+condition: "step2_urine_test_status == 'done_today' || step2_urine_test_status == 'done_earlier'"
 actions:
 - "isRelevant = true"
 ---
