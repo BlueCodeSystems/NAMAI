@@ -2226,6 +2226,82 @@
     "next": "step6",
     "fields": [
       {
+        "key": "syphilis_low_prev_counsel",
+        "openmrs_entity_parent": "165331AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "native_radio",
+        "label": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label}}",
+        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_text}}",
+        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_title}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "not_done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.not_done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "syphilis_high_prev_counsel",
+        "openmrs_entity_parent": "165332AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "native_radio",
+        "label": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label}}",
+        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_text}}",
+        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_title}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "not_done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.not_done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "hypertension_counsel",
         "openmrs_entity_parent": "165325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
@@ -2368,82 +2444,6 @@
         "v_required": {
           "value": true,
           "err": "{{anc_counselling_treatment.step5.hepc_positive_counsel.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "syphilis_low_prev_counsel",
-        "openmrs_entity_parent": "165331AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.not_done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "syphilis_high_prev_counsel",
-        "openmrs_entity_parent": "165332AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.not_done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
