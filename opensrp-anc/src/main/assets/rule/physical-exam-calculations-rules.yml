@@ -79,7 +79,7 @@ actions:
 name: step1_hypertension
 description: Hypertension Diognosis
 priority: 1
-condition: "(step1_bp_systolic_repeat >= 140  || step1_bp_diastolic_repeat >= 90) && (step1_bp_systolic_repeat <= 160  || step1_bp_diastolic_repeat <= 100)"
+condition: "(step1_bp_systolic_repeat >= 140 && step1_bp_systolic_repeat <= 159) || (step1_bp_diastolic_repeat <= 99 &&  step1_bp_diastolic_repeat >= 90)"
 actions:
   - "calculation = 1"
 ---
