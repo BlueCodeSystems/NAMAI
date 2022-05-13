@@ -79,14 +79,14 @@ actions:
 name: step1_hypertension
 description: Hypertension Diognosis
 priority: 1
-condition: "step1_urine_protein == 'none' ||  step1_urine_protein == '+' || global_health_conditions.contains('hypertension')"
+condition: "(step1_bp_systolic_repeat >= 140  || step1_bp_diastolic_repeat >= 90) && (step1_bp_systolic_repeat <= 160  || step1_bp_diastolic_repeat <= 100)"
 actions:
   - "calculation = 1"
 ---
 name: step1_severe_hypertension
 description: Severe hypertension
 priority: 1
-condition: "(step1_hypertension == 1 && (step1_bp_systolic_repeat >= 160  || step1_bp_diastolic_repeat >= 110))"
+condition: "step1_bp_systolic_repeat >= 160  || step1_bp_diastolic_repeat >= 100"
 actions:
   - "calculation = 1"
 ---
