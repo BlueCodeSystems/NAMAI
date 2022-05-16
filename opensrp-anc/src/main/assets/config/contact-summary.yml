@@ -42,7 +42,7 @@ fields:
     relevance: "!receiving.isEmpty()"
 
   - template: "{{contact_summary.hospital_referral.provider_name}}: {provider_name}"
-    relevance: "!provider_name.isEmpty()"
+    relevance: "emergency_referal.contains('yes')"
 
   - template: "{{contact_summary.hospital_referral.provider_phone_number}}: {provider_phone_number}"
     relevance: "!provider_phone_number.isEmpty()"
