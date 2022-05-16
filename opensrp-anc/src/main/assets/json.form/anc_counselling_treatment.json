@@ -172,6 +172,25 @@
         }
       },
       {
+        "key": "anemia_diagnosis_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Anemia diagnosis",
+        "toaster_info_text": "Anemia diagnosis  treatment is required",
+        "toaster_info_title": "Anemia diagnosis",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+
+      {
         "key": "severe_pre_eclampsia_dialog_toaster",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
