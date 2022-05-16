@@ -178,7 +178,7 @@
         "openmrs_entity_id": "",
         "type": "toaster_notes",
         "text": "Anemia diagnosis",
-        "toaster_info_text": "Anemia diagnosis  treatment is required",
+        "toaster_info_text": "Anemia diagnosis  refer to hospital",
         "toaster_info_title": "Anemia diagnosis",
         "toaster_type": "problem",
         "relevance": {
