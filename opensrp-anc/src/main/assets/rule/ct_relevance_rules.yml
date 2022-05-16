@@ -27,6 +27,13 @@ condition: "global_preeclampsia == 1"
 actions:
   - "isRelevant = true"
 ---
+name: step1_anemia_diagnosis_toaster
+description: Anemia  diagnosis
+priority: 1
+condition: "global_anaemic == 1"
+actions:
+  - "isRelevant = true"
+---
 name: step1_severe_pre_eclampsia_dialog_toaster
 description: Severe pre-eclampsia diagnosis
 priority: 1
