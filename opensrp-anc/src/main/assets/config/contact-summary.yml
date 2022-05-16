@@ -42,7 +42,7 @@ fields:
     relevance: "!receiving.isEmpty()"
 
   - template: "{{contact_summary.hospital_referral.provider_name}}: {provider_name}"
-    relevance: "!provider_name.isEmpty()"
+    relevance: "emergency_referal.contains('yes')"
 
   - template: "{{contact_summary.hospital_referral.provider_phone_number}}: {provider_phone_number}"
     relevance: "!provider_phone_number.isEmpty()"
@@ -461,6 +461,9 @@ fields:
 
   - template: "{{contact_summary.blood_pressure.bp_10_min_rest}}: {bp_systolic_repeat}/{bp_diastolic_repeat} mmHg"
     relevance: "bp_systolic_repeat != '' && bp_diastolic_repeat != ''"
+---
+group: "RISK AND DIAGNOSIS"
+fields:
 
   - template: "{{contact_summary.blood_pressure.systptoms_pre_eclampsia}}: {symp_sev_preeclampsia_value}"
     relevance: "symp_sev_preeclampsia != ''"
