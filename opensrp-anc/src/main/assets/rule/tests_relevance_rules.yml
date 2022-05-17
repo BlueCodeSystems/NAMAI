@@ -839,13 +839,6 @@ condition: "step1_anaemic == 1"
 actions:
 - "isRelevant = true"
 ---
-name: step2_anaemia_diagnosis_danger_toaster
-description: anaemia_diagnosis_danger_toaster
-priority: 1
-condition: "step2_anaemic == 1"
-actions:
-- "isRelevant = true"
----
 name: step1_ht
 description: ht
 priority: 1
