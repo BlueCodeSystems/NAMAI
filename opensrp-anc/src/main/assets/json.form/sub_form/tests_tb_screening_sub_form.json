@@ -323,7 +323,7 @@
       "openmrs_entity_id": "",
       "type": "toaster_notes",
       "text": "MTB positive diagnosis!",
-      "toaster_info_text": "MTB positive diagnosis!",
+      "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
       "toaster_info_title": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_title}}",
       "toaster_type": "problem",
       "relevance": {
@@ -340,7 +340,7 @@
       "openmrs_entity_id": "",
       "type": "toaster_notes",
       "text": "MDR TB positive diagnosis!",
-      "toaster_info_text": "MDR TB positive diagnosis!",
+      "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
       "toaster_info_title": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_title}}",
       "toaster_type": "problem",
       "relevance": {
