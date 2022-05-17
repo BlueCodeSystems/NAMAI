@@ -489,7 +489,8 @@ public class ANCFormUtils extends FormUtils {
 
     public static String keyToValueConverter(String keys) {
         if (keys != null) {
-            String cleanKey = WordUtils.capitalizeFully(cleanValue(keys), ',');
+            //String cleanKey = WordUtils.capitalizeFully(cleanValue(keys), ',');
+            String cleanKey = keys;
             if (!TextUtils.isEmpty(keys)) {
                 return cleanKey.replaceAll("_", " ");
             } else {
