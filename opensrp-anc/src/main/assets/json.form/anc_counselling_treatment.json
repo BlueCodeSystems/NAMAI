@@ -3488,14 +3488,14 @@
             "openmrs_entity_id": ""
           },
           {
-            "key": "cu_iud",
+            "key": "Cu_IUD",
             "text": "Cu IUD",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
-            "key": "lng_iud",
+            "key": "Lng_IUD",
             "text": "{{anc_counselling_treatment.step7.family_planning_type.options.lng_iud.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
