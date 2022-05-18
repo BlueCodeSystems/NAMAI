@@ -72,13 +72,13 @@ fields:
 ---
 sub_group: medical_history
 fields:
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.blood_type}}: {blood_type}"
+  - template: "{{profile_overview.overview_of_pregnancy.medical_history.blood_type}}: {blood_type_value}"
     relevance: "blood_type != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.allergies}}: {allergies}"
+  - template: "{{profile_overview.overview_of_pregnancy.medical_history.allergies}}: {allergies_value}"
     relevance: "allergies != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.surgeries}}: {surgeries}"
+  - template: "{{profile_overview.overview_of_pregnancy.medical_history.surgeries}}: {surgeries_value}"
     relevance: "surgeries != ''"
 
   - template: "{{profile_overview.overview_of_pregnancy.medical_history.chronic_health_conditions}}: {health_conditions_value}"
@@ -307,10 +307,10 @@ fields:
 ---
 group: birth_plan_counselling
 fields:
-  - template: "{{profile_overview.birth_plan_counseling.planned_birth_place}}: {delivery_place}"
+  - template: "{{profile_overview.birth_plan_counseling.planned_birth_place}}: {delivery_place_value}"
     relevance: "delivery_place != ''"
 
-  - template: "{{profile_overview.birth_plan_counseling.fp_method_accepted}}: {family_planning_type}"
+  - template: "{{profile_overview.birth_plan_counseling.fp_method_accepted}}: {family_planning_type_value}"
     relevance: "family_planning_type != ''"
 
 ---
