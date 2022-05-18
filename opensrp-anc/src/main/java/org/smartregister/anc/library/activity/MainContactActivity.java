@@ -313,24 +313,36 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
                 int c3 = 0;
                 int c4 = 0;
+                boolean phys = false;
+                boolean symp = false;
+                boolean rac = false;
 
                 if (contact3.getRequiredFields() != null) {
                     c3 = contact3.getRequiredFields();
+                    symp = true;
                 }
 
                 if (contact4.getRequiredFields() != null) {
                     c4 = contact4.getRequiredFields();
+                    phys = true;
+                }
+
+                if((phys == true)&&(symp == true))
+                {
+                    rac = true;
                 }
 
                 int fc = c3 + c4;
 
-                if(fc == 0){
+                if((fc == 0) && (rac == true)){
                     requiredFieldsx.setVisibility(View.GONE);
                     completeLayoutx.setVisibility(View.VISIBLE);
                 } else {
                     requiredFieldsx.setText(String.format(this.getString(R.string.required_fields), fc));
                     requiredFieldsx.setVisibility(View.VISIBLE);
                     completeLayoutx.setVisibility(View.GONE);
+                    mainlayout.setVisibility(View.GONE);
+                    middleLayout.setVisibility(View.VISIBLE);
                 }
 
             }
