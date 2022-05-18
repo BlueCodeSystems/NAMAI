@@ -27,6 +27,13 @@ condition: "true"
 actions:
   - "calculation = (step2_bmi < 18.5 ? 'Underweight' : ((step2_bmi >= 18.5 && step2_bmi < 26) ?  'Normal Weight' : ((step2_bmi >= 25 && step2_bmi < 30) ? 'Overweight' : 'Obese')))"
 ---
+name: step2_weight_gain
+description: Weight gain since last contact
+priority: 1
+condition: "global_contact_no > 1"
+actions:
+  - "calculation = step2_current_weight - global_previous_current_weight"
+---
 name: step2_exp_weight_gain
 description: weight gain tingz
 priority: 1
@@ -48,6 +55,13 @@ condition: "true"
 actions:
   - "calculation = ['bmi' : step2_bmi, 'weight_cat' : step2_weight_cat]"
 ---
+name: step2_weight_gain_toaster
+description: Note displaying the weight gain.
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['weight' : step2_weight_gain]"
+---
 name: step4_weight_gain_duration
 description: Todays date
 priority: 1
@@ -55,13 +69,7 @@ condition: "global_contact_no > 1 && global_last_contact_date != ''"
 actions:
   - "calculation = helper.getDifferenceDays(global_last_contact_date)"
 ---
-name: step4_weight_gain
-description: Average weight gain per week since last contact (in kg).
-priority: 1
-condition: "global_contact_no > 1 && step4_weight_gain_duration >= 7 "
-actions:
-  - "calculation = ((step4_current_weight - global_previous_current_weight) / (step4_weight_gain_duration / 7))"
----
+
 name: step4_tot_weight_gain
 description: Total weight gain in pregnancy so far (in kg).
 priority: 1

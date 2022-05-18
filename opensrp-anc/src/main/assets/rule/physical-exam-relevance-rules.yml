@@ -463,6 +463,14 @@ actions:
   - "isRelevant = true"
 
 ---
+name: step2_weight_gain_toaster
+description: toaster1
+priority: 1
+condition: "step2_weight_gain != '' && global_contact_no > 1"
+actions:
+  - "isRelevant = true"
+
+---
 name: step3_low_pulse_rate_toaster
 description: low_pulse_rate_toaster
 priority: 1
