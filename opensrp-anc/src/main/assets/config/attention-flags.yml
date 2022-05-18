@@ -6,6 +6,9 @@ fields:
   - template: "{{attention_flags.yellow.age}}: {age}"
     relevance: "age <= 17 || age >= 35"
 
+  - template: "Give fansidar"
+    relevance: "fansidar.contains('yes') && (helper.formatDate(contact_date,'w') < 4)"
+
   - template: "Re-test for HIV"
     relevance: "(hiv_test_date != '') && (helper.formatDate(hiv_test_date,'d') < 90)  && ( hiv_test_result == 'negative' )"
 
