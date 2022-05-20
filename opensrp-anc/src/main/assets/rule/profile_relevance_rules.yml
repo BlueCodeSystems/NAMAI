@@ -44,21 +44,21 @@ actions:
 name: step1_sfh_gest_age_selection
 description: sfh_gest_age_selection
 priority: 1
-condition: "step1_lmp_known == '' || step1_ultrasound_done == '' || (step1_lmp_known == 'no' && step1_ultrasound_done == 'no')"
+condition: "step1_lmp_known == '' && step1_ultrasound_done == '' || (step1_lmp_known == 'no' && step1_ultrasound_done == 'no')"
 actions:
   - "isRelevant = true"
 ---
 name: step1_ultrasound_gest_age_selection
 description: ultrasound_gest_age_selection
 priority: 1
-condition: "step1_lmp_known == '' || step1_ultrasound_done == '' || (step1_lmp_known == 'no' && step1_ultrasound_done == 'yes' && (step1_ultrasound_gest_age_wks == '' || step1_ultrasound_gest_age_wks < 24))"
+condition: "step1_lmp_known == '' && step1_ultrasound_done != '' || (step1_lmp_known == 'no' && step1_ultrasound_done == 'yes' && (step1_ultrasound_gest_age_wks == '' || step1_ultrasound_gest_age_wks < 24))"
 actions:
   - "isRelevant = true"
 ---
 name: step1_lmp_gest_age_selection
 description: lmp_gest_age_selection
 priority: 1
-condition: "step1_lmp_known == '' || step1_ultrasound_done == '' || (step1_lmp_known == 'yes' && step1_ultrasound_done == 'no')"
+condition: "step1_lmp_known != '' && step1_ultrasound_done == '' || (step1_lmp_known == 'yes' && step1_ultrasound_done == 'no')"
 actions:
   - "isRelevant = true"
 ---
