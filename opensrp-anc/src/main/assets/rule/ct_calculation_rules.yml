@@ -6,6 +6,13 @@ condition: "!global_danger_signs.isEmpty() && !global_danger_signs.contains('dan
 actions:
  - 'calculation = ["danger_signs" : global_danger_signs_value]'
 ---
+  name: step1_anemia_diagnosis_toaster
+  description: Note displaying the anemia level.
+  priority: 1
+  condition: "!global_anemia_level.isEmpty()"
+  actions:
+   - 'calculation = ["level" : global_anemia_level]'
+---
 name: step1_severe_hypertension_toaster
 description: Severe hypertension toaster
 priority: 1

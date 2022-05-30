@@ -333,12 +333,26 @@
       }
     },
     {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "121629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "key": "anemia_level",
+      "type": "hidden",
+      "calculation": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_calculation_rules.yml"
+          }
+        }
+      }
+    },
+    {
       "key": "anaemia_diagnosis_danger_toaster",
       "openmrs_entity_parent": "",
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.text}}",
+      "text": "{level} {{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.text}}",
       "toaster_info_text": "{{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.toaster_info_text}}",
       "toaster_info_title": "{{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.toaster_info_title}}",
       "toaster_type": "problem",
@@ -346,6 +360,13 @@
         "rules-engine": {
           "ex-rules": {
             "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      },
+      "calculation": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_calculation_rules.yml"
           }
         }
       }
