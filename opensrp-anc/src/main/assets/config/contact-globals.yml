@@ -122,6 +122,8 @@ fields:
   - "ttcv_unprotected"
   - "ttcv_protected"
   - "ttcv_full_protected"
+  -  "anemia_level"
+  - "hb_result"
 ---
 form: anc_profile
 fields:

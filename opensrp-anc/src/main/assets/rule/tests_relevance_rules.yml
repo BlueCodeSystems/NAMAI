@@ -835,7 +835,7 @@ actions:
 name: step1_anaemia_diagnosis_danger_toaster
 description: anaemia_diagnosis_danger_toaster
 priority: 1
-condition: "step1_anaemic == 1"
+condition: "step1_anaemic == 1 && step1_anemia_level != 0 "
 actions:
 - "isRelevant = true"
 ---
