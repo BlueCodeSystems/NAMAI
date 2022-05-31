@@ -1,4 +1,5 @@
 {
+  "validate_on_submit": true,
   "content_form": [
     {
       "key": "syph_test_status",
@@ -44,7 +45,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       }
     },
     {
@@ -130,7 +132,8 @@
         }
       },
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       }
     },
     {
@@ -232,7 +235,8 @@
         }
       },
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       }
     },
     {
@@ -260,7 +264,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
@@ -295,7 +300,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
@@ -330,7 +336,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
