@@ -177,8 +177,8 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Anemia diagnosis",
-        "toaster_info_text": "Anemia diagnosis  refer to hospital",
+        "text": "{level} Anemia diagnosis",
+        "toaster_info_text": " {level} Anemia diagnosis  refer to hospital",
         "toaster_info_title": "Anemia diagnosis",
         "toaster_type": "problem",
         "relevance": {
@@ -187,9 +187,15 @@
               "rules-file": "ct_relevance_rules.yml"
             }
           }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_calculation_rules.yml"
+            }
+          }
         }
       },
-
       {
         "key": "severe_pre_eclampsia_dialog_toaster",
         "openmrs_entity_parent": "",
@@ -2245,6 +2251,242 @@
     "next": "step6",
     "fields": [
       {
+        "key": "anaemia_od",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "anaemia_od",
+        "type": "native_radio",
+        "label": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
+        "label_info_title": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "not_done",
+            "text": "Not given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "anaemia_od_notdone",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_data_type": "",
+        "type": "check_box",
+        "label": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.label}}",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.hint}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "referred_instead",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.referred_instead.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "side_effects",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.side_effects.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165273AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.other.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step5:anaemia_od": {
+            "type": "string",
+            "ex": "equalTo(., \"not_done\")"
+          }
+        }
+      },
+      {
+        "key": "anaemia_od_notdone_other",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone_other.hint}}",
+        "edit_type": "name",
+        "relevance": {
+          "step5:anaemia_od_notdone": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "oc",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "anaemia_od",
+        "type": "native_radio",
+        "label": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
+        "label_info_title": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "not_done",
+            "text": "Not given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "ifa_anaemia",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "native_radio",
+        "label": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
+        "label_info_title": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "not_done",
+            "text": "Not given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "ifa_anaemia_notdone",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_data_type": "",
+        "type": "check_box",
+        "label": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.label}}",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.hint}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "referred_instead",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.referred_instead.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "side_effects",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.side_effects.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165273AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.other.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step5:ifa_anaemia": {
+            "type": "string",
+            "ex": "equalTo(., \"not_done\")"
+          }
+        }
+      },
+      {
+        "key": "ifa_anaemia_notdone_other",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone_other.hint}}",
+        "edit_type": "name",
+        "relevance": {
+          "step5:ifa_anaemia_notdone": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+
+
+      {
         "key": "syphilis_low_prev_counsel",
         "openmrs_entity_parent": "165331AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
@@ -2320,6 +2562,7 @@
           }
         }
       },
+
       {
         "key": "hypertension_counsel",
         "openmrs_entity_parent": "165325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2627,104 +2870,6 @@
             "ex-rules": {
               "rules-file": "ct_relevance_rules.yml"
             }
-          }
-        }
-      },
-      {
-        "key": "ifa_anaemia",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
-        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
-        "label_info_title": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "Given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "Not given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "ifa_anaemia_notdone",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "",
-        "type": "check_box",
-        "label": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.label}}",
-        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.hint}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "referred_instead",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.referred_instead.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "side_effects",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.side_effects.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "165273AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "other",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.other.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "relevance": {
-          "step5:ifa_anaemia": {
-            "type": "string",
-            "ex": "equalTo(., \"not_done\")"
-          }
-        }
-      },
-      {
-        "key": "ifa_anaemia_notdone_other",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "edit_text",
-        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone_other.hint}}",
-        "edit_type": "name",
-        "relevance": {
-          "step5:ifa_anaemia_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
           }
         }
       },

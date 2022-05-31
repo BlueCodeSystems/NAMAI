@@ -462,7 +462,7 @@ fields:
   - template: "{{contact_summary.blood_pressure.bp_10_min_rest}}: {bp_systolic_repeat}/{bp_diastolic_repeat} mmHg"
     relevance: "bp_systolic_repeat != '' && bp_diastolic_repeat != ''"
 ---
-group: "RISK AND DIAGNOSIS"
+group: "RISK AND DIAGNOSES"
 fields:
 
   - template: "{{contact_summary.blood_pressure.systptoms_pre_eclampsia}}: {symp_sev_preeclampsia_value}"

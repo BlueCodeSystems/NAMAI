@@ -496,23 +496,13 @@
         }
       },
       {
-        "key": "select_gest_age_edd_label",
-        "type": "label",
-        "text": "{{anc_profile.step2.select_gest_age_edd_label.text}}",
-        "label_info_text": "If the difference between GA from LMP and early ultrasound is one week or less, then use GA from LMP. If the difference is more than 7 days, use the early ultrasound GA. If ultrasound was done late, use GA from LMP. Between late ultrasound and SFH or HOF, use your best judgment to select GA.",
-        "label_text_style": "bold",
-        "text_color": "#000000",
-        "v_required": {
-          "value": true,
-          "err": "{{anc_profile.step2.select_gest_age_edd_label.v_required.err}}"
-        }
-      },
-      {
         "key": "lmp_gest_age_selection",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160697AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "label": "Dating method",
         "type": "native_radio",
+        "label_text_style": "bold",
         "options": [
           {
             "key": "lmp",
@@ -547,6 +537,8 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160697AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "label": "Dating method",
+        "label_text_style": "bold",
         "type": "native_radio",
         "options": [
           {
@@ -560,7 +552,7 @@
         ],
         "v_required": {
           "value": true,
-          "err": "{{anc_profile.step2.ultrasound_gest_age_selection.v_required.err}}"
+          "err": "Dating method is required"
         },
         "calculation": {
           "rules-engine": {
@@ -582,6 +574,8 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160697AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "label": "Dating method",
+        "label_text_style": "bold",
         "type": "native_radio",
         "options": [
           {
@@ -595,7 +589,7 @@
         ],
         "v_required": {
           "value": true,
-          "err": "{{anc_profile.step2.sfh_gest_age_selection.v_required.err}}"
+          "err": "Dating method is required"
         },
         "calculation": {
           "rules-engine": {
@@ -650,6 +644,8 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "160697AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "label": "Dating method",
+        "label_text_style": "bold",
         "type": "native_radio",
         "options": [
           {
@@ -671,7 +667,7 @@
         ],
         "v_required": {
           "value": true,
-          "err": "{{anc_profile.step2.lmp_ultrasound_gest_age_selection.v_required.err}}"
+          "err": "Dating method is required"
         },
         "calculation": {
           "rules-engine": {
