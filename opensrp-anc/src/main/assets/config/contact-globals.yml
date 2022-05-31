@@ -255,6 +255,8 @@ fields:
   - "partner_syph_test_status"
   - "lmp_known"
   - "ultrasound_done"
+  - "tb_test_result"
+  - "Sputum_result"
 ---
 form: test
 fields:
@@ -314,3 +316,5 @@ fields:
   - "ultrasound_done"
   - "emergency_referal"
   - "referral_feedback"
+  - "tb_test_result"
+  - "Sputum_result"

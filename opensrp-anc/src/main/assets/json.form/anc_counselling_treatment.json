@@ -2,7 +2,7 @@
   "validate_on_submit": false,
   "display_scroll_bars": true,
   "skip_blank_steps": true,
-  "count": "12",
+  "count": "13",
   "encounter_type": "Counselling, Preventive Therapy and Treatment",
   "entity_id": "",
   "relational_id": "",
@@ -3502,7 +3502,7 @@
             "openmrs_entity_id": ""
           },
           {
-            "key": "etg_implant",
+            "key": "Etonogestrel_(ETG)_one-rod_implant",
             "text": "{{anc_counselling_treatment.step7.family_planning_type.options.etg_implant.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -3510,7 +3510,7 @@
           },
           {
             "key": "lng_implant",
-            "text": "{{anc_counselling_treatment.step7.family_planning_type.options.lng_implant.text}}",
+            "text": "Levonorgestrel_(LNG)_two-rod_implant",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
@@ -5685,6 +5685,7 @@
   },
   "step12": {
     "title": "HIV Treatment",
+    "next": "step13",
     "fields": [
       {
         "key": "initiate_ctx",
@@ -5840,6 +5841,59 @@
         "ex": "greaterThan(.,\"3\")"
       }
     }
+  },
+  "step13": {
+    "title": "TB counselling and treatment",
+    "fields": [
+      {
+        "key": "tb_treatment_done",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "tb_treatment_done",
+        "type": "native_radio",
+        "label": "TB treatment done?",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Done",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "not_done",
+            "text": "Not done",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "tb_negative",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Woman  isn't showing symptoms of TB",
+        "toaster_type": "info",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
   },
   "properties_file_name": "anc_counselling_treatment"
 }

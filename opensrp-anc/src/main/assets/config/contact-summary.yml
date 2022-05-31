@@ -57,46 +57,46 @@ fields:
     relevance: "!date_scheduled.isEmpty()"
 
   - template: "{{contact_summary.hospital_referral.severe_hypertension}}: {bp_systolic_repeat}/{bp_diastolic_repeat} mmHg"
-    relevance: "severe_hypertension == 1"
+    relevance: "severe_hypertension == 1 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.hypertension_and_symptom_of_severe_pre_eclampsia}}: {symp_sev_preeclampsia_value}"
-    relevance: "hypertension == 1 && symp_sev_preeclampsia != '' && !symp_sev_preeclampsia.contains('none')"
+    relevance: "hypertension == 1 && symp_sev_preeclampsia != '' && !symp_sev_preeclampsia.contains('none') && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.pre_eclampsia_diagnosis}}"
-    relevance: "preeclampsia == 1"
+    relevance: "preeclampsia == 1 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.severe_pre_eclampsia_diagnosis}}"
-    relevance: "severe_preeclampsia == 1"
+    relevance: "severe_preeclampsia == 1 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.fever}}: {body_temp_repeat}ºC"
-    relevance: "body_temp_repeat >= 38"
+    relevance: "body_temp_repeat >= 38 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_pulse_rate}}: {pulse_rate_repeat}bpm"
-    relevance: "pulse_rate_repeat < 60 || pulse_rate_repeat > 100"
+    relevance: "pulse_rate_repeat < 60 || pulse_rate_repeat > 100 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.respiratory_distress}}: {respiratory_exam_abnormal_value}"
-    relevance: "!respiratory_exam_abnormal.contains('none') && !respiratory_exam_abnormal.isEmpty()"
+    relevance: "!respiratory_exam_abnormal.contains('none') && !respiratory_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.low_oximetry}}: {oximetry}%"
-    relevance: "oximetry < 92"
+    relevance: "oximetry < 92 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_cardiac_exam}}: {cardiac_exam_abnormal_value}"
-    relevance: "!cardiac_exam_abnormal.contains('none') && !cardiac_exam_abnormal.isEmpty()"
+    relevance: "!cardiac_exam_abnormal.contains('none') && !cardiac_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_breast_exam}}: {breast_exam_abnormal_value}"
-    relevance: "!breast_exam_abnormal.contains('none') && !breast_exam_abnormal.isEmpty()"
+    relevance: "!breast_exam_abnormal.contains('none') && !breast_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_abdominal_exam}}: {abdominal_exam_abnormal_value}"
-    relevance: "!abdominal_exam_abnormal.contains('none') && !abdominal_exam_abnormal.isEmpty()"
+    relevance: "!abdominal_exam_abnormal.contains('none') && !abdominal_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_pelvic_exam}}: {pelvic_exam_abnormal_value}"
-    relevance: "!pelvic_exam_abnormal.contains('none') && !pelvic_exam_abnormal.isEmpty()"
+    relevance: "!pelvic_exam_abnormal.contains('none') && !pelvic_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.no_fetal_heartbeat_observed}}"
-    relevance: "fetal_heartbeat == 'no'"
+    relevance: "fetal_heartbeat == 'no' && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_fetal_heart_rate}}: {fetal_heart_rate_repeat}bpm"
-    relevance: "fetal_heart_rate_repeat < 100 || fetal_heart_rate_repeat > 180"
+    relevance: "fetal_heart_rate_repeat < 100 || fetal_heart_rate_repeat > 180 && referred_hosp == 'yes'"
 
 ---
 group: demographic_info
@@ -277,7 +277,7 @@ fields:
     relevance: "behaviour_persist != ''"
 
   - template: "{{contact_summary.woman_behaviour.caffeine_intake}}: {caffeine_intake_value}"
-    relevance: "caffeine_intake != ''"
+    relevance: "caffeine_intake != '' && !caffeine_intake.contains('none')"
 
   - template: "{{contact_summary.woman_behaviour.caffeine_reduction_counseling}}: {caffeine_counsel_value}"
     relevance: "caffeine_counsel == 'done'"

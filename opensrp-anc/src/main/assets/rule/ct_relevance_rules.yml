@@ -538,6 +538,20 @@ condition: "step11_flu_date == 'done_earlier' || step11_flu_date == 'done_today'
 actions:
   - "isRelevant = true"
 ---
+name: step13_tb_negative
+description: tb_negative
+priority: 1
+condition: "(!global_tb_test_result.contains('positive') && !global_Sputum_result.contains('mtb_sensitive') && !global_Sputum_result.contains('mtb_resistant'))"
+actions:
+  - "isRelevant = true"
+---
+name: step13_tb_treatment_done
+description: tb_treatment_done
+priority: 1
+condition: "((global_tb_test_result.contains('positive') || global_Sputum_result.contains('mtb_sensitive')) || global_Sputum_result.contains('mtb_resistant'))"
+actions:
+  - "isRelevant = true"
+---
 name: step9_vita_supp
 description: vita_supp
 priority: 1
@@ -629,7 +643,6 @@ priority: 1
 condition: "!(global_hiv_positive == 1) && (global_gest_age_openmrs < 13)"
 actions:
   - "isRelevant = true"
-
 ---
 name: step10_co_trimoxazole
 description: co_trimoxazole
@@ -637,7 +650,6 @@ priority: 1
 condition: "global_hiv_positive == 1"
 actions:
   - "isRelevant = true"
-
 ---
 name: step12_initiate_ctx
 description: initiate_ctx
@@ -645,7 +657,6 @@ priority: 1
 condition: "global_hiv_positive == 1"
 actions:
   - "isRelevant = true"
-
 ---
 name: step12_started_art
 description: started_art
@@ -653,7 +664,6 @@ priority: 1
 condition: "global_hiv_positive == 1"
 actions:
   - "isRelevant = true"
-
 ---
 name: step12_art_number
 description: art_number
@@ -736,7 +746,6 @@ actions:
 name: step11_tt1_dose_no
 description: tt1_dose_no
 priority: 1
-condition: "step11_tt1_date.contains('done_earlier) || step11_tt1_date.contains('done_today)"
+condition: "step11_tt1_date.contains('done_earlier') || step11_tt1_date.contains('done_today')"
 actions:
   - "isRelevant = true"
-
