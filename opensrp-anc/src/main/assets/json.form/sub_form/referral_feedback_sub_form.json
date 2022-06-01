@@ -44,7 +44,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       }
     },
     {
@@ -558,7 +559,8 @@
       "text": "No. of live births",
       "text_color": "#000000",
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
@@ -611,7 +613,8 @@
       "text": "No. of Still  births",
       "text_color": "#000000",
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
@@ -664,7 +667,8 @@
       "text": " No. of Miscarriages",
       "text_color": "#000000",
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {

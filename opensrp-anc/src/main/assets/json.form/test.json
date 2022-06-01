@@ -75,7 +75,9 @@
     "syph_test_status",
     "ultrasound",
     "hepb_positive",
-    "partner_hepb_positive"
+    "partner_hepb_positive",
+    "Sputum_result",
+    "tb_test_result"
   ],
   "step1": {
     "title": "Laboratory tests",
