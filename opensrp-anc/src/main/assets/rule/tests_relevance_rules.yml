@@ -1149,16 +1149,16 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step1_provider_name
-description: provider_name
+name: step1_ref_facility
+description: ref_facility
 priority: 1
 condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
 actions:
   - "isRelevant = true"
 
 ---
-name: step1_provider_phone_number
-description: provider_phone_number
+name: step1_rec_facility
+description: rec_facility
 priority: 1
 condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
 actions:
@@ -1190,16 +1190,16 @@ actions:
 
 
 ---
-name: step1_no_of_prev_preg
-description: no_of_prev_preg
+name: step1_date_discharge
+description: date_discharge
 priority: 1
 condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
 actions:
   - "isRelevant = true"
 
 ---
-name: step1_pregnancy_comp
-description: pregnancy_comp
+name: step1_outcome
+description: outcome
 priority: 1
 condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
 actions:

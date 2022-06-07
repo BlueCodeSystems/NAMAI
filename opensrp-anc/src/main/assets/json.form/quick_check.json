@@ -977,6 +977,13 @@
         "read_only": "true"
       },
       {
+        "key": "register_id",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "register_id",
+        "type": "hidden"
+      },
+      {
         "key": "provider_phone_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",

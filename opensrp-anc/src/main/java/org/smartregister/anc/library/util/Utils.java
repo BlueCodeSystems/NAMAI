@@ -225,6 +225,8 @@ public class Utils extends org.smartregister.util.Utils {
             ////////
             if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
                 JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+                JSONObject smNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"register_id");
+                smNumber.put(JsonFormUtils.VALUE, personObjectClient.get("register_id"));
                 ccname.put(JsonFormUtils.VALUE, name);
             }
 

@@ -99,7 +99,11 @@
     "partner_hiv_status",
     "ttcv_unprotected",
     "ttcv_protected",
-    "ttcv_full_protected"
+    "ttcv_full_protected",
+    "hepatitis_immun_status",
+    "tb_screening_history",
+    "tobacco_user_sniffing",
+    "hiv_test_result"
   ],
   "default_values": [
     "discordant_out",
@@ -150,7 +154,11 @@
     "sfh_ultrasound_gest_age_selection",
     "ttcv_unprotected",
     "ttcv_protected",
-    "ttcv_full_protected"
+    "ttcv_full_protected",
+    "hepatitis_immun_status",
+    "tb_screening_history",
+    "tobacco_user_sniffing",
+    "hiv_test_result"
   ],
   "global_previous": [
     "age",
@@ -9001,24 +9009,12 @@
     "title": "TB screening history",
     "fields": [
       {
-        "key": "tb_label",
-        "type": "label",
-        "text": "TB screening",
-        "label_info_text": "TB screening",
-        "label_text_style": "bold",
-        "text_color": "#000000",
-        "v_required": {
-          "value": false,
-          "err": "TB screening"
-        }
-      },
-      {
         "key": "tb_screening_history",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "tb_screening_history",
         "type": "check_box",
-        "label": "",
+        "label": "TB screening",
         "label_text_style": "bold",
         "exclusive": [
           "none"
