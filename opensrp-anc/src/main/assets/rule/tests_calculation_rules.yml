@@ -329,3 +329,11 @@ priority: 1
 condition: "step1_referral_test_status == 'done_today'"
 actions:
   -  "calculation = helper.getDateToday()"
+
+---
+name: step1_ref_facility
+description: ref_facility
+priority: 1
+condition: "register_id != ''"
+actions:
+  -  "calculation = register_id"

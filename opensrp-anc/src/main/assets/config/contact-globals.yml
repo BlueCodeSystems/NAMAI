@@ -320,3 +320,4 @@ fields:
   - "referral_feedback"
   - "tb_test_result"
   - "Sputum_result"
+  - "register_id"
