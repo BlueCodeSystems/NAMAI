@@ -535,14 +535,21 @@ actions:
 name: step13_tb_negative
 description: tb_negative
 priority: 1
-condition: "(!global_tb_test_result.contains('positive') && !global_Sputum_result.contains('mtb_sensitive') && !global_Sputum_result.contains('mtb_resistant'))"
+condition: "(global_tb_test_result.contains('positive') && global_Sputum_result.contains('mtb_sensitive') && global_Sputum_result.contains('mtb_resistant'))"
 actions:
   - "isRelevant = true"
 ---
 name: step13_tb_treatment_done
 description: tb_treatment_done
 priority: 1
-condition: "((global_tb_test_result.contains('positive') || global_Sputum_result.contains('mtb_sensitive')) || global_Sputum_result.contains('mtb_resistant'))"
+condition: "((!global_tb_test_result.contains('positive') || !global_Sputum_result.contains('mtb_sensitive')) || !global_Sputum_result.contains('mtb_resistant'))"
+actions:
+  - "isRelevant = true"
+---
+name: step13_tb_reason
+description: tb_reason
+priority: 1
+condition: "step13_tb_treatment_done == 'not_done'"
 actions:
   - "isRelevant = true"
 ---
@@ -746,13 +753,13 @@ actions:
 name: step5_ifa_anaemia
 description: ifa_anaemia
 priority: 1
-condition: "global_anaemic == 1 && global_anemia_level != '' && !global_anemia_level.contains('Mild')"
+condition: "!(global_anemia_level.contains('Mild'))"
 actions:
   - "isRelevant = true"
 ---
 name: step5_anaemia_od
 description: anaemia_od
-priority: 1
-condition: "global_anaemic == 1 && global_anemia_level != '' && global_anemia_level.contains('Mild') "
+priority: 2
+condition: "(global_anemia_level.contains('Mild'))"
 actions:
   - "isRelevant = true"
