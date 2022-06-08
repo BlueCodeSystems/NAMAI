@@ -2251,14 +2251,14 @@
     "next": "step6",
     "fields": [
       {
-        "key": "anaemia_od",
+        "key": "ifa_anaemia",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "anaemia_od",
+        "openmrs_entity_id": "ifa_anaemia",
         "type": "native_radio",
-        "label": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
         "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
-        "label_info_title": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_info_title": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
         "label_text_style": "bold",
         "options": [
           {
@@ -2289,10 +2289,48 @@
         }
       },
       {
-        "key": "anaemia_od_notdone",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "key": "anaemia_od",
+        "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity_id": "anaemia_od",
+        "type": "native_radio",
+        "label": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_info_text": "If a woman is diagnosed with anaemia during pregnancy, her daily elemental iron should be increased to 120 mg until her haemoglobin (Hb) concentration rises to normal (Hb 11 g/dL or higher). Thereafter, she can resume the standard daily antenatal iron dose to prevent re-occurrence of anaemia.\\n\\nThe equivalent of 120 mg of elemental iron equals 600 mg of ferrous sulfate heptahydrate, 360 mg of ferrous fumarate, or 1000 mg of ferrous gluconate.",
+        "label_info_title": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "done"
+          },
+          {
+            "key": "not_done",
+            "text": "Not given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "not_done"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "Please select an option"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "anaemia_od_notdone",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "anaemia_od_notdone",
         "openmrs_data_type": "",
         "type": "check_box",
         "label": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.label}}",
@@ -2345,82 +2383,6 @@
                 ]
               }
             ]
-          }
-        }
-      },
-      {
-        "key": "oc",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "anaemia_od",
-        "type": "native_radio",
-        "label": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
-        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
-        "label_info_title": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "Given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "Not given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "ifa_anaemia",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
-        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
-        "label_info_title": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "Given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "Not given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
           }
         }
       },

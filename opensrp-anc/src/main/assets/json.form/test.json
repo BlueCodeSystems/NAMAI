@@ -77,7 +77,8 @@
     "hepb_positive",
     "partner_hepb_positive",
     "Sputum_result",
-    "tb_test_result"
+    "tb_test_result",
+    "cbc"
   ],
   "step1": {
     "title": "Laboratory tests",
