@@ -200,19 +200,19 @@ fields:
   - template: "{{contact_summary.immunisation_status.tt_immunisation_status}}: {tt_immun_status_value}"
     relevance: "tt_immun_status_value != ''"
 
-  - template: "TTVC protection status: Fully protected"
+  - template: "{{contact_summary.immunisation_status.tt_status_p}}: Fully Protected"
     relevance: "tt_immun_status == '3_doses'"
 
   - template: "Number of TTVC doses: 4 doses"
     relevance: "tt_immun_status == '3_doses'"
 
-  - template: "TTVC protection status:  Protected"
+  - template: "{{contact_summary.immunisation_status.tt_status_p}}: Protected"
     relevance: " underimmunized_doses != ''  && underimmunized_doses >= 2 && underimmunized_doses < 4"
 
   - template: "Number of TTVC doses: {underimmunized_doses}"
     relevance: "underimmunized_doses != ''"
 
-  - template: "TTVC protection status: Not protected"
+  - template: "{{contact_summary.immunisation_status.tt_status_p}}: Unprotected"
     relevance: "tt_immun_status.contains('ttcv_not_received') || underimmunized_doses <= 1"
 
   - template: "Number of TTVC doses: 0"

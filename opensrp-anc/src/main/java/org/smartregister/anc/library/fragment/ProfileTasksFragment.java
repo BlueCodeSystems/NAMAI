@@ -149,7 +149,7 @@ public class ProfileTasksFragment extends BaseProfileFragment implements Profile
     private void toggleViews(List<Task> taskList) {
         if (taskList.size() > 0) {
             noHealthRecordLayout.setVisibility(View.GONE);
-            tasksLayoutHeader.setVisibility(View.VISIBLE);
+            tasksLayoutHeader.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         } else {
             noHealthRecordLayout.setVisibility(View.VISIBLE);

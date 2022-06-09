@@ -3617,7 +3617,7 @@
           },
           {
             "key": "lng_implant",
-            "text": "Levonorgestrel_(LNG)_two-rod_implant",
+            "text": "Levonorgestrel (LNG) two-rod implant",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
@@ -5959,6 +5959,8 @@
         "openmrs_entity_id": "tb_treatment_done",
         "type": "native_radio",
         "label": "TB treatment done?",
+        "label_info_text": "TB counselling and treatment\n\nFor Intensive phase: 2 months (RHZE 150/75/400/275);\n\n    if woman weighs 25–37kg, give/prescribe 2 tablets of RHZE.\n    if woman weighs 38–54kg, give/prescribe 3 tablets of RHZE.\n    if woman weighs 55–70kg, give/prescribe 4 tablets of RHZE.\n    if woman weighs 71kg and above give/prescribe 5 tablets of RHZE.\n\nFor Continuation phase: 4 months (RH 150/75);\n\n    if woman weighs 25–37kg, give/prescribe 2 tablets of RH.\n    if woman weighs 38–54kg, give/prescribe 3 tablets of RH.\n    if woman weighs 55–70kg, give/prescribe 4 tablets of RH.\n    if woman weighs 71kg and above give/prescribe 5 tablets of RH.\n\nAbbreviations: RHZE, rifampicin/isoniazid/pyrazinamide/ethambutol\n\nFor MDR TB; refer to hospital.\n\n",
+        "label_info_title": "TB treatment",
         "label_text_style": "bold",
         "options": [
           {
@@ -5966,14 +5968,14 @@
             "text": "Done",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": ""
+            "openmrs_entity_id": "done"
           },
           {
             "key": "not_done",
             "text": "Not done",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": ""
+            "openmrs_entity_id": "not_done"
           }
         ],
         "relevance": {
@@ -5981,6 +5983,61 @@
             "ex-rules": {
               "rules-file": "ct_relevance_rules.yml"
             }
+          }
+        }
+      },
+      {
+        "key": "reason",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "reason",
+        "type": "check_box",
+        "label": "Reason",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "refer",
+            "text": "Refer instead",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "refer"
+          },
+          {
+            "key": "other",
+            "text": "Other (specify)",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "other"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "please enter value"
+        },
+        "relevance": {
+          "step13:tb_treatment_done": {
+            "type": "string",
+            "ex": "equalTo(., \"not_done\")"
+          }
+        }
+      },
+      {
+        "key": "specify",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "specify",
+        "type": "edit_text",
+        "hint": "Specify",
+        "edit_type": "name",
+        "relevance": {
+          "step13:reason": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
           }
         }
       },
