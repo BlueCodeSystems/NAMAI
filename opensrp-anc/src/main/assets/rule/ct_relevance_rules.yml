@@ -252,6 +252,20 @@ condition: "global_weight_cat == 'Underweight'"
 actions:
   - "isRelevant = true"
 ---
+name: step5_ifa_anaemia
+description: ifa_anaemia
+priority: 1
+condition: "!(global_anemia_level.contains('Mild'))"
+actions:
+  - "isRelevant = true"
+---
+name: step5_anaemia_od
+description: anaemia_od
+priority: 1
+condition: "(global_anemia_level.contains('Mild'))"
+actions:
+  - "isRelevant = true"
+---
 name: step5_hypertension_counsel
 description: Hypertension counseling
 priority: 1
@@ -270,13 +284,6 @@ name: step5_hepb_positive_counsel
 description: Hepatitis B positive counseling
 priority: 1
 condition: "global_hepb_positive == 1"
-actions:
-  - "isRelevant = true"
----
-name: step5_hepc_positive_counsel
-description: Hepatitis C positive counseling
-priority: 1
-condition: "global_hepc_positive == 1"
 actions:
   - "isRelevant = true"
 ---
@@ -747,19 +754,5 @@ name: step11_tt1_dose_no
 description: tt1_dose_no
 priority: 1
 condition: "step11_tt1_date.contains('done_earlier') || step11_tt1_date.contains('done_today')"
-actions:
-  - "isRelevant = true"
----
-name: step5_ifa_anaemia
-description: ifa_anaemia
-priority: 1
-condition: "!(global_anemia_level.contains('Mild'))"
-actions:
-  - "isRelevant = true"
----
-name: step5_anaemia_od
-description: anaemia_od
-priority: 2
-condition: "(global_anemia_level.contains('Mild'))"
 actions:
   - "isRelevant = true"

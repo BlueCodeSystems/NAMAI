@@ -196,7 +196,7 @@ fields:
     relevance: "fetal_heart_rate_repeat < 100 || fetal_heart_rate_repeat > 180"
 
 ---
-group: diagnoses
+group: risk_and_diagnoses
 fields:
   - template: "High daily consumption of caffeine: {caffeine_intake_value}"
     relevance: "caffeine_intake != '' && !caffeine_intake.contains('none')"
