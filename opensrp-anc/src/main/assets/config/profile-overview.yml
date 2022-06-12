@@ -37,9 +37,9 @@ fields:
 ---
 sub_group: obstetric_history
 fields:
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.gravida}}: {gravida}"
-    relevance: "gravida != ''"
-    isRedFont: "gravida >= 5"
+  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.gravida}}: {total_gravida}"
+    relevance: "total_gravida != ''"
+    isRedFont: "total_gravida >= 5"
 
   - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.parity}}: {parity}"
     relevance: "parity != ''"
