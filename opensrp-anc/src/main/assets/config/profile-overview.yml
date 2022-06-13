@@ -335,13 +335,13 @@ fields:
   - template: "{{profile_overview.immunisation_status.tt_immunisation_number}}: {underimmunized_doses}"
     relevance: "underimmunized_doses != ''"
 
-  - template: "Protected status: Fully Protected"
+  - template: "Protection status: Fully Protected"
     relevance: "tt_immun_status == '3_doses' && tt_immun_status != ''"
 
-  - template: "Protected status: Unprotected"
+  - template: "Protection status: Unprotected"
     relevance: "underimmunized_doses < '2' && tt_immun_status != ''"
 
-  - template: "Protected status: Protected"
+  - template: "Protection status: Protected"
     relevance: "underimmunized_doses > '1' && tt_immun_status != ''"
 
   - template: "{{profile_overview.immunisation_status.tt_dose_1}}: {tt1_date_value}"
