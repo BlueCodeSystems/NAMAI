@@ -242,7 +242,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             }
 
-            yes.setOnClickListener(v -> goToContactFinalize(dialog));
+            yes.setOnClickListener(v -> saveReferral(dialog));
             no.setOnClickListener(v -> quickCheckClose());
 
             dialog.show();
@@ -307,6 +307,13 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
         });
     }
 
+    //go to main contact  to auto populate gestation age then display summary
+    public void saveReferral(Dialog dialog)
+    {
+        ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
+        goToContactFinalize(dialog);
+
+    }
 
     @Nullable
     private LinearLayout getQuickCheckButtonsLayout() {
