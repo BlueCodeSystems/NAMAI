@@ -173,6 +173,25 @@
     "next": "step2",
     "fields": [
       {
+        "key": "headss_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "toaster_notes",
+        "type": "toaster_notes",
+        "text": "{{anc_profile.step1.headss_toaster.text}}",
+        "text_color": "#1199F9",
+        "toaster_info_text": "{{anc_profile.step1.headss_toaster.toaster_info_text}}",
+        "toaster_info_title": "{{anc_profile.step1.headss_toaster.toaster_info_title}}",
+        "toaster_type": "info",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "lmp_known",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
