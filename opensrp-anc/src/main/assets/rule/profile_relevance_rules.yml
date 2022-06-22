@@ -1143,3 +1143,10 @@ priority: 1
 condition: "step8_discordant_set != null"
 actions:
   - "isRelevant = step8_discordant_set"
+---
+name: step1_headss_toaster
+description: HEADSS info
+priority: 1
+condition: "(global_age < 16)"
+actions:
+  - "isRelevant = true"
