@@ -1950,7 +1950,6 @@
           {
             "key": "normal_fetal_move",
             "text": "{{anc_symptoms_follow_up.step4.mat_percept_fetal_move.options.normal_fetal_move.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "162108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1958,7 +1957,6 @@
           {
             "key": "reduced_fetal_move",
             "text": "{{anc_symptoms_follow_up.step4.mat_percept_fetal_move.options.reduced_fetal_move.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "113377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1966,7 +1964,6 @@
           {
             "key": "no_fetal_move",
             "text": "{{anc_symptoms_follow_up.step4.mat_percept_fetal_move.options.no_fetal_move.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1452AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
