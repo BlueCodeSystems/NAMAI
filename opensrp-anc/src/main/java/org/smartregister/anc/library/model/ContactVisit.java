@@ -257,6 +257,12 @@ public class ContactVisit {
                     }
                 }
             }
+//            else{
+//                String encounterType = formObject.getString(ConstantsUtils.JsonFormKeyUtils.ENCOUNTER_TYPE
+//                JSONObject dueStep = formObject.optJSONObject(JsonFormConstants.STEP1);
+//                JSONArray stepFields = dueStep.optJSONArray(JsonFormConstants.FIELDS);
+//                saveOrDeleteTasks(stepFields);
+//            }
         } catch (JSONException e) {
             Timber.e(e, " --> processTasks");
         }
@@ -303,11 +309,15 @@ public class ContactVisit {
     private void saveOrDeleteTasks(@NotNull JSONArray stepFields) throws JSONException {
         for (int i = 0; i < stepFields.length(); i++) {
             JSONObject field = stepFields.getJSONObject(i);
-            if (field != null && field.has(JsonFormConstants.IS_VISIBLE) && field.getBoolean(JsonFormConstants.IS_VISIBLE)) {
+            if (field != null/* && field.has(JsonFormConstants.IS_VISIBLE) && field.getBoolean(JsonFormConstants.IS_VISIBLE)*/) {
                 JSONArray jsonArray = field.optJSONArray(JsonFormConstants.VALUE);
                 String key = field.optString(JsonFormConstants.KEY);
                 if (jsonArray == null || (jsonArray.length() == 0)) {
                     if (getCurrentClientTasks() != null && !getCurrentClientTasks().containsKey(key)) {
+                        if(key.contains("accordion_feedback"))
+                        {
+                            saveTasks(field);
+                        }
                         //saveTasks(field);
                     }
                 } else {
@@ -396,3 +406,4 @@ public class ContactVisit {
         return AncLibrary.getInstance().getPreviousContactRepository();
     }
 }
+
