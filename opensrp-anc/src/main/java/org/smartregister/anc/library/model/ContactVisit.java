@@ -316,7 +316,9 @@ public class ContactVisit {
                     if (getCurrentClientTasks() != null && !getCurrentClientTasks().containsKey(key)) {
                         if(key.contains("accordion_feedback"))
                         {
-                            saveTasks(field);
+                            if (referral != null){
+                                saveTasks(field);
+                            }
                         }
                         //saveTasks(field);
                     }
