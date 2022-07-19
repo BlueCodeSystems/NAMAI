@@ -1123,6 +1123,31 @@
         }
       },
       {
+        "key": "type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "labour_type",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -1328,6 +1353,10 @@
             "text": "Ruptured uterus"
           },
           {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
+          },
+          {
             "key": "other",
             "text": "Other (specify)"
           }
@@ -1513,7 +1542,7 @@
         "key": "pregnancy_two_delivery_method",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "delivery_method",
+        "openmrs_entity_id": "pregnancy_two_delivery_method",
         "type": "native_radio",
         "label": "Mode of delivery",
         "label_text_style": "bold",
@@ -1535,6 +1564,31 @@
           "step2:pregnancy_two_gestational_age": {
             "type": "string",
             "ex": "greaterThan(., \"6\")"
+          }
+        }
+      },
+      {
+        "key": "pregnancy_two_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_two_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:pregnancy_two_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
           }
         }
       },
@@ -1745,6 +1799,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -1958,6 +2016,31 @@
         }
       },
       {
+        "key": "pregnancy_three_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_three_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_three_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_three",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -2164,6 +2247,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -2377,6 +2464,31 @@
         }
       },
       {
+        "key": "pregnancy_four_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_four_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_four_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_four",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -2583,6 +2695,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -2795,6 +2911,31 @@
         }
       },
       {
+        "key": "pregnancy_five_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_five_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_five_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_five",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -3001,6 +3142,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -3213,6 +3358,31 @@
         }
       },
       {
+        "key": "pregnancy_six_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_six_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_six_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_six",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -3419,6 +3589,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -3631,6 +3805,31 @@
         }
       },
       {
+        "key": "pregnancy_seven_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_seven_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_seven_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_seven",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -3837,6 +4036,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -4069,6 +4272,31 @@
         }
       },
       {
+        "key": "pregnancy_eight_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_eight_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_eight_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_eight",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -4275,6 +4503,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -4487,6 +4719,31 @@
         }
       },
       {
+        "key": "pregnancy_nine_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_nine_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_nine_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_nine",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -4693,6 +4950,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -4906,6 +5167,31 @@
         }
       },
       {
+        "key": "pregnancy_ten_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_ten_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_ten_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_ten",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -5112,6 +5398,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -5324,6 +5614,31 @@
         }
       },
       {
+        "key": "pregnancy_eleven_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_eleven_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_eleven_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_eleven",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -5530,6 +5845,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -5742,6 +6061,31 @@
         }
       },
       {
+        "key": "pregnancy_twelve_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_twelve_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_twelve_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_twelve",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -5948,6 +6292,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -6160,6 +6508,31 @@
         }
       },
       {
+        "key": "pregnancy_thirteen_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_thirteen_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_thirteen_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_thirteen",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -6366,6 +6739,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -6578,6 +6955,31 @@
         }
       },
       {
+        "key": "pregnancy_fourteen_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_fourteen_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_fourteen_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_fourteen",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -6784,6 +7186,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
@@ -6996,6 +7402,31 @@
         }
       },
       {
+        "key": "pregnancy_fifteen_type_of_assisted",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pregnancy_fifteen_type_of_assisted",
+        "type": "native_radio",
+        "label": "Type of assisted delivery",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "forceps",
+            "text": "Forceps"
+          },
+          {
+            "key": "vacuum",
+            "text": "Vacuum"
+          }
+        ],
+        "relevance": {
+          "step2:preg_fifteen_delivery_method": {
+            "type": "string",
+            "ex": "equalTo(., \"assisted_delivery\")"
+          }
+        }
+      },
+      {
         "key": "c_type_fifteen",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -7202,6 +7633,10 @@
           {
             "key": "rapture",
             "text": "Ruptured uterus"
+          },
+          {
+            "key": "intrauterine",
+            "text": "Intrauterine fetal demise (IUFD)"
           },
           {
             "key": "other",
