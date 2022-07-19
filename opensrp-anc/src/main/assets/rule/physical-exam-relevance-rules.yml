@@ -90,80 +90,80 @@ condition: "step3_pulse_rate_repeat > 0 && (step3_pulse_rate_repeat < 60 || step
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster21
+name: step4_toaster21
 description: Oxymetry Entry
 priority: 1
-condition: "step3_oximetry > 0 && step3_oximetry < 92"
+condition: "step4_oximetry > 0 && step4_oximetry < 92"
 actions:
   - "isRelevant = true"
 ---
-name: step4_toaster28
+name: step5_toaster28
 description: Fetal heart beat rate
 priority: 1
-condition: "(step4_fetal_heart_rate > 0 && step4_fetal_heart_rate < 120 ) || (step4_fetal_heart_rate > 160)"
+condition: "(step5_fetal_heart_rate > 0 && step5_fetal_heart_rate < 120 ) || (step5_fetal_heart_rate > 160)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_fetal_movement
+name: step5_fetal_movement
 description: Fetal movement
 priority: 1
 condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 20)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_no_of_fetuses_label
+name: step5_no_of_fetuses_label
 description: No of Fetuses Label
 priority: 1
-condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26) && (!step4_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
+condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26) && (!step5_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
 actions:
   - "isRelevant = true"
 ---
-name: step4_no_of_fetuses
+name: step5_no_of_fetuses
 description: No of Fetuses
 priority: 1
-condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26) && (!step4_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
+condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26) && (!step5_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
 actions:
   - "isRelevant = true"
 ---
-name: step4_no_of_fetuses_unknown
+name: step5_no_of_fetuses_unknown
 description: No of Fetuses unknown
 priority: 1
 condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_fetal_heart_rate_repeat_label
+name: step5_fetal_heart_rate_repeat_label
 description: Fetal heart beat rate
 priority: 1
-condition: "(step4_fetal_heart_rate > 0 && step4_fetal_heart_rate < 120 ) || (step4_fetal_heart_rate > 160)"
+condition: "(step5_fetal_heart_rate > 0 && step5_fetal_heart_rate < 120 ) || (step5_fetal_heart_rate > 160)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_fetal_heart_rate_repeat
+name: step5_fetal_heart_rate_repeat
 description: Fetal heart beat rate
 priority: 1
-condition: "(step4_fetal_heart_rate > 0 && step4_fetal_heart_rate < 120 ) || (step4_fetal_heart_rate > 160)"
+condition: "(step5_fetal_heart_rate > 0 && step5_fetal_heart_rate < 120 ) || (step5_fetal_heart_rate > 160)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_toaster27
+name: step5_toaster27
 description: No fetal heartbeat observed. Refer to hospital.
 priority: 1
-condition: "(step4_fetal_heartbeat == 'no' && (global_gest_age_openmrs != '' && global_gest_age_openmrs >= 20))"
+condition: "(step5_fetal_heartbeat == 'no' && (global_gest_age_openmrs != '' && global_gest_age_openmrs >= 20))"
 actions:
   - "isRelevant = true"
 ---
-name: step4_toaster29
+name: step5_toaster29
 description: Fetal heart beat rate repeat toaster
 priority: 1
-condition: "(step4_fetal_heart_rate_repeat > 0 && step4_fetal_heart_rate_repeat < 120 ) || (step4_fetal_heart_rate_repeat > 160)"
+condition: "(step5_fetal_heart_rate_repeat > 0 && step5_fetal_heart_rate_repeat < 120 ) || (step5_fetal_heart_rate_repeat > 160)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_toaster3
+name: step5_toaster3
 description: Note displaying that the woman is at risk of developing pre-eclampsia.
 priority: 1
-condition: "(step4_gdm_risk == 1)"
+condition: "(step5_gdm_risk == 1)"
 actions:
   - "isRelevant = true"
 ---
@@ -209,101 +209,101 @@ condition: "(step1_preeclampsia == 1)"
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster19
+name: step4_toaster19
 description: Note displaying that anaemic
 priority: 1
-condition: "(step3_anaemic == 1)"
+condition: "(step4_anaemic == 1)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_toaster30
+name: step5_toaster30
 description: Note displaying that preeclampsia risk
 priority: 1
-condition: "(step4_preeclampsia_risk == 1)"
+condition: "(step5_preeclampsia_risk == 1)"
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster22
+name: step4_toaster22
 description: toaster22
 priority: 1
-condition: "step3_cardiac_exam == 3"
+condition: "step4_cardiac_exam == 3"
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster23
+name: step4_toaster23
 description: toaster23
 priority: 1
-condition: "step3_breast_exam == 3"
+condition: "step4_breast_exam == 3"
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster24
+name: step4_toaster24
 description: toaster24
 priority: 1
-condition: "step3_abdominal_exam == 3"
+condition: "step4_abdominal_exam == 3"
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster25
+name: step4_toaster25
 description: toaster25
 priority: 1
-condition: "step3_pelvic_exam == 3"
+condition: "step4_pelvic_exam == 3"
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster26
+name: step4_toaster26
 description: toaster26
 priority: 1
-condition: "step3_toaster26_hidden > 2"
+condition: "step4_toaster26_hidden > 2"
 actions:
   - "isRelevant = true"
 ---
-name: step3_evaluate_labour_toaster
+name: step4_evaluate_labour_toaster
 description: evaluate_labour_toaster
 priority: 1
-condition: "!step3_pelvic_exam_abnormal.isEmpty() && step3_pelvic_exam_abnormal.contains('amniotic_fluid_evidence')"
+condition: "!step4_pelvic_exam_abnormal.isEmpty() && step4_pelvic_exam_abnormal.contains('amniotic_fluid_evidence')"
 actions:
   - "isRelevant = true"
 ---
-name: step3_ipv_physical_signs_symptoms
+name: step4_ipv_physical_signs_symptoms
 description: ipv_physical_signs_symptoms
 priority: 1
 condition: "global_site_ipv_assess == true"
 actions:
   - "isRelevant = true"
 ---
-name: step3_toaster31
+name: step4_toaster31
 description: toaster31
 priority: 1
-condition: "step3_ipv_suspect == 1 "
+condition: "step4_ipv_suspect == 1 "
 actions:
   - "isRelevant = true"
 ---
-name: step3_ipv_clinical_enquiry
+name: step4_ipv_clinical_enquiry
 description: ipv_clinical_enquiry
 priority: 1
-condition: "step3_ipv_suspect == 1"
+condition: "step4_ipv_suspect == 1"
 actions:
   - "isRelevant = true"
 ---
-name: step3_ipv_clinical_enquiry_not_done_reason
+name: step4_ipv_clinical_enquiry_not_done_reason
 description: ipv_clinical_enquiry_not_done_reason
 priority: 1
-condition: "step3_ipv_clinical_enquiry == 'no'"
+condition: "step4_ipv_clinical_enquiry == 'no'"
 actions:
   - "isRelevant = true"
 ---
-name: step3_ipv_subject
+name: step4_ipv_subject
 description: ipv_subject
 priority: 1
-condition: "step3_ipv_clinical_enquiry == 'yes'"
+condition: "step4_ipv_clinical_enquiry == 'yes'"
 actions:
   - "isRelevant = true"
 ---
-name: step3_ipv_subject_violence_types
+name: step4_ipv_subject_violence_types
 description: ipv_subject
 priority: 1
-condition: "step3_ipv_subject == 'yes'"
+condition: "step4_ipv_subject == 'yes'"
 actions:
   - "isRelevant = true"
 ---
@@ -394,60 +394,60 @@ actions:
 name: step3_hypothermia_toaster
 description: hypothermia_toaster
 priority: 1
-condition: " step3_body_temp_repeat > 0 && step3_body_temp_repeat < 36"
+condition: " step3_body_temp_repeat > 0 && step3_body_temp_repeat < 35.5"
 actions:
   - "isRelevant = true"
 ---
-name: step4_fetal_heartbeat
+name: step5_fetal_heartbeat
 description: Fetal heartbeat
 priority: 1
 condition: "global_gest_age_openmrs >= 26"
 actions:
   - "isRelevant = true"
 ---
-name: step4_sfh_label
+name: step5_sfh_label
 description: SFH label
 priority: 1
 condition: "(global_gest_age_openmrs >= 20 && global_gest_age_openmrs <= 45)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_sfh
+name: step5_sfh
 description: SFH
 priority: 1
 condition: "(global_gest_age_openmrs >= 20 && global_gest_age_openmrs <= 45)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_hof
+name: step5_hof
 description: HOF
 priority: 1
 condition: " (global_gest_age_openmrs >= 12)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_hof_label
+name: step5_hof_label
 description: HOF label
 priority: 1
 condition: "(global_gest_age_openmrs >= 12)"
 actions:
   - "isRelevant = true"
 ---
-name: step4_fetal_presentation
+name: step5_fetal_presentation
 description: Fetal movement
 priority: 1
 condition: "global_gest_age_openmrs >= 26"
 actions:
   - "isRelevant = true"
 ---
-name: step4_descent
+name: step5_descent
 description: Descent
 priority: 1
-condition: "((global_gest_age_openmrs >= 26)&&(step4_fetal_presentation.contains('cephalic')))"
+condition: "((global_gest_age_openmrs >= 26)&&(step5_fetal_presentation.contains('cephalic')))"
 actions:
   - "isRelevant = true"
 ---
-name: step4_baby_lie
+name: step5_baby_lie
 description: Baby lie
 priority: 1
 condition: "(global_gest_age_openmrs >= 26)"
@@ -495,18 +495,18 @@ actions:
   - "isRelevant = true"
   
 ---
-name: step4_lie_toaster
+name: step5_lie_toaster
 description: lie_toaster
 priority: 1
-condition: "step4_baby_lie.contains('undetermined') || step4_baby_lie.contains('oblique') || step4_baby_lie.contains('transverse')"
+condition: "step5_baby_lie.contains('undetermined') || step5_baby_lie.contains('oblique') || step5_baby_lie.contains('transverse')"
 actions:
   - "isRelevant = true"
 
 ---
-name: step4_sfh_big_toaster
+name: step5_sfh_big_toaster
 description: sfh_big_toaster
 priority: 1
-condition: "step4_sfh >= 40"
+condition: "step5_sfh >= 40"
 actions:
   - "isRelevant = true"
 

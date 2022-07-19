@@ -434,7 +434,7 @@
       "openmrs_entity_id": "fetal_weight",
       "type": "edit_text",
       "edit_type": "number",
-      "hint": "Fetal weight (grams)",
+      "hint": "Estimated fetal weight (grams)",
       "v_required": {
         "value": "false",
         "err": "Enter fetal weight"
@@ -604,7 +604,7 @@
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165296AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "native_radio",
+      "type": "check_box",
       "label": "{{tests_ultrasound_sub_form.step1.placenta_location.label}}",
       "label_text_style": "bold",
       "options": [
@@ -637,25 +637,11 @@
           "openmrs_entity_id": "541AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
-          "key": "left_right_side",
-          "text": "Side walls (left or right lateral) ",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
           "key": "fundal",
           "text": "{{tests_ultrasound_sub_form.step1.placenta_location.options.fundal.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "undetermined",
-          "text": "Undetermined",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "undetermined"
         }
       ],
       "relevance": {

@@ -212,7 +212,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "160053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "edit_text",
-      "hint": "{{tests_blood_glucose_sub_form.step1.fasting_plasma_gluc.hint}}",
+      "hint": "Fasting plasma glucose results (mmol/l)",
       "edit_type": "number",
       "v_min": {
         "value": "3.5",

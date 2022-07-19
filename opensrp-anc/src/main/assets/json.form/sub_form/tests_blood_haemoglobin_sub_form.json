@@ -219,11 +219,11 @@
       "edit_type": "number",
       "v_min": {
         "value": "0",
-        "err": "The complete blood count test must be greater than or equal to 0"
+        "err": "The full blood count test must be greater than or equal to 0"
       },
       "v_max": {
         "value": "25",
-        "err": "The complete blood count test must be less than or equal to 25"
+        "err": "The full blood count test must be less than or equal to 25"
       },
       "v_numeric": {
         "value": "true",

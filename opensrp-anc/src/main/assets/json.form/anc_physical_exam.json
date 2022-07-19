@@ -1052,7 +1052,7 @@
     ]
   },
   "step3": {
-    "title": "{{anc_physical_exam.step3.title}}",
+    "title": "Vitals",
     "next": "step4",
     "fields": [
       {
@@ -1162,7 +1162,7 @@
         "relevance": {
           "step3:body_temp_repeat": {
             "type": "numeric",
-            "ex": "greaterThanEqualTo(., \"39\")"
+            "ex": "greaterThanEqualTo(., \"37.6\")"
           }
         }
       },
@@ -1219,7 +1219,6 @@
           "err": ""
         }
       },
-
       {
         "key": "toaster17",
         "openmrs_entity_parent": "",
@@ -1321,7 +1320,6 @@
           }
         }
       },
-
       {
         "key": "toaster18",
         "openmrs_entity_parent": "",
@@ -1563,7 +1561,13 @@
             }
           }
         }
-      },
+      }
+    ]
+  },
+  "step4": {
+    "title": "{{anc_physical_exam.step3.title}}",
+    "next": "step5",
+    "fields": [
       {
         "key": "spacer",
         "openmrs_entity_parent": "",
@@ -1733,7 +1737,7 @@
           }
         ],
         "relevance": {
-          "step3:respiratory_exam": {
+          "step4:respiratory_exam": {
             "type": "string",
             "ex": "equalTo(., \"3\")"
           }
@@ -1751,7 +1755,7 @@
           "err": "Please enter valid content"
         },
         "relevance": {
-          "step3:respiratory_exam_abnormal": {
+          "step4:respiratory_exam_abnormal": {
             "ex-checkbox": [
               {
                 "or": [
@@ -1772,7 +1776,7 @@
         "text_color": "#E20000",
         "toaster_type": "problem",
         "relevance": {
-          "step3:respiratory_exam": {
+          "step4:respiratory_exam": {
             "type": "string",
             "ex": "equalTo(., \"3\")"
           }
@@ -1785,7 +1789,7 @@
         "text": "{{anc_physical_exam.step3.oximetry_label.text}}",
         "text_color": "#000000",
         "relevance": {
-          "step3:respiratory_exam_abnormal": {
+          "step4:respiratory_exam_abnormal": {
             "ex-checkbox": [
               {
                 "or": [
@@ -1812,7 +1816,7 @@
         "edit_text_style": "bordered",
         "edit_type": "number",
         "relevance": {
-          "step3:respiratory_exam_abnormal": {
+          "step4:respiratory_exam_abnormal": {
             "ex-checkbox": [
               {
                 "or": [
@@ -2162,7 +2166,7 @@
           }
         ],
         "relevance": {
-          "step3:cervical_exam": {
+          "step4:cervical_exam": {
             "type": "string",
             "ex": "equalTo(., \"3\")"
           }
@@ -2181,7 +2185,7 @@
           "value": false
         },
         "relevance": {
-          "step3:speculum_abnormal_symptoms": {
+          "step4:speculum_abnormal_symptoms": {
             "ex-checkbox": [
               {
                 "or": [
@@ -2208,7 +2212,7 @@
           "value": false,
           "err": "Field cervical dilation is required"
         }, "relevance": {
-        "step3:speculum_abnormal_symptoms": {
+        "step4:speculum_abnormal_symptoms": {
           "ex-checkbox": [
             {
               "or": [
@@ -2229,7 +2233,7 @@
         "hint": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.others.text}}",
         "edit_type": "name",
         "relevance": {
-          "step3:speculum_abnormal_symptoms": {
+          "step4:speculum_abnormal_symptoms": {
             "ex-checkbox": [
               {
                 "or": [
@@ -2255,7 +2259,7 @@
           "src": {
             "key": "cervical_exam",
             "option_key": "1",
-            "stepName": "step3"
+            "stepName": "step4"
           }
         }
       },
@@ -2364,7 +2368,7 @@
           "err": "{{anc_physical_exam.step3.oedema_severity.v_required.err}}"
         },
         "relevance": {
-          "step3:oedema": {
+          "step4:oedema": {
             "type": "string",
             "ex": "equalTo(., \"yes\")"
           }
@@ -2490,7 +2494,7 @@
         "hint": "{{anc_physical_exam.step3.ipv_physical_signs_symptoms_injury_other.hint}}",
         "edit_type": "name",
         "relevance": {
-          "step3:ipv_physical_signs_symptoms": {
+          "step4:ipv_physical_signs_symptoms": {
             "ex-checkbox": [
               {
                 "or": [
@@ -2510,7 +2514,7 @@
         "hint": "{{anc_physical_exam.step3.ipv_physical_signs_symptoms_other.hint}}",
         "edit_type": "name",
         "relevance": {
-          "step3:ipv_physical_signs_symptoms": {
+          "step4:ipv_physical_signs_symptoms": {
             "ex-checkbox": [
               {
                 "or": [
@@ -2652,7 +2656,7 @@
         "type": "edit_text",
         "hint": "{{anc_physical_exam.step3.ipv_clinical_enquiry_not_done_reason_other.hint}}",
         "relevance": {
-          "step3:ipv_clinical_enquiry_not_done_reason": {
+          "step4:ipv_clinical_enquiry_not_done_reason": {
             "type": "string",
             "ex": "equalTo(., \"other\")"
           }
@@ -2774,7 +2778,7 @@
           "err": "Cannot contain numbers or special characters"
         },
          "relevance": {
-        "step3:ipv_subject_violence_types": {
+        "step4:ipv_subject_violence_types": {
           "ex-checkbox": [
             {
               "or": ["other"]
@@ -2784,7 +2788,7 @@
       }}
     ]
   },
-  "step4": {
+  "step5": {
     "title": "{{anc_physical_exam.step4.title}}",
     "fields": [
       {
@@ -2898,7 +2902,7 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "baby_lie",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "Fetal lie",
         "label_text_style": "bold",
         "label_info_text": "The position in which the baby is lying",

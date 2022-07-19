@@ -4157,9 +4157,9 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "od",
         "type": "native_radio",
-        "label": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label": "Give daily dose of elemental iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
         "label_info_text": "If a woman is diagnosed with anaemia during pregnancy, her daily elemental iron should be increased to 120 mg until her haemoglobin (Hb) concentration rises to normal (Hb 11 g/dL or higher). Thereafter, she can resume the standard daily antenatal iron dose to prevent re-occurrence of anaemia.\\n\\nThe equivalent of 120 mg of elemental iron equals 600 mg of ferrous sulfate heptahydrate, 360 mg of ferrous fumarate, or 1000 mg of ferrous gluconate.",
-        "label_info_title": "Give daily dose of iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_info_title": "Give daily dose of elemental iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
         "label_text_style": "bold",
         "options": [
           {

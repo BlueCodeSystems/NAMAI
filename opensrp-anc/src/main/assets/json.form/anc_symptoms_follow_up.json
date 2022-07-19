@@ -1336,7 +1336,6 @@
           {
             "key": "none",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.none.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1344,7 +1343,6 @@
           {
             "key": "nausea",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.nausea.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "133473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1352,7 +1350,6 @@
           {
             "key": "vomiting",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.vomiting.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "133473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1360,7 +1357,6 @@
           {
             "key": "heartburn",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.heartburn.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "139059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1368,7 +1364,6 @@
           {
             "key": "leg_cramps",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.leg_cramps.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "135969AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1376,7 +1371,6 @@
           {
             "key": "constipation",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.constipation.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "996AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1384,7 +1378,6 @@
           {
             "key": "low_back_pain",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.low_back_pain.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "116225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1392,7 +1385,13 @@
           {
             "key": "pelvic_pain",
             "text": "{{anc_symptoms_follow_up.step4.phys_symptoms.options.pelvic_pain.text}}",
-            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "131034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": ""
+          },
+          {
+            "key": "other_physiological",
+            "text": "Other (specify)",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "131034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -1401,6 +1400,30 @@
         "v_required": {
           "value": "true",
           "err": "{{anc_symptoms_follow_up.step4.phys_symptoms.v_required.err}}"
+        }
+      },
+      {
+        "key": "other_phys",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "other_phys",
+        "type": "edit_text",
+        "hint": "Specify",
+        "edit_type": "name",
+        "v_required": {
+          "value": true,
+          "err": "Please specify physiological symptoms"
+        },
+        "relevance": {
+          "step4:phys_symptoms": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other_physiological"
+                ]
+              }
+            ]
+          }
         }
       },
       {

@@ -651,8 +651,8 @@
           "err": "Enter a Valid GA from SFH or HOF - weeks value"
         },
         "v_min": {
-          "value": "4",
-          "err": "GA from SFH or HOF - weeks should 4 or greater"
+          "value": "12",
+          "err": "GA from SFH or HOF - weeks should 12 or greater"
         },
         "v_max": {
           "value": "40",
@@ -1325,7 +1325,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -1744,7 +1744,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -2163,7 +2163,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -2582,7 +2582,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -3000,7 +3000,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -3418,7 +3418,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -3836,7 +3836,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -4274,7 +4274,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -4692,7 +4692,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -5111,7 +5111,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -5529,7 +5529,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -5947,7 +5947,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -6365,7 +6365,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -6783,7 +6783,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -7201,7 +7201,7 @@
           },
           {
             "key": "rapture",
-            "text": "Raptured uterus"
+            "text": "Ruptured uterus"
           },
           {
             "key": "other",
@@ -7356,20 +7356,6 @@
             "openmrs_entity_id": "140951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "key": "macrosomia",
             "text": "{{anc_profile.step3.prev_preg_comps.options.macrosomia.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "118159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "key": "vacuum_delivery",
-            "text": "{{anc_profile.step3.prev_preg_comps.options.vacuum_delivery.text}}"
-          },
-          {
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "",
-            "key": "vacuum",
-            "text": "{{anc_profile.step3.prev_preg_comps.options.vacuum.text}}"
           },
           {
             "openmrs_entity_parent": "",
