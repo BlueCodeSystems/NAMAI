@@ -181,6 +181,13 @@ condition: "step3_health_conditions.contains('hiv') && !step3_hiv_diagnosis_date
 actions:
   - "isRelevant = true"
 ---
+name: step3_unsafe_drugs
+description: unsafe_drugs
+priority: 1
+condition: "step3_medications_other.contains('furosemide') || step3_medications_other.contains('frusemide') || step3_medications_other.contains('lasix') || step3_medications_other.contains('moduretic')"
+actions:
+  - "isRelevant = true"
+---
 name: step5_hiv_counselling_toaster
 description: Hiv Risk counselling
 priority: 1
