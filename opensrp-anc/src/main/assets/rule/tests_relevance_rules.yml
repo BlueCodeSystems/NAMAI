@@ -1028,31 +1028,38 @@ condition: "(step1_blood_type_test_status == 'done_today' || step1_blood_type_te
 actions:
 - "isRelevant = true"
 ---
-name: step1_rh_factor
-description: rh_factor
+name: step1_rh_factor_a
+description: rh_factor_a
 priority: 1
-condition: "(step1_blood_type_test_status == 'done_today' || step1_blood_type_test_status == 'done_earlier')"
+condition: "step1_blood_type == 'a'"
 actions:
 - "isRelevant = true"
 ---
-name: step1_rh_factor
-description: rh_factor
+name: step1_rh_factor_b
+description: rh_factor_b
 priority: 1
-condition: "(step1_blood_type_test_status == 'done_today' || step1_blood_type_test_status == 'done_earlier')"
+condition: "step1_blood_type == 'b'"
 actions:
 - "isRelevant = true"
+---
+name: step1_rh_factor_ab
+description: rh_factor_ab
+priority: 1
+condition: "step1_blood_type == 'ab'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_rh_factor_o
+description: rh_factor_o
+priority: 1
+condition: "step1_blood_type == 'o'"
+actions:
+  - "isRelevant = true"
 ---
 name: step1_rh_factor_toaster
 description: rh_factor
 priority: 1
-condition: "(step1_rh_factor != '' && step1_rh_factor == 'negative')"
-actions:
-- "isRelevant = true"
----
-name: step1_rh_factor_toaster
-description: rh_factor
-priority: 1
-condition: "(step1_rh_factor != '' && step1_rh_factor == 'negative')"
+condition: "(step1_rh_factor_a == 'negative' || step1_rh_factor_b == 'negative' || step1_rh_factor_ab == 'negative' || step1_rh_factor_o == 'negative')"
 actions:
 - "isRelevant = true"
 ---

@@ -947,6 +947,25 @@
         }
       },
       {
+        "key": "treatment_specify",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "treatment_specify",
+        "type": "edit_text",
+        "hint": "Specify treatment given",
+        "edit_type": "edit_text",
+        "v_required": {
+          "value": false,
+          "err": "Specify treatment given"
+        },
+        "relevance": {
+          "step1:treatment": {
+            "type": "string",
+            "ex": "equalTo(., \"yes\")"
+          }
+        }
+      },
+      {
         "key": "receiving",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
