@@ -2818,6 +2818,19 @@
             }
           }
         }
+      },
+      {
+        "key": "diagnoses_comments",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "diagnoses_comments",
+        "type": "edit_text",
+        "hint": "Comments",
+        "edit_type": "edit_text",
+        "v_required": {
+          "value": false,
+          "err": "Please enter comments"
+        }
       }
     ]
   },
