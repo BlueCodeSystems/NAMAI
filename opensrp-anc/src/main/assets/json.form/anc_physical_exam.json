@@ -1033,12 +1033,29 @@
         }
       },
       {
-        "key": "test_diabetes_toaster",
+        "key": "test_diabetes_over_ga_toaster",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
-        "openmrs_entity_id": "test_diabetes_toaster",
+        "openmrs_entity_id": "test_diabetes_over_ga_toaster",
         "type": "toaster_notes",
-        "text": "Test for gestational diabetes mellitus",
+        "text": "Test for gestational diabetes",
+        "text_color": "#E20000",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "physical-exam-relevance-rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "test_diabetes_under_ga_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "test_diabetes_under_ga_toaster",
+        "type": "toaster_notes",
+        "text": "Test for diabetes mellitus",
         "text_color": "#E20000",
         "toaster_type": "problem",
         "relevance": {
