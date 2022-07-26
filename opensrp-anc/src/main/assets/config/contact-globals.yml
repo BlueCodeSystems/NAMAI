@@ -1,6 +1,7 @@
 ---
 form: anc_counselling_treatment
 fields:
+  - "Sputum_result"
   - "hepc_positive"
   - "danger_signs"
   - "danger_signs_value"
@@ -256,7 +257,6 @@ fields:
   - "lmp_known"
   - "ultrasound_done"
   - "tb_test_result"
-  - "Sputum_result"
 ---
 form: test
 fields:

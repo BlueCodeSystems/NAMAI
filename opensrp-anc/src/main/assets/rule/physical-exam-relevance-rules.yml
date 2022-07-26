@@ -487,13 +487,21 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step2_test_diabetes_toaster
-description: test_diabetes_toaster
+name: step2_test_diabetes_over_ga_toaster
+description: test_diabetes_over_ga_toaster
 priority: 1
-condition: "(!step2_bmi.isEmpty()) && (step2_bmi >= 30)"
+condition: "(!step2_bmi.isEmpty()) && (step2_bmi >= 30) && (global_gest_age_openmrs >= 24)"
 actions:
   - "isRelevant = true"
-  
+
+---
+name: step2_test_diabetes_under_ga_toaster
+description: test_diabetes_under_ga_toaster
+priority: 1
+condition: "(!step2_bmi.isEmpty()) && (step2_bmi >= 30) && (global_gest_age_openmrs < 24)"
+actions:
+  - "isRelevant = true"
+
 ---
 name: step5_lie_toaster
 description: lie_toaster
