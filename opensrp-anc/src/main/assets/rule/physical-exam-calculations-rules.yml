@@ -119,10 +119,10 @@ condition: "(global_hb_result != '' && global_hb_result < 11 && (global_gest_age
 actions:
   - "calculation = 1"
 ---
-name: step4_preeclampsia_risk
+name: step5_preeclampsia_risk
 description: Preeclampsia_risk
 priority: 1
-condition: "(step4_no_of_fetuses != null && step4_no_of_fetuses != '' && step4_no_of_fetuses >= 2)"
+condition: "(step5_no_of_fetuses != null && step5_no_of_fetuses != '' && step5_no_of_fetuses >= 2)"
 actions:
   - "calculation = 1"
 ---
@@ -147,7 +147,7 @@ condition: "bp_diastolic_repeat < 20 || bp_systolic_repeat < 60"
 actions:
   - 'calculation = ["bp_unrecordable" : 1]'
 ---
-name: step4_hof
+name: step5_hof
 description: HOF
 priority: 1
 condition: "global_sfh_gest_age != null"

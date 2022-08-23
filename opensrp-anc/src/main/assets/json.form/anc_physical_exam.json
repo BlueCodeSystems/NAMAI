@@ -2,7 +2,7 @@
   "validate_on_submit": true,
   "display_scroll_bars": true,
   "skip_blank_steps": true,
-  "count": "4",
+  "count": "5",
   "encounter_type": "Physical Exam",
   "entity_id": "",
   "relational_id": "",
@@ -2850,7 +2850,8 @@
             }
           ]
         }
-      }}
+         }
+      }
     ]
   },
   "step5": {
@@ -2862,9 +2863,6 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step4.sfh_label.text}}",
         "text_color": "#000000",
-        "v_required": {
-          "value": false
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -2920,9 +2918,6 @@
         "label_text_style": "bold",
         "text": "Height of fundus ( /40)",
         "text_color": "#000000",
-        "v_required": {
-          "value": false
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -3141,7 +3136,6 @@
           {
             "key": "yes",
             "text": "{{anc_physical_exam.step4.fetal_movement.options.yes.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": "165376AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -3149,7 +3143,6 @@
           {
             "key": "no",
             "text": "{{anc_physical_exam.step4.fetal_movement.options.no.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": "165376AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"

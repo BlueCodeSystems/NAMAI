@@ -321,17 +321,17 @@ condition: "((step1_bp_diastolic_repeat > 0 && step1_bp_diastolic_repeat < 20 ) 
 actions:
   - "isRelevant = true"
 ---
-name: fetal_heart_rate_repeat
+name: step5_fetal_heart_rate_repeat
 description: Second heartrate
 priority: 1
-condition: "((fetal_heart_rate > 0 && fetal_heart_rate < 120 ) || (fetal_heart_rate > 160))"
+condition: "((step5_fetal_heart_rate > 0 && step5_fetal_heart_rate < 120 ) || (step5_fetal_heart_rate > 160))"
 actions:
   - "isRelevant = false"
 ---
-name: fetal_heart_rate_repeat_label
+name: step5_fetal_heart_rate_repeat_label
 description: Second heartrate
 priority: 1
-condition: "((fetal_heart_rate > 0 && fetal_heart_rate < 120 ) || (fetal_heart_rate > 160))"
+condition: "((step5_fetal_heart_rate > 0 && step5_fetal_heart_rate < 120 ) || (step5_fetal_heart_rate > 160))"
 actions:
   - "isRelevant = false"
 ---
@@ -515,13 +515,5 @@ name: step5_sfh_big_toaster
 description: sfh_big_toaster
 priority: 1
 condition: "step5_sfh >= 40"
-actions:
-  - "isRelevant = true"
-
----
-name: step8_discordant_out
-description: discordant_out
-priority: 1
-condition: "step8_discordant_set != null"
 actions:
   - "isRelevant = true"
