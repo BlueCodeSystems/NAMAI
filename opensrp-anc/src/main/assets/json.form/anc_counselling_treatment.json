@@ -2283,9 +2283,9 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "ifa_anaemia",
         "type": "native_radio",
-        "label": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label": "Give daily dose of elemental iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
         "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
-        "label_info_title": "Give daily dose of iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label_info_title": "Give daily dose of elemental iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
         "label_text_style": "bold",
         "options": [
           {

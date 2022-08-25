@@ -184,7 +184,7 @@ actions:
 name: step3_unsafe_drugs
 description: unsafe_drugs
 priority: 1
-condition: "step3_medications_other.contains('furosemide') || step3_medications_other.contains('frusemide') || step3_medications_other.contains('lasix') || step3_medications_other.contains('moduretic')"
+condition: "step3_medications_other.contains('furosemide') || step3_medications_other.contains('frusemide') || step3_medications_other.contains('lasix') || step3_medications_other.contains('moduretic') || step3_medications_other.contains('Furosemide') || step3_medications_other.contains('Frusemide') || step3_medications_other.contains('Lasix') || step3_medications_other.contains('Moduretic')"
 actions:
   - "isRelevant = true"
 ---
