@@ -2386,6 +2386,76 @@
         }
       },
       {
+        "key": "uni_bi_options",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "uni_bi_options",
+        "type": "check_box",
+        "label": "Any other oedema symptoms",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "exclusive": [
+          "none"
+        ],
+        "options": [
+          {
+            "key": "none",
+            "text": "None",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "none"
+          },
+          {
+            "key": "leg_pain",
+            "text": "Leg pain",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "leg_pain"
+          },
+          {
+            "key": "area_pain",
+            "text": "Pain on the affected area",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "area_pain"
+          },
+          {
+            "key": "area_warmth",
+            "text": "Warmth on the affected area",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "area_warmth"
+          },
+          {
+            "key": "redness",
+            "text": "Redness",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "redness"
+          }
+        ],
+        "relevance": {
+          "step4:uni_bi": {
+            "type": "string",
+            "ex": "equalTo(., \"uni\")"
+          }
+        }
+      },
+      {
+        "key": "uni_bi_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "toaster_notes",
+        "type": "toaster_notes",
+        "text": "Emergency referral for doppler scan and further management",
+        "text_color": "#000000",
+        "toaster_info_text": "Emergency referral for doppler scan and further management",
+        "toaster_info_title": "Emergency referral for doppler scan and further management",
+        "toaster_type": "warning",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "physical-exam-relevance-rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "oedema_severity",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
