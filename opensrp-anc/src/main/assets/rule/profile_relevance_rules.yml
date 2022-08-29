@@ -196,10 +196,10 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step1_headss_toaster
-description: HEADSS info
+name: step1_old_toaster
+description: old info
 priority: 1
-condition: "(global_age < 19)"
+condition: "(global_age > 51)"
 actions:
   - "isRelevant = true"
 ---
