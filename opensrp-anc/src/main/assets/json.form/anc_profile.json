@@ -192,6 +192,25 @@
         }
       },
       {
+        "key": "old_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "old_toaster",
+        "type": "toaster_notes",
+        "text": "High risk pregnancy. Refer to the hospital for delivery",
+        "text_color": "#1199F9",
+        "toaster_info_text": "High risk pregnancy. Refer to the hospital for delivery",
+        "toaster_info_title": "High risk pregnancy. Refer to the hospital for delivery",
+        "toaster_type": "info",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "lmp_known",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
