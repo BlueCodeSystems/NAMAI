@@ -188,7 +188,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_hiv_sub_form.step1.hiv_test_result.label}}",
+      "label": "Record result",
       "label_text_style": "bold",
       "options": [
         {

@@ -45,7 +45,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_status.v_required.err}}"
+        "err": "TB screening status is required"
       }
     },
     {
@@ -78,7 +78,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "{{tests_tb_screening_sub_form.step1.tb_screening_date.hint}}",
+      "hint": "TB test date",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
@@ -97,7 +97,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_date.v_required.err}}"
+        "err": "Please record the date TB screening was done"
       }
     },
     {
@@ -184,54 +184,54 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165182AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "check_box",
-      "label": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.label}}",
+      "label": "Reason",
       "label_text_style": "bold",
       "options": [
         {
           "key": "sputum_smear",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.sputum_smear.text}}",
+          "text": "Sputum smear not available",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "sputum_culture",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.sputum_culture.text}}",
+          "text": "Sputum culture not available",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "genexpert_machine",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.genexpert_machine.text}}",
+          "text": "GeneXpert machine not available",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165403AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "no_sputum_supplies",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.no_sputum_supplies.text}}",
+          "text": "No sputum supplies available",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "machine_not_functioning",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.machine_not_functioning.text}}",
+          "text": "Machine not functioning",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165179AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "technician_not_available",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.technician_not_available.text}}",
+          "text": "Technician not available",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "other",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.other.text}}",
+          "text": "Other (specify)",
           "openmrs_entity_parent": "164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -246,7 +246,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.v_required.err}}"
+        "err": "Reason why tb screen was not done is required"
       }
     },
     {
@@ -255,7 +255,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165435AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "edit_text",
-      "hint": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone_other.hint}}",
+      "hint": "Specify",
       "edit_type": "name",
       "relevance": {
         "rules-engine": {
@@ -297,7 +297,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_result.v_required.err}}"
+        "err": "Tb screen result is required"
       }
     },
     {
@@ -306,9 +306,9 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.text}}",
-      "toaster_info_text": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_text}}",
-      "toaster_info_title": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_title}}",
+      "text": "TB screening positive.",
+      "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
+      "toaster_info_title": "TB screening positive.",
       "toaster_type": "problem",
       "relevance": {
         "rules-engine": {
@@ -326,7 +326,7 @@
       "type": "toaster_notes",
       "text": "MTB positive diagnosis!",
       "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
-      "toaster_info_title": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_title}}",
+      "toaster_info_title": "TB screening positive.",
       "toaster_type": "problem",
       "relevance": {
         "step1:Sputum_result": {
@@ -343,7 +343,7 @@
       "type": "toaster_notes",
       "text": "MDR TB positive diagnosis!",
       "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
-      "toaster_info_title": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_title}}",
+      "toaster_info_title": "TB screening positive.",
       "toaster_type": "problem",
       "relevance": {
         "step1:Sputum_result": {
