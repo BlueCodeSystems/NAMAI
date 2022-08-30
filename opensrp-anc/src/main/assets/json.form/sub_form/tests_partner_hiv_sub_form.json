@@ -157,7 +157,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "164400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_date.hint}}",
+      "hint": "Partner HIV test date",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
@@ -176,7 +176,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_date.v_required.err}}"
+        "err": "Partner HIV test date required"
       }
     },
     {
@@ -185,26 +185,26 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_result.label}}",
+      "label": "Record result",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_result.options.positive.text}}",
+          "text": "Positive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_result.options.negative.text}}",
+          "text": "Negative",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "inconclusive",
-          "text": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_result.options.inconclusive.text}}",
+          "text": "Inconclusive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -242,7 +242,7 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_partner_hiv_sub_form.step1.partner_hiv_positive_toaster.text}}",
+      "text": "Partner HIV test inconclusive, refer partner for further testing.",
       "toaster_type": "warning",
       "relevance": {
         "step1:hiv_test_partner_result": {
@@ -271,9 +271,9 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_partner_hiv_sub_form.step1.hiv_risk_toaster.text}}",
-      "toaster_info_text": "{{tests_partner_hiv_sub_form.step1.hiv_risk_toaster.toaster_info_text}}",
-      "toaster_info_title": "{{tests_partner_hiv_sub_form.step1.hiv_risk_toaster.toaster_info_title}}",
+      "text": "HIV risk counselling",
+      "toaster_info_text": "Provide comprehensive HIV prevention options: \\n- STI screening and treatment (syndromic and syphilis)\\n- Condom promotion\\n- Risk reduction counselling\\n- PrEP with emphasis on adherence\\n- Emphasize importance of follow-up ANC contact visits",
+      "toaster_info_title": "HIV risk counselling",
       "toaster_type": "problem",
       "relevance": {
         "rules-engine": {

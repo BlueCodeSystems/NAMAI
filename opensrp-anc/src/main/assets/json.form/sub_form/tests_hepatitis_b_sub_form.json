@@ -45,7 +45,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_status.v_required.err}}"
+        "err": "Hepatitis B test is required"
       }
     },
     {
@@ -62,26 +62,26 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165182AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "check_box",
-      "label": "{{tests_hepatitis_b_sub_form.step1.hepb_test_notdone.label}}",
+      "label": "Reason",
       "label_text_style": "bold",
       "options": [
         {
           "key": "stock_out",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hepb_test_notdone.options.stock_out.text}}",
+          "text": "Stock out",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "expired_stock",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hepb_test_notdone.options.expired_stock.text}}",
+          "text": "Expired stock",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165299AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "other",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hepb_test_notdone.options.other.text}}",
+          "text": "Other (specify)",
           "openmrs_entity_parent": "161475AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -89,7 +89,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_notdone.v_required.err}}"
+        "err": "Hepatitis B test not done reason is required"
       },
       "relevance": {
         "rules-engine": {
@@ -105,7 +105,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165435AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "edit_text",
-      "hint": "{{tests_hepatitis_b_sub_form.step1.hepb_test_notdone_other.hint}}",
+      "hint": "Specify",
       "edit_type": "name",
       "relevance": {
         "rules-engine": {
@@ -137,7 +137,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "{{tests_hepatitis_b_sub_form.step1.hepb_test_date.hint}}",
+      "hint": "Hep B test date",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
@@ -156,7 +156,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_date.v_required.err}}"
+        "err": "Hep B test date is required"
       }
     },
     {
@@ -165,26 +165,26 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_hepatitis_b_sub_form.step1.hepb_test_type.label}}",
+      "label": "Hep B test type",
       "label_text_style": "bold",
       "options": [
         {
           "key": "hbsag_lab_based",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hepb_test_type.options.hbsag_lab_based.text}}",
+          "text": "HBsAg laboratory-based immunoassay (recommended)",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "159430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "hbsag_rdt",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hepb_test_type.options.hbsag_rdt.text}}",
+          "text": "HBsAg rapid diagnostic test (RDT)",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "hbsag_dbs",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hepb_test_type.options.hbsag_dbs.text}}",
+          "text": "Dried Blood Spot (DBS) HBsAg test",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "161472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -199,7 +199,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_type.v_required.err}}"
+        "err": "Hep B test type is required"
       }
     },
     {
@@ -208,19 +208,19 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "159430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_hepatitis_b_sub_form.step1.hbsag_lab_ima.label}}",
+      "label": "HBsAg laboratory-based immunoassay (recommended)",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hbsag_lab_ima.options.positive.text}}",
+          "text": "Positive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hbsag_lab_ima.options.negative.text}}",
+          "text": "Negative",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -228,7 +228,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hepatitis_b_sub_form.step1.hbsag_lab_ima.v_required.err}}"
+        "err": "BsAg laboratory-based immunoassay is required"
       },
       "relevance": {
         "rules-engine": {
@@ -244,19 +244,19 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_hepatitis_b_sub_form.step1.hbsag_rdt.label}}",
+      "label": "HBsAg rapid diagnostic test (RDT)",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hbsag_rdt.options.positive.text}}",
+          "text": "Positive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hbsag_rdt.options.negative.text}}",
+          "text": "Negative",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -264,7 +264,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hepatitis_b_sub_form.step1.hbsag_rdt.v_required.err}}"
+        "err": "HBsAg rapid diagnostic test is required"
       },
       "relevance": {
         "rules-engine": {
@@ -280,19 +280,19 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "161472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_hepatitis_b_sub_form.step1.hbsag_dbs.label}}",
+      "label": "Dried Blood Spot (DBS) HBsAg test",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hbsag_dbs.options.positive.text}}",
+          "text": "Positive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "{{tests_hepatitis_b_sub_form.step1.hbsag_dbs.options.negative.text}}",
+          "text": "Negative",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -300,7 +300,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hepatitis_b_sub_form.step1.hbsag_dbs.v_required.err}}"
+        "err": "(DBS) HBsAg test is required"
       },
       "relevance": {
         "rules-engine": {
@@ -332,9 +332,9 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_hepatitis_b_sub_form.step1.hepatitis_b_danger_toaster.text}}",
-      "toaster_info_text": "{{tests_hepatitis_b_sub_form.step1.hepatitis_b_danger_toaster.toaster_info_text}}",
-      "toaster_info_title": "{{tests_hepatitis_b_sub_form.step1.hepatitis_b_danger_toaster.toaster_info_title}}",
+      "text": "Hep B positive diagnosis!",
+      "toaster_info_text": "Counselling and referral required.",
+      "toaster_info_title": "Hep B positive diagnosis!",
       "toaster_type": "problem",
       "relevance": {
         "rules-engine": {
