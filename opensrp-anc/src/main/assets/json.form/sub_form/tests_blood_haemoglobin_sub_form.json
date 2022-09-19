@@ -215,7 +215,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "edit_text",
-      "hint": "Full blood count test result (g/dl) (recommended)",
+      "hint": "Haemoglobin (g/dl) (recommended)",
       "edit_type": "number",
       "v_min": {
         "value": "0",
@@ -231,7 +231,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "Full blood count test result (g/dl)"
+        "err": "Haemoglobin (g/dl) (recommended) required"
       },
       "relevance": {
         "rules-engine": {
