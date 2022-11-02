@@ -87,6 +87,7 @@ fields:
   - "ifa_effects"
   - "medications"
   - "tt_immun_status"
+  - "tt_immun_status_value"
   - "flu_immun_status"
   - "underimmunized_doses"
   - "underimmunized_doses_value"

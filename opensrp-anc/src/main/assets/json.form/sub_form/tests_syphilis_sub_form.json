@@ -1,19 +1,18 @@
 {
-  "validate_on_submit": true,
   "content_form": [
     {
       "key": "syph_test_status",
       "openmrs_entity_parent": "161476AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "openmrs_entity": "concept",
-      "openmrs_entity_id": "syph",
-      "label": "Syphilis test",
+      "openmrs_entity_id": "163725AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "label": "{{tests_syphilis_sub_form.step1.syph_test_status.label}}",
       "label_text_style": "bold",
       "text_color": "#000000",
       "type": "extended_radio_button",
       "options": [
         {
           "key": "done_today",
-          "text": "Done today",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.done_today.text}}",
           "type": "done_today",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -21,7 +20,7 @@
         },
         {
           "key": "done_earlier",
-          "text": "Done earlier",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.done_earlier.text}}",
           "type": "done_earlier",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -29,7 +28,7 @@
         },
         {
           "key": "ordered",
-          "text": "Ordered",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.ordered.text}}",
           "type": "ordered",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -37,7 +36,7 @@
         },
         {
           "key": "not_done",
-          "text": "Not done",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.not_done.text}}",
           "type": "not_done",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -46,7 +45,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "please enter value"
+        "err": "{{tests_syphilis_sub_form.step1.syph_test_status.v_required.err}}"
       }
     },
     {
@@ -133,7 +132,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "please enter value"
+        "err": "{{tests_syphilis_sub_form.step1.syph_test_notdone.v_required.err}}"
       }
     },
     {
@@ -174,7 +173,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "Syphilis test date",
+      "hint": "{{tests_syphilis_sub_form.step1.syphilis_test_date.hint}}",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
@@ -202,26 +201,26 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165422AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "Syphilis test type",
+      "label": "{{tests_syphilis_sub_form.step1.syph_test_type.label}}",
       "label_text_style": "bold",
       "options": [
         {
           "key": "rapid_syphilis",
-          "text": "Rapid syphilis test (RST)",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_type.options.rapid_syphilis.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165303AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "rapid_plasma",
-          "text": "Rapid plasma reagin (RPR) test",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_type.options.rapid_plasma.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "1619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "off_site_lab",
-          "text": "Off-site lab test",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_type.options.off_site_lab.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165389AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -236,7 +235,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "please enter value"
+        "err": "{{tests_syphilis_sub_form.step1.syph_test_type.v_required.err}}"
       }
     },
     {
@@ -245,19 +244,19 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165303AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "Rapid syphilis test (RST)",
+      "label": "{{tests_syphilis_sub_form.step1.rapid_syphilis_test.label}}",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "Positive",
+          "text": "{{tests_syphilis_sub_form.step1.rapid_syphilis_test.options.positive.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "Negative",
+          "text": "{{tests_syphilis_sub_form.step1.rapid_syphilis_test.options.negative.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -265,7 +264,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "please enter value"
+        "err": "{{tests_syphilis_sub_form.step1.rapid_syphilis_test.v_required.err}}"
       },
       "relevance": {
         "rules-engine": {
@@ -281,19 +280,19 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "1619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "Rapid plasma reagin (RPR) test",
+      "label": "{{tests_syphilis_sub_form.step1.rpr_syphilis_test.label}}",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "Positive",
+          "text": "{{tests_syphilis_sub_form.step1.rpr_syphilis_test.options.positive.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "Negative",
+          "text": "{{tests_syphilis_sub_form.step1.rpr_syphilis_test.options.negative.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -301,7 +300,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "please enter value"
+        "err": "{{tests_syphilis_sub_form.step1.rpr_syphilis_test.v_required.err}}"
       },
       "relevance": {
         "rules-engine": {
@@ -317,19 +316,19 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165389AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "Off-site lab test for syphilis",
+      "label": "{{tests_syphilis_sub_form.step1.lab_syphilis_test.label}}",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "Positive",
+          "text": "{{tests_syphilis_sub_form.step1.lab_syphilis_test.options.positive.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "Negative",
+          "text": "{{tests_syphilis_sub_form.step1.lab_syphilis_test.options.negative.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -337,7 +336,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "please enter value"
+        "err": "{{tests_syphilis_sub_form.step1.lab_syphilis_test.v_required.err}}"
       },
       "relevance": {
         "rules-engine": {
@@ -369,9 +368,9 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "Syphilis test positive",
-      "toaster_info_text": "Provide counselling and treatment according to protocol. Ensure that her partner comes for counselling",
-      "toaster_info_title": "Syphilis test positive",
+      "text": "{{tests_syphilis_sub_form.step1.syphilis_danger_toaster.text}}",
+      "toaster_info_text": "{{tests_syphilis_sub_form.step1.syphilis_danger_toaster.toaster_info_text}}",
+      "toaster_info_title": "{{tests_syphilis_sub_form.step1.syphilis_danger_toaster.toaster_info_title}}",
       "toaster_type": "problem",
       "relevance": {
         "rules-engine": {
@@ -383,5 +382,6 @@
     }
   ],
   "count": 1,
+  "validate_on_submit": true,
   "properties_file_name": "tests_syphilis_sub_form"
 }

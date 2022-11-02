@@ -5,6 +5,7 @@
   "encounter_type": "Rapid Assessment and Management",
   "entity_id": "",
   "relational_id": "",
+  "form_version": "0.0.6",
   "metadata": {
     "start": {
       "openmrs_entity_parent": "",
@@ -54,7 +55,7 @@
     }
   },
   "step1": {
-    "title": "RAM",
+    "title": "{{anc_quick_check.step1.title}}",
     "fields": [
       {
         "key": "contact_date",
@@ -86,21 +87,24 @@
         "options": [
           {
             "key": "first_contact",
-            "text": "First antenatal care contact",
+            "text": "{{anc_quick_check.step1.contact_reason.options.first_contact.text}}",
+            "translation_text": "anc_quick_check.step1.contact_reason.options.first_contact.text",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "165269AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "scheduled_contact",
-            "text": "Scheduled antenatal care contact",
+            "text": "{{anc_quick_check.step1.contact_reason.options.scheduled_contact.text}}",
+            "translation_text": "anc_quick_check.step1.contact_reason.options.scheduled_contact.text",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "specific_complaint",
-            "text": "Specific complaint",
+            "text": "{{anc_quick_check.step1.contact_reason.options.specific_complaint.text}}",
+            "translation_text": "anc_quick_check.step1.contact_reason.options.specific_complaint.text",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -130,12 +134,36 @@
             "openmrs_entity_id": "123395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
+            "key": "changes_in_bp",
+            "text": "{{anc_quick_check.step1.specific_complaint.options.changes_in_bp.text}}",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "changes_in_bp_down",
+            "text": "{{anc_quick_check.step1.specific_complaint.options.changes_in_bp_down.text}}",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
             "key": "constipation",
             "text": "{{anc_quick_check.step1.specific_complaint.options.constipation.text}}",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "996AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "contractions",
+            "text": "{{anc_quick_check.step1.specific_complaint.options.contractions.text}}",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "163750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "cough",
@@ -195,7 +223,7 @@
           },
           {
             "key": "fluid_loss",
-            "text": "Fluid loss(draining)",
+            "text": "{{anc_quick_check.step1.specific_complaint.options.fluid_loss.text}}",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -248,6 +276,30 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other_bleeding",
+            "text": "{{anc_quick_check.step1.specific_complaint.options.other_bleeding.text}}",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "147241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other_skin_disorder",
+            "text": "{{anc_quick_check.step1.specific_complaint.options.other_skin_disorder.text}}",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "119022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other_types_of_violence",
+            "text": "{{anc_quick_check.step1.specific_complaint.options.other_types_of_violence.text}}",
+            "value": false,
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "158358AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
             "key": "full_abdominal_pain",

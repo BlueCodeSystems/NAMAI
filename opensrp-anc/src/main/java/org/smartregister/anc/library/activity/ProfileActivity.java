@@ -48,6 +48,7 @@ import org.smartregister.util.PermissionUtils;
 import org.smartregister.view.activity.BaseProfileActivity;
 import org.smartregister.view.contract.MeContract;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import timber.log.Timber;
@@ -82,8 +83,8 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
     protected void onResumption() {
         super.onResumption();
         String baseEntityId = getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID);
-        ((ProfilePresenter) presenter).refreshProfileView(baseEntityId);
         registerEventBus();
+        ((ProfilePresenter) presenter).refreshProfileView(baseEntityId);
         getTasksCount(baseEntityId);
     }
 
@@ -153,7 +154,7 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
 
         model = new MeModel();
         String name = model.getName();
-        
+
         if (view.getId() == R.id.profile_overview_due_button) {
             String baseEntityId = getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID);
 
@@ -328,6 +329,15 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
         if (event != null && !event.isEditMode()) {
             Utils.removeStickyEvent(event);
             ((ProfilePresenter) presenter).refreshProfileTopSection(event.getWomanClient());
+           if(!contactNo.equals(String.valueOf(Utils.getTodayContact(event.getWomanClient().get(DBConstantsUtils.KeyUtils.NEXT_CONTACT))))) {
+               Intent previousIntent =  getIntent();
+               previousIntent.putExtra(ConstantsUtils.IntentKeyUtils.CLIENT_MAP, (Serializable) event.getWomanClient());
+               setIntent(previousIntent);
+               setupViewPager(viewPager);
+               getButtonAlertStatus();
+               updateTasksTabTitle();
+               getTasksCount(event.getWomanClient().get(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID));
+           }
         }
     }
 
@@ -375,6 +385,11 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
     @Override
     public void setTaskCount(String taskCount) {
         getTaskTabCount().setText(taskCount);
+    }
+
+    @Override
+    public void createContactSummaryPdf(String womanName) {
+        //overridden
     }
 
     public TextView getTaskTabCount() {

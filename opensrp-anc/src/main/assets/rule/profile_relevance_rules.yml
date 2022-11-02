@@ -65,63 +65,63 @@ actions:
 name: step2_miscarriages_abortions_label
 description: Miscarrige abortions label
 priority: 1
-condition: "step2_previous_pregnancies > 0 "
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_miscarriages_abortions
 description: Miscarrige abortions
 priority: 1
-condition: "step2_previous_pregnancies > 0 "
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_miscarriages_lost_label
 description: Miscarrige lost label
 priority: 1
-condition: "((step2_previous_pregnancies - step2_miscarriages_abortions) > 0)"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_miscarriages_lost
 description: Miscarrige lost
 priority: 1
-condition: "((step2_previous_pregnancies - step2_miscarriages_abortions) > 0)"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_live_births_label
 description: Live births label
 priority: 1
-condition: "((step2_previous_pregnancies - step2_miscarriages_abortions - step2_miscarriages_lost) > 0)"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_live_births
 description: Live births
 priority: 1
-condition: "((step2_previous_pregnancies - step2_miscarriages_abortions - step2_miscarriages_lost) > 0)"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_last_live_birth_preterm
 description: Live last live birth preterm
 priority: 1
-condition: "(step2_live_births > 0)"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_stillbirths_label
 description: Still births label
 priority: 1
-condition: "((step2_previous_pregnancies - step2_miscarriages_abortions - step2_live_births - step2_miscarriages_lost) > 0)"
+condition: "true"
 actions:
   - "isRelevant = true"
 ---
 name: step2_stillbirths
 description: Slill births
 priority: 1
-condition: "((step2_previous_pregnancies - step2_miscarriages_abortions - step2_live_births - step2_miscarriages_lost) > 0) "
+condition: "true"
 actions:
   - "isRelevant = true"
 ---

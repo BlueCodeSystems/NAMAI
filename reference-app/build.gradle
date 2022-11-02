@@ -18,7 +18,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'org.smartregister.gradle.jarjar'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.firebase.firebase-perf'
-
+//classpath 'com.android.tools.build:gradle:4.2.2'
 jacoco {
     toolVersion = jacocoVersion
 }
@@ -143,7 +143,7 @@ android {
             minifyEnabled false
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
-            resValue "string", 'opensrp_url', '"https://anc.labs.smartregister.org/opensrp/"'
+            resValue "string", 'opensrp_url', '"https://opensrp.who.bluecodeltd.com/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -337,7 +337,7 @@ dependencies {
     }
 
     implementation(project(":p2p-sync")) {
-        //api("org.smartregister:android-p2p-sync:0.3.9-SNAPSHOT") {
+        api("org.smartregister:android-p2p-sync:0.3.7-SNAPSHOT") {
             transitive = true
             exclude group: 'org.smartregister', module: 'opensrp-client-core'
             exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -345,6 +345,7 @@ dependencies {
             exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
             exclude group: 'com.rengwuxian.materialedittext', module: 'library'
         }
+    }
         implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
 
 
@@ -403,12 +404,13 @@ dependencies {
             exclude group: 'com.android.support', module: 'cardview-v7'
             exclude group: 'com.android.support', module: 'support-v4'
         }
-        implementation 'com.google.firebase:firebase-perf'
+        testImplementation 'com.google.firebase:firebase-perf'
 
         testImplementation 'junit:junit:4.13.1'
         testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
         testImplementation('com.squareup:fest-android:1.0.8') {
             exclude module: 'support-v4'
+            exclude group: 'com.google.firebase', module: 'firebase-perf'
         }
 // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
         testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
@@ -446,8 +448,9 @@ dependencies {
     }
 
 
-//    jarJar {
-//        // Dependencies and related JarJar rules
-//        remove = ['fhir-model-4.8.3.jar': 'com.ibm.fhir.model.visitor.CopyingVisitor*']
-//    }
-//}
+/*
+    jarJar {
+        // Dependencies and related JarJar rules
+        remove = ['fhir-model-4.8.3.jar': 'com.ibm.fhir.model.visitor.CopyingVisitor*']
+    }
+}*/

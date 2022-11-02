@@ -185,7 +185,7 @@ public class HomeRegisterFragment extends BaseRegisterFragment implements Regist
     @Override
     public void showNotFoundPopup(String whoAncId) {
         NoMatchDialogFragment
-                .launchDialog((BaseRegisterActivity) Objects.requireNonNull(getActivity()), SecuredNativeSmartRegisterFragment.DIALOG_TAG, whoAncId);
+                .launchDialog((BaseRegisterActivity) requireActivity(), SecuredNativeSmartRegisterFragment.DIALOG_TAG, whoAncId);
     }
 
     @Override
