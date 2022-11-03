@@ -149,7 +149,7 @@ actions:
 name: step2_c_sections
 description: C-sections label
 priority: 1
-condition: "step2_parity > 0  "
+condition: "true"
 actions:
   - "isRelevant = true"
 ---

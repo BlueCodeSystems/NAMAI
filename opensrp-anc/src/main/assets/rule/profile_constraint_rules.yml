@@ -18,14 +18,14 @@ description: live births number selectors
 priority: 1
 condition: "true"
 actions:
-- "constraint = (step2_previous_pregnancies - step2_miscarriages_abortions - step2_miscarriages_lost) + 1"
+- "constraint = step2_previous_pregnancies + 1"
 ---
 name: step2_stillbirths
 description: Still birth number selector
 priority: 1
 condition: "true"
 actions:
-- "constraint = (step2_previous_pregnancies - step2_miscarriages_abortions- step2_live_births - step2_miscarriages_lost) + 1"
+- "constraint = step2_previous_pregnancies + 1"
 ---
 name: step2_c_sections
 description: C -Sections number selector

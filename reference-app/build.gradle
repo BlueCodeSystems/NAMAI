@@ -27,7 +27,7 @@ ext.versionMajor = 1
 ext.versionMinor = 0
 ext.versionPatch = 0
 ext.versionClassifier =
-ext.isSnapshot = false
+        ext.isSnapshot = false
 ext.minimumSdkVersion = androidMinSdkVersion
 
 android {
@@ -336,7 +336,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'android-p2p-sync'
     }
 
-    implementation(project(":p2p-sync")) {
+    api("org.smartregister:android-p2p-sync:0.3.7-SNAPSHOT"){
         api("org.smartregister:android-p2p-sync:0.3.7-SNAPSHOT") {
             transitive = true
             exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -346,106 +346,106 @@ dependencies {
             exclude group: 'com.rengwuxian.materialedittext', module: 'library'
         }
     }
-        implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
+    implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
 
 
-        jarJar 'com.ibm.fhir:fhir-model:4.8.3'
-        implementation fileTree(dir: "./build/libs", include: ['*.jar'])
-        implementation('org.smartregister:opensrp-client-configurable-views:1.1.5-SNAPSHOT@aar') {
-            transitive = true
-            exclude group: 'org.smartregister', module: 'opensrp-client-core'
-            exclude group: 'com.android.support', module: 'appcompat-v7'
-            exclude group: 'com.android.support', module: 'recyclerview-v7'
-            exclude group: 'com.android.support', module: 'support-media-compat'
-            exclude group: 'com.android.support', module: 'cardview-v7'
-            exclude group: 'com.android.support', module: 'support-v4'
-        }
-        implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
-        annotationProcessor 'com.jakewharton:butterknife:10.2.3'
-        implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
-        implementation 'commons-validator:commons-validator:1.7'
-        implementation 'com.google.code.gson:gson:2.8.6'
-        implementation 'org.greenrobot:eventbus:3.2.0'
-        annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.2.0'
-        implementation 'com.google.guava:guava:30.0-jre'
-        implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-        implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
-        implementation 'com.evernote:android-job:1.4.2'
-        implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
-        implementation 'id.zelory:compressor:2.1.1'
-        implementation('com.google.android.material:material:1.4.0') {
-            exclude group: 'com.android.support', module: 'recyclerview-v7'
-            exclude group: 'com.android.support', module: 'cardview-v7'
-        }
-        implementation 'androidx.recyclerview:recyclerview:1.2.1'
-        implementation 'androidx.cardview:cardview:1.0.0'
-        implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-        implementation group: 'org.yaml', name: 'snakeyaml', version: '1.27'
-        implementation 'de.hdodenhof:circleimageview:3.1.0'
-        implementation 'org.jeasy:easy-rules-core:3.3.0'
-        implementation 'org.jeasy:easy-rules-mvel:3.3.0'
-        implementation 'com.flurry.android:analytics:11.6.0@aar'
-        implementation 'com.flurry.android:analytics:11.6.0@aar'
-        implementation 'androidx.multidex:multidex:2.0.1'
+    jarJar 'com.ibm.fhir:fhir-model:4.8.3'
+    implementation fileTree(dir: "./build/libs", include: ['*.jar'])
+    implementation('org.smartregister:opensrp-client-configurable-views:1.1.5-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'support-media-compat'
+        exclude group: 'com.android.support', module: 'cardview-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
+    annotationProcessor 'com.jakewharton:butterknife:10.2.3'
+    implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
+    implementation 'commons-validator:commons-validator:1.7'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'org.greenrobot:eventbus:3.2.0'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.2.0'
+    implementation 'com.google.guava:guava:30.0-jre'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
+    implementation 'com.evernote:android-job:1.4.2'
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    implementation 'id.zelory:compressor:2.1.1'
+    implementation('com.google.android.material:material:1.4.0') {
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'cardview-v7'
+    }
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.27'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'org.jeasy:easy-rules-core:3.3.0'
+    implementation 'org.jeasy:easy-rules-mvel:3.3.0'
+    implementation 'com.flurry.android:analytics:11.6.0@aar'
+    implementation 'com.flurry.android:analytics:11.6.0@aar'
+    implementation 'androidx.multidex:multidex:2.0.1'
 // Import the BoM for the Firebase platform
-        implementation platform('com.google.firebase:firebase-bom:28.3.1')
+    implementation platform('com.google.firebase:firebase-bom:28.3.1')
 
-        implementation "androidx.sqlite:sqlite:2.0.1"
-        implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.sqlite:sqlite:2.0.1"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-        // Declare the dependencies for the Crashlytics and Analytics libraries
-        // When using the BoM, you don't specify versions in Firebase library dependencies
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
 
-        implementation 'com.google.firebase:firebase-crashlytics'
-        implementation('com.google.firebase:firebase-analytics') {
-            exclude group: 'com.android.support', module: 'appcompat-v7'
-            exclude group: 'com.android.support', module: 'recyclerview-v7'
-            exclude group: 'com.android.support', module: 'support-media-compat'
-            exclude group: 'com.android.support', module: 'cardview-v7'
-            exclude group: 'com.android.support', module: 'support-v4'
-        }
-        testImplementation 'com.google.firebase:firebase-perf'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation('com.google.firebase:firebase-analytics') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'support-media-compat'
+        exclude group: 'com.android.support', module: 'cardview-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+    implementation 'com.google.firebase:firebase-perf'
 
-        testImplementation 'junit:junit:4.13.1'
-        testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
-        testImplementation('com.squareup:fest-android:1.0.8') {
-            exclude module: 'support-v4'
-            exclude group: 'com.google.firebase', module: 'firebase-perf'
-        }
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
+    testImplementation('com.squareup:fest-android:1.0.8') {
+        exclude module: 'support-v4'
+        exclude group: 'com.google.firebase', module: 'firebase-perf'
+    }
 // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
-        testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
-        testImplementation 'org.robolectric:robolectric:4.4'
-        testImplementation 'org.robolectric:shadows-multidex:4.4'
-        testImplementation 'com.ibm.fhir:fhir-model:4.8.3'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation 'org.robolectric:shadows-multidex:4.4'
+    testImplementation 'com.ibm.fhir:fhir-model:4.8.3'
 //testImplementation 'org.robolectric:shadows-support-v4:3.4-rc2'
-        testImplementation "org.powermock:powermock-module-junit4:$powerMockVersion"
-        testImplementation "org.powermock:powermock-module-junit4-rule:$powerMockVersion"
-        testImplementation "org.powermock:powermock-api-mockito2:$powerMockVersion"
-        testImplementation "org.powermock:powermock-classloading-xstream:$powerMockVersion"
-        testImplementation 'org.mockito:mockito-core:3.5.15'
-        testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
-        testImplementation 'org.skyscreamer:jsonassert:1.5.0'
+    testImplementation "org.powermock:powermock-module-junit4:$powerMockVersion"
+    testImplementation "org.powermock:powermock-module-junit4-rule:$powerMockVersion"
+    testImplementation "org.powermock:powermock-api-mockito2:$powerMockVersion"
+    testImplementation "org.powermock:powermock-classloading-xstream:$powerMockVersion"
+    testImplementation 'org.mockito:mockito-core:3.5.15'
+    testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
+    testImplementation 'org.skyscreamer:jsonassert:1.5.0'
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+    reports {
+        xml.enabled = true
+        html.enabled = true
     }
 
-    task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
-        reports {
-            xml.enabled = true
-            html.enabled = true
-        }
+    getReports().getXml().setDestination(file("${buildDir}/reports/jacoco/jacocoRootReport/merged.xml"))
+    getReports().getHtml().setDestination(file("${buildDir}/reports/jacoco/jacocoRootReport/html"))
 
-        getReports().getXml().setDestination(file("${buildDir}/reports/jacoco/jacocoRootReport/merged.xml"))
-        getReports().getHtml().setDestination(file("${buildDir}/reports/jacoco/jacocoRootReport/html"))
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/*$ViewBinder*.*']
+    def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug/classes/", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
 
-        def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/*$ViewBinder*.*']
-        def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug/classes/", excludes: fileFilter)
-        def mainSrc = "$project.projectDir/src/main/java"
-
-        getSourceDirectories().setFrom([mainSrc])
-        getClassDirectories().setFrom([debugTree])
-        getExecutionData().setFrom(dir: project.buildDir, includes: [
-                'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
-        ])
-    }
+    getSourceDirectories().setFrom([mainSrc])
+    getClassDirectories().setFrom([debugTree])
+    getExecutionData().setFrom(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
+    ])
+}
 
 
 /*
