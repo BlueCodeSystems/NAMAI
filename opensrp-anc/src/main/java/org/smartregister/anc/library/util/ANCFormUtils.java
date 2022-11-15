@@ -327,8 +327,8 @@ public class ANCFormUtils extends FormUtils {
                             if (JsonFormConstants.CHECK_BOX.equals(fieldObject.optString(JsonFormConstants.TYPE, ""))) {
                                 String value = Utils.getProperties(context).getProperty(ConstantsUtils.Properties.WIDGET_VALUE_TRANSLATED, "false");
                                 if (StringUtils.isNotBlank(value) && Boolean.parseBoolean(value)) {
-                                    facts.put(fieldKey, Utils.generateTranslatableValue(fieldKey, fieldObject));
-                                } else {
+                                    /*facts.put(fieldKey, Utils.generateTranslatableValue(fieldKey, fieldObject));
+                                } else {*/
                                     facts.put(fieldKey, fieldObject.getString(JsonFormConstants.VALUE));
                                 }
 
