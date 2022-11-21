@@ -256,6 +256,13 @@ public class ContactVisit {
                         saveOrDeleteTasks(stepFields);
                     }
                 }
+            }else if(formObject.has(ConstantsUtils.JsonFormKeyUtils.ENCOUNTER_TYPE) && StringUtils.isNotBlank(encounterType) && ConstantsUtils.JsonFormUtils.QUICK_CHECK_ENCOUNTER_TYPE.equals(encounterType)){
+                JSONObject dueStep = formObject.optJSONObject(JsonFormConstants.STEP1);
+                    JSONArray stepFields = dueStep.optJSONArray(JsonFormConstants.FIELDS);
+                    if (stepFields != null && stepFields.length() > 0) {
+                        saveOrDeleteTasks(stepFields);
+                    }
+
             }
 //            else{
 //                String encounterType = formObject.getString(ConstantsUtils.JsonFormKeyUtils.ENCOUNTER_TYPE

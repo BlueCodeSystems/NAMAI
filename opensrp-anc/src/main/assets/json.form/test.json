@@ -308,25 +308,6 @@
             }
           }
         }
-      },
-      {
-        "key": "accordion_feedback",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "Referral feedback",
-        "accordion_info_text": "Enter referral feedback",
-        "accordion_info_title": "Referral feedback",
-        "type": "expansion_panel",
-        "content_form": "referral_feedback_sub_form",
-        "container": "test",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
       }
     ]
   },
