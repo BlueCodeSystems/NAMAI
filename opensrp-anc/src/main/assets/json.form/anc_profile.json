@@ -8092,7 +8092,7 @@
           "err": "{{anc_profile.step4.health_conditions_cancer_other.v_required.err}}"
         },
         "relevance": {
-          "step3:health_conditions": {
+          "step6:health_conditions": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8116,7 +8116,7 @@
           "err": "{{anc_profile.step4.health_conditions_other.v_required.err}}"
         },
         "relevance": {
-          "step3:health_conditions": {
+          "step6:health_conditions": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8175,8 +8175,7 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "161829AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "key": "removal_of_fibroid",
-            "text": "{{anc_profile.step4.surgeries.options.removal_of_fibroid.text}}",
-            "translation_text": "anc_profile.step4.surgeries.options.removal_of_fibroid.text"
+            "text": "{{anc_profile.step4.surgeries.options.removal_of_fibroid.text}}"
           },
           {
             "openmrs_entity_parent": "",
@@ -8239,7 +8238,7 @@
           "err": "{{anc_profile.step4.surgeries_other.v_required.err}}"
         },
         "relevance": {
-          "step3:surgeries": {
+          "step6:surgeries": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8411,7 +8410,7 @@
           "err": "{{anc_profile.step6.medications_other.v_required.err}}"
         },
         "relevance": {
-          "step3:medications": {
+          "step6:medications": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8506,7 +8505,7 @@
         "hint": "{{anc_profile.step4.allergies_other.hint}}",
         "edit_type": "edit_text",
         "relevance": {
-          "step3:allergies": {
+          "step6:allergies": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8530,7 +8529,7 @@
           "err": "Specify type of mental illness"
         },
         "relevance": {
-          "step3:health_conditions": {
+          "step6:health_conditions": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8623,7 +8622,7 @@
           "err": "{{anc_profile.step4.hiv_diagnosis_date_unknown.v_required.err}}"
         },
         "relevance": {
-          "step3:health_conditions": {
+          "step6:health_conditions": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8673,7 +8672,6 @@
           {
             "key": "3_doses",
             "text": "{{anc_profile.step5.tt_immun_status.options.3_doses.text}}",
-            "translation_text": "anc_profile.step5.tt_immun_status.options.3_doses.text",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "164134AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -8715,7 +8713,7 @@
           "value": false
         },
         "relevance": {
-          "step4:tt_immun_status": {
+          "step7:tt_immun_status": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8744,7 +8742,7 @@
           "err": "Please enter the number of doses"
         },
         "relevance": {
-          "step4:tt_immun_status": {
+          "step7:tt_immun_status": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8829,7 +8827,7 @@
         "toaster_info_title": "{{anc_profile.step5.tt_immunisation_toaster.toaster_info_title}}",
         "toaster_type": "info",
         "relevance": {
-          "step4:tt_immun_status": {
+          "step7:tt_immun_status": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8852,7 +8850,7 @@
         "text_color": "#000000",
         "toaster_type": "positive",
         "relevance": {
-          "step4:tt_immun_status": {
+          "step7:tt_immun_status": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8917,7 +8915,7 @@
         "text_color": "#000000",
         "toaster_type": "positive",
         "relevance": {
-          "step4:hepatitis_immun_status": {
+          "step7:hepatitis_immun_status": {
             "ex-checkbox": [
               {
                 "or": [
@@ -8938,7 +8936,7 @@
         "text_color": "#000000",
         "toaster_type": "info",
         "relevance": {
-          "step4:hepatitis_immun_status": {
+          "step7:hepatitis_immun_status": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9018,7 +9016,7 @@
         "toaster_info_title": "{{anc_profile.step7.caffeine_reduction_toaster.toaster_info_title}}",
         "toaster_type": "warning",
         "relevance": {
-          "step5:caffeine_intake": {
+          "step8:caffeine_intake": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9061,7 +9059,44 @@
             "text": "{{anc_profile.step7.tobacco_user.options.recently_quit.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "165267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "quitt"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
+        }
+      },
+      {
+        "key": "tobacco_user_sniffing",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "tobacco_user_sniffing",
+        "type": "native_radio",
+        "label": "Tobacco use - Sniffing(Insunko)",
+        "label_text_style": "bold",
+        "multi_relevance": true,
+        "options": [
+          {
+            "key": "yes",
+            "text": "{{anc_profile.step7.tobacco_user.options.yes.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "yes"
+          },
+          {
+            "key": "no",
+            "text": "{{anc_profile.step7.tobacco_user.options.no.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "no"
+          },
+          {
+            "key": "recently_quit",
+            "text": "{{anc_profile.step7.tobacco_user.options.recently_quit.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "quit"
           }
         ],
         "v_required": {
@@ -9081,15 +9116,10 @@
         "toaster_info_title": "{{anc_profile.step7.tobacco_cessation_toaster.toaster_info_title}}",
         "toaster_type": "problem",
         "relevance": {
-          "step5:tobacco_user": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "yes",
-                  "recently_quit"
-                ]
-              }
-            ]
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         }
       },
@@ -9134,7 +9164,7 @@
         "toaster_info_title": "{{anc_profile.step7.second_hand_smoke_toaster.toaster_info_title}}",
         "toaster_type": "warning",
         "relevance": {
-          "step5:shs_exposure": {
+          "step8:shs_exposure": {
             "type": "string",
             "ex": "equalTo(., \"yes\")"
           }
@@ -9260,7 +9290,6 @@
           {
             "key": "cocaine",
             "text": "{{anc_profile.step7.alcohol_substance_use.options.cocaine.text}}",
-            "translation_text": "anc_profile.step7.alcohol_substance_use.options.cocaine.text",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "155793AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -9298,7 +9327,7 @@
           "err": "{{anc_profile.step7.other_substance_use.v_required.err}}"
         },
         "relevance": {
-          "step5:alcohol_substance_use": {
+          "step8:alcohol_substance_use": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9321,7 +9350,7 @@
         "toaster_info_title": "{{anc_profile.step7.substance_use_toaster.toaster_info_title}}",
         "toaster_type": "problem",
         "relevance": {
-          "step5:alcohol_substance_use": {
+          "step8:alcohol_substance_use": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9449,7 +9478,7 @@
           "err": " can only contain letters"
         },
         "relevance": {
-          "step6:tb_screening_history": {
+          "step9:tb_screening_history": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9472,7 +9501,7 @@
         "toaster_info_title": "Laboratory test",
         "toaster_type": "problem",
         "relevance": {
-          "step6:tb_screening_history": {
+          "step9:tb_screening_history": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9499,7 +9528,7 @@
         "toaster_info_title": "TB test recommended",
         "toaster_type": "info",
         "relevance": {
-          "step6:tb_screening_history": {
+          "step9:tb_screening_history": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9567,7 +9596,7 @@
         "toaster_info_title": "Test for HIV every 3 months",
         "toaster_type": "info",
         "relevance": {
-          "step7:hiv_test_result": {
+          "step10:hiv_test_result": {
             "type": "string",
             "ex": "equalTo(., \"negative\")"
           }
@@ -9582,7 +9611,7 @@
         "text": "HIV status unknown please refer for testing",
         "toaster_type": "warning",
         "relevance": {
-          "step7:hiv_test_result": {
+          "step10:hiv_test_result": {
             "type": "string",
             "ex": "equalTo(., \"unknown\")"
           }
@@ -9607,7 +9636,7 @@
           }
         ],
         "relevance": {
-          "step7:hiv_test_result": {
+          "step10:hiv_test_result": {
             "type": "string",
             "ex": "equalTo(., \"positive\")"
           }
@@ -9635,7 +9664,7 @@
           }
         ],
         "relevance": {
-          "step7:on_art": {
+          "step10:on_art": {
             "type": "string",
             "ex": "equalTo(., \"no\")"
           }
@@ -9653,7 +9682,7 @@
           "err": "Please enter the other reason not on ART"
         },
         "relevance": {
-          "step7:reason_not_on_art": {
+          "step10:reason_not_on_art": {
             "type": "string",
             "ex": "equalTo(., \"other\")"
           }
@@ -9671,7 +9700,7 @@
         "toaster_info_title": "Refer to art clinic",
         "toaster_type": "problem",
         "relevance": {
-          "step7:on_art": {
+          "step10:on_art": {
             "type": "string",
             "ex": "equalTo(., \"no\")"
           }
@@ -9730,7 +9759,7 @@
         "toaster_info_title": "Test for HIV every 3 months",
         "toaster_type": "info",
         "relevance": {
-          "step8:partner_hiv_status": {
+          "step11:partner_hiv_status": {
             "type": "string",
             "ex": "equalTo(., \"negative\")"
           }
@@ -9745,7 +9774,7 @@
         "text": "HIV status unknown please refer for testing",
         "toaster_type": "warning",
         "relevance": {
-          "step8:partner_hiv_status": {
+          "step11:partner_hiv_status": {
             "type": "string",
             "ex": "equalTo(., \"unknown\")"
           }
@@ -9770,7 +9799,7 @@
           }
         ],
         "relevance": {
-          "step8:partner_hiv_status": {
+          "step11:partner_hiv_status": {
             "type": "string",
             "ex": "equalTo(., \"positive\")"
           }
@@ -9797,7 +9826,7 @@
           }
         ],
         "relevance": {
-          "step8:partner_on_art": {
+          "step11:partner_on_art": {
             "type": "string",
             "ex": "equalTo(., \"no\")"
           }
@@ -9815,7 +9844,7 @@
           "err": "Please enter the other reason not on ART"
         },
         "relevance": {
-          "step8:reason_partner_not_on_art": {
+          "step11:reason_partner_not_on_art": {
             "type": "string",
             "ex": "equalTo(., \"other\")"
           }
@@ -9832,7 +9861,7 @@
         "toaster_info_title": "Refer to art clinic",
         "toaster_type": "problem",
         "relevance": {
-          "step8:partner_on_art": {
+          "step11:partner_on_art": {
             "type": "string",
             "ex": "equalTo(., \"no\")"
           }

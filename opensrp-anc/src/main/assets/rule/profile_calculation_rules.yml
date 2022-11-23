@@ -2,7 +2,7 @@
 name: step1_hiv_risk
 description: HIV Risk
 priority: 1
-condition: "(step3_hiv_positive != 1 && (step7_partner_hiv_positive == 1 || step6_alcohol_substance_use.contains('injectable_drugs') || step1_occupation.contains('informal_employment_sex_worker')))"
+condition: "(step6_hiv_positive != 1 && (step10_partner_hiv_positive == 1 || step8_alcohol_substance_use.contains('injectable_drugs')))"
 actions:
   - "calculation = 1"
 ---
@@ -156,7 +156,7 @@ actions:
 name: step2_preeclampsia_risk
 description: preeclampsia_risk
 priority: 1
-condition: "((global_no_of_fetuses != null && global_no_of_fetuses != '' && global_no_of_fetuses >= 2) || (!step2_prev_preg_comps.isEmpty() && (step2_prev_preg_comps.contains('pre_eclampsia') || step2_prev_preg_comps.contains('eclampsia') || step2_prev_preg_comps.contains('convulsions'))) || (!step3_health_conditions.isEmpty() && (step3_health_conditions.contains('autoimmune_disease') || step3_health_conditions.contains('diabetes') || step3_health_conditions.contains('gest_diabetes') || step3_health_conditions.contains('diabetes_other') || step3_health_conditions.contains('diabetes_type2') || step3_health_conditions.contains('hypertension') || step3_health_conditions.contains('kidney_disease'))))"
+condition: "((global_no_of_fetuses != null && global_no_of_fetuses != '' && global_no_of_fetuses >= 2) || (!step2_prev_preg_comps.isEmpty() && (step2_prev_preg_comps.contains('pre_eclampsia') || step2_prev_preg_comps.contains('eclampsia') || step2_prev_preg_comps.contains('convulsions'))) || (!step6_health_conditions.isEmpty() && (step6_health_conditions.contains('autoimmune_disease') || step6_health_conditions.contains('diabetes') || step6_health_conditions.contains('gest_diabetes') || step6_health_conditions.contains('diabetes_other') || step6_health_conditions.contains('diabetes_type2') || step6_health_conditions.contains('hypertension') || step6_health_conditions.contains('kidney_disease'))))"
 actions:
   - "calculation = 1"
 ---
@@ -170,42 +170,42 @@ actions:
 name: step3_preeclampsia_risk
 description: preeclampsia_risk
 priority: 1
-condition: "((global_no_of_fetuses != null && global_no_of_fetuses != '' && global_no_of_fetuses >= 2) || (!step2_prev_preg_comps.isEmpty() && (step2_prev_preg_comps.contains('pre_eclampsia') || step2_prev_preg_comps.contains('eclampsia') || step2_prev_preg_comps.contains('convulsions'))) || (!step3_health_conditions.isEmpty() && (step3_health_conditions.contains('autoimmune_disease') || step3_health_conditions.contains('diabetes') || step3_health_conditions.contains('gest_diabetes') || step3_health_conditions.contains('diabetes_other') || step3_health_conditions.contains('diabetes_type2') || step3_health_conditions.contains('hypertension') || step3_health_conditions.contains('kidney_disease'))))"
+condition: "((global_no_of_fetuses != null && global_no_of_fetuses != '' && global_no_of_fetuses >= 2) || (!step2_prev_preg_comps.isEmpty() && (step2_prev_preg_comps.contains('pre_eclampsia') || step2_prev_preg_comps.contains('eclampsia') || step2_prev_preg_comps.contains('convulsions'))) || (!step6_health_conditions.isEmpty() && (step6_health_conditions.contains('autoimmune_disease') || step6_health_conditions.contains('diabetes') || step6_health_conditions.contains('gest_diabetes') || step6_health_conditions.contains('diabetes_other') || step6_health_conditions.contains('diabetes_type2') || step6_health_conditions.contains('hypertension') || step6_health_conditions.contains('kidney_disease'))))"
 actions:
   - "calculation = 1"
 ---
 name: step3_hiv_positive
 description: hiv_positive
 priority: 1
-condition: "(global_hiv_test_result != null && global_hiv_test_result != '' && global_hiv_test_result == 'positive') || (step3_health_conditions.contains('hiv'))"
+condition: "(global_hiv_test_result != null && global_hiv_test_result != '' && global_hiv_test_result == 'positive') || (step6_health_conditions.contains('hiv'))"
 actions:
   - "calculation = 1"
 ---
-name: step6_hiv_risk
+name: step9_hiv_risk
 description: HIV Risk
 priority: 1
-condition: "((global_hiv_positive == null || global_hiv_positive == '' || global_hiv_positive == 0) && step3_hiv_positive != 1 && (global_site_anc_hiv == true || step7_partner_hiv_positive == 1 || step6_alcohol_substance_use.contains('injectable_drugs') || step1_occupation.contains('informal_employment_sex_worker')))"
+condition: "((global_hiv_positive == null || global_hiv_positive == '' || global_hiv_positive == 0) && step6_hiv_positive != 1 && (global_site_anc_hiv == true || step10_partner_hiv_positive == 1 || step8_alcohol_substance_use.contains('injectable_drugs')))"
 actions:
   - "calculation = 1"
 ---
-name: step7_hiv_risk
+name: step10_hiv_risk
 description: HIV Risk
 priority: 1
-condition: "((global_hiv_positive == null || global_hiv_positive == '' || global_hiv_positive == 0) && step3_hiv_positive != 1 && (global_site_anc_hiv == true || step7_partner_hiv_positive == 1 || step6_alcohol_substance_use.contains('injectable_drugs') || step1_occupation.contains('informal_employment_sex_worker')))"
+condition: "((global_hiv_positive == null || global_hiv_positive == '' || global_hiv_positive == 0) && step6_hiv_positive != 1 && (global_site_anc_hiv == true || step10_partner_hiv_positive == 1 || step8_alcohol_substance_use.contains('injectable_drugs')))"
 actions:
   - "calculation = 1"
 ---
-name: step7_partner_hiv_positive
+name: step10_partner_hiv_positive
 description: HIV Risk
 priority: 1
-condition: "(step8_partner_hiv_status == 'positive') || (global_hiv_test_partner_result != null && global_hiv_test_partner_result != '' && global_hiv_test_partner_result == 'positive')"
+condition: "(step11_partner_hiv_status == 'positive') || (global_hiv_test_partner_result != null && global_hiv_test_partner_result != '' && global_hiv_test_partner_result == 'positive')"
 actions:
   - "calculation = 1"
 ---
-name: step8_discordant_set
+name: step11_discordant_set
 description: discordant_set
 priority: 1
-condition: " ((global_hiv_test_partner_result == 'positive'  || step8_partner_hiv_status == 'positive' ) && (global_hiv_test_result == 'negative' || step7_hiv_test_result == 'negative')) || ((global_hiv_test_partner_result == 'negative'  || step8_partner_hiv_status == 'negative' ) && (global_hiv_test_result == 'positive' || step7_hiv_test_result == 'positive')) "
+condition: " ((global_hiv_test_partner_result == 'positive'  || step11_partner_hiv_status == 'positive' ) && (global_hiv_test_result == 'negative' || step10_hiv_test_result == 'negative')) || ((global_hiv_test_partner_result == 'negative'  || step11_partner_hiv_status == 'negative' ) && (global_hiv_test_result == 'positive' || step10_hiv_test_result == 'positive')) "
 actions:
   - "calculation = 'yes' "
 ---
@@ -230,21 +230,21 @@ condition: "true"
 actions:
   - "calculation = step2_gravida + 1 "
 ---
-name: step4_underimmunized_doses
+name: step7_underimmunized_doses
 description: underimmunized_doses
 priority: 1
 condition: "!global_tt1_dose_no.contains('')"
 actions:
-  - "calculation = step4_underimmunized_doses + 1"
+  - "calculation = step7_underimmunized_doses + 1"
 ---
-name: step4_tt_immun_status
+name: step7_tt_immun_status
 description: tt_immun_status
 priority: 1
 condition: "(global_underimmunized_doses > 3)"
 actions:
   - "calculation = '3_doses' "
 ---
-name: step7_hiv_test_result
+name: step10_hiv_test_result
 description: hiv_test_result
 priority: 3
 condition: " step3_health_conditions.contains('hiv')"
@@ -252,7 +252,7 @@ actions:
   - "calculation = 'positive' "
 
 ---
-name: step7_hiv_test_result
+name: step10_hiv_test_result
 description: hiv_test_result
 priority: 2
 condition: " global_hiv_test_result == 'negative'"
@@ -260,7 +260,7 @@ actions:
   - "calculation = 'negative' "
 
 ---
-name: step7_hiv_test_result
+name: step10_hiv_test_result
 description: hiv_test_result
 priority: 1
 condition: " global_hiv_test_result == 'positive'"
@@ -268,16 +268,16 @@ actions:
   - "calculation = 'positive' "
 
 ---
-name: step8_discordant_set
+name: step11_discordant_set
 description: discordant_set
 priority: 2
-condition: " ((global_hiv_test_partner_result == 'positive'  || step8_partner_hiv_status == 'positive' ) && (global_hiv_test_result == 'positive' || step7_hiv_test_result == 'positive')) || ((global_hiv_test_partner_result == 'negative'  || step8_partner_hiv_status == 'negative' ) && (global_hiv_test_result == 'negative' || step7_hiv_test_result == 'negative')) "
+condition: " ((global_hiv_test_partner_result == 'positive'  || step11_partner_hiv_status == 'positive' ) && (global_hiv_test_result == 'positive' || step10_hiv_test_result == 'positive')) || ((global_hiv_test_partner_result == 'negative'  || step11_partner_hiv_status == 'negative' ) && (global_hiv_test_result == 'negative' || step10_hiv_test_result == 'negative')) "
 actions:
   - "calculation = 'no' "
 ---
-name: step8_discordant_out
+name: step11_discordant_out
 description: discordant_out
 priority: 1
-condition: "step8_discordant_set != null"
+condition: "step11_discordant_set != null"
 actions:
   - "calculation = step8_discordant_set"

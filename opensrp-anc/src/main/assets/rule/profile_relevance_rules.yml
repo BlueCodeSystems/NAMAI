@@ -174,24 +174,24 @@ condition: "step3_preeclampsia_risk == 1"
 actions:
   - "isRelevant = true"
 ---
-name: step3_hiv_diagnosis_date
+name: step6_hiv_diagnosis_date
 description: hiv_diagnosis_date
 priority: 1
-condition: "step3_health_conditions.contains('hiv') && !step3_hiv_diagnosis_date_unknown.contains('yes')"
+condition: "step6_health_conditions.contains('hiv') && !step6_hiv_diagnosis_date_unknown.contains('yes')"
 actions:
   - "isRelevant = true"
 ---
-name: step3_unsafe_drugs
+name: step6_unsafe_drugs
 description: unsafe_drugs
 priority: 1
-condition: "step3_medications_other.contains('furosemide') || step3_medications_other.contains('frusemide') || step3_medications_other.contains('lasix') || step3_medications_other.contains('moduretic') || step3_medications_other.contains('Furosemide') || step3_medications_other.contains('Frusemide') || step3_medications_other.contains('Lasix') || step3_medications_other.contains('Moduretic')"
+condition: "step6_medications_other.contains('furosemide') || step6_medications_other.contains('frusemide') || step6_medications_other.contains('lasix') || step6_medications_other.contains('moduretic') || step6_medications_other.contains('Furosemide') || step6_medications_other.contains('Frusemide') || step6_medications_other.contains('Lasix') || step6_medications_other.contains('Moduretic')"
 actions:
   - "isRelevant = true"
 ---
-name: step5_hiv_counselling_toaster
+name: step8_hiv_counselling_toaster
 description: Hiv Risk counselling
 priority: 1
-condition: "(step5_hiv_risk == 1)"
+condition: "(step8_hiv_risk == 1)"
 actions:
   - "isRelevant = true"
 
@@ -210,10 +210,10 @@ condition: "(step7_partner_hiv_status.contains('positive')) || (step7_partner_hi
 actions:
   - "isRelevant = true"
 ---
-name: step5_tobacco_cessation_toaster
+name: step8_tobacco_cessation_toaster
 description: Cessation Counselling
 priority: 1
-condition: "(step5_tobacco_user.contains('yes')) || (step5_tobacco_user.contains('recently_quit')) || (step5_tobacco_user_sniffing.contains('yes')) || (step5_tobacco_user_sniffing.contains('recently_quit'))"
+condition: "(step8_tobacco_user.contains('yes')) || (step8_tobacco_user.contains('recently_quit')) || (step8_tobacco_user_sniffing.contains('yes')) || (step8_tobacco_user_sniffing.contains('recently_quit'))"
 actions:
   - "isRelevant = true"
 ---
@@ -245,7 +245,7 @@ condition: "(step2_gestational_age > 6)"
 actions:
   - "isRelevant = true"
 ---
-name: step5_condom_use
+name: step8_condom_use
 description: condom_use
 priority: 1
 condition: "(global_hiv_test_result == 'positive')"
@@ -1119,34 +1119,34 @@ condition: "(step5_preg_fifteen_gestational_age > 0) && (step5_preg_fifteen_gest
 actions:
   - "isRelevant = true"
 ---
-name: step4_ttcv_unprotected
+name: step7_ttcv_unprotected
 description: ttcv_unprotected
 priority: 1
-condition: "(((global_underimmunized_doses < 2)||(step4_tt_immun_status == 'ttcv_not_received')) && (!step4_tt_immun_status.isEmpty()))"
+condition: "(((global_underimmunized_doses < 2)||(step7_tt_immun_status == 'ttcv_not_received')) && (!step7_tt_immun_status.isEmpty()))"
 actions:
   - "isRelevant = true"
 ---
-name: step4_ttcv_protected
+name: step7_ttcv_protected
 description: ttcv_protected
 priority: 1
 condition: "((global_underimmunized_doses > 1) && (global_underimmunized_doses < 4))"
 actions:
   - "isRelevant = true"
 ---
-name: step4_ttcv_full_protected
+name: step7_ttcv_full_protected
 description: ttcv_full_protected
 priority: 1
-condition: "(((global_underimmunized_doses > 3)||(step4_tt_immun_status == '3_doses')) && (!step4_tt_immun_status.isEmpty()))"
+condition: "(((global_underimmunized_doses > 3)||(step7_tt_immun_status == '3_doses')) && (!step7_tt_immun_status.isEmpty()))"
 actions:
   - "isRelevant = true"
 
 ---
-name: step8_discordant_out
+name: step11_discordant_out
 description: discordant_out
 priority: 1
-condition: "step8_discordant_set != null"
+condition: "step11_discordant_set != null"
 actions:
-  - "isRelevant = step8_discordant_set"
+  - "isRelevant = step11_discordant_set"
 ---
 name: step1_headss_toaster
 description: HEADSS info
