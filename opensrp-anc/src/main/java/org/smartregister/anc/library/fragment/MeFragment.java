@@ -34,10 +34,10 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
     private RelativeLayout mePopCharacteristicsSection;
     private RelativeLayout siteCharacteristicsSection;
     private RelativeLayout languageSwitcherSection;
-    private TextView languageSwitcherText;
-    private Map<String, Locale> locales = new HashMap<>();
-    private String[] languages;
     private RelativeLayout p2pSyncSetion;
+    private TextView languageSwitcherText;
+    private final Map<String, Locale> locales = new HashMap<>();
+    private String[] languages;
 
     @Nullable
     @Override
@@ -108,7 +108,6 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         } else if (viewId == R.id.p2p_section) {
             startActivity(new Intent(getContext(), AncP2pModeSelectActivity.class));
         }
-
     }
 
     private void languageSwitcherDialog() {

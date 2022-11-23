@@ -1,19 +1,18 @@
 {
-  "validate_on_submit": true,
   "content_form": [
     {
       "key": "ultrasound",
       "openmrs_entity_parent": "159617AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163725AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "label": "Ultrasound scan",
+      "label": "{{tests_ultrasound_sub_form.step1.ultrasound.label}}",
       "label_text_style": "bold",
       "text_color": "#000000",
       "type": "extended_radio_button",
       "options": [
         {
           "key": "done_today",
-          "text": "Done today",
+          "text": "{{tests_ultrasound_sub_form.step1.ultrasound.options.done_today.text}}",
           "type": "done_today",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -21,7 +20,7 @@
         },
         {
           "key": "done_earlier",
-          "text": "Done earlier",
+          "text": "{{tests_ultrasound_sub_form.step1.ultrasound.options.done_earlier.text}}",
           "type": "done_earlier",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -29,7 +28,7 @@
         },
         {
           "key": "ordered",
-          "text": "Ordered",
+          "text": "{{tests_ultrasound_sub_form.step1.ultrasound.options.ordered.text}}",
           "type": "ordered",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -37,7 +36,7 @@
         },
         {
           "key": "not_done",
-          "text": "Not done",
+          "text": "{{tests_ultrasound_sub_form.step1.ultrasound.options.not_done.text}}",
           "type": "not_done",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -46,7 +45,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "please enter value"
+        "err": "Please select an option"
       }
     },
     {
@@ -145,7 +144,7 @@
       "hint": "{{tests_ultrasound_sub_form.step1.ultrasound_date.hint}}",
       "expanded": "false",
       "max_date": "today",
-      "min_date": "today-1y",
+      "min_date": "today-9m",
       "relevance": {
         "rules-engine": {
           "ex-rules": {
@@ -156,6 +155,13 @@
       "v_required": {
         "value": true,
         "err": "{{tests_ultrasound_sub_form.step1.ultrasound_date.v_required.err}}"
+      },
+      "calculation": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "ultrasound_sub_form_calculation_rules.yml"
+          }
+        }
       }
     },
     {
@@ -220,6 +226,10 @@
       "label_text_style": "bold",
       "text": "{{tests_ultrasound_sub_form.step1.no_of_fetuses_label.text}}",
       "text_color": "#000000",
+      "v_required": {
+        "value": true,
+        "err": "Please select the number of fetus(es)"
+      },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
@@ -242,8 +252,7 @@
       "text_color": "#000000",
       "selected_text_color": "#ffffff",
       "v_required": {
-        "value": true,
-        "err": "please enter value"
+        "value": true
       },
       "relevance": {
         "rules-engine": {
@@ -261,76 +270,6 @@
       }
     },
     {
-      "key": "spacer",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "",
-      "openmrs_entity_id": "spacer",
-      "type": "spacer",
-      "spacer_height": "20dp"
-    },
-    {
-      "key": "fetal_heartbeat",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "165377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "native_radio",
-      "label": "Fetal heartbeat",
-      "label_text_style": "bold",
-      "text_color": "#000000",
-      "options": [
-        {
-          "key": "yes",
-          "text": "Present",
-          "value": false,
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "openmrs_entity_parent": "165377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "no",
-          "text": "Absent",
-          "value": false,
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "openmrs_entity_parent": "165377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        }
-      ],
-      "v_required": {
-        "value": "true",
-        "err": "Fetal heartbeat is required"
-      },
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
-          }
-        }
-      }
-    },
-    {
-      "key": "fetal_heart_rate",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "edit_text",
-      "edit_type": "number",
-      "hint": "Fetal heart rate",
-      "relevance": {
-        "step2:fetal_heartbeat": {
-          "type": "string",
-          "ex": "equalTo(., \"yes\")"
-        }
-      },
-      "v_required": {
-        "value": "true",
-        "err": "enter fetal heart rate"
-      },
-      "v_numeric": {
-        "value": "true",
-        "err": "Enter number"
-      }
-    },
-    {
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -338,6 +277,9 @@
       "type": "hidden",
       "label_text_style": "bold",
       "text_color": "#FF0000",
+      "v_required": {
+        "value": false
+      },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
@@ -378,86 +320,7 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "spacer",
       "type": "spacer",
-      "spacer_height": "20dp"
-    },
-    {
-      "key": "baby_lie",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "baby_lie",
-      "type": "native_radio",
-      "label": "Fetal lie",
-      "label_text_style": "bold",
-      "label_info_text": "The position in which the baby is lying",
-      "options": [
-        {
-          "key": "longitudinal",
-          "text": "Longitudinal",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "Longitudinal"
-        },
-        {
-          "key": "transverse",
-          "text": "Transverse",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "transverse"
-        },
-        {
-          "key": "oblique",
-          "text": "Oblique",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "oblique"
-        },
-        {
-          "key": "undetermined",
-          "text": "Undetermined",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "undetermined"
-        }
-      ],
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
-          }
-        }
-      }
-    },
-    {
-      "key": "fetal_weight",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "fetal_weight",
-      "type": "edit_text",
-      "edit_type": "number",
-      "hint": "Estimated fetal weight (grams)",
-      "v_required": {
-        "value": "false",
-        "err": "Enter fetal weight"
-      },
-      "v_numeric": {
-        "value": "true",
-        "err": "Enter number"
-      },
-      "v_min": {
-        "value": "0",
-        "err": "Weight must be equal or greater than 0 grams"
-      },
-      "v_max": {
-        "value": "8000",
-        "err": "Weight must be equal or less than 8000 grams"
-      },
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
-          }
-        }
-      }
+      "spacer_height": "10dp"
     },
     {
       "key": "fetal_presentation",
@@ -470,13 +333,6 @@
       "label_info_text": "{{tests_ultrasound_sub_form.step1.fetal_presentation.label_info_text}}",
       "options": [
         {
-          "key": "breech",
-          "text": "Breech",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "breech"
-        },
-        {
           "key": "cephalic",
           "text": "{{tests_ultrasound_sub_form.step1.fetal_presentation.options.cephalic.text}}",
           "openmrs_entity_parent": "",
@@ -484,11 +340,25 @@
           "openmrs_entity_id": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
-          "key": "undetermined",
-          "text": "Undetermined",
+          "key": "pelvic",
+          "text": "{{tests_ultrasound_sub_form.step1.fetal_presentation.options.pelvic.text}}",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
-          "openmrs_entity_id": "undetermined"
+          "openmrs_entity_id": "146922AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "transverse",
+          "text": "{{tests_ultrasound_sub_form.step1.fetal_presentation.options.transverse.text}}",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "112259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "other",
+          "text": "{{tests_ultrasound_sub_form.step1.fetal_presentation.options.other.text}}",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         }
       ],
       "relevance": {
@@ -502,60 +372,6 @@
         "rules-engine": {
           "ex-rules": {
             "rules-file": "ultrasound_sub_form_calculation_rules.yml"
-          }
-        }
-      }
-    },
-    {
-      "key": "descent",
-      "openmrs_entity_parent": "",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "descent",
-      "type": "native_radio",
-      "label": "Descent",
-      "label_text_style": "bold",
-      "label_info_text": "Descent",
-      "options": [
-        {
-          "key": "five",
-          "text": "5/5",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "five"
-        },
-        {
-          "key": "four",
-          "text": "4/5",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "four"
-        },
-        {
-          "key": "three",
-          "text": "3/5",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "three"
-        },
-        {
-          "key": "two",
-          "text": "2/5",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "two"
-        },
-        {
-          "key": "one",
-          "text": "1/5",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "one"
-        }
-      ],
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "ultrasound_sub_form_relevance_rules.yml"
           }
         }
       }
@@ -604,7 +420,7 @@
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165296AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "check_box",
+      "type": "native_radio",
       "label": "{{tests_ultrasound_sub_form.step1.placenta_location.label}}",
       "label_text_style": "bold",
       "options": [
@@ -637,6 +453,20 @@
           "openmrs_entity_id": "541AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
+          "key": "right_side",
+          "text": "{{tests_ultrasound_sub_form.step1.placenta_location.options.right_side.text}}",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "left_side",
+          "text": "{{tests_ultrasound_sub_form.step1.placenta_location.options.left_side.text}}",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
           "key": "fundal",
           "text": "{{tests_ultrasound_sub_form.step1.placenta_location.options.fundal.text}}",
           "openmrs_entity_parent": "",
@@ -654,5 +484,6 @@
     }
   ],
   "count": 1,
+  "validate_on_submit": true,
   "properties_file_name": "tests_ultrasound_sub_form"
 }

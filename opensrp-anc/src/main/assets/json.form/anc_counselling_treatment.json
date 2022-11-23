@@ -2069,7 +2069,7 @@
         "edit_type": "name",
         "relevance": {
           "step4:eat_exercise_counsel_notdone": {
-              "type": "string",
+            "type": "string",
             "ex": "equalTo(., \"other\")"
 
           }
@@ -2263,8 +2263,8 @@
         "edit_type": "name",
         "relevance": {
           "step4:balanced_energy_counsel_notdone": {
-              "type": "string",
-              "ex": "equalTo(., \"other\")"
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
           }
         }
       }

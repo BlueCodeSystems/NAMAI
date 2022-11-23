@@ -27,7 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.anc.library.AncLibrary;
-import org.smartregister.anc.library.BuildConfig;
+//import org.smartregister.anc.library.BuildConfig;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.EditJsonFormActivity;
 import org.smartregister.anc.library.domain.YamlConfigItem;
@@ -370,7 +370,7 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
     public static FormTag getFormTag(AllSharedPreferences allSharedPreferences) {
         FormTag formTag = new FormTag();
         formTag.providerId = allSharedPreferences.fetchRegisteredANM();
-        formTag.appVersion = BuildConfig.VERSION_CODE;
+        formTag.appVersion = 10614;//BuildConfig.VERSION_CODE
         formTag.databaseVersion = AncLibrary.getInstance().getDatabaseVersion();
         return formTag;
     }
@@ -383,7 +383,7 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         event.setTeam(allSharedPreferences.fetchDefaultTeam(providerId));
         event.setTeamId(allSharedPreferences.fetchDefaultTeamId(providerId));
         //event.setVersion(BuildConfig.EVENT_VERSION);
-        event.setClientApplicationVersion(BuildConfig.VERSION_CODE);
+        event.setClientApplicationVersion(Integer.valueOf("10614"));//BuildConfig.VERSION_CODE
         event.setClientDatabaseVersion(AncLibrary.getInstance().getDatabaseVersion());
     }
 
@@ -886,7 +886,6 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             EventClientRepository db = AncLibrary.getInstance().getEventClientRepository();
 
             JSONObject clientForm = db.getClientByBaseEntityId(baseEntityId);
-
             JSONObject attributes = clientForm.getJSONObject(ConstantsUtils.JsonFormKeyUtils.ATTRIBUTES);
             attributes.put(DBConstantsUtils.KeyUtils.NEXT_CONTACT, womanDetails.get(DBConstantsUtils.KeyUtils.NEXT_CONTACT));
             attributes.put(DBConstantsUtils.KeyUtils.NEXT_CONTACT_DATE, womanDetails.get(DBConstantsUtils.KeyUtils.NEXT_CONTACT_DATE));
@@ -896,6 +895,9 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             attributes.put(DBConstantsUtils.KeyUtils.YELLOW_FLAG_COUNT, womanDetails.get(DBConstantsUtils.KeyUtils.YELLOW_FLAG_COUNT));
             attributes.put(DBConstantsUtils.KeyUtils.RED_FLAG_COUNT, womanDetails.get(DBConstantsUtils.KeyUtils.RED_FLAG_COUNT));
             attributes.put(DBConstantsUtils.KeyUtils.EDD, womanDetails.get(DBConstantsUtils.KeyUtils.EDD));
+            attributes.put(DBConstantsUtils.KeyUtils.ALT_NAME, womanDetails.get(DBConstantsUtils.KeyUtils.ALT_NAME));
+            attributes.put(DBConstantsUtils.KeyUtils.PHONE_NUMBER, womanDetails.get(DBConstantsUtils.KeyUtils.PHONE_NUMBER));
+            attributes.put(DBConstantsUtils.KeyUtils.ALT_PHONE_NUMBER, womanDetails.get(DBConstantsUtils.KeyUtils.ALT_PHONE_NUMBER));
             clientForm.put(ConstantsUtils.JsonFormKeyUtils.ATTRIBUTES, attributes);
 
             db.addorUpdateClient(baseEntityId, clientForm);
@@ -965,7 +967,10 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
 
     public static JSONObject readJsonFromAsset(Context context, String filePath) throws Exception {
         InputStream inputStream = context.getAssets().open(filePath + ".json");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        BufferedReader reader = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        }
         String jsonString;
         StringBuilder stringBuilder = new StringBuilder();
         while ((jsonString = reader.readLine()) != null) {

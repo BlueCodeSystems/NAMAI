@@ -1,35 +1,35 @@
 ---
-name: step3_miscarriages_abortions
+name: step2_miscarriages_abortions
 description: miscarriage abortions number selectors
 priority: 1
 condition: "true"
 actions:
-- "constraint = step3_previous_pregnancies + 1"
+- "constraint = step2_previous_pregnancies + 1"
 ---
-name: step3_miscarriages_lost
+name: step2_miscarriages_lost
 description: miscarriage lost number selectors
 priority: 1
 condition: "true"
 actions:
-  - "constraint = (step3_previous_pregnancies - step3_miscarriages_abortions) + 1"
+  - "constraint = (step2_previous_pregnancies - step2_miscarriages_abortions) + 1"
 ---
-name: step3_live_births
+name: step2_live_births
 description: live births number selectors
 priority: 1
 condition: "true"
 actions:
-- "constraint = (step3_previous_pregnancies - step3_miscarriages_abortions - step3_miscarriages_lost) + 1"
+- "constraint = step2_previous_pregnancies + 1"
 ---
-name: step3_stillbirths
+name: step2_stillbirths
 description: Still birth number selector
 priority: 1
 condition: "true"
 actions:
-- "constraint = (step3_previous_pregnancies - step3_miscarriages_abortions- step3_live_births - step3_miscarriages_lost) + 1"
+- "constraint = step2_previous_pregnancies + 1"
 ---
-name: step3_c_sections
+name: step2_c_sections
 description: C -Sections number selector
 priority: 1
 condition: "true"
 actions:
-- "constraint = step3_parity + 1"
+- "constraint = step2_parity + 1"

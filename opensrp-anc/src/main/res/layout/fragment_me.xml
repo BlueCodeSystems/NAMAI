@@ -129,7 +129,7 @@
                         android:contentDescription="@string/right_arrow"
                         android:gravity="center"
                         android:src="@drawable/baseline_keyboard_arrow_right"
-                        android:tint="@color/me_page_arrow" />
+                        app:tint="@color/me_page_arrow" />
                 </RelativeLayout>
 
                 <View
@@ -182,7 +182,7 @@
                         android:contentDescription="@string/right_arrow"
                         android:gravity="center"
                         android:src="@drawable/baseline_keyboard_arrow_right"
-                        android:tint="@color/me_page_arrow" />
+                        app:tint="@color/me_page_arrow" />
 
                 </RelativeLayout>
 
@@ -236,7 +236,7 @@
                         android:contentDescription="@string/right_arrow"
                         android:gravity="center"
                         android:src="@drawable/baseline_keyboard_arrow_right"
-                        android:tint="@color/me_page_arrow" />
+                        app:tint="@color/me_page_arrow" />
 
                 </RelativeLayout>
 
@@ -288,7 +288,7 @@
                         android:contentDescription="@string/right_arrow"
                         android:gravity="center"
                         android:src="@drawable/baseline_keyboard_arrow_right"
-                        android:tint="@color/me_page_arrow" />
+                        app:tint="@color/me_page_arrow" />
 
                 </RelativeLayout>
 
@@ -397,7 +397,7 @@
                         android:contentDescription="@string/right_arrow"
                         android:gravity="center"
                         android:src="@drawable/baseline_keyboard_arrow_right"
-                        android:tint="@color/me_page_arrow" />
+                        app:tint="@color/me_page_arrow" />
 
                 </RelativeLayout>
 
@@ -446,7 +446,7 @@
                         android:contentDescription="@string/right_arrow"
                         android:gravity="center"
                         android:src="@drawable/baseline_keyboard_arrow_right"
-                        android:tint="@color/me_page_arrow" />
+                        app:tint="@color/me_page_arrow" />
 
                 </RelativeLayout>
 
