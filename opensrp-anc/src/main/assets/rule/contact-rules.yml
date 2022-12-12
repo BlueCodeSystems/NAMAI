@@ -68,3 +68,11 @@ condition: "contactRule.isFirst && (contactRule.initialVisit >= 30) && contactRu
 actions:
     - "contactRule.currentVisit = contactRule.currentVisit + 2"
     - "contactRule.set.add(contactRule.currentVisit)"
+---
+name: all_visits_even
+description: all visits should be on even weeks
+priority: 1
+condition: "contactRule.currentVisit.contains(15) || contactRule.currentVisit.contains(17) || contactRule.currentVisit.contains(19) || contactRule.currentVisit.contains(21) || contactRule.currentVisit.contains(23) || contactRule.currentVisit.contains(25) || contactRule.currentVisit.contains(27) || contactRule.currentVisit.contains(29) || contactRule.currentVisit.contains(31) || contactRule.currentVisit.contains(33) || contactRule.currentVisit.contains(35) && contactRule.currentVisit.contains(37) && contactRule.currentVisit.contains(39)"
+actions:
+  - "contactRule.currentVisit = contactRule.currentVisit + 1"
+  - "contactRule.set.add(contactRule.currentVisit)"
