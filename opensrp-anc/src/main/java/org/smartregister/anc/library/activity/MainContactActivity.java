@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.activity;
 
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -18,10 +20,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
 import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
+import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.PreviousContact;
 import org.smartregister.anc.library.presenter.ContactPresenter;
@@ -33,11 +37,14 @@ import org.smartregister.anc.library.util.DBConstantsUtils;
 import org.smartregister.anc.library.util.FilePathUtils;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.util.FormUtils;
+import org.smartregister.util.JsonFormUtils;
 import org.smartregister.view.contract.MeContract;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -77,6 +84,17 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     LinearLayout completeLayout, completeLayout2, completeLayout3, completeLayout4,
             completeLayout5, completeLayout6, completeLayoutx, mainlayout, middleLayout;
     Button finalizeBtn;
+    public Boolean ramTimed = false;
+    public Boolean phyTimed = false;
+    public Boolean proTimed = false;
+    public Boolean tesTimed = false;
+    public Boolean couTimed = false;
+    public Boolean symTimed = false;
+    public Instant startProfile;
+    public Instant startSymptoms;
+    public Instant startPhysical;
+    public Instant startTests;
+    public Instant startCounselling;
 
 
     @Override
@@ -96,7 +114,11 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
         initializeMainContactContainers();
         initializeContactLayout();
-        setFields(contacts);
+        try {
+            setFields(contacts);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         int finished = getRequiredCountTotal();
 
         //if (finished == 0) {
@@ -195,12 +217,14 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             counsellingAndTreatment.setFormName(ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT);
             contacts.add(counsellingAndTreatment);
 
+            //Utils.endRamVal = 1;
 
         } catch (Exception e) {
             Timber.e(e, " --> initializeMainContactContainers");
         }
 
     }
+
 
     public void initializeContactLayout(){
         requiredFields = findViewById(R.id.required_fields);
@@ -225,7 +249,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
 
 
-        public void setFields(List<Contact> contacts){
+        public void setFields(List<Contact> contacts) throws Exception {
 
         Contact contact1 = contacts.get(0);
         Contact contact2 = contacts.get(1);
@@ -252,6 +276,26 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             } else if (contact2.getRequiredFields() == 0) {
                 completeLayout2.setVisibility(View.VISIBLE);
                 requiredFields2.setVisibility(View.GONE);
+                String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+                ContactModel baseContactModel = new ContactModel();
+                Contact Profile = new Contact();
+                JSONObject form = baseContactModel.getFormAsJson(Profile.getFormName(), baseEntityId, locationId);
+                if(form.optString("encounter_type").equals("Client profile")) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                        Instant endProfile = Instant.now();
+
+                        Duration timeElapsedProfile = Duration.between(startProfile, endProfile);
+
+                        JSONObject durPro = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_profile");
+
+                        durPro.put(JsonFormUtils.VALUE, timeElapsedProfile);
+
+                        proTimed = true;
+                        System.out.println("Time taken: " + timeElapsedProfile.toMillis() + " milliseconds");
+                    }
+                }
             } else {
                 requiredFields2.setText(String.format(this.getString(R.string.required_fields), contact2.getRequiredFields()));
                 requiredFields2.setVisibility(View.VISIBLE);
@@ -264,6 +308,26 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             } else if (contact3.getRequiredFields() == 0) {
                 completeLayout3.setVisibility(View.VISIBLE);
                 requiredFields3.setVisibility(View.GONE);
+                String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+                ContactModel baseContactModel = new ContactModel();
+                Contact Symptoms = new Contact();
+                JSONObject form = baseContactModel.getFormAsJson(Symptoms.getFormName(), baseEntityId, locationId);
+                if(form.optString("encounter_type").equals("Symptoms and Signs")) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                        Instant endSymptoms = Instant.now();
+
+                        Duration timeElapsedSymptoms = Duration.between(startSymptoms, endSymptoms);
+
+                        JSONObject durSym = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_symptoms");
+
+                        durSym.put(JsonFormUtils.VALUE, timeElapsedSymptoms);
+
+                        symTimed = true;
+                        System.out.println("Time taken: " + timeElapsedSymptoms.toMillis() + " milliseconds");
+                    }
+                }
             } else {
                 requiredFields3.setText(String.format(this.getString(R.string.required_fields), contact3.getRequiredFields()));
                 requiredFields3.setVisibility(View.VISIBLE);
@@ -276,6 +340,26 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             } else if (contact4.getRequiredFields() == 0) {
                 completeLayout4.setVisibility(View.VISIBLE);
                 requiredFields4.setVisibility(View.GONE);
+                String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+                ContactModel baseContactModel = new ContactModel();
+                Contact Physical = new Contact();
+                JSONObject form = baseContactModel.getFormAsJson(Physical.getFormName(), baseEntityId, locationId);
+                if(form.optString("encounter_type").equals("Physical Exam")) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                        Instant endPhysical = Instant.now();
+
+                        Duration timeElapsedPhysical = Duration.between(startPhysical, endPhysical);
+
+                        JSONObject durPhy = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_physical");
+
+                        durPhy.put(JsonFormUtils.VALUE, timeElapsedPhysical);
+
+                        phyTimed = true;
+                        System.out.println("Time taken: " + timeElapsedPhysical.toMillis() + " milliseconds");
+                    }
+                }
             } else {
                 requiredFields4.setText(String.format(this.getString(R.string.required_fields), contact4.getRequiredFields()));
                 requiredFields4.setVisibility(View.VISIBLE);
@@ -288,6 +372,26 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             } else if (contact5.getRequiredFields() == 0) {
                 completeLayout5.setVisibility(View.VISIBLE);
                 requiredFields5.setVisibility(View.GONE);
+                String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+                ContactModel baseContactModel = new ContactModel();
+                Contact Tests = new Contact();
+                JSONObject form = baseContactModel.getFormAsJson(Tests.getFormName(), baseEntityId, locationId);
+                if(form.optString("encounter_type").equals("Diagnostic Tests and Imaging")) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                        Instant endTests = Instant.now();
+
+                        Duration timeElapsedTests = Duration.between(startTests, endTests);
+
+                        JSONObject durTes = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_tests");
+
+                        durTes.put(JsonFormUtils.VALUE, timeElapsedTests);
+
+                        tesTimed = true;
+                        System.out.println("Time taken: " + timeElapsedTests.toMillis() + " milliseconds");
+                    }
+                }
             } else {
                 requiredFields5.setText(String.format(this.getString(R.string.required_fields), contact5.getRequiredFields()));
                 requiredFields5.setVisibility(View.VISIBLE);
@@ -300,6 +404,26 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             } else if (contact6.getRequiredFields() == 0) {
                 completeLayout6.setVisibility(View.VISIBLE);
                 requiredFields6.setVisibility(View.GONE);
+                String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+                ContactModel baseContactModel = new ContactModel();
+                Contact Counselling = new Contact();
+                JSONObject form = baseContactModel.getFormAsJson(Counselling.getFormName(), baseEntityId, locationId);
+                if(form.optString("encounter_type").equals("Counselling, Preventive Therapy and Treatment")) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                        Instant endCounselling = Instant.now();
+
+                        Duration timeElapsedCounselling = Duration.between(startCounselling, endCounselling);
+
+                        JSONObject durCou = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_counselling");
+
+                        durCou.put(JsonFormUtils.VALUE, timeElapsedCounselling);
+
+                        couTimed = true;
+                        System.out.println("Time taken: " + timeElapsedCounselling.toMillis() + " milliseconds");
+                    }
+                }
             } else {
                 requiredFields6.setText(String.format(this.getString(R.string.required_fields), contact6.getRequiredFields()));
                 requiredFields6.setVisibility(View.VISIBLE);
@@ -350,27 +474,64 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
         }
 
-    public void clickme(View v) {
+    public void clickme(View v) throws Exception {
 
         int i = v.getId();
         if (i == R.id.ram) {
             presenter.startForm(contacts.get(0));
         } else if (i == R.id.profile){
             presenter.startForm(contacts.get(1));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startProfile = Instant.now();
+            }
         } else if (i == R.id.symptoms){
             presenter.startForm(contacts.get(2));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startSymptoms = Instant.now();
+            }
         } else if (i == R.id.exam){
             presenter.startForm(contacts.get(3));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startPhysical = Instant.now();
+            }
         }else if (i == R.id.imaging){
             presenter.startForm(contacts.get(4));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startTests = Instant.now();
+            }
         }else if (i == R.id.counselling){
             presenter.startForm(contacts.get(5));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startCounselling = Instant.now();
+            }
         } else if (i == R.id.routine){
             mainlayout.setVisibility(View.GONE);
             middleLayout.setVisibility(View.VISIBLE);
         } else if (i == R.id.containerBack){
             mainlayout.setVisibility(View.VISIBLE);
             middleLayout.setVisibility(View.GONE);
+        }else if (i == R.id.proceed){
+            if(ramTimed==false){
+                String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+                ContactModel baseContactModel = new ContactModel();
+                Contact quickCheck = new Contact();
+                JSONObject form = baseContactModel.getFormAsJson(quickCheck.getFormName(), baseEntityId, locationId);
+                if(form.optString("encounter_type").equals("Rapid Assessment and Management")) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        Instant endRam = Instant.now();
+
+                        Duration timeElapsedRam = Duration.between(Utils.startRam, endRam);
+
+                        JSONObject durRam = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_ram");
+
+                        durRam.put(JsonFormUtils.VALUE, timeElapsedRam);
+
+                        ramTimed = true;
+                        System.out.println("Time taken: " + timeElapsedRam.toMillis() + " milliseconds");
+                    }
+                }
+            }
         }
     }
 

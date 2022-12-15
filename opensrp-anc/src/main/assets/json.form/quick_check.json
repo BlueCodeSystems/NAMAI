@@ -1359,6 +1359,13 @@
         }
       },
       {
+        "key": "time_ram",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "time_ram",
+        "type": "edit_text"
+      },
+      {
         "key": "accordion_feedback",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",

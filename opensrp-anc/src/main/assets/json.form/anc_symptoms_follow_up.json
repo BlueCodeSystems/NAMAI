@@ -608,6 +608,13 @@
             }
           }
         }
+      },
+      {
+        "key": "time_symptoms",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "time_symptoms",
+        "type": "edit_text"
       }
     ]
   },

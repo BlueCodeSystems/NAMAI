@@ -37,6 +37,8 @@ import java.util.List;
 import java.util.Map;
 
 import timber.log.Timber;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ContactVisit {
     private Map<String, String> details;

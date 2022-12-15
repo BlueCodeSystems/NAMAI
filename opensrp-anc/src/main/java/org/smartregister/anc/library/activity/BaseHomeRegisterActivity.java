@@ -56,6 +56,8 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -255,6 +257,8 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                             PatientRepository
                                     .updateContactVisitStartDate(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID),
                                             Utils.getDBDateToday());
+
+                            Date currentTime = Calendar.getInstance().getTime();
                             break;
                         default:
                             break;

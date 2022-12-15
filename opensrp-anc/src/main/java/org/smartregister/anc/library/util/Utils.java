@@ -92,6 +92,10 @@ import java.util.Map;
 
 import timber.log.Timber;
 
+
+import java.time.Duration;
+import java.time.Instant;
+
 /**
  * Created by ndegwamartin on 14/03/2018.
  */
@@ -106,6 +110,8 @@ public class Utils extends org.smartregister.util.Utils {
     public static final String HOME_ADDRESS = "Home Address";
     private static final DateTimeFormatter SQLITE_DATE_DF = DateTimeFormat.forPattern(ConstantsUtils.SQLITE_DATE_TIME_FORMAT);
     private static final String OTHER_SUFFIX = ", other]";
+    public static Instant startRam = null;
+    //public static int endRamVal = 0;
 
     static {
         ALLOWED_LEVELS = new ArrayList<>();
@@ -239,6 +245,12 @@ public class Utils extends org.smartregister.util.Utils {
                 JSONObject smNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"register_id");
                 smNumber.put(JsonFormUtils.VALUE, personObjectClient.get("register_id"));
                 ccname.put(JsonFormUtils.VALUE, name);
+
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    startRam = Instant.now();
+                }
+//                Date currentTimeRamStart = Calendar.getInstance().getTime();
             }
 
 
