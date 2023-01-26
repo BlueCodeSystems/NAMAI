@@ -1,13 +1,13 @@
 package org.smartregister.anc.library.activity;
 
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -18,10 +18,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
 import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
+import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.PreviousContact;
 import org.smartregister.anc.library.presenter.ContactPresenter;
@@ -32,12 +34,13 @@ import org.smartregister.anc.library.util.ConstantsUtils;
 import org.smartregister.anc.library.util.DBConstantsUtils;
 import org.smartregister.anc.library.util.FilePathUtils;
 import org.smartregister.anc.library.util.Utils;
-import org.smartregister.util.FormUtils;
-import org.smartregister.view.contract.MeContract;
+import org.smartregister.util.JsonFormUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -48,10 +51,6 @@ import java.util.Map;
 import java.util.Set;
 
 import timber.log.Timber;
-import android.widget.CompoundButton;
-import android.widget.Toast;
-
-import java.util.UUID;
 
 
 public class MainContactActivity extends BaseContactActivity implements ContactContract.View {
@@ -72,12 +71,39 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP, ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM,
             ConstantsUtils.JsonFormUtils.ANC_TEST, ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT, ConstantsUtils.JsonFormUtils.ANC_TEST_TASKS};
     private String formInvalidFields = null;
+    /*    public List<Contact> contacts = new ArrayList<>();
+        TextView requiredFields, requiredFields2, requiredFields3, requiredFields4, requiredFields5, requiredFields6, requiredFieldsx;
+        LinearLayout completeLayout, completeLayout2, completeLayout3, completeLayout4,
+                completeLayout5, completeLayout6, completeLayoutx, mainlayout, middleLayout;*/
     public List<Contact> contacts = new ArrayList<>();
-    TextView requiredFields, requiredFields2, requiredFields3, requiredFields4, requiredFields5, requiredFields6, requiredFieldsx;
-    LinearLayout completeLayout, completeLayout2, completeLayout3, completeLayout4,
-            completeLayout5, completeLayout6, completeLayoutx, mainlayout, middleLayout;
+    public TextView requiredFields;
+    public static TextView requiredFields2;
+    public TextView requiredFields3;
+    public static TextView requiredFields4;
+    public static TextView requiredFields5;
+    public static TextView requiredFields6;
+    public TextView requiredFieldsx;
+    public LinearLayout completeLayout;
+    public static LinearLayout completeLayout2;
+    public LinearLayout completeLayout3;
+    public static LinearLayout completeLayout4;
+    public static LinearLayout completeLayout5;
+    public static LinearLayout completeLayout6;
+    public LinearLayout completeLayoutx;
+    public LinearLayout mainlayout;
+    public LinearLayout middleLayout;
     Button finalizeBtn;
-
+    public static Boolean ramTimed = false;
+    public static Boolean phyTimed = false;
+    public static Boolean proTimed = false;
+    public static Boolean tesTimed = false;
+    public static Boolean couTimed = false;
+    public static Boolean symTimed = false;
+    public static Instant startProfile;
+    public static Instant startSymptoms;
+    public static Instant startPhysical;
+    public static Instant startTests;
+    public static Instant startCounselling;
 
     @Override
     protected void onResume() {
@@ -96,12 +122,17 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
         initializeMainContactContainers();
         initializeContactLayout();
-        setFields(contacts);
+        try {
+            setFields(contacts);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         int finished = getRequiredCountTotal();
 
         //if (finished == 0) {
-            finalizeBtn.setEnabled(true);
+        finalizeBtn.setEnabled(true);
         //}
+
 
     }
 
@@ -122,6 +153,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                     requiredFieldsMap.put(pair[0], Integer.parseInt(pair[1]));
             }
 
+
             /*-- 1: RAM Quick Check Container --*/
 
             Contact quickCheck = new Contact();
@@ -135,6 +167,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             setRequiredFields(quickCheck);
             quickCheck.setFormName(ConstantsUtils.JsonFormUtils.ANC_QUICK_CHECK);
             contacts.add(quickCheck);
+
 
             /*-- 2: Client Profile Container --*/
 
@@ -183,7 +216,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             contacts.add(tests);
 
 
-            /*-- Counselling Container --*/
+            /*-- 6: Counselling Container --*/
 
             Contact counsellingAndTreatment = new Contact();
             counsellingAndTreatment.setName(getString(R.string.counselling_treatment));
@@ -196,11 +229,16 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             contacts.add(counsellingAndTreatment);
 
 
+
+            Utils.ramTime(quickCheck);
+
+
         } catch (Exception e) {
             Timber.e(e, " --> initializeMainContactContainers");
         }
 
     }
+
 
     public void initializeContactLayout(){
         requiredFields = findViewById(R.id.required_fields);
@@ -225,7 +263,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
 
 
-        public void setFields(List<Contact> contacts){
+    public void setFields(List<Contact> contacts) throws Exception {
 
         Contact contact1 = contacts.get(0);
         Contact contact2 = contacts.get(1);
@@ -234,137 +272,160 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         Contact contact5 = contacts.get(4);
         Contact contact6 = contacts.get(5);
 
-            if (contact1.getRequiredFields() == null) {
-                requiredFields.setVisibility(View.GONE);
-                completeLayout.setVisibility(View.GONE);
-            } else if (contact1.getRequiredFields() == 0) {
-                completeLayout.setVisibility(View.VISIBLE);
-                requiredFields.setVisibility(View.GONE);
-            } else {
-                requiredFields.setText(String.format(this.getString(R.string.required_fields), contact1.getRequiredFields()));
-                requiredFields.setVisibility(View.VISIBLE);
-                completeLayout.setVisibility(View.GONE);
+        if (contact1.getRequiredFields() == null) {
+            requiredFields.setVisibility(View.GONE);
+            completeLayout.setVisibility(View.GONE);
+        } else if (contact1.getRequiredFields() == 0) {
+            completeLayout.setVisibility(View.VISIBLE);
+            requiredFields.setVisibility(View.GONE);
+        } else {
+            requiredFields.setText(String.format(this.getString(R.string.required_fields), contact1.getRequiredFields()));
+            requiredFields.setVisibility(View.VISIBLE);
+            completeLayout.setVisibility(View.GONE);
+        }
+
+        if (contact2.getRequiredFields() == null) {
+            requiredFields2.setVisibility(View.GONE);
+            completeLayout2.setVisibility(View.GONE);
+        } else if (contact2.getRequiredFields() == 0) {
+            Utils.profileTime(contact2);
+            completeLayout2.setVisibility(View.VISIBLE);
+            requiredFields2.setVisibility(View.GONE);
+        } else {
+            requiredFields2.setText(String.format(this.getString(R.string.required_fields), contact2.getRequiredFields()));
+            requiredFields2.setVisibility(View.VISIBLE);
+            completeLayout2.setVisibility(View.GONE);
+        }
+
+        if (contact3.getRequiredFields() == null) {
+            requiredFields3.setVisibility(View.GONE);
+            completeLayout3.setVisibility(View.GONE);
+        } else if (contact3.getRequiredFields() == 0) {
+            Utils.symptomsTime(contact3);
+            completeLayout3.setVisibility(View.VISIBLE);
+            requiredFields3.setVisibility(View.GONE);
+            //runContact3 = true;
+        } else {
+            requiredFields3.setText(String.format(this.getString(R.string.required_fields), contact3.getRequiredFields()));
+            requiredFields3.setVisibility(View.VISIBLE);
+            completeLayout3.setVisibility(View.GONE);
+        }
+
+        if (contact4.getRequiredFields() == null) {
+            requiredFields4.setVisibility(View.GONE);
+            completeLayout4.setVisibility(View.GONE);
+        } else if (contact4.getRequiredFields() == 0) {
+            Utils.physicalTime(contact4);
+            completeLayout4.setVisibility(View.VISIBLE);
+            requiredFields4.setVisibility(View.GONE);
+            //runContact4 = true;
+        } else {
+            requiredFields4.setText(String.format(this.getString(R.string.required_fields), contact4.getRequiredFields()));
+            requiredFields4.setVisibility(View.VISIBLE);
+            completeLayout4.setVisibility(View.GONE);
+        }
+
+        if (contact5.getRequiredFields() == null) {
+            requiredFields5.setVisibility(View.GONE);
+            completeLayout5.setVisibility(View.GONE);
+        } else if (contact5.getRequiredFields() == 0) {
+            Utils.testsTime(contact5);
+            completeLayout5.setVisibility(View.VISIBLE);
+            requiredFields5.setVisibility(View.GONE);
+        } else {
+            requiredFields5.setText(String.format(this.getString(R.string.required_fields), contact5.getRequiredFields()));
+            requiredFields5.setVisibility(View.VISIBLE);
+            completeLayout5.setVisibility(View.GONE);
+        }
+
+        if (contact6.getRequiredFields() == null) {
+            requiredFields6.setVisibility(View.GONE);
+            completeLayout6.setVisibility(View.GONE);
+        } else if (contact6.getRequiredFields() == 0) {
+            Utils.counsellingTime(contact6);
+            completeLayout6.setVisibility(View.VISIBLE);
+            requiredFields6.setVisibility(View.GONE);
+            //runContact6 = true;
+        } else {
+            requiredFields6.setText(String.format(this.getString(R.string.required_fields), contact6.getRequiredFields()));
+            requiredFields6.setVisibility(View.VISIBLE);
+            completeLayout6.setVisibility(View.GONE);
+        }
+
+        if ((contact3.getRequiredFields() == null) && (contact4.getRequiredFields() == null) ) {
+            requiredFieldsx.setVisibility(View.GONE);
+            completeLayoutx.setVisibility(View.GONE);
+        } else {
+
+            int c3 = 0;
+            int c4 = 0;
+            boolean phys = false;
+            boolean symp = false;
+            boolean rac = false;
+
+            if (contact3.getRequiredFields() != null) {
+                c3 = contact3.getRequiredFields();
+                symp = true;
             }
 
-            if (contact2.getRequiredFields() == null) {
-                requiredFields2.setVisibility(View.GONE);
-                completeLayout2.setVisibility(View.GONE);
-            } else if (contact2.getRequiredFields() == 0) {
-                completeLayout2.setVisibility(View.VISIBLE);
-                requiredFields2.setVisibility(View.GONE);
-            } else {
-                requiredFields2.setText(String.format(this.getString(R.string.required_fields), contact2.getRequiredFields()));
-                requiredFields2.setVisibility(View.VISIBLE);
-                completeLayout2.setVisibility(View.GONE);
+            if (contact4.getRequiredFields() != null) {
+                c4 = contact4.getRequiredFields();
+                phys = true;
             }
 
-            if (contact3.getRequiredFields() == null) {
-                requiredFields3.setVisibility(View.GONE);
-                completeLayout3.setVisibility(View.GONE);
-            } else if (contact3.getRequiredFields() == 0) {
-                completeLayout3.setVisibility(View.VISIBLE);
-                requiredFields3.setVisibility(View.GONE);
-            } else {
-                requiredFields3.setText(String.format(this.getString(R.string.required_fields), contact3.getRequiredFields()));
-                requiredFields3.setVisibility(View.VISIBLE);
-                completeLayout3.setVisibility(View.GONE);
+            if((phys == true)&&(symp == true))
+            {
+                rac = true;
             }
 
-            if (contact4.getRequiredFields() == null) {
-                requiredFields4.setVisibility(View.GONE);
-                completeLayout4.setVisibility(View.GONE);
-            } else if (contact4.getRequiredFields() == 0) {
-                completeLayout4.setVisibility(View.VISIBLE);
-                requiredFields4.setVisibility(View.GONE);
-            } else {
-                requiredFields4.setText(String.format(this.getString(R.string.required_fields), contact4.getRequiredFields()));
-                requiredFields4.setVisibility(View.VISIBLE);
-                completeLayout4.setVisibility(View.GONE);
-            }
+            int fc = c3 + c4;
 
-            if (contact5.getRequiredFields() == null) {
-                requiredFields5.setVisibility(View.GONE);
-                completeLayout5.setVisibility(View.GONE);
-            } else if (contact5.getRequiredFields() == 0) {
-                completeLayout5.setVisibility(View.VISIBLE);
-                requiredFields5.setVisibility(View.GONE);
-            } else {
-                requiredFields5.setText(String.format(this.getString(R.string.required_fields), contact5.getRequiredFields()));
-                requiredFields5.setVisibility(View.VISIBLE);
-                completeLayout5.setVisibility(View.GONE);
-            }
-
-            if (contact6.getRequiredFields() == null) {
-                requiredFields6.setVisibility(View.GONE);
-                completeLayout6.setVisibility(View.GONE);
-            } else if (contact6.getRequiredFields() == 0) {
-                completeLayout6.setVisibility(View.VISIBLE);
-                requiredFields6.setVisibility(View.GONE);
-            } else {
-                requiredFields6.setText(String.format(this.getString(R.string.required_fields), contact6.getRequiredFields()));
-                requiredFields6.setVisibility(View.VISIBLE);
-                completeLayout6.setVisibility(View.GONE);
-            }
-
-            if ((contact3.getRequiredFields() == null) && (contact4.getRequiredFields() == null) ) {
+            if((fc == 0) && (rac == true)){
                 requiredFieldsx.setVisibility(View.GONE);
-                completeLayoutx.setVisibility(View.GONE);
+                completeLayoutx.setVisibility(View.VISIBLE);
             } else {
-
-                int c3 = 0;
-                int c4 = 0;
-                boolean phys = false;
-                boolean symp = false;
-                boolean rac = false;
-
-                if (contact3.getRequiredFields() != null) {
-                    c3 = contact3.getRequiredFields();
-                    symp = true;
-                }
-
-                if (contact4.getRequiredFields() != null) {
-                    c4 = contact4.getRequiredFields();
-                    phys = true;
-                }
-
-                if((phys == true)&&(symp == true))
-                {
-                    rac = true;
-                }
-
-                int fc = c3 + c4;
-
-                if((fc == 0) && (rac == true)){
-                    requiredFieldsx.setVisibility(View.GONE);
-                    completeLayoutx.setVisibility(View.VISIBLE);
-                } else {
-                    requiredFieldsx.setText(String.format(this.getString(R.string.required_fields), fc));
-                    requiredFieldsx.setVisibility(View.VISIBLE);
-                    completeLayoutx.setVisibility(View.GONE);
-                    mainlayout.setVisibility(View.GONE);
-                    middleLayout.setVisibility(View.VISIBLE);
-                }
-
+                requiredFieldsx.setText(String.format(this.getString(R.string.required_fields), fc));
+                requiredFieldsx.setVisibility(View.VISIBLE);
+                completeLayoutx.setVisibility(View.GONE);
+                mainlayout.setVisibility(View.GONE);
+                middleLayout.setVisibility(View.VISIBLE);
             }
-
 
         }
 
-    public void clickme(View v) {
+
+    }
+
+    public void clickme(View v) throws Exception {
 
         int i = v.getId();
         if (i == R.id.ram) {
             presenter.startForm(contacts.get(0));
         } else if (i == R.id.profile){
             presenter.startForm(contacts.get(1));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startProfile = Instant.now();
+            }
         } else if (i == R.id.symptoms){
             presenter.startForm(contacts.get(2));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startSymptoms = Instant.now();
+            }
         } else if (i == R.id.exam){
             presenter.startForm(contacts.get(3));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startPhysical = Instant.now();
+            }
         }else if (i == R.id.imaging){
             presenter.startForm(contacts.get(4));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startTests = Instant.now();
+            }
         }else if (i == R.id.counselling){
             presenter.startForm(contacts.get(5));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startCounselling = Instant.now();
+            }
         } else if (i == R.id.routine){
             mainlayout.setVisibility(View.GONE);
             middleLayout.setVisibility(View.VISIBLE);
@@ -500,7 +561,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                 requiredFieldsMap.put(object.getString(ConstantsUtils.JsonFormKeyUtils.ENCOUNTER_TYPE), 0);
             }
             if (contactNo > 1 && ConstantsUtils.JsonFormUtils.ANC_PROFILE_ENCOUNTER_TYPE.equals(encounterType)
-            && !PatientRepository.isFirstVisit(baseEntityId)) {
+                    && !PatientRepository.isFirstVisit(baseEntityId)) {
                 requiredFieldsMap.put(ConstantsUtils.JsonFormUtils.ANC_PROFILE_ENCOUNTER_TYPE, 0);
             }
 

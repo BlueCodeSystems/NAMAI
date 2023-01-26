@@ -280,4 +280,4 @@ description: discordant_out
 priority: 1
 condition: "step11_discordant_set != null"
 actions:
-  - "calculation = step8_discordant_set"
+  - "calculation = step11_discordant_set"
