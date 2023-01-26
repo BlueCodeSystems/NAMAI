@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
 
+import static org.smartregister.anc.library.activity.MainContactActivity.symTimed;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -54,6 +56,7 @@ import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.BaseHomeRegisterActivity;
 import org.smartregister.anc.library.activity.ContactJsonFormActivity;
 import org.smartregister.anc.library.activity.ContactSummaryFinishActivity;
+import org.smartregister.anc.library.activity.MainContactActivity;
 import org.smartregister.anc.library.constants.AncAppPropertyConstants;
 import org.smartregister.anc.library.domain.ButtonAlertStatus;
 import org.smartregister.anc.library.domain.Contact;
@@ -111,6 +114,11 @@ public class Utils extends org.smartregister.util.Utils {
     private static final DateTimeFormatter SQLITE_DATE_DF = DateTimeFormat.forPattern(ConstantsUtils.SQLITE_DATE_TIME_FORMAT);
     private static final String OTHER_SUFFIX = ", other]";
     public static Instant startRam = null;
+    public static String baseEntityId;
+    static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+    static ContactModel baseContactModel = new ContactModel();
+
     //public static int endRamVal = 0;
 
     static {
@@ -228,9 +236,6 @@ public class Utils extends org.smartregister.util.Utils {
             partialContactRequest.setContactNo(quickCheck.getContactNumber());
             partialContactRequest.setType(quickCheck.getFormName());
 
-            String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
-
-            ContactModel baseContactModel = new ContactModel();
             JSONObject form = baseContactModel.getFormAsJson(quickCheck.getFormName(), baseEntityId, locationId);
 
             if (ConstantsUtils.DueCheckStrategy.CHECK_FOR_FIRST_CONTACT.equals(Utils.getDueCheckStrategy())) {
@@ -245,7 +250,6 @@ public class Utils extends org.smartregister.util.Utils {
                 JSONObject smNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"register_id");
                 smNumber.put(JsonFormUtils.VALUE, personObjectClient.get("register_id"));
                 ccname.put(JsonFormUtils.VALUE, name);
-
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     startRam = Instant.now();
@@ -285,6 +289,136 @@ public class Utils extends org.smartregister.util.Utils {
         }
     }
 
+
+    public static void profileTime(Contact contact2) throws Exception {
+        if(MainContactActivity.proTimed==false) {
+            JSONObject form = baseContactModel.getFormAsJson(contact2.getFormName(), baseEntityId, locationId);
+
+
+            if (form.optString("encounter_type").equals("Client profile")) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                    Instant endProfile = Instant.now();
+
+                    Duration timeElapsedProfile = Duration.between(MainContactActivity.startProfile, endProfile);
+
+                    JSONObject durPro = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_profile");
+
+                    durPro.put(JsonFormUtils.VALUE, timeElapsedProfile.toString());
+
+                    MainContactActivity.proTimed = true;
+                    System.out.println("Time taken: " + timeElapsedProfile.toMillis() + " milliseconds");
+                }
+            }
+        }
+    }
+
+    public static void physicalTime(Contact contact4) throws Exception {
+        if(MainContactActivity.phyTimed==false)
+        {
+            JSONObject form = baseContactModel.getFormAsJson(contact4.getFormName(), baseEntityId, locationId);
+            if(form.optString("encounter_type").equals("Physical Exam")) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                    Instant endPhysical = Instant.now();
+
+                    Duration timeElapsedPhysical = Duration.between(MainContactActivity.startPhysical, endPhysical);
+
+                    JSONObject durPhy = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_physical");
+
+                    durPhy.put(JsonFormUtils.VALUE, timeElapsedPhysical.toString());
+
+                    MainContactActivity.phyTimed = true;
+                    System.out.println("Time taken: " + timeElapsedPhysical.toMillis() + " milliseconds");
+                }
+            }
+        }
+    }
+
+    public static void counsellingTime(Contact contact6) throws Exception {
+        if(MainContactActivity.couTimed==false) {
+            JSONObject form = baseContactModel.getFormAsJson(contact6.getFormName(), baseEntityId, locationId);
+            if (form.optString("encounter_type").equals("Counselling, Preventive Therapy and Treatment")) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                    Instant endCounselling = Instant.now();
+
+                    Duration timeElapsedCounselling = Duration.between(MainContactActivity.startCounselling, endCounselling);
+
+                    JSONObject durCou = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_counselling");
+
+                    durCou.put(JsonFormUtils.VALUE, timeElapsedCounselling.toString());
+
+                    MainContactActivity.couTimed = true;
+                    System.out.println("Time taken: " + timeElapsedCounselling.toMillis() + " milliseconds");
+                }
+            }
+        }
+    }
+
+    public static void testsTime(Contact contact5) throws Exception {
+        if(MainContactActivity.tesTimed==false) {
+            JSONObject form = baseContactModel.getFormAsJson(contact5.getFormName(), baseEntityId, locationId);
+            if (form.optString("encounter_type").equals("Diagnostic Tests and Imaging")) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                    Instant endTests = Instant.now();
+
+                    Duration timeElapsedTests = Duration.between(MainContactActivity.startTests, endTests);
+
+                    JSONObject durTes = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_tests");
+
+                    durTes.put(JsonFormUtils.VALUE, timeElapsedTests.toString());
+
+                    MainContactActivity.tesTimed = true;
+                    System.out.println("Time taken: " + timeElapsedTests.toMillis() + " milliseconds");
+                }
+            }
+        }
+    }
+
+    public static void symptomsTime(Contact contact3) throws Exception {
+        if(MainContactActivity.symTimed==false)
+        {
+            JSONObject form = baseContactModel.getFormAsJson(contact3.getFormName(), baseEntityId, locationId);
+            if(form.optString("encounter_type").equals("Symptoms and Signs")) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                    Instant endSymptoms = Instant.now();
+
+                    Duration timeElapsedSymptoms = Duration.between(MainContactActivity.startSymptoms, endSymptoms);
+
+                    JSONObject durSym = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_symptoms");
+
+                    durSym.put(JsonFormUtils.VALUE, timeElapsedSymptoms.toString());
+
+                    symTimed = true;
+                    System.out.println("Time taken: " + timeElapsedSymptoms.toMillis() + " milliseconds");
+                }
+            }
+        }
+    }
+
+    public static void ramTime(Contact quickCheck) throws Exception {
+        if(MainContactActivity.ramTimed == false) {
+            JSONObject form = baseContactModel.getFormAsJson(quickCheck.getFormName(), baseEntityId, locationId);
+
+            if (form.optString("encounter_type").equals("Rapid Assessment and Management")) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    Instant endRam = Instant.now();
+
+                    Duration timeElapsedRam = Duration.between(Utils.startRam, endRam);
+
+                    JSONObject durRam = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_ram");
+
+                    durRam.put(JsonFormUtils.VALUE, timeElapsedRam.toString());
+
+                    MainContactActivity.ramTimed = true;
+                    System.out.println("Time taken: " + timeElapsedRam.toMillis() + " milliseconds");
+                }
+            }
+        }
+    }
     /**
      * Checks the pending required fields on the json forms and returns true|false
      *
@@ -948,7 +1082,7 @@ public class Utils extends org.smartregister.util.Utils {
     }
 
     /**
-     * @param receives iterated keys and values and passes them through translation in nativeform
+     * @param //receives iterated keys and values and passes them through translation in nativeform
      *                 to return a string. It checks whether the value is an array, a json object or a normal string separated by ,
      * @return
      */

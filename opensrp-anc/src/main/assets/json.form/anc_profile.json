@@ -104,7 +104,8 @@
     "hepatitis_immun_status",
     "tb_screening_history",
     "tobacco_user_sniffing",
-    "hiv_test_result"
+    "hiv_test_result",
+    "time_profile"
   ],
   "default_values": [
     "discordant_out",
@@ -3132,9 +3133,9 @@
     ]
   },
   "step3": {
-  "title": "Obstetric history (Continued...)",
-  "next": "step4",
-  "fields": [
+    "title": "Obstetric history (Continued...)",
+    "next": "step4",
+    "fields": [
       {
         "key": "preg_five_label",
         "type": "label",
@@ -4903,7 +4904,7 @@
           }
         }
       }
-  ]
+    ]
   },
   "step4": {
     "title": "Obstetric history (continued...)",
