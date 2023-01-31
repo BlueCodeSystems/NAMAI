@@ -137,7 +137,7 @@
         "err": "{{pelvic_exam_sub_form.step1.pelvic_exam_abnormal_other.v_regex.err}}"
       },
       "relevance": {
-        "step3:pelvic_exam_abnormal": {
+        "step4:pelvic_exam_abnormal": {
           "ex-checkbox": [
             {
               "or": [
