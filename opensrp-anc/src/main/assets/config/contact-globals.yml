@@ -95,7 +95,6 @@ fields:
   - "other_symptoms"
   - "gravida"
   - "parity"
-  - "danger_signs_value"
   - "gest_age"
   - "gest_age_openmrs"
   - "iptp_sp1"

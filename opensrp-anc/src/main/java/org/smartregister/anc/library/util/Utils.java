@@ -1058,12 +1058,12 @@ public class Utils extends org.smartregister.util.Utils {
             JSONArray options = jsonObject.getJSONArray(JsonFormConstants.OPTIONS_FIELD_NAME);
             JSONObject selectedOption = formUtils.getOptionFromOptionsUsingKey(options, value);
             newValue.put(JsonFormConstants.VALUE, value);
-            String text = selectedOption.optString(JsonFormConstants.TRANSLATION_TEXT, "").length() != 0 ? selectedOption.optString(JsonFormConstants.TEXT, "") : selectedOption.optString(JsonFormConstants.KEY, "");
+            String text = selectedOption.optString(JsonFormConstants.TEXT, "").length() != 0 ? selectedOption.optString(JsonFormConstants.TEXT, "") : selectedOption.optString(JsonFormConstants.KEY, "");
             newValue.put(JsonFormConstants.TEXT, text);
             return newValue;
         }
         newValue.put(JsonFormConstants.VALUE, value);
-        newValue.put(JsonFormConstants.TEXT, jsonObject.optString(JsonFormConstants.TRANSLATION_TEXT, ""));
+        newValue.put(JsonFormConstants.TEXT, jsonObject.optString(JsonFormConstants.TEXT, ""));
         return newValue;
     }
 

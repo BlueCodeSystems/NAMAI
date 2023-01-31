@@ -181,7 +181,7 @@ public class ANCFormUtils extends FormUtils {
                         getRealSecondaryValue(jsonObject);
                     } else {
                         if (StringUtils.isNotBlank(value) && Boolean.parseBoolean(value)) {
-                            String text = jsonObject.optString(JsonFormConstants.TRANSLATION_TEXT);
+                            String text = jsonObject.optString(JsonFormConstants.TEXT);
                             valueList.add(text);
                         } else {
                             valueList.add(jsonObject.optString(JsonFormConstants.TEXT, ""));
@@ -548,7 +548,7 @@ public class ANCFormUtils extends FormUtils {
         }
     }
 
-
+/*
     @SuppressLint("NewApi")
     static String cleanValue(String value) {
         String returnValue = "";
@@ -576,6 +576,15 @@ public class ANCFormUtils extends FormUtils {
         } catch (Exception e) {
             Timber.e(e, "Clean Value in ANCFormUtils");
             return "";
+        }
+
+    }*/
+
+    public static String cleanValue(String value) {
+        if (value.length() > 0 && value.charAt(0) == '[') {
+            return value.substring(1, value.length() - 1);
+        } else {
+            return value;
         }
 
     }
