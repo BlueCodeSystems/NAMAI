@@ -18,16 +18,16 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'org.smartregister.gradle.jarjar'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.firebase.firebase-perf'
-
+//classpath 'com.android.tools.build:gradle:4.2.2'
 jacoco {
     toolVersion = jacocoVersion
 }
 // This variables are used by the version code & name generators
 ext.versionMajor = 1
-ext.versionMinor = 6
-ext.versionPatch = 11
-ext.versionClassifier = null
-ext.isSnapshot = false
+ext.versionMinor = 0
+ext.versionPatch = 0
+ext.versionClassifier =
+        ext.isSnapshot = false
 ext.minimumSdkVersion = androidMinSdkVersion
 
 android {
@@ -143,7 +143,7 @@ android {
             minifyEnabled false
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
-            resValue "string", 'opensrp_url', '"https://anc.labs.smartregister.org/opensrp/"'
+            resValue "string", 'opensrp_url', '"https://opensrp.who.bluecodeltd.com/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -288,12 +288,12 @@ private Integer generateVersionCode() {
  * @return version name
  */
 private String generateVersionName() {
-    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+    String versionName = "who_anc_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta8"
     if (ext.versionClassifier == null && ext.isSnapshot) {
         ext.versionClassifier = "SNAPSHOT"
     }
 
-    if (ext.versionClassifier != null) {
+    if (ext.versionClassifier != null && ext.isSnapshot != false) {
         versionName += "-" + ext.versionClassifier
     }
     return versionName;
@@ -308,7 +308,7 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     def powerMockVersion = '2.0.7'
     implementation project(":opensrp-anc")
-    implementation('org.smartregister:opensrp-client-native-form:2.1.11-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-native-form:2.1.19-RADIO-BUTTONS-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'recyclerview-v7'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -336,14 +336,15 @@ dependencies {
         exclude group: 'org.smartregister', module: 'android-p2p-sync'
     }
 
-    implementation (project(":p2p-sync")) {
-//    api("org.smartregister:android-p2p-sync:0.3.8-aplha4-SNAPSHOT") {
-        transitive = true
-        exclude group: 'org.smartregister', module: 'opensrp-client-core'
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
-        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
-        exclude group: 'com.rengwuxian.materialedittext', module: 'library'
+    api("org.smartregister:android-p2p-sync:0.3.7-SNAPSHOT"){
+        api("org.smartregister:android-p2p-sync:0.3.7-SNAPSHOT") {
+            transitive = true
+            exclude group: 'org.smartregister', module: 'opensrp-client-core'
+            exclude group: 'com.android.support', module: 'appcompat-v7'
+            exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+            exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+            exclude group: 'com.rengwuxian.materialedittext', module: 'library'
+        }
     }
     implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
 
@@ -409,6 +410,7 @@ dependencies {
     testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
     testImplementation('com.squareup:fest-android:1.0.8') {
         exclude module: 'support-v4'
+        exclude group: 'com.google.firebase', module: 'firebase-perf'
     }
 // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
@@ -446,7 +448,9 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
 }
 
 
-jarJar {
-    // Dependencies and related JarJar rules
-    remove = ['fhir-model-4.8.3.jar': 'com.ibm.fhir.model.visitor.CopyingVisitor*']
-}
+/*
+    jarJar {
+        // Dependencies and related JarJar rules
+        remove = ['fhir-model-4.8.3.jar': 'com.ibm.fhir.model.visitor.CopyingVisitor*']
+    }
+}*/

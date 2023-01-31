@@ -45,7 +45,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_status.v_required.err}}"
+        "err": "TB screening status is required"
       }
     },
     {
@@ -55,93 +55,6 @@
       "openmrs_entity_id": "spacer",
       "type": "spacer",
       "spacer_height": "10dp"
-    },
-    {
-      "key": "tb_test_notdone",
-      "openmrs_entity_parent": "164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "165182AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "check_box",
-      "label": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.label}}",
-      "label_text_style": "bold",
-      "options": [
-        {
-          "key": "sputum_smear",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.sputum_smear.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "165401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "sputum_culture",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.sputum_culture.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "165402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "genexpert_machine",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.genexpert_machine.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "165403AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "no_sputum_supplies",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.no_sputum_supplies.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "165183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "machine_not_functioning",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.machine_not_functioning.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "165179AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "technician_not_available",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.technician_not_available.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "165400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "other",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.options.other.text}}",
-          "openmrs_entity_parent": "164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        }
-      ],
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
-          }
-        }
-      },
-      "v_required": {
-        "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.v_required.err}}"
-      }
-    },
-    {
-      "key": "tb_test_notdone_other",
-      "openmrs_entity_parent": "164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "openmrs_entity": "concept",
-      "openmrs_entity_id": "165435AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "type": "edit_text",
-      "hint": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone_other.hint}}",
-      "edit_type": "name",
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
-          }
-        }
-      }
     },
     {
       "openmrs_entity_parent": "",
@@ -165,7 +78,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "{{tests_tb_screening_sub_form.step1.tb_screening_date.hint}}",
+      "hint": "TB test date",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
@@ -184,45 +97,31 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_date.v_required.err}}"
+        "err": "Please record the date TB screening was done"
       }
     },
     {
-      "key": "tb_test_result",
+      "key": "tb_test_type",
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",
-      "openmrs_entity_id": "160108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity_id": "165422AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_tb_screening_sub_form.step1.tb_screening_result.label}}",
+      "label": "TB test type",
       "label_text_style": "bold",
       "options": [
         {
-          "key": "positive",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.positive.text}}",
+          "key": "Gene_Xpert",
+          "text": "Sputum for Gene Xpert MTB/RIF",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
-          "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          "openmrs_entity_id": "Gene_Xpert"
         },
         {
-          "key": "negative",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.negative.text}}",
+          "key": "microscopy",
+          "text": "Sputum microscopy for AAFB",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
-          "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "inconclusive",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.inconclusive.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        {
-          "key": "incomplete",
-          "text": "{{tests_tb_screening_sub_form.step1.tb_screening_result.options.incomplete.text}}",
-          "openmrs_entity_parent": "",
-          "openmrs_entity": "concept",
-          "openmrs_entity_id": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          "openmrs_entity_id": "microscopy"
         }
       ],
       "relevance": {
@@ -234,7 +133,171 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_tb_screening_sub_form.step1.tb_screening_result.v_required.err}}"
+        "err": "please enter value"
+      }
+    },
+    {
+      "key": "Sputum_result",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "Sputum_result",
+      "type": "native_radio",
+      "label": " Sputum for Gene Xpert MTB/RIF result",
+      "label_text_style": "bold",
+      "options": [
+        {
+          "key": "mtb_not",
+          "text": "MTB not detected",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "mtb_not"
+        },
+        {
+          "key": "mtb_sensitive",
+          "text": "MTB detected; R sensitive",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "mtb_sensitive"
+        },
+        {
+          "key": "mtb_resistant",
+          "text": "MTB detected; R resistant",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "mtb_resistant"
+        }
+      ],
+      "relevance": {
+        "step1:tb_test_type": {
+          "type": "string",
+          "ex": "equalTo(., \"Gene_Xpert\")"
+        }
+      },
+      "v_required": {
+        "value": true,
+        "err": "please enter value"
+      }
+    },
+    {
+      "key": "tb_test_notdone",
+      "openmrs_entity_parent": "164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "165182AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "type": "check_box",
+      "label": "Reason",
+      "label_text_style": "bold",
+      "options": [
+        {
+          "key": "sputum_smear",
+          "text": "Sputum smear not available",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "sputum_culture",
+          "text": "Sputum culture not available",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "genexpert_machine",
+          "text": "GeneXpert machine not available",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165403AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "no_sputum_supplies",
+          "text": "No sputum supplies available",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "machine_not_functioning",
+          "text": "Machine not functioning",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165179AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "technician_not_available",
+          "text": "Technician not available",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "165400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "other",
+          "text": "Other (specify)",
+          "openmrs_entity_parent": "164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ],
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      },
+      "v_required": {
+        "value": true,
+        "err": "Reason why tb screen was not done is required"
+      }
+    },
+    {
+      "key": "tb_test_notdone_other",
+      "openmrs_entity_parent": "164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "165435AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "type": "edit_text",
+      "hint": "Specify",
+      "edit_type": "name",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      }
+    },
+    {
+      "key": "tb_test_result",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "160108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "type": "native_radio",
+      "label": "Sputum microscopy for AAFB result",
+      "label_text_style": "bold",
+      "options": [
+        {
+          "key": "positive",
+          "text": "Smear positive",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        {
+          "key": "negative",
+          "text": "Smear negative",
+          "openmrs_entity_parent": "",
+          "openmrs_entity": "concept",
+          "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ],
+      "relevance": {
+        "step1:tb_test_type": {
+          "type": "string",
+          "ex": "equalTo(., \"microscopy\")"
+        }
+      },
+      "v_required": {
+        "value": true,
+        "err": "Tb screen result is required"
       }
     },
     {
@@ -243,15 +306,49 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.text}}",
-      "toaster_info_text": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_text}}",
-      "toaster_info_title": "{{tests_tb_screening_sub_form.step1.tb_screening_danger_toaster.toaster_info_title}}",
+      "text": "TB screening positive.",
+      "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
+      "toaster_info_title": "TB screening positive.",
       "toaster_type": "problem",
       "relevance": {
         "rules-engine": {
           "ex-rules": {
             "rules-file": "tests_relevance_rules.yml"
           }
+        }
+      }
+    },
+    {
+      "key": "tb_sensitive_danger_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "MTB positive diagnosis!",
+      "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
+      "toaster_info_title": "TB screening positive.",
+      "toaster_type": "problem",
+      "relevance": {
+        "step1:Sputum_result": {
+          "type": "string",
+          "ex": "equalTo(., \"mtb_sensitive\")"
+        }
+      }
+    },
+    {
+      "key": "tb_resistant_danger_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "MDR TB positive diagnosis!",
+      "toaster_info_text": "Treat according to local protocol and/or refer for treatment.",
+      "toaster_info_title": "TB screening positive.",
+      "toaster_type": "problem",
+      "relevance": {
+        "step1:Sputum_result": {
+          "type": "string",
+          "ex": "equalTo(., \"mtb_resistant\")"
         }
       }
     }

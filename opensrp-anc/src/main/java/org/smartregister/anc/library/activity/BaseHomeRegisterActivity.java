@@ -56,6 +56,8 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -202,7 +204,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     @Override
     public void startFormActivity(JSONObject form) {
-        Intent intent = new Intent(this, FormConfigurationJsonFormActivity.class);
+        Intent intent = new Intent(this, AncRegistrationActivity.class);
         intent.putExtra(ConstantsUtils.JsonFormExtraUtils.JSON, form.toString());
         intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
         startActivityForResult(intent, ANCJsonFormUtils.REQUEST_CODE_GET_JSON);
@@ -228,7 +230,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                 Timber.i("NO RESULT FOR QR CODE");
             }
         } else {
-            onActivityResultExtended(requestCode, resultCode, data);
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -255,6 +257,8 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                             PatientRepository
                                     .updateContactVisitStartDate(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID),
                                             Utils.getDBDateToday());
+
+                            Date currentTime = Calendar.getInstance().getTime();
                             break;
                         default:
                             break;

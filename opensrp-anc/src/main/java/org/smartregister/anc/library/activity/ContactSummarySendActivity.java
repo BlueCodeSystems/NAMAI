@@ -120,8 +120,9 @@ public class ContactSummarySendActivity extends AppCompatActivity
         String maxContactToDisplay = Utils.getProperties(getApplicationContext()).getProperty(ConstantsUtils.Properties.MAX_CONTACT_SCHEDULE_DISPLAYED, "");
         if (StringUtils.isNotBlank(maxContactToDisplay)) {
             try {
-                int count = Integer.parseInt(maxContactToDisplay);
-                contactSummaryAdapter.setContactDates(models.size() > count ? models.subList(0, (count + 3)) : models);
+                //int count = Integer.parseInt(maxContactToDisplay);
+                int count = models.size() - 1;
+                contactSummaryAdapter.setContactDates(models.size() > count ? models.subList(0, (count)) : models);
             } catch (NumberFormatException e) {
                 contactSummaryAdapter.setContactDates(models);
                 Timber.e(e);

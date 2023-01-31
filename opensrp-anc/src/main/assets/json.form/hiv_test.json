@@ -2,7 +2,7 @@
   "validate_on_submit": false,
   "display_scroll_bars": true,
   "count": "2",
-  "encounter_type": "Hiv test",
+  "encounter_type": "HIV test",
   "entity_id": "",
   "relational_id": "",
   "form_version": "0.0.1",
@@ -469,10 +469,10 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "HIV risk counseling",
+        "text": "HIV risk counselling",
         "text_color": "#000000",
         "toaster_info_text": "Provide comprehensive HIV prevention options:\\n- STI screening and treatment (syndromic and syphilis)\\n- Condom promotion\\n- Risk reduction counselling\\n- PrEP with emphasis on adherence\\n- Emphasize importance of follow-up ANC contact visits",
-        "toaster_info_title": "HIV risk counseling",
+        "toaster_info_title": "HIV risk counselling",
         "toaster_type": "problem",
         "relevance": {
           "rules-engine": {

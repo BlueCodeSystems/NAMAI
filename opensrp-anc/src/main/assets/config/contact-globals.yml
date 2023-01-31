@@ -1,6 +1,7 @@
 ---
 form: anc_counselling_treatment
 fields:
+  - "Sputum_result"
   - "hepc_positive"
   - "danger_signs"
   - "danger_signs_value"
@@ -88,14 +89,12 @@ fields:
   - "tt_immun_status"
   - "tt_immun_status_value"
   - "flu_immun_status"
-  - "flu_immun_status_value"
   - "underimmunized_doses"
   - "underimmunized_doses_value"
   - "prev_preg_comps"
   - "other_symptoms"
   - "gravida"
   - "parity"
-  - "danger_signs_value"
   - "gest_age"
   - "gest_age_openmrs"
   - "iptp_sp1"
@@ -122,6 +121,8 @@ fields:
   - "ttcv_unprotected"
   - "ttcv_protected"
   - "ttcv_full_protected"
+  -  "anemia_level"
+  - "hb_result"
 ---
 form: anc_profile
 fields:
@@ -146,6 +147,7 @@ fields:
   - "ttcv_unprotected"
   - "ttcv_protected"
   - "ttcv_full_protected"
+  - "tt1_dose_no"
 ---
 form: anc_physical_exam
 fields:
@@ -254,6 +256,7 @@ fields:
   - "partner_syph_test_status"
   - "lmp_known"
   - "ultrasound_done"
+  - "tb_test_result"
 ---
 form: test
 fields:
@@ -311,3 +314,8 @@ fields:
   - "partner_hepb_positive"
   - "lmp_known"
   - "ultrasound_done"
+  - "emergency_referal"
+  - "referral_feedback"
+  - "tb_test_result"
+  - "Sputum_result"
+  - "register_id"

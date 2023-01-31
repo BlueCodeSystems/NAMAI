@@ -1,6 +1,7 @@
 package org.smartregister.anc.library.repository;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.anc.library.util.ConstantsUtils;
 import org.smartregister.anc.library.util.DBConstantsUtils;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -68,16 +69,18 @@ public class RegisterQueryProvider {
     }
 
     public String[] mainColumns() {
-        return new String[]{DBConstantsUtils.KeyUtils.STUDY_ID, DBConstantsUtils.KeyUtils.FIRST_NAME, DBConstantsUtils.KeyUtils.MAIDEN_NAME, DBConstantsUtils.KeyUtils.LAST_NAME, DBConstantsUtils.KeyUtils.NRC_NUMBER, DBConstantsUtils.KeyUtils.DOB,
+        return new String[]{DBConstantsUtils.KeyUtils.FIRST_NAME, DBConstantsUtils.KeyUtils.LAST_NAME, DBConstantsUtils.KeyUtils.DOB,
                 DBConstantsUtils.KeyUtils.DOB_UNKNOWN, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.PHONE_NUMBER, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.ALT_NAME,
                 getDetailsTable() + "." + DBConstantsUtils.KeyUtils.ALT_PHONE_NUMBER, getDemographicTable() + "." + DBConstantsUtils.KeyUtils.BASE_ENTITY_ID,
                 getDemographicTable() + "." + DBConstantsUtils.KeyUtils.BASE_ENTITY_ID + " as " + DBConstantsUtils.KeyUtils.ID_LOWER_CASE, DBConstantsUtils.KeyUtils.ANC_ID,
-                getDetailsTable() + "." + DBConstantsUtils.KeyUtils.REMINDERS, DBConstantsUtils.KeyUtils.HOME_ADDRESS, DBConstantsUtils.KeyUtils.LANDMARK, DBConstantsUtils.KeyUtils.OCCUPATION, DBConstantsUtils.KeyUtils.OCCUPATION_REDACTED, DBConstantsUtils.KeyUtils.MARITAL_STATUS, DBConstantsUtils.KeyUtils.EDUC_LEVEL, DBConstantsUtils.KeyUtils.COUPLE, DBConstantsUtils.KeyUtils.RELATION_NK, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.EDD,
+                getDetailsTable() + "." + DBConstantsUtils.KeyUtils.REMINDERS, DBConstantsUtils.KeyUtils.HOME_ADDRESS, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.EDD,
                 getDetailsTable() + "." + DBConstantsUtils.KeyUtils.CONTACT_STATUS, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.PREVIOUS_CONTACT_STATUS,
                 getDetailsTable() + "." + DBConstantsUtils.KeyUtils.NEXT_CONTACT, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.NEXT_CONTACT_DATE,
                 getDetailsTable() + "." + DBConstantsUtils.KeyUtils.VISIT_START_DATE, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.RED_FLAG_COUNT,
                 getDetailsTable() + "." + DBConstantsUtils.KeyUtils.YELLOW_FLAG_COUNT, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.LAST_CONTACT_RECORD_DATE,
-                getDetailsTable() + "." + DBConstantsUtils.KeyUtils.ORIGIN,getDetailsTable() + "." + DBConstantsUtils.KeyUtils.OTHER_RELATIONS,
-                getDetailsTable() + "." + DBConstantsUtils.KeyUtils.COHABITANTS, getDemographicTable() + "." + DBConstantsUtils.KeyUtils.RELATIONAL_ID};
+                getDetailsTable() + "." + DBConstantsUtils.KeyUtils.COHABITANTS, getDemographicTable() + "." + DBConstantsUtils.KeyUtils.RELATIONAL_ID,
+                getDetailsTable() + "." + ConstantsUtils.SpinnerKeyConstants.PROVINCE, getDetailsTable() + "." + ConstantsUtils.SpinnerKeyConstants.DISTRICT,
+                getDetailsTable() + "." + ConstantsUtils.SpinnerKeyConstants.SUB_DISTRICT, getDetailsTable() + "." + ConstantsUtils.SpinnerKeyConstants.FACILITY,
+                getDetailsTable() + "." + ConstantsUtils.SpinnerKeyConstants.VILLAGE};
     }
 }

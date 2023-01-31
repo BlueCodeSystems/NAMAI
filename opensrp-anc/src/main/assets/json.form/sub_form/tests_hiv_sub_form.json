@@ -1,11 +1,12 @@
 {
+  "validate_on_submit": true,
   "content_form": [
     {
       "key": "hiv_test_status",
       "openmrs_entity_parent": "1356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "openmrs_entity": "concept",
       "openmrs_entity_id": "163725AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "label": "Hiv test",
+      "label": "HIV test",
       "label_text_style": "bold",
       "label_info_text": "{{tests_hiv_sub_form.step1.hiv_test_status.label_info_text}}",
       "text_color": "#000000",
@@ -46,7 +47,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hiv_sub_form.step1.hiv_test_status.v_required.err}}"
+        "err": "HIV test status is required"
       }
     },
     {
@@ -63,19 +64,19 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "165300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "check_box",
-      "label": "{{tests_hiv_sub_form.step1.hiv_test_notdone.label}}",
+      "label": "Reason",
       "label_text_style": "bold",
       "options": [
         {
           "key": "stock_out",
-          "text": "{{tests_hiv_sub_form.step1.hiv_test_notdone.options.stock_out.text}}",
+          "text": "Stock out",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "expired_stock",
-          "text": "{{tests_hiv_sub_form.step1.hiv_test_notdone.options.expired_stock.text}}",
+          "text": "Expired stock",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "165299AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -103,7 +104,7 @@
         },
         {
           "key": "other",
-          "text": "{{tests_hiv_sub_form.step1.hiv_test_notdone.options.other.text}}",
+          "text": "Other (specify)",
           "openmrs_entity_parent": "165300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -111,7 +112,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hiv_sub_form.step1.hiv_test_notdone.v_required.err}}"
+        "err": "HIV not done reason is required!"
       },
       "relevance": {
         "rules-engine": {
@@ -127,7 +128,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "edit_text",
-      "hint": "{{tests_hiv_sub_form.step1.hiv_test_notdone_other.hint}}",
+      "hint": "Specify",
       "edit_type": "name",
       "relevance": {
         "rules-engine": {
@@ -159,7 +160,7 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "164400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "date_picker",
-      "hint": "{{tests_hiv_sub_form.step1.hiv_test_date.hint}}",
+      "hint": "HIV test date",
       "expanded": "false",
       "max_date": "today",
       "relevance": {
@@ -171,7 +172,7 @@
       },
       "v_required": {
         "value": true,
-        "err": "{{tests_hiv_sub_form.step1.hiv_test_date.v_required.err}}"
+        "err": "HIV test date is required."
       },
       "calculation": {
         "rules-engine": {
@@ -187,26 +188,26 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "type": "native_radio",
-      "label": "{{tests_hiv_sub_form.step1.hiv_test_result.label}}",
+      "label": "Record result",
       "label_text_style": "bold",
       "options": [
         {
           "key": "positive",
-          "text": "{{tests_hiv_sub_form.step1.hiv_test_result.options.positive.text}}",
+          "text": "Positive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "negative",
-          "text": "{{tests_hiv_sub_form.step1.hiv_test_result.options.negative.text}}",
+          "text": "Negative",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
           "key": "inconclusive",
-          "text": "{{tests_hiv_sub_form.step1.hiv_test_result.options.inconclusive.text}}",
+          "text": "Inconclusive",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
           "openmrs_entity_id": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -214,7 +215,7 @@
       ],
       "v_required": {
         "value": true,
-        "err": "{{tests_hiv_sub_form.step1.hiv_test_result.v_required.err}}"
+        "err": "Please record the HIV test result"
       },
       "relevance": {
         "rules-engine": {
@@ -264,7 +265,7 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_hiv_sub_form.step1.hiv_inconclusive_toaster.text}}",
+      "text": "HIV test inconclusive, refer for further testing.",
       "toaster_type": "warning",
       "relevance": {
         "rules-engine": {
@@ -280,9 +281,9 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{{tests_hiv_sub_form.step1.hiv_positive_toaster.text}}",
-      "toaster_info_text": "{{tests_hiv_sub_form.step1.hiv_positive_toaster.toaster_info_text}}",
-      "toaster_info_title": "{{tests_hiv_sub_form.step1.hiv_positive_toaster.toaster_info_title}}",
+      "text": "Give HIV positive counselling",
+      "toaster_info_text": "- Refer for further testing and confirmation\\n- Refer for HIV services\\n- Advise on opportunistic infections and need to seek medical help\\n- Proceed with systematic screening for active TB",
+      "toaster_info_title": "Give HIV positive counselling",
       "toaster_type": "problem",
       "relevance": {
         "rules-engine": {

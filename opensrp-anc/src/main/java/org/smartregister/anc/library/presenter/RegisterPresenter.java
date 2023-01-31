@@ -22,6 +22,7 @@ import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.view.LocationPickerView;
 
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -151,7 +152,10 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
     @Override
     public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {
 //30010-007-uuid/22
-        String smNumber = "30010007" + "/" +entityId +"/22";
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int thisYear = year % 100;
+        String smNumber = "30010007" + "/" +entityId+"/"+thisYear;
         try {
             startForm(triple.getLeft(), smNumber, triple.getMiddle(), triple.getRight());
         } catch (Exception e) {

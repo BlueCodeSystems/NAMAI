@@ -37,6 +37,8 @@ import java.util.List;
 import java.util.Map;
 
 import timber.log.Timber;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ContactVisit {
     private Map<String, String> details;
@@ -256,7 +258,20 @@ public class ContactVisit {
                         saveOrDeleteTasks(stepFields);
                     }
                 }
+            }else if(formObject.has(ConstantsUtils.JsonFormKeyUtils.ENCOUNTER_TYPE) && StringUtils.isNotBlank(encounterType) && ConstantsUtils.JsonFormUtils.QUICK_CHECK_ENCOUNTER_TYPE.equals(encounterType)){
+                JSONObject dueStep = formObject.optJSONObject(JsonFormConstants.STEP1);
+                    JSONArray stepFields = dueStep.optJSONArray(JsonFormConstants.FIELDS);
+                    if (stepFields != null && stepFields.length() > 0) {
+                        saveOrDeleteTasks(stepFields);
+                    }
+
             }
+//            else{
+//                String encounterType = formObject.getString(ConstantsUtils.JsonFormKeyUtils.ENCOUNTER_TYPE
+//                JSONObject dueStep = formObject.optJSONObject(JsonFormConstants.STEP1);
+//                JSONArray stepFields = dueStep.optJSONArray(JsonFormConstants.FIELDS);
+//                saveOrDeleteTasks(stepFields);
+//            }
         } catch (JSONException e) {
             Timber.e(e, " --> processTasks");
         }
@@ -303,12 +318,18 @@ public class ContactVisit {
     private void saveOrDeleteTasks(@NotNull JSONArray stepFields) throws JSONException {
         for (int i = 0; i < stepFields.length(); i++) {
             JSONObject field = stepFields.getJSONObject(i);
-            if (field != null && field.has(JsonFormConstants.IS_VISIBLE) && field.getBoolean(JsonFormConstants.IS_VISIBLE)) {
+            if (field != null/* && field.has(JsonFormConstants.IS_VISIBLE) && field.getBoolean(JsonFormConstants.IS_VISIBLE)*/) {
                 JSONArray jsonArray = field.optJSONArray(JsonFormConstants.VALUE);
                 String key = field.optString(JsonFormConstants.KEY);
                 if (jsonArray == null || (jsonArray.length() == 0)) {
                     if (getCurrentClientTasks() != null && !getCurrentClientTasks().containsKey(key)) {
-                        saveTasks(field);
+                        if(key.contains("accordion_feedback"))
+                        {
+                            if (referral != null){
+                                saveTasks(field);
+                            }
+                        }
+                        //saveTasks(field);
                     }
                 } else {
                     if (StringUtils.isNotBlank(key) && getCurrentClientTasks() != null) {
@@ -354,12 +375,21 @@ public class ContactVisit {
                     JSONArray givenValue = value.getJSONArray(JsonFormConstants.VALUES);
                     if (givenValue.length() > 0) {
                         String firstValue = givenValue.optString(0);
-                        if (StringUtils.isNotBlank(firstValue) && (firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.ORDERED) || firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.NOT_DONE))) {
+                        if (firstValue.contains(ConstantsUtils.AncRadioButtonOptionTypesUtils.ORDERED)) {
                             isTask = true;
                         }
                     }
                     break;
                 }
+
+                /*if (value == null)
+                {
+                    JSONArray testValue = value.getJSONArray(JsonFormConstants.VALUES);
+                    if (testValue.length() == 0) {
+                        isTask = false;
+                    }
+                }
+                break;*/
             }
         } catch (JSONException e) {
             Timber.e(e, " --> checkTestsStatus");
@@ -387,3 +417,4 @@ public class ContactVisit {
         return AncLibrary.getInstance().getPreviousContactRepository();
     }
 }
+

@@ -44,6 +44,7 @@ import timber.log.Timber;
  * Created by ndegwamartin on 12/07/2018.
  */
 public class ProfileTasksFragment extends BaseProfileFragment implements ProfileFragmentContract.View {
+    private final ANCFormUtils formUtils = new ANCFormUtils();
     private Button dueButton;
     private ButtonAlertStatus buttonAlertStatus;
     private ProfileFragmentContract.Presenter presenter;
@@ -55,7 +56,6 @@ public class ProfileTasksFragment extends BaseProfileFragment implements Profile
     private RecyclerView recyclerView;
     private HashMap<String, String> clientDetails;
     private Task currentTask;
-    private ANCFormUtils formUtils = new ANCFormUtils();
 
     public static ProfileTasksFragment newInstance(Bundle bundle) {
         Bundle args = bundle;
@@ -149,7 +149,7 @@ public class ProfileTasksFragment extends BaseProfileFragment implements Profile
     private void toggleViews(List<Task> taskList) {
         if (taskList.size() > 0) {
             noHealthRecordLayout.setVisibility(View.GONE);
-            tasksLayoutHeader.setVisibility(View.VISIBLE);
+            tasksLayoutHeader.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         } else {
             noHealthRecordLayout.setVisibility(View.VISIBLE);
@@ -172,6 +172,7 @@ public class ProfileTasksFragment extends BaseProfileFragment implements Profile
         intent.putExtra(ConstantsUtils.IntentKeyUtils.CLIENT_MAP, clientDetails);
         intent.putExtra(ConstantsUtils.IntentKeyUtils.CONTACT_NO, contactNo);
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, getForm());
+        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
         startActivityForResult(intent, ANCJsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
@@ -194,8 +195,8 @@ public class ProfileTasksFragment extends BaseProfileFragment implements Profile
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
-            String jsonString = data.getStringExtra(ConstantsUtils.IntentKeyUtils.JSON);
-            if (StringUtils.isNotBlank(jsonString)) {
+            if (data != null && StringUtils.isNotBlank(data.getStringExtra(ConstantsUtils.IntentKeyUtils.JSON))) {
+                String jsonString = data.getStringExtra(ConstantsUtils.IntentKeyUtils.JSON);
                 JSONObject form = new JSONObject(jsonString);
                 JSONArray accordionValues = createAccordionValues(form);
                 Task newTask = updateTaskValue(accordionValues);

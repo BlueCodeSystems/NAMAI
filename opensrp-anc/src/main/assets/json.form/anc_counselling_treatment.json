@@ -2,8 +2,8 @@
   "validate_on_submit": false,
   "display_scroll_bars": true,
   "skip_blank_steps": true,
-  "count": "12",
-  "encounter_type": "Counselling, Treatment and Preventive Therapy",
+  "count": "13",
+  "encounter_type": "Counselling, Preventive Therapy and Treatment",
   "entity_id": "",
   "relational_id": "",
   "form_version": "0.0.1",
@@ -167,6 +167,56 @@
           "rules-engine": {
             "ex-rules": {
               "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "anemia_diagnosis_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "{level} Anemia diagnosis",
+        "toaster_info_text": " {level} Anemia diagnosis  refer to hospital",
+        "toaster_info_title": "Anemia diagnosis",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "mdr_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "MDR TB diagnosis",
+        "toaster_info_text": " MDR TB diagnosis refer to hospital",
+        "toaster_info_title": "MDR TB diagnosis",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_calculation_rules.yml"
             }
           }
         }
@@ -524,6 +574,13 @@
             "ex": "equalTo(., \"other\")"
           }
         }
+      },
+      {
+        "key": "time_counselling",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "time_counselling",
+        "type": "edit_text"
       }
     ]
   },
@@ -2019,7 +2076,7 @@
         "edit_type": "name",
         "relevance": {
           "step4:eat_exercise_counsel_notdone": {
-              "type": "string",
+            "type": "string",
             "ex": "equalTo(., \"other\")"
 
           }
@@ -2213,8 +2270,8 @@
         "edit_type": "name",
         "relevance": {
           "step4:balanced_energy_counsel_notdone": {
-              "type": "string",
-              "ex": "equalTo(., \"other\")"
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
           }
         }
       }
@@ -2225,6 +2282,190 @@
     "title": "{{anc_counselling_treatment.step5.title}}",
     "next": "step6",
     "fields": [
+
+
+      {
+        "key": "ifa_anaemia",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "ifa_anaemia",
+        "type": "native_radio",
+        "label": "Give daily dose of elemental iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
+        "label_info_title": "Give daily dose of elemental iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Done",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "relevance": {
+              "rules-engine": {
+                "ex-rules": {
+                  "rules-file": "ct_relevance_rules.yml"
+                }
+              }
+            }
+          },
+          {
+            "key": "not_done",
+            "text": "Not given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "ifa_anaemia_notdone",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_data_type": "",
+        "type": "check_box",
+        "label": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.label}}",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.hint}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "referred_instead",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.referred_instead.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "side_effects",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.side_effects.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165273AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.other.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step5:ifa_anaemia": {
+            "type": "string",
+            "ex": "equalTo(., \"not_done\")"
+          }
+        }
+      },
+      {
+        "key": "ifa_anaemia_notdone_other",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone_other.hint}}",
+        "edit_type": "name",
+        "relevance": {
+          "step5:ifa_anaemia_notdone": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "syphilis_low_prev_counsel",
+        "openmrs_entity_parent": "165331AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "native_radio",
+        "label": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label}}",
+        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_text}}",
+        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_title}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "not_done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.not_done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "syphilis_high_prev_counsel",
+        "openmrs_entity_parent": "165332AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "native_radio",
+        "label": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label}}",
+        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_text}}",
+        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_title}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "not_done",
+            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.not_done.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+
       {
         "key": "hypertension_counsel",
         "openmrs_entity_parent": "165325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2368,82 +2609,6 @@
         "v_required": {
           "value": true,
           "err": "{{anc_counselling_treatment.step5.hepc_positive_counsel.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "syphilis_low_prev_counsel",
-        "openmrs_entity_parent": "165331AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.options.not_done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.syphilis_low_prev_counsel.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "syphilis_high_prev_counsel",
-        "openmrs_entity_parent": "165332AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.options.not_done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.syphilis_high_prev_counsel.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -2612,104 +2777,6 @@
         }
       },
       {
-        "key": "ifa_anaemia",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step5.ifa_anaemia.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "Given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "Not given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step5.ifa_anaemia.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "ifa_anaemia_notdone",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "",
-        "type": "check_box",
-        "label": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.label}}",
-        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.hint}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "referred_instead",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.referred_instead.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "side_effects",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.side_effects.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "165273AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "other",
-            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.other.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "relevance": {
-          "step5:ifa_anaemia": {
-            "type": "string",
-            "ex": "equalTo(., \"not_done\")"
-          }
-        }
-      },
-      {
-        "key": "ifa_anaemia_notdone_other",
-        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "edit_text",
-        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone_other.hint}}",
-        "edit_type": "name",
-        "relevance": {
-          "step5:ifa_anaemia_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      {
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
@@ -2757,6 +2824,19 @@
               "rules-file": "ct_relevance_rules.yml"
             }
           }
+        }
+      },
+      {
+        "key": "diagnoses_comments",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "diagnoses_comments",
+        "type": "edit_text",
+        "hint": "Comments",
+        "edit_type": "edit_text",
+        "v_required": {
+          "value": false,
+          "err": "Please enter comments"
         }
       }
     ]
@@ -3457,6 +3537,9 @@
         "type": "check_box",
         "label": "{{anc_counselling_treatment.step7.family_planning_type.label}}",
         "label_text_style": "bold",
+        "exclusive": [
+          "none"
+        ],
         "options": [
           {
             "key": "none",
@@ -3466,21 +3549,21 @@
             "openmrs_entity_id": ""
           },
           {
-            "key": "cu_iud",
-            "text": "{{anc_counselling_treatment.step7.family_planning_type.options.cu_iud.text}}",
+            "key": "Cu_IUD",
+            "text": "Cu IUD",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
-            "key": "lng_iud",
+            "key": "Lng_IUD",
             "text": "{{anc_counselling_treatment.step7.family_planning_type.options.lng_iud.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
           },
           {
-            "key": "etg_implant",
+            "key": "Etonogestrel_(ETG)_one-rod_implant",
             "text": "{{anc_counselling_treatment.step7.family_planning_type.options.etg_implant.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -3488,7 +3571,7 @@
           },
           {
             "key": "lng_implant",
-            "text": "{{anc_counselling_treatment.step7.family_planning_type.options.lng_implant.text}}",
+            "text": "Levonorgestrel (LNG) two-rod implant",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": ""
@@ -4089,6 +4172,104 @@
     "next": "step10",
     "fields": [
       {
+        "key": "anaemia_od",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "od",
+        "type": "native_radio",
+        "label": "Give daily dose of elemental iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_info_text": "If a woman is diagnosed with anaemia during pregnancy, her daily elemental iron should be increased to 120 mg until her haemoglobin (Hb) concentration rises to normal (Hb 11 g/dL or higher). Thereafter, she can resume the standard daily antenatal iron dose to prevent re-occurrence of anaemia.\\n\\nThe equivalent of 120 mg of elemental iron equals 600 mg of ferrous sulfate heptahydrate, 360 mg of ferrous fumarate, or 1000 mg of ferrous gluconate.",
+        "label_info_title": "Give daily dose of elemental iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "done"
+          },
+          {
+            "key": "not_done",
+            "text": "Not given",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "not_done"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "Please select an option"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "anaemia_od_notdone",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "anaemia_od_notdone",
+        "openmrs_data_type": "",
+        "type": "check_box",
+        "label": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.label}}",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.hint}}",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "referred_instead",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.referred_instead.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "side_effects",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.side_effects.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165273AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other",
+            "text": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone.options.other.text}}",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step5:anaemia_od": {
+            "type": "string",
+            "ex": "equalTo(., \"not_done\")"
+          }
+        }
+      },
+      {
+        "key": "anaemia_od_notdone_other",
+        "openmrs_entity_parent": "165348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "hint": "{{anc_counselling_treatment.step5.ifa_anaemia_notdone_other.hint}}",
+        "edit_type": "name",
+        "relevance": {
+          "step5:anaemia_od_notdone": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "ifa_high_prev",
         "openmrs_entity_parent": "165355AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
@@ -4124,13 +4305,6 @@
         "v_required": {
           "value": true,
           "err": "{{anc_counselling_treatment.step9.ifa_high_prev.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
         }
       },
       {
@@ -4202,125 +4376,6 @@
         "edit_type": "name",
         "relevance": {
           "step9:ifa_high_prev_notdone": {
-            "type": "string",
-            "ex": "equalTo(., \"other\")"
-          }
-        }
-      },
-      {
-        "key": "ifa_low_prev",
-        "openmrs_entity_parent": "165356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step9.ifa_low_prev.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step9.ifa_low_prev.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step9.ifa_low_prev.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "Given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "Not Given",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "alternate_other",
-            "text": "Alternate (Other)",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "alternate_other"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step9.ifa_low_prev.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "ifa_added_other",
-        "openmrs_entity_parent": "165345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "ifa_added_other",
-        "type": "edit_text",
-        "hint": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone_other.hint}}",
-        "edit_type": "name",
-        "relevance": {
-          "step9:ifa_low_prev": {
-            "type": "string",
-            "ex": "equalTo(., \"alternate_other\")"
-          }
-        }
-      },
-      {
-        "key": "ifa_low_prev_notdone",
-        "openmrs_entity_parent": "165356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165346AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone.label}}",
-        "hint": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone.hint}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "out_stock",
-            "text": "Out of stock",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "expired",
-            "text": "Expired",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "other",
-            "text": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone.options.other.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone.v_required.err}}"
-        },
-        "relevance": {
-          "step9:ifa_low_prev": {
-            "type": "string",
-            "ex": "equalTo(., \"not_done\")"
-          }
-        }
-      },
-      {
-        "key": "ifa_low_prev_notdone_other",
-        "openmrs_entity_parent": "165356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "edit_text",
-        "hint": "{{anc_counselling_treatment.step9.ifa_low_prev_notdone_other.hint}}",
-        "edit_type": "name",
-        "relevance": {
-          "step9:ifa_low_prev_notdone": {
             "type": "string",
             "ex": "equalTo(., \"other\")"
           }
@@ -4470,10 +4525,6 @@
             "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
-        "v_required": {
-          "value": false,
-          "err": "{{anc_counselling_treatment.step9.calcium_supp.v_required.err}}"
-        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -5224,7 +5275,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "mebendazole",
         "type": "native_radio",
-        "label": "Deworming (Mebendazole 500mg PO Stat or Albendazole 400mg PO Stat)",
+        "label": "Deworming (Mebendazole 500mg PO Stat)",
         "label_text_style": "bold",
         "options": [
           {
@@ -5793,31 +5844,8 @@
   },
   "step12": {
     "title": "HIV Treatment",
+    "next": "step13",
     "fields": [
-      {
-        "key": "woman_hiv_negative_toaster",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "toaster_notes",
-        "text": "Woman is HIV negative",
-        "toaster_info_text": "Woman is HIV negative , no further action is required",
-        "toaster_type": "success",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        },
-        "calculation": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_calculation_rules.yml"
-            }
-          }
-        }
-      },
       {
         "key": "initiate_ctx",
         "openmrs_entity_parent": "",
@@ -5935,9 +5963,6 @@
         "type": "date_picker",
         "hint": "Viral load test date",
         "expanded": false,
-        "duration": {
-          "label": "Date"
-        },
         "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
@@ -5975,6 +6000,116 @@
         "ex": "greaterThan(.,\"3\")"
       }
     }
+  },
+  "step13": {
+    "title": "TB counselling and treatment",
+    "fields": [
+      {
+        "key": "tb_treatment_done",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "tb_treatment_done",
+        "type": "native_radio",
+        "label": "TB treatment done?",
+        "label_info_text": "TB counselling and treatment\n\nFor Intensive phase: 2 months (RHZE 150/75/400/275);\n\n    if woman weighs 25–37kg, give/prescribe 2 tablets of RHZE.\n    if woman weighs 38–54kg, give/prescribe 3 tablets of RHZE.\n    if woman weighs 55–70kg, give/prescribe 4 tablets of RHZE.\n    if woman weighs 71kg and above give/prescribe 5 tablets of RHZE.\n\nFor Continuation phase: 4 months (RH 150/75);\n\n    if woman weighs 25–37kg, give/prescribe 2 tablets of RH.\n    if woman weighs 38–54kg, give/prescribe 3 tablets of RH.\n    if woman weighs 55–70kg, give/prescribe 4 tablets of RH.\n    if woman weighs 71kg and above give/prescribe 5 tablets of RH.\n\nAbbreviations: RHZE, rifampicin/isoniazid/pyrazinamide/ethambutol\n\nFor MDR TB; refer to hospital.\n\n",
+        "label_info_title": "TB treatment",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "done",
+            "text": "Done",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "done"
+          },
+          {
+            "key": "not_done",
+            "text": "Not done",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "not_done"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "reason",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "reason",
+        "type": "check_box",
+        "label": "Reason",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "refer",
+            "text": "Refer instead",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "refer"
+          },
+          {
+            "key": "other",
+            "text": "Other (specify)",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "other"
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "please enter value"
+        },
+        "relevance": {
+          "step13:tb_treatment_done": {
+            "type": "string",
+            "ex": "equalTo(., \"not_done\")"
+          }
+        }
+      },
+      {
+        "key": "specify",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "specify",
+        "type": "edit_text",
+        "hint": "Specify",
+        "edit_type": "name",
+        "relevance": {
+          "step13:reason": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "tb_negative",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Woman  isn't showing symptoms of TB",
+        "toaster_type": "info",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
   },
   "properties_file_name": "anc_counselling_treatment"
 }

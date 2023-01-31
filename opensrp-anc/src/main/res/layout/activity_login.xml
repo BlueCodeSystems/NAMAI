@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:orientation="vertical"
-            android:paddingTop="@dimen/login_logo_top_padding">
+            android:paddingTop="@dimen/login_logo_top_padding"
+            android:translationY="-50dp">
 
             <ImageView
                 android:id="@+id/login_logo"
@@ -45,7 +46,8 @@
                 android:gravity="center_horizontal"
                 android:text="@string/form_manifest_version"
                 android:textColor="#90c4dc"
-                android:textSize="@dimen/login_build_text_view_textSize" />
+                android:textSize="@dimen/login_build_text_view_textSize"
+                android:translationY="-30dp" />
 
             <TextView
                 android:id="@+id/login_build_text_view"
@@ -55,18 +57,20 @@
                 android:gravity="center_horizontal"
                 android:text="@string/app_version"
                 android:textColor="#90c4dc"
-                android:textSize="@dimen/login_build_text_view_textSize" />
+                android:textSize="@dimen/login_build_text_view_textSize"
+                android:translationY="-35dp" />
 
             <TextView
                 android:id="@+id/login_title_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
                 android:layout_marginTop="@dimen/login_text_build_margin"
+                android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:text="@string/antenatal_care_module"
                 android:textColor="@color/white"
                 android:textSize="@dimen/login_title_text_size"
+                android:translationY="-30dp"
                 android:typeface="sans" />
 
             <ImageView
@@ -79,7 +83,8 @@
                 android:scaleType="centerInside"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:src="@mipmap/ic_ministry_of_health" />
+                android:src="@mipmap/ic_ministry_of_health"
+                android:translationY="-40dp" />
 
         </LinearLayout>
 
@@ -92,7 +97,8 @@
             android:layout_marginTop="@dimen/login_middle_section_padding_top"
             android:orientation="vertical"
             android:paddingLeft="@dimen/login_horizontal_margin"
-            android:paddingRight="@dimen/login_horizontal_margin">
+            android:paddingRight="@dimen/login_horizontal_margin"
+            android:translationY="-100dp">
 
 
             <EditText
@@ -103,12 +109,12 @@
                 android:background="@drawable/rounded_corner_edit_text"
                 android:cursorVisible="true"
                 android:ems="10"
-                android:text="anc"
                 android:hint="@string/username"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:lines="1"
                 android:paddingLeft="10dp"
+                android:text="anc"
                 android:textColor="#666666"
                 android:textColorHint="#bfbfbf"
                 android:textCursorDrawable="@null"
@@ -122,7 +128,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:layout_weight="8"
-                android:text="anc123!"
                 android:background="@drawable/rounded_corner_edit_text"
                 android:cursorVisible="true"
                 android:ems="10"
@@ -131,11 +136,13 @@
                 android:inputType="textPassword"
                 android:lines="1"
                 android:paddingLeft="10dp"
+                android:text="anc123!"
                 android:textColor="#666666"
                 android:textColorHint="#bfbfbf"
                 android:textCursorDrawable="@null"
                 android:textSize="@dimen/login_edit_text_textSize"
                 android:typeface="sans" />
+
             <Button
                 android:id="@+id/login_login_btn"
                 android:layout_width="match_parent"
@@ -165,8 +172,8 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="5dp"
                     android:button="@drawable/white_checkbox_bg_selector" />
 
                 <TextView

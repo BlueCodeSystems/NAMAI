@@ -20,6 +20,13 @@ condition: "true"
 actions:
   - "isRelevant = true"
 ---
+name: step1_accordion_blood_glucose
+description: Blood glucose test
+priority: 1
+condition: "true"
+actions:
+  - "isRelevant = true"
+---
 name: step1_accordion_syphilis
 description: syph_test_status
 priority: 1

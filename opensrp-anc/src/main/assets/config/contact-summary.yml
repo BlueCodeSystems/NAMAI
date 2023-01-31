@@ -5,6 +5,9 @@ fields:
   - template: "{{contact_summary.hospital_referral.woman_referred_to_hospital}}"
     relevance: "referred_hosp == 'yes'"
 
+  - template: "Referral feedback: {referral_feedback}"
+    relevance: "referral_feedback != ''"
+
   - template: "{{contact_summary.hospital_referral.woman_not_referred_to_hospital}}: {referred_hosp_notdone_value}"
     relevance: "referred_hosp == 'no'"
 
@@ -39,7 +42,7 @@ fields:
     relevance: "!receiving.isEmpty()"
 
   - template: "{{contact_summary.hospital_referral.provider_name}}: {provider_name}"
-    relevance: "!provider_name.isEmpty()"
+    relevance: "emergency_referal.contains('yes')"
 
   - template: "{{contact_summary.hospital_referral.provider_phone_number}}: {provider_phone_number}"
     relevance: "!provider_phone_number.isEmpty()"
@@ -54,46 +57,46 @@ fields:
     relevance: "!date_scheduled.isEmpty()"
 
   - template: "{{contact_summary.hospital_referral.severe_hypertension}}: {bp_systolic_repeat}/{bp_diastolic_repeat} mmHg"
-    relevance: "severe_hypertension == 1"
+    relevance: "severe_hypertension == 1 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.hypertension_and_symptom_of_severe_pre_eclampsia}}: {symp_sev_preeclampsia_value}"
-    relevance: "hypertension == 1 && symp_sev_preeclampsia != '' && !symp_sev_preeclampsia.contains('none')"
+    relevance: "hypertension == 1 && symp_sev_preeclampsia != '' && !symp_sev_preeclampsia.contains('none') && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.pre_eclampsia_diagnosis}}"
-    relevance: "preeclampsia == 1"
+    relevance: "preeclampsia == 1 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.severe_pre_eclampsia_diagnosis}}"
-    relevance: "severe_preeclampsia == 1"
+    relevance: "severe_preeclampsia == 1 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.fever}}: {body_temp_repeat}ºC"
-    relevance: "body_temp_repeat >= 38"
+    relevance: "body_temp_repeat >= 38 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_pulse_rate}}: {pulse_rate_repeat}bpm"
-    relevance: "pulse_rate_repeat < 60 || pulse_rate_repeat > 100"
+    relevance: "pulse_rate_repeat < 60 || pulse_rate_repeat > 100 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.respiratory_distress}}: {respiratory_exam_abnormal_value}"
-    relevance: "!respiratory_exam_abnormal.contains('none') && !respiratory_exam_abnormal.isEmpty()"
+    relevance: "!respiratory_exam_abnormal.contains('none') && !respiratory_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.low_oximetry}}: {oximetry}%"
-    relevance: "oximetry < 92"
+    relevance: "oximetry < 92 && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_cardiac_exam}}: {cardiac_exam_abnormal_value}"
-    relevance: "!cardiac_exam_abnormal.contains('none') && !cardiac_exam_abnormal.isEmpty()"
+    relevance: "!cardiac_exam_abnormal.contains('none') && !cardiac_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_breast_exam}}: {breast_exam_abnormal_value}"
-    relevance: "!breast_exam_abnormal.contains('none') && !breast_exam_abnormal.isEmpty()"
+    relevance: "!breast_exam_abnormal.contains('none') && !breast_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_abdominal_exam}}: {abdominal_exam_abnormal_value}"
-    relevance: "!abdominal_exam_abnormal.contains('none') && !abdominal_exam_abnormal.isEmpty()"
+    relevance: "!abdominal_exam_abnormal.contains('none') && !abdominal_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_pelvic_exam}}: {pelvic_exam_abnormal_value}"
-    relevance: "!pelvic_exam_abnormal.contains('none') && !pelvic_exam_abnormal.isEmpty()"
+    relevance: "!pelvic_exam_abnormal.contains('none') && !pelvic_exam_abnormal.isEmpty() && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.no_fetal_heartbeat_observed}}"
-    relevance: "fetal_heartbeat == 'no'"
+    relevance: "fetal_heartbeat == 'no' && referred_hosp == 'yes'"
 
   - template: "{{contact_summary.hospital_referral.abnormal_fetal_heart_rate}}: {fetal_heart_rate_repeat}bpm"
-    relevance: "fetal_heart_rate_repeat < 100 || fetal_heart_rate_repeat > 180"
+    relevance: "fetal_heart_rate_repeat < 100 || fetal_heart_rate_repeat > 180 && referred_hosp == 'yes'"
 
 ---
 group: demographic_info
@@ -197,17 +200,26 @@ fields:
   - template: "{{contact_summary.immunisation_status.tt_immunisation_status}}: {tt_immun_status_value}"
     relevance: "tt_immun_status_value != ''"
 
-  - template: "{{contact_summary.immunisation_status.tt_immunisation_number}}: {underimmunized_doses}"
-    relevance: "underimmunized_doses != ''"
-
-  - template: "{{contact_summary.immunisation_status.tt_fully_protected}}: {ttcv_full_protected}"
+  - template: "{{contact_summary.immunisation_status.tt_status_p}}: Fully Protected"
     relevance: "tt_immun_status == '3_doses'"
 
-  - template: "{{contact_summary.immunisation_status.tt_unprotected}}: {ttcv_unprotected}"
-    relevance: "underimmunized_doses <= '1' || tt_immun_status == 'ttcv_not_received' || tt_immun_status == 'unknown'"
+  - template: "Number of TTVC doses: 4 doses"
+    relevance: "tt_immun_status == '3_doses'"
 
-  - template: "{{contact_summary.immunisation_status.tt_protected}}: {ttcv_protected}"
-    relevance: "underimmunized_doses >= '2'"
+  - template: "{{contact_summary.immunisation_status.tt_status_p}}: Protected"
+    relevance: " underimmunized_doses != ''  && underimmunized_doses >= 2 && underimmunized_doses < 4"
+
+  - template: "Number of TTVC doses: {underimmunized_doses}"
+    relevance: "underimmunized_doses != ''"
+
+  - template: "{{contact_summary.immunisation_status.tt_status_p}}: Unprotected"
+    relevance: "tt_immun_status.contains('ttcv_not_received') || underimmunized_doses <= 1"
+
+  - template: "Number of TTVC doses: 0"
+    relevance: "tt_immun_status.contains('ttcv_not_received')"
+
+  - template: "Number of TTVC doses: {underimmunized_doses}"
+    relevance: "underimmunized_doses != '' && underimmunized_doses <= 1 && tt_immun_status == '3_doses'"
 
   - template: "{{contact_summary.immunisation_status.tt_dose_1}}: {tt1_date_done_date_today_hidden} {tt1_date_done}"
     relevance: "tt1_date == 'done_today' || tt1_date == 'done_earlier'"
@@ -233,8 +245,8 @@ fields:
   - template: "{{contact_summary.medications.current_medications}}: {medications_value}"
     relevance: "!medications_value.isEmpty()"
 
-  - template: "{{contact_summary.medications.medications_prescribed}}: {vita}, {alben_meben}, {mag_calc}, {nausea_pharma}, {antacid}, {penicillin}, {antibiotic}, {prep}, {sp}, {ifa}, {ifa_medication}, {aspirin}, {calcium}"
-    relevance: "vita != '' || mag_calc != '' ||  nausea_pharma != '' || vita != '' || alben_meben != '' || antacid != '' || penicillin != '' || antibiotic != '' ||  prep != '' || sp != '' || ifa != '' || ifa_medication != '' ||  aspirin != '' || calcium != ''"
+  - template: "{{contact_summary.medications.medications_prescribed}}: {vita_supp}, {deworm}, {mag_calc}, {nausea_pharma}, {antacid}, {penicillin}, {antibiotic}, {prep}, {iptp_sp1}, {ifa}, {ifa_medication}, {aspirin_comply}, {calcium}, {mebendazole}, {fansidar}"
+    relevance: "vita != '' || mag_calc != '' ||  nausea_pharma != '' || vita != '' || alben_meben != '' || antacid != '' || penicillin != '' || antibiotic != '' ||  prep != '' || sp != '' || ifa != '' || ifa_medication != '' ||  aspirin != '' || calcium != '' || mebendazole != '' || fansidar !=''"
     isMultiWidget: true
 
   - template: "{{contact_summary.medications.calcium_compliance}}: {calcium_comply}"
@@ -265,7 +277,7 @@ fields:
     relevance: "behaviour_persist != ''"
 
   - template: "{{contact_summary.woman_behaviour.caffeine_intake}}: {caffeine_intake_value}"
-    relevance: "caffeine_intake != ''"
+    relevance: "caffeine_intake != '' && !caffeine_intake.contains('none')"
 
   - template: "{{contact_summary.woman_behaviour.caffeine_reduction_counseling}}: {caffeine_counsel_value}"
     relevance: "caffeine_counsel == 'done'"
@@ -449,6 +461,9 @@ fields:
 
   - template: "{{contact_summary.blood_pressure.bp_10_min_rest}}: {bp_systolic_repeat}/{bp_diastolic_repeat} mmHg"
     relevance: "bp_systolic_repeat != '' && bp_diastolic_repeat != ''"
+---
+group: "RISK AND DIAGNOSES"
+fields:
 
   - template: "{{contact_summary.blood_pressure.systptoms_pre_eclampsia}}: {symp_sev_preeclampsia_value}"
     relevance: "symp_sev_preeclampsia != ''"
@@ -474,7 +489,7 @@ fields:
   - template: "{{contact_summary.blood_pressure.severe_pre_eclampsia_diagnosis}}"
     relevance: "severe_preeclampsia == 1"
 ---
-group: speculum_exam
+group: "PHYSICAL EXAM"
 fields:
 
   - template: "{{contact_summary.maternal_exam.temperature}}: {body_temp}ºC"
@@ -600,11 +615,11 @@ fields:
   - template: "{{contact_summary.hiv_tests.hiv_test_not_done}}: {hiv_test_notdone_value}"
     relevance: "hiv_test_status == 'not_done'"
 
-  - template: "{{contact_summary.hiv_tests.hiv_test_date}}: {hiv_test_date}"
-    relevance: "hiv_test_date != ''"
-
   - template: "{{contact_summary.hiv_tests.hiv_test_result}}: {hiv_test_result_value}"
     relevance: "hiv_test_result != ''"
+
+  - template: "{{contact_summary.hiv_tests.hiv_test_date}}: {hiv_test_date}"
+    relevance: "hiv_test_date != ''"
 
   - template: "{{contact_summary.hiv_tests.hiv_positive_counseling_done}}"
     relevance: "hiv_positive_counsel == 'done'"
@@ -832,19 +847,19 @@ fields:
   - template: "{{contact_summary.blood_glucose_tests.blood_glucose_test_date}}: {glucose_test_date}"
     relevance: "glucose_test_date != ''"
 
-  - template: "{{contact_summary.blood_glucose_tests.fasting_plasma_glucose_results_mg_dl}}: {fasting_plasma_gluc} mg/dl"
+  - template: "{{contact_summary.blood_glucose_tests.fasting_plasma_glucose_results_mg_dl}}: {fasting_plasma_gluc} mmmol/L"
     relevance: "fasting_plasma_gluc != ''"
 
-  - template: "{{contact_summary.blood_glucose_tests.75g_ogtt_fasting_glucose_results_mg_dl}}: {ogtt_fasting} mg/dl"
+  - template: "{{contact_summary.blood_glucose_tests.75g_ogtt_fasting_glucose_results_mg_dl}}: {ogtt_fasting} mmmol/L"
     relevance: "ogtt_fasting != ''"
 
-  - template: "{{contact_summary.blood_glucose_tests.75g_ogtt_1_hr_results_mg_dl}}: {ogtt_1} mg/dl"
+  - template: "{{contact_summary.blood_glucose_tests.75g_ogtt_1_hr_results_mg_dl}}: {ogtt_1} mmmol/L"
     relevance: "ogtt_1 != ''"
 
-  - template: "{{contact_summary.blood_glucose_tests.75g_ogtt_2_hrs_results_mg_dl}}: {ogtt_2} mg/dl"
+  - template: "{{contact_summary.blood_glucose_tests.75g_ogtt_2_hrs_results_mg_dl}}: {ogtt_2} mmmol/L"
     relevance: "ogtt_2 != ''"
 
-  - template: "{{contact_summary.blood_glucose_tests.random_plasma_glucose_results_mg_dl}}: {random_plasma} mg/dl"
+  - template: "{{contact_summary.blood_glucose_tests.random_plasma_glucose_results_mg_dl}}: {random_plasma} mmmol/L"
     relevance: "random_plasma != ''"
 
   - template: "{{contact_summary.blood_glucose_tests.diabetes_counseling_done}}"

@@ -4,15 +4,15 @@
       "key": "syph_test_status",
       "openmrs_entity_parent": "161476AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "openmrs_entity": "concept",
-      "openmrs_entity_id": "syph",
-      "label": "Syphilis test",
+      "openmrs_entity_id": "163725AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "label": "{{tests_syphilis_sub_form.step1.syph_test_status.label}}",
       "label_text_style": "bold",
       "text_color": "#000000",
       "type": "extended_radio_button",
       "options": [
         {
           "key": "done_today",
-          "text": "Done today",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.done_today.text}}",
           "type": "done_today",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -20,7 +20,7 @@
         },
         {
           "key": "done_earlier",
-          "text": "Done earlier",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.done_earlier.text}}",
           "type": "done_earlier",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -28,7 +28,7 @@
         },
         {
           "key": "ordered",
-          "text": "Ordered",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.ordered.text}}",
           "type": "ordered",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -36,7 +36,7 @@
         },
         {
           "key": "not_done",
-          "text": "Not done",
+          "text": "{{tests_syphilis_sub_form.step1.syph_test_status.options.not_done.text}}",
           "type": "not_done",
           "openmrs_entity_parent": "",
           "openmrs_entity": "concept",
@@ -44,7 +44,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "{{tests_syphilis_sub_form.step1.syph_test_status.v_required.err}}"
       }
     },
     {
@@ -130,7 +131,8 @@
         }
       },
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "{{tests_syphilis_sub_form.step1.syph_test_notdone.v_required.err}}"
       }
     },
     {
@@ -232,7 +234,8 @@
         }
       },
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "{{tests_syphilis_sub_form.step1.syph_test_type.v_required.err}}"
       }
     },
     {
@@ -260,7 +263,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "{{tests_syphilis_sub_form.step1.rapid_syphilis_test.v_required.err}}"
       },
       "relevance": {
         "rules-engine": {
@@ -295,7 +299,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "{{tests_syphilis_sub_form.step1.rpr_syphilis_test.v_required.err}}"
       },
       "relevance": {
         "rules-engine": {
@@ -330,7 +335,8 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": true,
+        "err": "{{tests_syphilis_sub_form.step1.lab_syphilis_test.v_required.err}}"
       },
       "relevance": {
         "rules-engine": {
@@ -376,5 +382,6 @@
     }
   ],
   "count": 1,
+  "validate_on_submit": true,
   "properties_file_name": "tests_syphilis_sub_form"
 }

@@ -194,7 +194,7 @@
         "duration": {
           "label": "{{anc_register.step1.dob_entered.duration.label}}"
         },
-        "min_date": "today-49y",
+        "min_date": "today-100y",
         "max_date": "today-10y",
         "v_required": {
           "value": "true",
@@ -445,7 +445,8 @@
           }
         ],
         "v_required": {
-          "value": false
+          "value": true,
+          "err": "please state occupation"
         },
         "relevance": {
           "step1:educ_level": {
@@ -611,7 +612,7 @@
           "err": "{{anc_register.step1.phone_number.v_numeric.err}}"
         },
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "{{anc_register.step1.phone_number.v_required.err}}"
         },
         "v_regex": {
@@ -622,8 +623,8 @@
       {
         "key": "reminders",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "163164AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "reminders",
         "type": "native_radio",
         "label": "{{anc_register.step1.reminders.label}}",
         "label_info_text": "{{anc_register.step1.reminders.label_info_text}}",
@@ -651,8 +652,8 @@
       {
         "key": "alt_name",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "alt_name",
         "type": "edit_text",
         "hint": "{{anc_register.step1.alt_name.hint}}",
         "edit_type": "name",
@@ -666,8 +667,8 @@
       {
         "key": "alt_phone_number",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "alt_phone_number",
         "type": "edit_text",
         "hint": "{{anc_register.step1.alt_phone_number.hint}}",
         "v_numeric": {
@@ -677,7 +678,7 @@
 
         "v_regex": {
           "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
-          "err": "Number must must be a total of 10 digits in length"
+          "err": "Number must start with 097|096|095|077|076 and must have be 10 digits in length"
         }
       },
       {
@@ -768,8 +769,8 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "cohabitants",
         "openmrs_data_type": "select multiple",
-        "label": "Co-habitants",
-        "label_info_text": "Who does the client live with? It is important to know whether client lives with parents, other family members, a partner, friends, etc.",
+        "label": "{{anc_register.step1.cohabitants.label}}",
+        "label_info_text": "{{anc_register.step1.cohabitants.label_info_text}}",
         "type": "check_box",
         "exclusive": [
           "no_one"
@@ -779,73 +780,65 @@
             "key": "parents",
             "text": "{{anc_register.step1.cohabitants.options.parents.text}}",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "parents"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           },
           {
             "key": "siblings",
             "text": "{{anc_register.step1.cohabitants.options.siblings.text}}",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "siblings"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           },
           {
             "key": "children",
             "text": "Child(ren)",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "children"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           },
           {
             "key": "extended_family",
             "text": "{{anc_register.step1.cohabitants.options.extended_family.text}}",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "extended_family"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           },
           {
             "key": "partner",
             "text": "{{anc_register.step1.cohabitants.options.partner.text}}",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "partner"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           },
           {
             "key": "friends",
             "text": "{{anc_register.step1.cohabitants.options.friends.text}}",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "friends"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           },
           {
             "key": "employee",
             "text": "Employee(s)",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "employee"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           },
           {
             "key": "no_one",
             "text": "{{anc_register.step1.cohabitants.options.no_one.text}}",
             "text_size": "18px",
-            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "no_one"
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
           }
         ]
       },

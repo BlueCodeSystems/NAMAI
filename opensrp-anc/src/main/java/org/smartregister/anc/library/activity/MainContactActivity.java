@@ -1,12 +1,13 @@
 package org.smartregister.anc.library.activity;
 
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Switch;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -17,10 +18,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
 import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
+import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.PreviousContact;
 import org.smartregister.anc.library.presenter.ContactPresenter;
@@ -31,12 +34,13 @@ import org.smartregister.anc.library.util.ConstantsUtils;
 import org.smartregister.anc.library.util.DBConstantsUtils;
 import org.smartregister.anc.library.util.FilePathUtils;
 import org.smartregister.anc.library.util.Utils;
-import org.smartregister.util.FormUtils;
-import org.smartregister.view.contract.MeContract;
+import org.smartregister.util.JsonFormUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,10 +51,6 @@ import java.util.Map;
 import java.util.Set;
 
 import timber.log.Timber;
-import android.widget.CompoundButton;
-import android.widget.Toast;
-
-import java.util.UUID;
 
 
 public class MainContactActivity extends BaseContactActivity implements ContactContract.View {
@@ -71,11 +71,39 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP, ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM,
             ConstantsUtils.JsonFormUtils.ANC_TEST, ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT, ConstantsUtils.JsonFormUtils.ANC_TEST_TASKS};
     private String formInvalidFields = null;
+    /*    public List<Contact> contacts = new ArrayList<>();
+        TextView requiredFields, requiredFields2, requiredFields3, requiredFields4, requiredFields5, requiredFields6, requiredFieldsx;
+        LinearLayout completeLayout, completeLayout2, completeLayout3, completeLayout4,
+                completeLayout5, completeLayout6, completeLayoutx, mainlayout, middleLayout;*/
     public List<Contact> contacts = new ArrayList<>();
-    public JSONObject formObject;
-    public boolean removeMainC = false;
-    public boolean startUp = true;
-
+    public TextView requiredFields;
+    public static TextView requiredFields2;
+    public TextView requiredFields3;
+    public static TextView requiredFields4;
+    public static TextView requiredFields5;
+    public static TextView requiredFields6;
+    public TextView requiredFieldsx;
+    public LinearLayout completeLayout;
+    public static LinearLayout completeLayout2;
+    public LinearLayout completeLayout3;
+    public static LinearLayout completeLayout4;
+    public static LinearLayout completeLayout5;
+    public static LinearLayout completeLayout6;
+    public LinearLayout completeLayoutx;
+    public LinearLayout mainlayout;
+    public LinearLayout middleLayout;
+    Button finalizeBtn;
+    public static Boolean ramTimed = false;
+    public static Boolean phyTimed = false;
+    public static Boolean proTimed = false;
+    public static Boolean tesTimed = false;
+    public static Boolean couTimed = false;
+    public static Boolean symTimed = false;
+    public static Instant startProfile;
+    public static Instant startSymptoms;
+    public static Instant startPhysical;
+    public static Instant startTests;
+    public static Instant startCounselling;
 
     @Override
     protected void onResume() {
@@ -91,50 +119,21 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         if (!presenter.baseEntityIdExists()) {
             presenter.setBaseEntityId(baseEntityId);
         }
-        if (startUp ==true)
-        {
-            initializeMainContactContainers();
-            startUp = false;
+
+        initializeMainContactContainers();
+        initializeContactLayout();
+        try {
+            setFields(contacts);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        int finished = getRequiredCountTotal();
 
-        Button r = (Button) findViewById(R.id.routineButton);
-        Button b = (Button) findViewById(R.id.containerBack);
+        //if (finished == 0) {
+        finalizeBtn.setEnabled(true);
+        //}
 
-        //r.setBackgroundResource(R.drawable.physical_exam_bg);
-        if(removeMainC==true){
-            r.setVisibility(View.GONE);
-        }else{
-           r.setVisibility(View.VISIBLE);
-        }
 
-        r.setOnClickListener(new OnClickListener() {
-                                 @Override
-                                 public void onClick(View view) {
-                                     removeMainC = true;
-                                     contacts.clear();
-                                     initializeSecondContactContainers();
-                                     r.setVisibility(View.GONE);
-                                     b.setVisibility(View.VISIBLE);
-
-                                 }
-        }
-        );
-
-        b.setOnClickListener(new OnClickListener() {
-                                 @Override
-                                 public void onClick(View view) {
-                                     removeMainC = false;
-                                     contacts.clear();
-                                     initializeMainContactContainers();
-                                     b.setVisibility(View.GONE);
-                                     r.setVisibility(View.VISIBLE);
-
-                                 }
-                             }
-        );
-
-        //Enable/Disable finalize button
-        findViewById(R.id.finalize_contact).setEnabled(true);
     }
 
 
@@ -154,25 +153,27 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                     requiredFieldsMap.put(pair[0], Integer.parseInt(pair[1]));
             }
 
+
+            /*-- 1: RAM Quick Check Container --*/
+
             Contact quickCheck = new Contact();
+
             quickCheck.setName(getString(R.string.quick_check));
             quickCheck.setContactNumber(contactNo);
             quickCheck.setActionBarBackground(R.color.quick_check_red);
             quickCheck.setBackground(R.drawable.quick_check_bg);
             quickCheck.setWizard(false);
             quickCheck.setHideSaveLabel(true);
-            if (requiredFieldsMap.containsKey(quickCheck.getName())) {
-                Integer quickCheckFields = requiredFieldsMap.get(quickCheck.getName());
-                quickCheck.setRequiredFields(quickCheckFields != null ? quickCheckFields : 0);
-            }
-
+            setRequiredFields(quickCheck);
             quickCheck.setFormName(ConstantsUtils.JsonFormUtils.ANC_QUICK_CHECK);
             contacts.add(quickCheck);
+
+
+            /*-- 2: Client Profile Container --*/
 
             Contact profile = new Contact();
             profile.setName(getString(R.string.profile));
             profile.setContactNumber(contactNo);
-            profile.setBackground(R.drawable.profile_bg);
             profile.setActionBarBackground(R.color.contact_profile_actionbar);
             profile.setNavigationBackground(R.color.contact_profile_navigation);
             setRequiredFields(profile);
@@ -180,17 +181,29 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             contacts.add(profile);
 
 
-            Contact spaceone = new Contact();
-            spaceone.setName("spacer");
-            contacts.add(spaceone);
+            /*-- 3: Symptoms and Follow Up --*/
 
+            Contact symptomsAndFollowUp = new Contact();
+            symptomsAndFollowUp.setName(getString(R.string.symptoms_follow_up));
+            symptomsAndFollowUp.setContactNumber(contactNo);
+            symptomsAndFollowUp.setActionBarBackground(R.color.contact_symptoms_actionbar);
+            symptomsAndFollowUp.setNavigationBackground(R.color.contact_symptoms_navigation);
+            setRequiredFields(symptomsAndFollowUp);
+            symptomsAndFollowUp.setFormName(ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP);
+            contacts.add(symptomsAndFollowUp);
 
-            Contact spacetwo = new Contact();
-            spacetwo.setName("spacer2");
-            spacetwo.setBackground(R.color.spaceCone);
-            spacetwo.setActionBarBackground(R.color.spaceCone);
-            spacetwo.setNavigationBackground(R.color.spaceCone);
-            contacts.add(spacetwo);
+            /*-- 4: Physical Exam --*/
+
+            Contact physicalExam = new Contact();
+            physicalExam.setName(getString(R.string.physical_exam));
+            physicalExam.setContactNumber(contactNo);
+            physicalExam.setActionBarBackground(R.color.contact_exam_actionbar);
+            physicalExam.setNavigationBackground(R.color.contact_exam_navigation);
+            setRequiredFields(physicalExam);
+            physicalExam.setFormName(ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM);
+            contacts.add(physicalExam);
+
+            /*-- 5: Tests Container --*/
 
             Contact tests = new Contact();
             tests.setName(getString(R.string.tests));
@@ -202,6 +215,9 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             tests.setFormName(ConstantsUtils.JsonFormUtils.ANC_TEST);
             contacts.add(tests);
 
+
+            /*-- 6: Counselling Container --*/
+
             Contact counsellingAndTreatment = new Contact();
             counsellingAndTreatment.setName(getString(R.string.counselling_treatment));
             counsellingAndTreatment.setContactNumber(contactNo);
@@ -212,8 +228,10 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             counsellingAndTreatment.setFormName(ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT);
             contacts.add(counsellingAndTreatment);
 
-            contactAdapter.setContacts(contacts);
-            contactAdapter.notifyDataSetChanged();
+
+
+            Utils.ramTime(quickCheck);
+
 
         } catch (Exception e) {
             Timber.e(e, " --> initializeMainContactContainers");
@@ -221,48 +239,200 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
     }
 
-    private void initializeSecondContactContainers() {
 
-        try {
+    public void initializeContactLayout(){
+        requiredFields = findViewById(R.id.required_fields);
+        completeLayout = findViewById(R.id.complete_layout);
+        requiredFields2 = findViewById(R.id.required_fields2);
+        completeLayout2 = findViewById(R.id.complete_layout2);
+        requiredFields3 = findViewById(R.id.required_fields3);
+        completeLayout3 = findViewById(R.id.complete_layout3);
+        requiredFields4 = findViewById(R.id.required_fields4);
+        completeLayout4 = findViewById(R.id.complete_layout4);
+        requiredFields5 = findViewById(R.id.required_fields5);
+        completeLayout5 = findViewById(R.id.complete_layout5);
+        requiredFields6 = findViewById(R.id.required_fields6);
+        completeLayout6 = findViewById(R.id.complete_layout6);
+        requiredFieldsx = findViewById(R.id.required_fieldsx);
+        completeLayoutx = findViewById(R.id.complete_layoutx);
+        mainlayout = findViewById(R.id.mainlayout);
+        middleLayout = findViewById(R.id.middle_containers);
+        finalizeBtn = findViewById(R.id.finalize_contact);
+    }
 
-            loadContactGlobalsConfig();
 
-            process(contactForms);
-            requiredFieldsMap.put(ConstantsUtils.JsonFormUtils.ANC_TEST_TASKS_ENCOUNTER_TYPE, 0);
 
-            if (StringUtils.isNotBlank(formInvalidFields) && contactNo > 1 && !PatientRepository.isFirstVisit(baseEntityId)) {
-                String[] pair = formInvalidFields.split(":");
-                if (ConstantsUtils.JsonFormUtils.ANC_PROFILE_ENCOUNTER_TYPE.equals(pair[0]))
-                    requiredFieldsMap.put(pair[0], Integer.parseInt(pair[1]));
-            }
 
-            Contact symptomsAndFollowUp = new Contact();
-            symptomsAndFollowUp.setName(getString(R.string.symptoms_follow_up));
-            symptomsAndFollowUp.setContactNumber(contactNo);
-            symptomsAndFollowUp.setBackground(R.drawable.symptoms_bg);
-            symptomsAndFollowUp.setActionBarBackground(R.color.contact_symptoms_actionbar);
-            symptomsAndFollowUp.setNavigationBackground(R.color.contact_symptoms_navigation);
-            setRequiredFields(symptomsAndFollowUp);
-            symptomsAndFollowUp.setFormName(ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP);
-            contacts.add(symptomsAndFollowUp);
+    public void setFields(List<Contact> contacts) throws Exception {
 
-            Contact physicalExam = new Contact();
-            physicalExam.setName(getString(R.string.physical_exam));
-            physicalExam.setContactNumber(contactNo);
-            physicalExam.setBackground(R.drawable.physical_exam_bg);
-            physicalExam.setActionBarBackground(R.color.contact_exam_actionbar);
-            physicalExam.setNavigationBackground(R.color.contact_exam_navigation);
-            setRequiredFields(physicalExam);
-            physicalExam.setFormName(ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM);
-            contacts.add(physicalExam);
+        Contact contact1 = contacts.get(0);
+        Contact contact2 = contacts.get(1);
+        Contact contact3 = contacts.get(2);
+        Contact contact4 = contacts.get(3);
+        Contact contact5 = contacts.get(4);
+        Contact contact6 = contacts.get(5);
 
-            contactAdapter.setContacts(contacts);
-            contactAdapter.notifyDataSetChanged();
-
-        } catch (Exception e) {
-            Timber.e(e, " --> initializeSecondContactContainers");
+        if (contact1.getRequiredFields() == null) {
+            requiredFields.setVisibility(View.GONE);
+            completeLayout.setVisibility(View.GONE);
+        } else if (contact1.getRequiredFields() == 0) {
+            completeLayout.setVisibility(View.VISIBLE);
+            requiredFields.setVisibility(View.GONE);
+        } else {
+            requiredFields.setText(String.format(this.getString(R.string.required_fields), contact1.getRequiredFields()));
+            requiredFields.setVisibility(View.VISIBLE);
+            completeLayout.setVisibility(View.GONE);
         }
 
+        if (contact2.getRequiredFields() == null) {
+            requiredFields2.setVisibility(View.GONE);
+            completeLayout2.setVisibility(View.GONE);
+        } else if (contact2.getRequiredFields() == 0) {
+            Utils.profileTime(contact2);
+            completeLayout2.setVisibility(View.VISIBLE);
+            requiredFields2.setVisibility(View.GONE);
+        } else {
+            requiredFields2.setText(String.format(this.getString(R.string.required_fields), contact2.getRequiredFields()));
+            requiredFields2.setVisibility(View.VISIBLE);
+            completeLayout2.setVisibility(View.GONE);
+        }
+
+        if (contact3.getRequiredFields() == null) {
+            requiredFields3.setVisibility(View.GONE);
+            completeLayout3.setVisibility(View.GONE);
+        } else if (contact3.getRequiredFields() == 0) {
+            Utils.symptomsTime(contact3);
+            completeLayout3.setVisibility(View.VISIBLE);
+            requiredFields3.setVisibility(View.GONE);
+            //runContact3 = true;
+        } else {
+            requiredFields3.setText(String.format(this.getString(R.string.required_fields), contact3.getRequiredFields()));
+            requiredFields3.setVisibility(View.VISIBLE);
+            completeLayout3.setVisibility(View.GONE);
+        }
+
+        if (contact4.getRequiredFields() == null) {
+            requiredFields4.setVisibility(View.GONE);
+            completeLayout4.setVisibility(View.GONE);
+        } else if (contact4.getRequiredFields() == 0) {
+            Utils.physicalTime(contact4);
+            completeLayout4.setVisibility(View.VISIBLE);
+            requiredFields4.setVisibility(View.GONE);
+            //runContact4 = true;
+        } else {
+            requiredFields4.setText(String.format(this.getString(R.string.required_fields), contact4.getRequiredFields()));
+            requiredFields4.setVisibility(View.VISIBLE);
+            completeLayout4.setVisibility(View.GONE);
+        }
+
+        if (contact5.getRequiredFields() == null) {
+            requiredFields5.setVisibility(View.GONE);
+            completeLayout5.setVisibility(View.GONE);
+        } else if (contact5.getRequiredFields() == 0) {
+            Utils.testsTime(contact5);
+            completeLayout5.setVisibility(View.VISIBLE);
+            requiredFields5.setVisibility(View.GONE);
+        } else {
+            requiredFields5.setText(String.format(this.getString(R.string.required_fields), contact5.getRequiredFields()));
+            requiredFields5.setVisibility(View.VISIBLE);
+            completeLayout5.setVisibility(View.GONE);
+        }
+
+        if (contact6.getRequiredFields() == null) {
+            requiredFields6.setVisibility(View.GONE);
+            completeLayout6.setVisibility(View.GONE);
+        } else if (contact6.getRequiredFields() == 0) {
+            Utils.counsellingTime(contact6);
+            completeLayout6.setVisibility(View.VISIBLE);
+            requiredFields6.setVisibility(View.GONE);
+            //runContact6 = true;
+        } else {
+            requiredFields6.setText(String.format(this.getString(R.string.required_fields), contact6.getRequiredFields()));
+            requiredFields6.setVisibility(View.VISIBLE);
+            completeLayout6.setVisibility(View.GONE);
+        }
+
+        if ((contact3.getRequiredFields() == null) && (contact4.getRequiredFields() == null) ) {
+            requiredFieldsx.setVisibility(View.GONE);
+            completeLayoutx.setVisibility(View.GONE);
+        } else {
+
+            int c3 = 0;
+            int c4 = 0;
+            boolean phys = false;
+            boolean symp = false;
+            boolean rac = false;
+
+            if (contact3.getRequiredFields() != null) {
+                c3 = contact3.getRequiredFields();
+                symp = true;
+            }
+
+            if (contact4.getRequiredFields() != null) {
+                c4 = contact4.getRequiredFields();
+                phys = true;
+            }
+
+            if((phys == true)&&(symp == true))
+            {
+                rac = true;
+            }
+
+            int fc = c3 + c4;
+
+            if((fc == 0) && (rac == true)){
+                requiredFieldsx.setVisibility(View.GONE);
+                completeLayoutx.setVisibility(View.VISIBLE);
+            } else {
+                requiredFieldsx.setText(String.format(this.getString(R.string.required_fields), fc));
+                requiredFieldsx.setVisibility(View.VISIBLE);
+                completeLayoutx.setVisibility(View.GONE);
+                mainlayout.setVisibility(View.GONE);
+                middleLayout.setVisibility(View.VISIBLE);
+            }
+
+        }
+
+
+    }
+
+    public void clickme(View v) throws Exception {
+
+        int i = v.getId();
+        if (i == R.id.ram) {
+            presenter.startForm(contacts.get(0));
+        } else if (i == R.id.profile){
+            presenter.startForm(contacts.get(1));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startProfile = Instant.now();
+            }
+        } else if (i == R.id.symptoms){
+            presenter.startForm(contacts.get(2));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startSymptoms = Instant.now();
+            }
+        } else if (i == R.id.exam){
+            presenter.startForm(contacts.get(3));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startPhysical = Instant.now();
+            }
+        }else if (i == R.id.imaging){
+            presenter.startForm(contacts.get(4));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startTests = Instant.now();
+            }
+        }else if (i == R.id.counselling){
+            presenter.startForm(contacts.get(5));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startCounselling = Instant.now();
+            }
+        } else if (i == R.id.routine){
+            mainlayout.setVisibility(View.GONE);
+            middleLayout.setVisibility(View.VISIBLE);
+        } else if (i == R.id.containerBack){
+            mainlayout.setVisibility(View.VISIBLE);
+            middleLayout.setVisibility(View.GONE);
+        }
     }
 
     private int getRequiredCountTotal() {
@@ -277,6 +447,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         }
         return count;
     }
+
 
     private void loadContactGlobalsConfig() throws IOException {
         Iterable<Object> contactGlobals = readYaml(FilePathUtils.FileUtils.CONTACT_GLOBALS);
@@ -390,7 +561,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                 requiredFieldsMap.put(object.getString(ConstantsUtils.JsonFormKeyUtils.ENCOUNTER_TYPE), 0);
             }
             if (contactNo > 1 && ConstantsUtils.JsonFormUtils.ANC_PROFILE_ENCOUNTER_TYPE.equals(encounterType)
-            && !PatientRepository.isFirstVisit(baseEntityId)) {
+                    && !PatientRepository.isFirstVisit(baseEntityId)) {
                 requiredFieldsMap.put(ConstantsUtils.JsonFormUtils.ANC_PROFILE_ENCOUNTER_TYPE, 0);
             }
 
@@ -643,23 +814,6 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         return "";
     }
 
-    @Override
-    public void startForms(View view) {
-        Contact contact = (Contact) view.getTag();
-        try {
-            if (contact != null) {
-                loadContactGlobalsConfig();
-                process(contactForms);
-
-                setRequiredFields(contact);
-                view.setTag(contact);
-                super.startForms(view);
-            }
-        } catch (IOException e) {
-            Timber.e(e, " --> startForms");
-        }
-    }
-
     private void preProcessDefaultValues(JSONObject object) {
         try {
             if (object != null) {
@@ -887,8 +1041,14 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
             formInvalidFields = data.getStringExtra("formInvalidFields");
         }
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
     }
 }

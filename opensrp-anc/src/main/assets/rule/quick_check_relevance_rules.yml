@@ -82,3 +82,66 @@ priority: 1
 condition: "!step1_danger_signs.isEmpty()"
 actions:
   - "isRelevant = true"
+
+---
+name: step1_live_label
+description: live_label
+priority: 1
+condition: "step1_emergency_referal.contains('yes') && step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_live_births
+description: live_label
+priority: 1
+condition: "step1_emergency_referal.contains('yes') && step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_still_label
+description: still_label
+priority: 1
+condition: "step1_emergency_referal.contains('yes') && step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_still_births
+description: still_label
+priority: 1
+condition: "step1_emergency_referal.contains('yes') && step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_provider_name
+description: provider_name
+priority: 1
+condition: "step1_emergency_referal.contains('yes')"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_miscarriage_label
+description: miscarriage_label
+priority: 1
+condition: "step1_emergency_referal.contains('yes') && step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_miscarriage
+description: miscarriage
+priority: 1
+condition: "step1_emergency_referal.contains('yes') && step1_no_of_prev_preg > 0"
+actions:
+  - "isRelevant = true"
+---
+name: step1_accordion_feedback
+description: accordion_feedback
+priority: 1
+condition: "false"
+actions:
+  - "isRelevant = true"

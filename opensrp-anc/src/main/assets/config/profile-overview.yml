@@ -37,9 +37,9 @@ fields:
 ---
 sub_group: obstetric_history
 fields:
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.gravida}}: {gravida}"
-    relevance: "gravida != ''"
-    isRedFont: "gravida >= 5"
+  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.gravida}}: {total_gravida}"
+    relevance: "total_gravida != ''"
+    isRedFont: "total_gravida >= 5"
 
   - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.parity}}: {parity}"
     relevance: "parity != ''"
@@ -58,8 +58,12 @@ fields:
     isRedFont: "stillbirths > 0"
 
   - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.past_pregnancy_problems}}: {prev_preg_comps_value}, {prev_preg_comps_other}"
-    relevance: "!prev_preg_comps.isEmpty() && (!prev_preg_comps.contains('dont_know') || !prev_preg_comps.contains('none'))"
+    relevance: "!prev_preg_comps.isEmpty() && (!prev_preg_comps.contains('dont_know') && !prev_preg_comps.contains('none'))"
     isRedFont: "true"
+
+  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.past_pregnancy_problems}}: {prev_preg_comps_value}, {prev_preg_comps_other}"
+    relevance: "!prev_preg_comps.isEmpty() && prev_preg_comps.contains('none')"
+    isRedFont: "false"
 
   - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.past_substances_used}}: {substances_used_value},{substances_used_other}"
     relevance: "(!substances_used.contains('none') && !substances_used.isEmpty())"
@@ -68,14 +72,14 @@ fields:
 ---
 sub_group: medical_history
 fields:
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.blood_type}}: {blood_type}"
+  - template: "{{profile_overview.overview_of_pregnancy.medical_history.blood_type}}: {blood_type_value}"
     relevance: "blood_type != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.allergies}}: {allergies}"
+  - template: "{{profile_overview.overview_of_pregnancy.medical_history.allergies}}: {allergies_value}"
     relevance: "allergies != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.surgeries}}: {surgeries}"
-    relevance: "surgeries != ''"
+  - template: "{{profile_overview.overview_of_pregnancy.medical_history.surgeries}}: {surgeries_value}"
+    relevance: "surgeries_value != ''"
 
   - template: "{{profile_overview.overview_of_pregnancy.medical_history.chronic_health_conditions}}: {health_conditions_value}"
     relevance: "!health_conditions.isEmpty() && !health_conditions.contains('none') && !health_conditions.contains('dont_know')"
@@ -105,7 +109,7 @@ fields:
 sub_group: medications
 fields:
   - template: "{{profile_overview.overview_of_pregnancy.medications.current_medications}}: {medications_value}"
-    relevance: "medications != ''"
+    relevance: "medications_value != ''"
 
   - template: "{{profile_overview.overview_of_pregnancy.medications.medications_prescribed}}: {medications_prescribed}"
     relevance: "medications_prescribed !='' "
@@ -134,20 +138,59 @@ fields:
 group: hospital_referral_reasons
 fields:
   - template: "{{profile_overview.hospital_referral_reasons.woman_referred_to_hospital}}"
-    relevance: "referred_hosp == 'Yes'"
+    relevance: "emergency_referal == 'Yes'"
+
+  - template: "Referral feedback: {referral_feedback}"
+    relevance: "referral_feedback != ''"
 
   - template: "{{profile_overview.hospital_referral_reasons.woman_not_referred_to_hospital}}: {referred_hosp_notdone}"
-    relevance: "referred_hosp == 'No'"
+    relevance: "emergency_referal == 'No'"
     isRedFont: "true"
 
-  - template: "{{profile_overview.hospital_referral_reasons.danger_signs}}: {danger_signs}"
+  - template: "Referral reason: {referal_reason}"
+    relevance: "!referal_reason.isEmpty()"
+
+  - template: "Other reason: {other_reason}"
+    relevance: "!other_reason.isEmpty()"
+
+  - template: "Pre-existing: {pre_existing_medic_value}"
+    relevance: "!pre_existing_medic.isEmpty()"
+
+  - template: "Other complications: {other_complications_value}"
+    relevance: "!other_complications.isEmpty()"
+
+  - template: "Specific diagnosis: {diagnostics_specify_value}"
+    relevance: "!diagnostics_specify.isEmpty()"
+
+  - template: "Treatment : {treatment}"
+    relevance: "!treatment.isEmpty()"
+
+  - template: "Receiving: {receiving}"
+    relevance: "!receiving.isEmpty()"
+
+  - template: "Provider Name: {provider_name}"
+    relevance: "emergency_referal.contains('yes')"
+
+  - template: "Provider phone number: {provider_phone_number}"
+    relevance: "!provider_phone_number.isEmpty()"
+
+  - template: "Referral notes: {referral_notes}"
+    relevance: "!referral_notes.isEmpty()"
+
+  - template: "Date of referral: {date_referral}"
+    relevance: "!date_referral.isEmpty()"
+
+  - template: "Date scheduled: {date_scheduled}"
+    relevance: "!date_scheduled.isEmpty()"
+
+  - template: "{{profile_overview.hospital_referral_reasons.danger_signs}}: {danger_signs_value}"
     relevance: "!danger_signs.contains('danger_none') && !danger_signs.isEmpty()"
 
   - template: "{{profile_overview.hospital_referral_reasons.severe_hypertension}}: {bp_systolic_repeat}/{bp_diastolic_repeat} mmHg"
     relevance: "severe_hypertension == 1 && global_contact_no == 1"
 
-  - template: "{{profile_overview.hospital_referral_reasons.hypertension_and_symptom_of_severe_pre_eclampsia}}: {symp_sev_preeclampsia}"
-    relevance: "hypertension == 1 && symp_sev_preeclampsia != '' && symp_sev_preeclampsia != 'none'"
+  - template: "{{profile_overview.hospital_referral_reasons.hypertension_and_symptom_of_severe_pre_eclampsia}}: {symp_sev_preeclampsia_value}"
+    relevance: "hypertension == 1 && symp_sev_preeclampsia_value != '' && symp_sev_preeclampsia_value != 'none'"
 
   - template: "{{profile_overview.hospital_referral_reasons.pre_eclampsia_diagnosis}}"
     relevance: "preeclampsia == 1 && global_contact_no == 1"
@@ -189,10 +232,10 @@ fields:
     relevance: "fetal_heart_rate_repeat < 100 || fetal_heart_rate_repeat > 180"
 
 ---
-group: risks_and_diagnoses
+group: risk_and_diagnoses
 fields:
   - template: "High daily consumption of caffeine: {caffeine_intake_value}"
-    relevance: "caffeine_intake != '' && caffeine_intake != 'none'"
+    relevance: "caffeine_intake != '' && !caffeine_intake.contains('none')"
     isRedFont: "true"
 
   - template: "Tobacco user or recently quit: {tobacco_user}"
@@ -292,7 +335,7 @@ fields:
 group: physiological_symptoms
 fields:
   - template: "{{profile_overview.physiological_symptoms.physiological_symptoms}}: {phys_symptoms_value}"
-    relevance: "phys_symptoms != ''"
+    relevance: "phys_symptoms_value != ''"
   - template: "Persisting physiological symptoms: {phys_symptoms_persist_value}"
     relevance: "phys_symptoms_persist != ''"
     isRedFont: "true"
@@ -300,11 +343,11 @@ fields:
 ---
 group: birth_plan_counselling
 fields:
-  - template: "{{profile_overview.birth_plan_counseling.planned_birth_place}}: {delivery_place}"
+  - template: "{{profile_overview.birth_plan_counseling.planned_birth_place}}: {delivery_place_value}"
     relevance: "delivery_place != ''"
 
-  - template: "{{profile_overview.birth_plan_counseling.fp_method_accepted}}: {family_planning_type}"
-    relevance: "family_planning_type != ''"
+  - template: "{{profile_overview.birth_plan_counseling.fp_method_accepted}}: {family_planning_type_value}"
+    relevance: "family_planning_type_value != ''"
 
 ---
 group: malaria_prophylaxis
@@ -322,20 +365,20 @@ fields:
 group: immunisation_status
 fields:
   - template: "{{profile_overview.immunisation_status.tt_immunisation_status}}: {tt_immun_status_value}"
-    relevance: "tt_immun_status != ''"
+    relevance: "tt_immun_status_value != ''"
     isRedFont: "tt_immun_status == 'ttcv_not_received' || tt_immun_status == 'unknown'"
 
   - template: "{{profile_overview.immunisation_status.tt_immunisation_number}}: {underimmunized_doses}"
     relevance: "underimmunized_doses != ''"
 
-  - template: "{{profile_overview.immunisation_status.tt_fully_protected}}: {ttcv_full_protected}"
-    relevance: "tt_immun_status == '3_doses'"
+  - template: "Protection status: Fully Protected"
+    relevance: "tt_immun_status == '3_doses' && tt_immun_status != ''"
 
-  - template: "{{profile_overview.immunisation_status.tt_unprotected}}: {ttcv_unprotected}"
-    relevance: "underimmunized_doses < '2'"
+  - template: "Protection status: Unprotected"
+    relevance: "underimmunized_doses < '2' && tt_immun_status != ''"
 
-  - template: "{{profile_overview.immunisation_status.tt_protected}}: {ttcv_protected}"
-    relevance: "underimmunized_doses > '1'"
+  - template: "Protection status: Protected"
+    relevance: "underimmunized_doses > '1' && tt_immun_status != ''"
 
   - template: "{{profile_overview.immunisation_status.tt_dose_1}}: {tt1_date_value}"
     relevance: "tt1_date == 'done_today' || tt1_date == 'done_earlier'"

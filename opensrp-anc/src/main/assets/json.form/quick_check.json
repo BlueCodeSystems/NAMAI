@@ -442,12 +442,12 @@
             "openmrs_entity_id": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
-            "key": "draining",
+            "key": "drainin",
             "text": "Draining",
             "value": false,
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "draining"
+            "openmrs_entity_id": "drainin"
           },
           {
             "key": "severe_headache",
@@ -559,9 +559,12 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "emergency_referal",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "Emergency referral",
         "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",
@@ -598,7 +601,8 @@
                   "danger_fever",
                   "convulsing",
                   "central_cyanosis",
-                  "danger_bleeding"
+                  "danger_bleeding",
+                  "drainin"
                 ]
               }
             ]
@@ -663,8 +667,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -697,84 +706,91 @@
             "text": "Asthma",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "165269AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "asthma"
           },
           {
             "key": "cardiac_condition",
             "text": " Cardiac condition",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "cardiac_condition"
           },
           {
             "key": "diabetes_mellitus",
             "text": "Diabetes mellitus",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "diabetes_mellitus"
           },
           {
             "key": "renal_failure",
             "text": "Renal failure",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "renal_failure"
           },
           {
             "key": "epilepsy",
             "text": "Epilepsy",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "epilepsy"
           },
           {
             "key": "hypertension",
             "text": "Hypertension",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "hypertension"
           },
           {
             "key": "hyperthyroidism",
             "text": "Hyperthyroidism",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "hyperthyroidism"
           },
           {
             "key": "moderate_anaemia",
             "text": "Moderate to severe anaemia (< 8g/dl)",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "moderate_anaemia"
           },
           {
             "key": "previous_coagulopathy",
             "text": "Previous or current coagulopathy (eg. DVT)",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "previous_coagulopathy"
           },
           {
-            "key": "renal disease",
+            "key": "renal_disease",
             "text": "Renal disease",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "renal_disease"
           },
           {
             "key": "sickle_cell_disease",
             "text": "Sickle cell disease",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "sickle_cell_disease"
           },
           {
             "key": "rh_negative",
             "text": "RH negative",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
-            "openmrs_entity_id": "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "openmrs_entity_id": "rh_negative"
+          },
+          {
+            "key": "other",
+            "text": "Other (Specify)",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "other"
           }
         ],
         "v_required": {
@@ -789,6 +805,21 @@
         }
       },
       {
+        "key": "other_reason_pre",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "other_reason_pre",
+        "type": "edit_text",
+        "hint": "Specify",
+        "edit_type": "name",
+        "relevance": {
+          "step1:pre_existing_medic": {
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
+          }
+        }
+      },
+      {
         "key": "other_complications",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -796,6 +827,9 @@
         "type": "check_box",
         "label": "Other complications",
         "label_text_style": "bold",
+        "exclusive": [
+          "none_comp"
+        ],
         "options": [
           {
             "key": "none_comp",
@@ -902,6 +936,30 @@
         },
         "relevance": {
           "step1:emergency_referal": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "treatment_specify",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "treatment_specify",
+        "type": "edit_text",
+        "hint": "Specify treatment given",
+        "edit_type": "edit_text",
+        "v_required": {
+          "value": false,
+          "err": "Specify treatment given"
+        },
+        "relevance": {
+          "step1:treatment": {
             "type": "string",
             "ex": "equalTo(., \"yes\")"
           }
@@ -917,8 +975,13 @@
         "edit_type": "name",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -933,6 +996,13 @@
         "read_only": "true"
       },
       {
+        "key": "register_id",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "register_id",
+        "type": "hidden"
+      },
+      {
         "key": "provider_phone_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -945,12 +1015,17 @@
         },
         "v_regex": {
           "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
-          "err": "Number must must be a total of 10 digits in length"
+          "err": "Number must start with 097|096|095|077|076 and must have be 10 digits in length"
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -964,8 +1039,13 @@
         "edit_type": "name",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -978,8 +1058,13 @@
         "hint": "Referral feedback",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1000,8 +1085,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1022,8 +1112,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1035,8 +1130,13 @@
         "text_color": "#000000",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1051,8 +1151,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1064,7 +1169,7 @@
         "type": "numbers_selector",
         "number_of_selectors": "5",
         "start_number": "0",
-        "max_value": "8",
+        "max_value": "16",
         "text_size": "16px",
         "text_color": "#000000",
         "selected_text_color": "#ffffff",
@@ -1073,8 +1178,13 @@
         },
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -1088,42 +1198,48 @@
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
       {
         "key": "live_births",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "",
         "openmrs_entity_id": "live_births",
-        "type": "normal_edit_text",
-        "edit_text_style": "bordered",
-        "edit_type": "number",
+        "type": "numbers_selector",
+        "start_number": "0",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "v_required": {
-          "value": "true",
-          "err": "Enter number of live births"
+          "value": false
         },
-        "v_numeric": {
-          "value": "true",
-          "err": ""
-        },
-        "v_min": {
-          "value": "0",
-          "err": "cannot be less than 0"
-        },
-        "v_max": {
-          "value": "10",
-          "err": "can not be more than 10"
+        "constraints": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_constraint_rules.yml"
+            }
+          }
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
       },
       {
         "key": "still_label",
@@ -1135,87 +1251,91 @@
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
       {
         "key": "still_births",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "",
         "openmrs_entity_id": "still_births",
-        "type": "normal_edit_text",
-        "edit_text_style": "bordered",
-        "edit_type": "number",
+        "type": "numbers_selector",
+        "start_number": "0",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "v_required": {
-          "value": "true",
-          "err": "Enter number of still births"
+          "value": false
         },
-        "v_numeric": {
-          "value": "true",
-          "err": ""
-        },
-        "v_min": {
-          "value": "0",
-          "err": "cannot be less than 0"
-        },
-        "v_max": {
-          "value": "10",
-          "err": "can not be more than 10"
+        "constraints": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_constraint_rules.yml"
+            }
+          }
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
+      },
+      {
+        "key": "spacer",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "spacer",
+        "type": "spacer",
+        "spacer_height": "20dp"
       },
       {
         "key": "miscarriage_label",
         "type": "label",
         "label_text_style": "bold",
-        "text": " No. of Miscarriage",
+        "text": " No. of Miscarriages",
         "text_color": "#000000",
         "v_required": {
           "value": true
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
       {
         "key": "miscarriage",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "",
         "openmrs_entity_id": "miscarriage",
-        "type": "normal_edit_text",
-        "edit_text_style": "bordered",
-        "edit_type": "number",
+        "type": "numbers_selector",
+        "start_number": "0",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "v_required": {
-          "value": "true",
-          "err": "Enter number of Miscarriages/ Abortions"
+          "value": false
         },
-        "v_numeric": {
-          "value": "true",
-          "err": ""
-        },
-        "v_min": {
-          "value": "0",
-          "err": "cannot be less than 0"
-        },
-        "v_max": {
-          "value": "10",
-          "err": "can not be more than 10"
+        "constraints": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_constraint_rules.yml"
+            }
+          }
         },
         "relevance": {
-          "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       },
@@ -1226,11 +1346,41 @@
         "openmrs_entity_id": "pregnancy_comp",
         "type": "edit_text",
         "hint": "Any pregnancy complications",
-        "edit_type": "name",
         "relevance": {
           "step1:emergency_referal": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "time_ram",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "time_ram",
+        "type": "edit_text"
+      },
+      {
+        "key": "accordion_feedback",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "text": "Referral feedback",
+        "accordion_info_text": "Enter referral feedback",
+        "accordion_info_title": "Referral feedback",
+        "type": "expansion_panel",
+        "content_form": "referral_feedback_sub_form",
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "quick_check_relevance_rules.yml"
+            }
           }
         }
       }
