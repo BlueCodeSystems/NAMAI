@@ -66,6 +66,7 @@ import org.smartregister.anc.library.event.BaseEvent;
 import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.Task;
+import org.smartregister.anc.library.presenter.ProfilePresenter;
 import org.smartregister.anc.library.repository.ContactTasksRepository;
 import org.smartregister.anc.library.repository.PatientRepository;
 import org.smartregister.anc.library.rule.AlertRule;
@@ -583,6 +584,11 @@ public class Utils extends org.smartregister.util.Utils {
         Integer gestationAge = 0;
         if (StringUtils.isNotBlank(edd)) {
             gestationAge = Utils.getGestationAgeFromEDDate(edd);
+            if(gestationAge < 1){
+                if(ProfilePresenter.gest_age_profile!=null){
+                    gestationAge =  Integer.parseInt(ProfilePresenter.gest_age_profile);
+                }
+            }
             AlertRule alertRule = new AlertRule(gestationAge, nextContactDate);
             alertStatus =
                     StringUtils.isNotBlank(contactStatus) && ConstantsUtils.AlertStatusUtils.ACTIVE.equals(contactStatus) ?
@@ -1183,7 +1189,7 @@ public class Utils extends org.smartregister.util.Utils {
 
 
         layoutDocument.close();
-        Toast.makeText(context, context.getResources().getString(R.string.pdf_saved_successfully) + filePath, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, context.getResources().getString(R.string.pdf_saved_successfully) + filePath, Toast.LENGTH_SHORT).show();
     }
 
     private String processUnderscores(String string) {

@@ -59,7 +59,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     private final Map<String, String> eventToFileMap = new HashMap<>();
     private final Yaml yaml = new Yaml();
     private final Map<String, List<String>> formGlobalKeys = new HashMap<>();
-    private final Map<String, String> formGlobalValues = new HashMap<>();
+    public static final Map<String, String> formGlobalValues = new HashMap<>();
     private final Set<String> globalKeys = new HashSet<>();
     private final Set<String> defaultValueFields = new HashSet<>();
     private List<String> globalValueFields = new ArrayList<>();
@@ -104,6 +104,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static Instant startPhysical;
     public static Instant startTests;
     public static Instant startCounselling;
+    public String gest_age_ref_yes;
 
     @Override
     protected void onResume() {

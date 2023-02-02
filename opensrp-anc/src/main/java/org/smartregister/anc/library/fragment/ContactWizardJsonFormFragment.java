@@ -3,6 +3,7 @@ package org.smartregister.anc.library.fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,8 +30,10 @@ import com.vijay.jsonwizard.interactors.JsonFormInteractor;
 
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.ContactJsonFormActivity;
+import org.smartregister.anc.library.activity.MainContactActivity;
 import org.smartregister.anc.library.domain.Contact;
 import org.smartregister.anc.library.presenter.ContactWizardJsonFormFragmentPresenter;
+import org.smartregister.anc.library.presenter.ProfilePresenter;
 import org.smartregister.anc.library.util.ANCFormUtils;
 import org.smartregister.anc.library.util.ConstantsUtils;
 import org.smartregister.anc.library.util.DBConstantsUtils;
@@ -37,6 +41,7 @@ import org.smartregister.anc.library.util.Utils;
 import org.smartregister.anc.library.viewstate.ContactJsonFormFragmentViewState;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -230,6 +235,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             builder.setView(view);
 
             Button yes = view.findViewById(R.id.refer_yes);
+
             final Button no = view.findViewById(R.id.refer_no);
 
             final AlertDialog dialog = builder.create();
@@ -242,7 +248,19 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             }
 
-            yes.setOnClickListener(v -> saveReferral(dialog));
+            yes.setOnClickListener(v -> {
+                EditText gestAgeEditText = view.findViewById(R.id.add_gest_age);
+                String ga_ref_value = gestAgeEditText.getText().toString();
+                ProfilePresenter.gest_age_profile = ga_ref_value;
+
+                Map<String, String> map = new HashMap<>();
+                if (TextUtils.isEmpty(MainContactActivity.formGlobalValues.get(ConstantsUtils.GEST_AGE_OPENMRS))) {
+                    map.put(ConstantsUtils.GEST_AGE_OPENMRS, ga_ref_value);
+                }
+
+                saveReferral(dialog);
+
+            });
             no.setOnClickListener(v -> quickCheckClose());
 
             dialog.show();
