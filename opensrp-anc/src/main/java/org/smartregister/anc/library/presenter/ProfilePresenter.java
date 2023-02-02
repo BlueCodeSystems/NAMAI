@@ -35,6 +35,7 @@ public class ProfilePresenter implements ProfileContract.Presenter, RegisterCont
     private ProfileContract.Interactor mProfileInteractor;
     private RegisterContract.Interactor mRegisterInteractor;
     private ContactInteractor contactInteractor;
+    public static String gest_age_profile = null;
 
     public ProfilePresenter(ProfileContract.View profileView) {
         mProfileView = new WeakReference<>(profileView);
@@ -144,12 +145,20 @@ public class ProfilePresenter implements ProfileContract.Presenter, RegisterCont
             try {
                 if(client.containsKey(DBConstantsUtils.KeyUtils.EDD) && client.get(DBConstantsUtils.KeyUtils.EDD) != null)
                     if(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD)) <= 40) {
-                        getProfileView().setProfileGestationAge(
-                                String.valueOf(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD))));
+                        if(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD)) < 1) {
+                            getProfileView().setProfileGestationAge(gest_age_profile);
+                        }else {
+                            getProfileView().setProfileGestationAge(
+                                    String.valueOf(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD))));
+                        }
                     }
 
             } catch (Exception e) {
-                getProfileView().setProfileGestationAge("0");
+                if(gest_age_profile!=null){
+                    getProfileView().setProfileGestationAge(gest_age_profile);
+                }else{
+                    getProfileView().setProfileGestationAge("0");
+                }
             }
             getProfileView().setProfileID(client.get(DBConstantsUtils.KeyUtils.ANC_ID));
             getProfileView().setProfileImage(client.get(DBConstantsUtils.KeyUtils.BASE_ENTITY_ID));
