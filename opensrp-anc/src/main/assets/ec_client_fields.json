@@ -11,17 +11,17 @@
           }
         },
         {
-          "column_name": "phone_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.phone_number"
-          }
-        },
-        {
           "column_name": "alt_name",
           "type": "Event",
           "json_mapping": {
             "field": "attributes.alt_name"
+          }
+        },
+        {
+          "column_name": "origin",
+          "type": "Event",
+          "json_mapping": {
+            "field": "attributes.origin"
           }
         },
         {
@@ -52,13 +52,6 @@
           "json_mapping": {
             "field": "obs.fieldCode",
             "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "alt_phone_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.alt_phone_number"
           }
         },
         {
@@ -199,6 +192,13 @@
           "type": "Client",
           "json_mapping": {
             "field": "attributes.occupation"
+          }
+        },
+        {
+          "column_name": "phone_number",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.phone_number"
           }
         },
         {

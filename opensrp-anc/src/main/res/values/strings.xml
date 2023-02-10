@@ -446,5 +446,6 @@
     <string name="contact_summary_data_file">contactSummaryData.pdf</string>
     <string name="device_to_device">Device-to-device sync</string>
     <string name="ga_ref">Enter Gestational Age</string>
+    <string name="enter_valid_ga">Enter a valid Gestational Age(12 weeks and above)</string>
 
 </resources>

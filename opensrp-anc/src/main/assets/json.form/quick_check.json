@@ -1363,7 +1363,7 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "time_ram",
-        "type": "edit_text"
+        "type": "hidden"
       },
       {
         "key": "accordion_feedback",
