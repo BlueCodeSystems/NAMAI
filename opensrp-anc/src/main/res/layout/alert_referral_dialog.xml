@@ -58,7 +58,7 @@
         android:textAllCaps="false"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/referral_dialog_text_size" />
+        android:textSize="20sp" />
 
 
 </LinearLayout>

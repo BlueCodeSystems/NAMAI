@@ -159,23 +159,10 @@
       "openmrs_entity": "concept",
       "openmrs_entity_id": "ref_facility",
       "type": "edit_text",
+      "value": "ref id",
       "hint": "File# (referring facility)",
-      "read_only": "true",
-      "edit_type": "name",
-      "relevance": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
-          }
-        }
-      },
-      "calculation": {
-        "rules-engine": {
-          "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
-          }
-        }
-      }
+      "read_only": "false",
+      "edit_type": "name"
     },
     {
       "key": "rec_facility",

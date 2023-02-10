@@ -116,6 +116,7 @@ public class Utils extends org.smartregister.util.Utils {
     private static final String OTHER_SUFFIX = ", other]";
     public static Instant startRam = null;
     public static String baseEntityId;
+    public static String refIDstring;
     static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
 
     static ContactModel baseContactModel = new ContactModel();
@@ -249,7 +250,10 @@ public class Utils extends org.smartregister.util.Utils {
             if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
                 JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
                 JSONObject smNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"register_id");
+                //JSONObject phnNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
                 smNumber.put(JsonFormUtils.VALUE, personObjectClient.get("register_id"));
+                refIDstring = personObjectClient.get("register_id");
+                //phnNumber.put(JsonFormUtils.VALUE, personObjectClient.get("phone_number"));
                 ccname.put(JsonFormUtils.VALUE, name);
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

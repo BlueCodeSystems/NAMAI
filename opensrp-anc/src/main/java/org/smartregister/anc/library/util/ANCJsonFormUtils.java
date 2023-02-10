@@ -551,11 +551,10 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             String homeAddress = womanClient.get(DBConstantsUtils.KeyUtils.HOME_ADDRESS);
             jsonObject.put(ANCJsonFormUtils.VALUE, homeAddress);
 
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.ORIGIN))
-    {
-        String origin = womanClient.get(DBConstantsUtils.KeyUtils.ORIGIN);
-        jsonObject.put(ANCJsonFormUtils.VALUE, origin);
-    }
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.ORIGIN)) {
+            String origin = womanClient.get(DBConstantsUtils.KeyUtils.ORIGIN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, origin);
+        }
         else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.OTHER_RELATIONS))
         {
             String otherRelationsToClient = womanClient.get(DBConstantsUtils.KeyUtils.OTHER_RELATIONS);
@@ -576,7 +575,12 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             String relationNK = womanClient.get(DBConstantsUtils.KeyUtils.RELATION_NK);
             jsonObject.put(ANCJsonFormUtils.VALUE, relationNK);
 
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.OCCUPATION)) {
+        }
+        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PHONE_NUMBER)) {
+            String phoneNumber = womanClient.get(DBConstantsUtils.KeyUtils.PHONE_NUMBER);
+            jsonObject.put(ANCJsonFormUtils.VALUE, phoneNumber);
+        }
+        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.OCCUPATION)) {
             String occupation = womanClient.get(DBConstantsUtils.KeyUtils.OCCUPATION);
             jsonObject.put(ANCJsonFormUtils.VALUE, occupation);
 
