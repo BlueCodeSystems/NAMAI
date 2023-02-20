@@ -83,6 +83,29 @@
     "next": "step2",
     "fields": [
       {
+        "key": "accordion_blood_haemoglobin",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "text": "{{anc_test.step1.accordion_blood_haemoglobin.text}}",
+        "accordion_info_text": "{{anc_test.step1.accordion_blood_haemoglobin.accordion_info_text}}",
+        "accordion_info_title": "{{anc_test.step1.accordion_blood_haemoglobin.accordion_info_title}}",
+        "type": "expansion_panel",
+        "content_form": "tests_blood_haemoglobin_sub_form",
+        "container": "test",
+        "v_required": {
+          "value": "true",
+          "err": "Please test for haemoglobin"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "accordion_blood_type",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -92,6 +115,108 @@
         "accordion_info_text": "Blood Type",
         "accordion_info_title": "Blood Group test",
         "content_form": "tests_blood_type_sub_form",
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "accordion_urine",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "text": "{{anc_test.step1.accordion_urine.text}}",
+        "accordion_info_text": "{{anc_test.step1.accordion_urine.accordion_info_text}}",
+        "accordion_info_title": "{{anc_test.step1.accordion_urine.accordion_info_title}}",
+        "type": "expansion_panel",
+        "content_form": "tests_urine_sub_form",
+        "container": "test",
+        "v_required": {
+          "value": "true",
+          "err": "Please test Urine"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "accordion_blood_glucose",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "text": "{{anc_test.step2.accordion_blood_glucose.text}}",
+        "type": "expansion_panel",
+        "display_bottom_section": true,
+        "content_form": "tests_blood_glucose_sub_form",
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "accordion_tb_screening",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "text": "{{anc_test.step1.accordion_tb_screening.text}}",
+        "accordion_info_text": "{{anc_test.step1.accordion_tb_screening.accordion_info_text}}",
+        "accordion_info_title": "{{anc_test.step1.accordion_tb_screening.accordion_info_title}}",
+        "type": "expansion_panel",
+        "content_form": "tests_tb_screening_sub_form",
+        "container": "test",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "accordion_syphilis",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "text": "{{anc_test.step1.accordion_syphilis.text}}",
+        "accordion_info_text": "{{anc_test.step1.accordion_syphilis.accordion_info_text}}",
+        "accordion_info_title": "{{anc_test.step1.accordion_syphilis.accordion_info_title}}",
+        "type": "expansion_panel",
+        "content_form": "tests_syphilis_sub_form",
+        "container": "test",
+        "v_required": {
+          "value": "true",
+          "err": "Please test for Syphilis"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "tests_expansion_panel_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "accordion_partner_syphilis",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "text": "Partner Syphilis test",
+        "accordion_info_text": "Partner Syphilis test",
+        "accordion_info_title": "Partner Syphilis test",
+        "type": "expansion_panel",
+        "content_form": "partner_tests_syphilis_sub_form",
         "container": "test",
         "relevance": {
           "rules-engine": {
@@ -183,131 +308,6 @@
           "err": "Please test for Hepatitis B"
         }
 
-      },
-      {
-        "key": "accordion_tb_screening",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "{{anc_test.step1.accordion_tb_screening.text}}",
-        "accordion_info_text": "{{anc_test.step1.accordion_tb_screening.accordion_info_text}}",
-        "accordion_info_title": "{{anc_test.step1.accordion_tb_screening.accordion_info_title}}",
-        "type": "expansion_panel",
-        "content_form": "tests_tb_screening_sub_form",
-        "container": "test",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "accordion_syphilis",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "{{anc_test.step1.accordion_syphilis.text}}",
-        "accordion_info_text": "{{anc_test.step1.accordion_syphilis.accordion_info_text}}",
-        "accordion_info_title": "{{anc_test.step1.accordion_syphilis.accordion_info_title}}",
-        "type": "expansion_panel",
-        "content_form": "tests_syphilis_sub_form",
-        "container": "test",
-        "v_required": {
-          "value": "true",
-          "err": "Please test for Syphilis"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "accordion_partner_syphilis",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "Partner Syphilis test",
-        "accordion_info_text": "Partner Syphilis test",
-        "accordion_info_title": "Partner Syphilis test",
-        "type": "expansion_panel",
-        "content_form": "partner_tests_syphilis_sub_form",
-        "container": "test",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "accordion_urine",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "{{anc_test.step1.accordion_urine.text}}",
-        "accordion_info_text": "{{anc_test.step1.accordion_urine.accordion_info_text}}",
-        "accordion_info_title": "{{anc_test.step1.accordion_urine.accordion_info_title}}",
-        "type": "expansion_panel",
-        "content_form": "tests_urine_sub_form",
-        "container": "test",
-        "v_required": {
-          "value": "true",
-          "err": "Please test Urine"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "accordion_blood_haemoglobin",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "{{anc_test.step1.accordion_blood_haemoglobin.text}}",
-        "accordion_info_text": "{{anc_test.step1.accordion_blood_haemoglobin.accordion_info_text}}",
-        "accordion_info_title": "{{anc_test.step1.accordion_blood_haemoglobin.accordion_info_title}}",
-        "type": "expansion_panel",
-        "content_form": "tests_blood_haemoglobin_sub_form",
-        "container": "test",
-        "v_required": {
-          "value": "true",
-          "err": "Please test for haemoglobin"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "accordion_blood_glucose",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "text": "{{anc_test.step2.accordion_blood_glucose.text}}",
-        "type": "expansion_panel",
-        "display_bottom_section": true,
-        "content_form": "tests_blood_glucose_sub_form",
-        "container": "test",
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "tests_expansion_panel_relevance_rules.yml"
-            }
-          }
-        }
       },
       {
         "key": "time_tests",

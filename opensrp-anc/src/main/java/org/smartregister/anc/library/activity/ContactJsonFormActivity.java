@@ -73,8 +73,8 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
                         List<String> list = Arrays.asList(danger_signs_value.split(",")), finalList = new LinkedList<>();
                         for (int i = 0; i < list.size(); i++) {
                             String text = list.get(i).trim();
-                            String translated_text = StringUtils.isNotBlank(text) ? NativeFormLangUtils.translateDatabaseString(text, AncLibrary.getInstance().getApplicationContext()) : "";
-                            finalList.add(translated_text);
+                            //String translated_text = StringUtils.isNotBlank(text) ? NativeFormLangUtils.translateDatabaseString(text, AncLibrary.getInstance().getApplicationContext()) : "";
+                            finalList.add(text);
                         }
                         globalValues.put(ConstantsUtils.DANGER_SIGNS + ConstantsUtils.SuffixUtils.VALUE, finalList.size() > 1 ? String.join(",", finalList) : finalList.size() == 1 ? finalList.get(0) : "");
                     }
