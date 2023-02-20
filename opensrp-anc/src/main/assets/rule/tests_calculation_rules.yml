@@ -1,74 +1,4 @@
 ---
-name: step1_hiv_positive
-description: hiv_positive
-priority: 1
-condition: "(step1_hiv_test_result == 'positive') || (!global_health_conditions.isEmpty() && global_health_conditions.contains('hiv'))"
-actions:
-  - "calculation = 1"
----
-name: step1_hiv_positive
-description: hiv_positive
-priority: 1
-condition: "(step1_hiv_test_result == 'positive') || (!global_health_conditions.isEmpty() && global_health_conditions.contains('hiv'))"
-actions:
-  - "calculation = 1"
----
-name: step1_partner_hiv_positive
-description: partner_hiv_positive
-priority: 1
-condition: "global_partner_hiv_status == 'positive' || step1_hiv_test_partner_result == 'positive'"
-actions:
-  - "calculation = 1"
----
-name: step1_hiv_risk
-description: hiv_risk
-priority: 1
-condition: "((global_hiv_positive == ''  || global_hiv_positive == 0) && (step1_partner_hiv_positive == 1 || global_alcohol_substance_use.contains('injectable_drugs') || global_occupation.contains('informal_employment_sex_worker') || global_site_anc_hiv == true))"
-actions:
-  - "calculation = 1"
----
-name: step1_hepb_positive
-description: hepb_positive
-priority: 1
-condition: "(step1_hbsag_lab_ima == 'positive') || (step1_hbsag_rdt == 'positive') || (step1_hbsag_dbs == 'positive')"
-actions:
-  - "calculation = 1"
----
-name: step1_partner_hepb_positive
-description: partner_hepb_positive
-priority: 1
-condition: "(step1_partner_hbsag_lab_ima == 'positive') || (step1_partner_hbsag_rdt == 'positive') || (step1_partner_hbsag_dbs == 'positive')"
-actions:
-  - "calculation = 1"
----
-name: step1_hepc_positive
-description: hepc_positive
-priority: 1
-condition: "(step1_hcv_lab_ima != '' && step1_hcv_lab_ima == 'positive') || (step1_hcv_rdt != '' && step1_hcv_rdt == 'positive') || (step1_hcv_dbs != '' && step1_hcv_dbs == 'positive')"
-actions:
-  - "calculation = 1"
----
-name: step1_hepc_positive
-description: hepc_positive
-priority: 1
-condition: "(step1_hcv_lab_ima != '' && step1_hcv_lab_ima == 'positive') || (step1_hcv_rdt != '' && step1_hcv_rdt == 'positive') || (step1_hcv_dbs != '' && step1_hcv_dbs == 'positive')"
-actions:
-  - "calculation = 1"
----
-name: step1_syphilis_positive
-description: syphilis_positive
-priority: 1
-condition: "(step1_rapid_syphilis_test == 'positive' && step1_rapid_syphilis_test != '' ) || (step1_rpr_syphilis_test == 'positive' && step1_rpr_syphilis_test != '') || (step1_lab_syphilis_test == 'positive' && step1_lab_syphilis_test != '')"
-actions:
-  - "calculation = 1"
----
-name: step1_partner_syphilis_positive
-description: syphilis_positive
-priority: 1
-condition: "(step1_partner_rapid_syphilis_test == 'positive' && step1_partner_rapid_syphilis_test != '' ) || (step1_partner_rpr_syphilis_test == 'positive' && step1_partner_rpr_syphilis_test != '') || (step1_partner_lab_syphilis_test == 'positive' && step1_partner_lab_syphilis_test != '')"
-actions:
-  - "calculation = 1"
----
 name: step1_gdm_risk
 description: gdm_risk
 priority: 1
@@ -128,21 +58,21 @@ actions:
 name: step1_anaemic
 description: anaemic
 priority: 1
-condition: "((step1_hb_result != ''  && step1_hb_result > 0 && step1_hb_result < 11) && (global_gest_age_openmrs != '' && global_gest_age_openmrs <= 12 || global_gest_age_openmrs >= 28))  "
+condition: "(step1_hb_result != ''  && step1_hb_result > 0 && step1_hb_result < 11)"
 actions:
   - "calculation = 1"
 ---
 name: step1_anemia_level
 description: anaemic level
 priority: 1
-condition: "((step1_hb_result != ''  && step1_hb_result > 8 && step1_hb_result <= 10.9) && (global_gest_age_openmrs != '' && global_gest_age_openmrs <= 12 || global_gest_age_openmrs >= 28))  "
+condition: "(step1_hb_result != ''  && step1_hb_result > 8 && step1_hb_result <= 10.9)"
 actions:
   - "calculation = 'Mild'"
 ---
 name: step1_anemia_level
 description: anaemic level
 priority: 2
-condition: "((step1_hb_result != ''  && step1_hb_result >= 7 && step1_hb_result <= 8.9) && (global_gest_age_openmrs != '' && global_gest_age_openmrs <= 12 || global_gest_age_openmrs >= 28))  "
+condition: "(step1_hb_result != ''  && step1_hb_result >= 7 && step1_hb_result <= 8.9)"
 actions:
   - "calculation = 'Moderate'"
 
@@ -150,7 +80,7 @@ actions:
 name: step1_anemia_level
 description: anaemic level
 priority: 3
-condition: "((step1_hb_result != ''  && step1_hb_result > 0 && step1_hb_result < 7) && (global_gest_age_openmrs != '' && global_gest_age_openmrs <= 12 || global_gest_age_openmrs >= 28))  "
+condition: "(step1_hb_result != ''  && step1_hb_result > 0 && step1_hb_result < 7)"
 actions:
   - "calculation = 'Severe'"
 ---
@@ -329,3 +259,73 @@ priority: 1
 condition: "step1_referral_test_status == 'done_today'"
 actions:
   -  "calculation = helper.getDateToday()"
+---
+name: step1_hiv_positive
+description: hiv_positive
+priority: 1
+condition: "(step1_hiv_test_result == 'positive') || (!global_health_conditions.isEmpty() && global_health_conditions.contains('hiv'))"
+actions:
+  - "calculation = 1"
+---
+name: step1_hiv_positive
+description: hiv_positive
+priority: 1
+condition: "(step1_hiv_test_result == 'positive') || (!global_health_conditions.isEmpty() && global_health_conditions.contains('hiv'))"
+actions:
+  - "calculation = 1"
+---
+name: step1_partner_hiv_positive
+description: partner_hiv_positive
+priority: 1
+condition: "global_partner_hiv_status == 'positive' || step1_hiv_test_partner_result == 'positive'"
+actions:
+  - "calculation = 1"
+---
+name: step1_hiv_risk
+description: hiv_risk
+priority: 1
+condition: "((global_hiv_positive == ''  || global_hiv_positive == 0) && (step1_partner_hiv_positive == 1 || global_alcohol_substance_use.contains('injectable_drugs') || global_occupation.contains('informal_employment_sex_worker') || global_site_anc_hiv == true))"
+actions:
+  - "calculation = 1"
+---
+name: step1_hepb_positive
+description: hepb_positive
+priority: 1
+condition: "(step1_hbsag_lab_ima == 'positive') || (step1_hbsag_rdt == 'positive') || (step1_hbsag_dbs == 'positive')"
+actions:
+  - "calculation = 1"
+---
+name: step1_partner_hepb_positive
+description: partner_hepb_positive
+priority: 1
+condition: "(step1_partner_hbsag_lab_ima == 'positive') || (step1_partner_hbsag_rdt == 'positive') || (step1_partner_hbsag_dbs == 'positive')"
+actions:
+  - "calculation = 1"
+---
+name: step1_hepc_positive
+description: hepc_positive
+priority: 1
+condition: "(step1_hcv_lab_ima != '' && step1_hcv_lab_ima == 'positive') || (step1_hcv_rdt != '' && step1_hcv_rdt == 'positive') || (step1_hcv_dbs != '' && step1_hcv_dbs == 'positive')"
+actions:
+  - "calculation = 1"
+---
+name: step1_hepc_positive
+description: hepc_positive
+priority: 1
+condition: "(step1_hcv_lab_ima != '' && step1_hcv_lab_ima == 'positive') || (step1_hcv_rdt != '' && step1_hcv_rdt == 'positive') || (step1_hcv_dbs != '' && step1_hcv_dbs == 'positive')"
+actions:
+  - "calculation = 1"
+---
+name: step1_syphilis_positive
+description: syphilis_positive
+priority: 1
+condition: "(step1_rapid_syphilis_test == 'positive' && step1_rapid_syphilis_test != '' ) || (step1_rpr_syphilis_test == 'positive' && step1_rpr_syphilis_test != '') || (step1_lab_syphilis_test == 'positive' && step1_lab_syphilis_test != '')"
+actions:
+  - "calculation = 1"
+---
+name: step1_partner_syphilis_positive
+description: syphilis_positive
+priority: 1
+condition: "(step1_partner_rapid_syphilis_test == 'positive' && step1_partner_rapid_syphilis_test != '' ) || (step1_partner_rpr_syphilis_test == 'positive' && step1_partner_rpr_syphilis_test != '') || (step1_partner_lab_syphilis_test == 'positive' && step1_partner_lab_syphilis_test != '')"
+actions:
+  - "calculation = 1"

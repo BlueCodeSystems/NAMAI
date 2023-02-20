@@ -9,7 +9,7 @@ actions:
   name: step1_anemia_diagnosis_toaster
   description: Note displaying the anemia level.
   priority: 1
-  condition: "!global_anemia_level.isEmpty()"
+  condition: "global_anemia_level != ''"
   actions:
    - 'calculation = ["level" : global_anemia_level]'
 ---
