@@ -731,7 +731,7 @@ actions:
 name: step12_viral_load_testdate_toaster
 description: viral_load_testdate_toaster
 priority: 1
-condition: "global_gest_age_openmrs>35"
+condition: "global_gest_age_openmrs > 35 && global_hiv_positive == 1"
 actions:
   - "isRelevant = true"
 ---

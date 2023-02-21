@@ -19,6 +19,7 @@ import org.smartregister.anc.library.activity.AncP2pModeSelectActivity;
 import org.smartregister.anc.library.activity.PopulationCharacteristicsActivity;
 import org.smartregister.anc.library.activity.SiteCharacteristicsActivity;
 import org.smartregister.anc.library.presenter.MePresenter;
+import org.smartregister.anc.library.reporting.monthly.MonthlyReportsActivity;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.util.LangUtils;
 import org.smartregister.view.activity.DrishtiApplication;
@@ -33,6 +34,7 @@ import timber.log.Timber;
 public class MeFragment extends org.smartregister.view.fragment.MeFragment implements MeContract.View {
     private RelativeLayout mePopCharacteristicsSection;
     private RelativeLayout siteCharacteristicsSection;
+    private RelativeLayout hia2ReportingSection;
     private RelativeLayout languageSwitcherSection;
     private RelativeLayout p2pSyncSetion;
     private TextView languageSwitcherText;
@@ -51,6 +53,7 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         super.setUpViews(view);
         mePopCharacteristicsSection = view.findViewById(R.id.me_pop_characteristics_section);
         siteCharacteristicsSection = view.findViewById(R.id.site_characteristics_section);
+        hia2ReportingSection = view.findViewById(R.id.hia2_reporting_section);
         p2pSyncSetion = view.findViewById(R.id.p2p_section);
 
         if (Utils.enableLanguageSwitching()) {
@@ -102,6 +105,10 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         } else if (viewId == R.id.me_pop_characteristics_section) {
             if (getContext() != null) {
                 getContext().startActivity(new Intent(getContext(), PopulationCharacteristicsActivity.class));
+            }
+        } else if (viewId == R.id.hia2_reporting_section) {
+            if (getContext() != null) {
+                getContext().startActivity(new Intent(getContext(), MonthlyReportsActivity.class));
             }
         } else if (viewId == R.id.language_switcher_section) {
             languageSwitcherDialog();
