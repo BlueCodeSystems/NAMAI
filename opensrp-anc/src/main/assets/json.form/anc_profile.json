@@ -168,7 +168,8 @@
     "underimmunized_doses",
     "ttcv_unprotected",
     "ttcv_protected",
-    "ttcv_full_protected"
+    "ttcv_full_protected",
+    "hiv_test_result"
   ],
   "step1": {
     "title": "{{anc_profile.step1.title}}",

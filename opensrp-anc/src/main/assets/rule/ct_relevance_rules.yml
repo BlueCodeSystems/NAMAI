@@ -663,7 +663,7 @@ actions:
 name: step10_fansidar
 description: fansidar
 priority: 1
-condition: "global_hiv_positive != 1 && (global_gest_age_openmrs >= 13)"
+condition: "global_hiv_positive != 1"
 actions:
   - "isRelevant = true"
 ---
@@ -696,14 +696,6 @@ actions:
   - "isRelevant = true"
 
 ---
-name: step12_viral_load_testdate
-description: viral_load_testdate
-priority: 1
-condition: "global_hiv_positive == 1"
-actions:
-  - "isRelevant = true"
-
----
 name: step12_viral_load
 description: art_number
 priority: 1
@@ -723,7 +715,7 @@ actions:
 name: step12_woman_hiv_negative_toaster
 description: woman_hiv_negative_toaster
 priority: 1
-condition: "!(global_hiv_positive == 1)"
+condition: "global_hiv_positive != 1 || global_hiv_test_result == 'negative'"
 actions:
   - "isRelevant = true"
 
@@ -731,7 +723,7 @@ actions:
 name: step12_viral_load_testdate_toaster
 description: viral_load_testdate_toaster
 priority: 1
-condition: "global_gest_age_openmrs>35"
+condition: "global_gest_age_openmrs > 35 && global_hiv_positive == 1"
 actions:
   - "isRelevant = true"
 ---
@@ -761,7 +753,7 @@ actions:
 name: step10_started_on_prep
 description: started_on_prep
 priority: 1
-condition: "!(global_hiv_positive == 1) && (global_partner_hiv_status == 'positive')"
+condition: "(global_hiv_positive != 1 || global_hiv_test_result == 'negative') && (global_partner_hiv_status == 'positive')"
 actions:
   - "isRelevant = true"
 ---

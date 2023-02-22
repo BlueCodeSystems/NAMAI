@@ -174,10 +174,10 @@ condition: "((global_no_of_fetuses != null && global_no_of_fetuses != '' && glob
 actions:
   - "calculation = 1"
 ---
-name: step3_hiv_positive
+name: step6_hiv_positive
 description: hiv_positive
 priority: 1
-condition: "(global_hiv_test_result != null && global_hiv_test_result != '' && global_hiv_test_result == 'positive') || (step6_health_conditions.contains('hiv'))"
+condition: "(global_hiv_test_result != null && global_hiv_test_result != '' && global_hiv_test_result == 'positive') || (step6_health_conditions.contains('hiv')) || (step10_hiv_test_result == 'positive')"
 actions:
   - "calculation = 1"
 ---
@@ -191,7 +191,7 @@ actions:
 name: step10_hiv_risk
 description: HIV Risk
 priority: 1
-condition: "((global_hiv_positive == null || global_hiv_positive == '' || global_hiv_positive == 0) && step6_hiv_positive != 1 && (global_site_anc_hiv == true || step10_partner_hiv_positive == 1 || step8_alcohol_substance_use.contains('injectable_drugs')))"
+condition: "((global_hiv_positive == null || global_hiv_positive == '' || global_hiv_positive == 0) && step6_hiv_positive != 1 && (global_site_anc_hiv == true || global_partner_hiv_positive == 1 || step8_alcohol_substance_use.contains('injectable_drugs')))"
 actions:
   - "calculation = 1"
 ---
@@ -247,23 +247,15 @@ actions:
 name: step10_hiv_test_result
 description: hiv_test_result
 priority: 3
-condition: " step3_health_conditions.contains('hiv')"
+condition: " step6_health_conditions.contains('hiv')"
 actions:
   - "calculation = 'positive' "
 
 ---
 name: step10_hiv_test_result
 description: hiv_test_result
-priority: 2
-condition: " global_hiv_test_result == 'negative'"
-actions:
-  - "calculation = 'negative' "
-
----
-name: step10_hiv_test_result
-description: hiv_test_result
 priority: 1
-condition: " global_hiv_test_result == 'positive'"
+condition: " global_hiv_positive == 'positive'"
 actions:
   - "calculation = 'positive' "
 

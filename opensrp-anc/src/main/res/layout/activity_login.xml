@@ -69,8 +69,8 @@
                 android:gravity="center_horizontal"
                 android:text="@string/antenatal_care_module"
                 android:textColor="@color/white"
-                android:textSize="@dimen/login_title_text_size"
-                android:translationY="-30dp"
+                android:textSize="20sp"
+                android:translationY="-10dp"
                 android:typeface="sans" />
 
             <ImageView
@@ -84,7 +84,20 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:src="@mipmap/ic_ministry_of_health"
-                android:translationY="-40dp" />
+                android:translationY="-10dp" />
+
+            <TextView
+                android:id="@+id/login_ministry_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-20dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:text="Ministry of Health"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:translationY="10dp"
+                android:typeface="sans" />
 
         </LinearLayout>
 
@@ -98,7 +111,7 @@
             android:orientation="vertical"
             android:paddingLeft="@dimen/login_horizontal_margin"
             android:paddingRight="@dimen/login_horizontal_margin"
-            android:translationY="-100dp">
+            android:translationY="-50dp">
 
 
             <EditText
