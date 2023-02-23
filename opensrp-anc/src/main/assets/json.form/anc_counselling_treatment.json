@@ -581,7 +581,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Return to Rapid Assessment and Management and fill in Referral form",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
         "toaster_type": "problem",
         "relevance": {
           "step1:referred_hosp": {
@@ -6135,7 +6135,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Return to Rapid Assessment and Management and fill in Referral form",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
         "toaster_type": "problem",
         "relevance": {
           "step1:referred_hosp": {
