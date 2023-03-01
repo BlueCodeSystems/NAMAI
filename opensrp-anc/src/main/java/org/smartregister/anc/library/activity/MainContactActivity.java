@@ -23,6 +23,7 @@ import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
+import org.smartregister.anc.library.fragment.ContactWizardJsonFormFragment;
 import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.PreviousContact;
@@ -232,6 +233,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
 
             Utils.ramTime(quickCheck);
+            //ContactWizardJsonFormFragment.contactStarted = true;
 
 
         } catch (Exception e) {

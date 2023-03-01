@@ -69,9 +69,9 @@ public class RegisterQueryProvider {
     }
 
     public String[] mainColumns() {
-        return new String[]{DBConstantsUtils.KeyUtils.FIRST_NAME, DBConstantsUtils.KeyUtils.MAIDEN_NAME, DBConstantsUtils.KeyUtils.LAST_NAME, DBConstantsUtils.KeyUtils.DOB, DBConstantsUtils.KeyUtils.OTHER_RELATIONS, DBConstantsUtils.KeyUtils.HOME_ADDRESS, DBConstantsUtils.KeyUtils.LANDMARK, DBConstantsUtils.KeyUtils.OCCUPATION, DBConstantsUtils.KeyUtils.OCCUPATION_REDACTED, DBConstantsUtils.KeyUtils.EDUC_LEVEL, DBConstantsUtils.KeyUtils.COUPLE, DBConstantsUtils.KeyUtils.RELATION_NK, DBConstantsUtils.KeyUtils.STUDY_ID, DBConstantsUtils.KeyUtils.PHONE_NUMBER, DBConstantsUtils.KeyUtils.NRC_NUMBER,
+        return new String[]{DBConstantsUtils.KeyUtils.FIRST_NAME, DBConstantsUtils.KeyUtils.MAIDEN_NAME, DBConstantsUtils.KeyUtils.LAST_NAME, DBConstantsUtils.KeyUtils.DOB, DBConstantsUtils.KeyUtils.OTHER_RELATIONS, DBConstantsUtils.KeyUtils.HOME_ADDRESS, DBConstantsUtils.KeyUtils.LANDMARK, DBConstantsUtils.KeyUtils.OCCUPATION, DBConstantsUtils.KeyUtils.OCCUPATION_REDACTED, DBConstantsUtils.KeyUtils.EDUC_LEVEL, DBConstantsUtils.KeyUtils.COUPLE, DBConstantsUtils.KeyUtils.RELATION_NK, DBConstantsUtils.KeyUtils.STUDY_ID, DBConstantsUtils.KeyUtils.PHONE_NUMBER, DBConstantsUtils.KeyUtils.NRC_NUMBER, DBConstantsUtils.KeyUtils.ORIGIN, DBConstantsUtils.KeyUtils.ALT_PHONE_NUMBER, DBConstantsUtils.KeyUtils.MARITAL_STATUS,
                 DBConstantsUtils.KeyUtils.DOB_UNKNOWN, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.ALT_NAME,
-                getDetailsTable() + "." + DBConstantsUtils.KeyUtils.ALT_PHONE_NUMBER, getDemographicTable() + "." + DBConstantsUtils.KeyUtils.BASE_ENTITY_ID,
+                getDemographicTable() + "." + DBConstantsUtils.KeyUtils.BASE_ENTITY_ID,
                 getDemographicTable() + "." + DBConstantsUtils.KeyUtils.BASE_ENTITY_ID + " as " + DBConstantsUtils.KeyUtils.ID_LOWER_CASE, DBConstantsUtils.KeyUtils.ANC_ID,
                 getDetailsTable() + "." + DBConstantsUtils.KeyUtils.REMINDERS, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.EDD,
                 getDetailsTable() + "." + DBConstantsUtils.KeyUtils.CONTACT_STATUS, getDetailsTable() + "." + DBConstantsUtils.KeyUtils.PREVIOUS_CONTACT_STATUS,

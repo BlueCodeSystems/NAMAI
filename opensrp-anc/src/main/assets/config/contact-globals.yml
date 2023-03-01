@@ -149,6 +149,7 @@ fields:
   - "ttcv_full_protected"
   - "tt1_dose_no"
   - "profile_hiv_test_result"
+  - "on_art"
 ---
 form: anc_physical_exam
 fields:

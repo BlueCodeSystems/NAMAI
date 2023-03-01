@@ -5133,7 +5133,7 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "fansidar",
             "text": "Yes"
           },
           {
@@ -5217,7 +5217,7 @@
         "label_info_text": "CTP is Cotrimoxazole Preventive Therapy; given as cotrimoxazole 960mg daily oral in HIV+ women",
         "options": [
           {
-            "key": "yes",
+            "key": "cotrimoxazole",
             "text": "Yes"
           },
           {
@@ -5299,7 +5299,7 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "mebendazole",
             "text": "Yes"
           },
           {

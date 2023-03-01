@@ -55,6 +55,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     private TextView contactTitle;
     private BottomNavigationListener navigationListener = new BottomNavigationListener();
     private ContactWizardJsonFormFragment formFragment;
+    //public static boolean contactStarted;
 
     public static JsonWizardFormFragment getFormFragment(String stepName) {
         ContactWizardJsonFormFragment jsonFormFragment = new ContactWizardJsonFormFragment();
@@ -328,7 +329,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     //go to main contact  to auto populate gestation age then display summary
     public void saveReferral(Dialog dialog)
     {
-        ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
+        //((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
         goToContactFinalize(dialog);
 
     }
@@ -348,7 +349,12 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             buttonLayout.setVisibility(View.VISIBLE);
             proceedButton.setVisibility(View.VISIBLE);
             if (other) {
-                referButton.setVisibility(View.VISIBLE);
+                if(MainContactActivity.ramTimed == false)
+                {
+                    referButton.setVisibility(View.VISIBLE);
+                }else{
+                    referButton.setVisibility(View.GONE);
+                }
             }
         }
     }
@@ -390,9 +396,10 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
                 getJsonApi().setPreviousPressed(true);
                 getFragmentManager().popBackStack();
             } else if (view.getId() == R.id.refer) {
-                displayReferralDialog();
+                    displayReferralDialog();
             } else if (view.getId() == R.id.proceed && getActivity() != null) {
                 ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
+                //contactStarted = true;
             }
         }
     }

@@ -352,7 +352,7 @@
       "openmrs_entity": "",
       "openmrs_entity_id": "",
       "type": "toaster_notes",
-      "text": "{level}{{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.text}}",
+      "text": "{level} {{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.text}}",
       "toaster_info_text": "{{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.toaster_info_text}}",
       "toaster_info_title": "{{tests_blood_haemoglobin_sub_form.step1.anaemia_diagnosis_danger_toaster.toaster_info_title}}",
       "toaster_type": "problem",

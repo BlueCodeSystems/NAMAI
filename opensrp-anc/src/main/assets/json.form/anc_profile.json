@@ -428,6 +428,7 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
+        "value": "0",
         "type": "edit_text",
         "hint": "{{anc_profile.step2.ultrasound_gest_age_days.hint}}",
         "relevance": {
@@ -443,10 +444,6 @@
         "v_numeric_integer": {
           "value": true,
           "err": "Enter a Valid GA from ultrasound - days value"
-        },
-        "v_min": {
-          "value": "1",
-          "err": "GA from ultrasound - days should be equal to or greater than 1"
         },
         "v_max": {
           "value": "6",
@@ -9206,13 +9203,6 @@
         "v_required": {
           "value": false,
           "err": "{{anc_profile.step7.condom_use.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "profile_relevance_rules.yml"
-            }
-          }
         }
       },
       {

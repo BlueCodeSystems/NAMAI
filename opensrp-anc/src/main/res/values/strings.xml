@@ -302,7 +302,7 @@
     <string name="contact_number_due_no_break">CONTACT %1$d &#183; DUE &#183; %2$s</string>
     <string name="last_contact">LAST CONTACT</string>
     <string name="key_figure">KEY FIGURES</string>
-    <string name="recent_test">RECENT TEST %1$s</string>
+    <string name="recent_test">RECENT TEST<!-- %1$s--></string>
     <string name="previous_contacts">PREVIOUS CONTACTS</string>
     <string name="all_tests_results">All Tests Results</string>
     <string name="contact_details">%1$s Weeks &#183; Contact %2$s</string>

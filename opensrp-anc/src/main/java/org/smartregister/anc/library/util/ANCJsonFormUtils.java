@@ -547,11 +547,13 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.JsonFormKeyUtils.DOB_ENTERED)) {
             getDobUsingEdd(womanClient, jsonObject, DBConstantsUtils.KeyUtils.DOB);
 
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.HOME_ADDRESS)) {
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.HOME_ADDRESS))
+        {
             String homeAddress = womanClient.get(DBConstantsUtils.KeyUtils.HOME_ADDRESS);
             jsonObject.put(ANCJsonFormUtils.VALUE, homeAddress);
 
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.ORIGIN)) {
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.ORIGIN))
+        {
             String origin = womanClient.get(DBConstantsUtils.KeyUtils.ORIGIN);
             jsonObject.put(ANCJsonFormUtils.VALUE, origin);
         }
@@ -560,14 +562,13 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             String otherRelationsToClient = womanClient.get(DBConstantsUtils.KeyUtils.OTHER_RELATIONS);
             jsonObject.put(ANCJsonFormUtils.VALUE, otherRelationsToClient);
         }
-
-        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.WOM_IMAGE)) {
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.NRC_NUMBER)) {
+        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.NRC_NUMBER)) {
             String nrcNumber = womanClient.get(DBConstantsUtils.KeyUtils.NRC_NUMBER);
             jsonObject.put(ANCJsonFormUtils.VALUE, nrcNumber);
         }
         else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.WOM_IMAGE)) {
-            } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.STUDY_ID)) {
+            }
+        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.STUDY_ID)) {
                 String studyID = womanClient.get(DBConstantsUtils.KeyUtils.STUDY_ID);
                 jsonObject.put(ANCJsonFormUtils.VALUE, studyID);
 
@@ -599,7 +600,6 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.MARITAL_STATUS)) {
             String maritalStatus = womanClient.get(DBConstantsUtils.KeyUtils.MARITAL_STATUS);
             jsonObject.put(ANCJsonFormUtils.VALUE, maritalStatus);
-
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.COHABITANTS)) {
             String cohabitants = womanClient.get(DBConstantsUtils.KeyUtils.COHABITANTS);
             Integer numberOfCohabitants = jsonObject.getJSONArray("options").length();

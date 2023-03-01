@@ -745,7 +745,7 @@ actions:
 name: step10_mebendazole
 description: mebendazole
 priority: 1
-condition: "gest_age_openmrs >= 16"
+condition: "true"
 actions:
   - "isRelevant = true"
 
