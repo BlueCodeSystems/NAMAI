@@ -55,7 +55,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     private TextView contactTitle;
     private BottomNavigationListener navigationListener = new BottomNavigationListener();
     private ContactWizardJsonFormFragment formFragment;
-    //public static boolean contactStarted;
+    public static boolean contactFinished;
 
     public static JsonWizardFormFragment getFormFragment(String stepName) {
         ContactWizardJsonFormFragment jsonFormFragment = new ContactWizardJsonFormFragment();
@@ -349,7 +349,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             buttonLayout.setVisibility(View.VISIBLE);
             proceedButton.setVisibility(View.VISIBLE);
             if (other) {
-                if(MainContactActivity.ramTimed == false)
+                if(contactFinished == false)
                 {
                     referButton.setVisibility(View.VISIBLE);
                 }else{
@@ -358,6 +358,13 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             }
         }
     }
+/*
+    ramTimed = false;
+    public static Boolean phyTimed = false;
+    public static Boolean proTimed = false;
+    public static Boolean tesTimed = false;
+    public static Boolean couTimed = false;
+    public static Boolean symTimed*/
 
     private void setQuickCheckButtonsInvisible(boolean none, boolean other, LinearLayout buttonLayout, Button referButton, Button proceedButton) {
         if ((!none && !other) && buttonLayout != null) {

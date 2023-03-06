@@ -201,7 +201,7 @@ fields:
     relevance: "tt_immun_status_value != ''"
 
   - template: "{{contact_summary.immunisation_status.tt_status_p}}: Fully Protected"
-    relevance: "tt_immun_status == '3_doses'"
+    relevance: "tt_immun_status == '3_doses' || tt1_dose_no == '4'"
 
   - template: "Number of TTVC doses: 4 doses"
     relevance: "tt_immun_status == '3_doses'"
@@ -210,7 +210,7 @@ fields:
     relevance: " underimmunized_doses != ''  && underimmunized_doses >= 2 && underimmunized_doses < 4"
 
   - template: "Number of TTVC doses: {underimmunized_doses}"
-    relevance: "underimmunized_doses != ''"
+    relevance: "underimmunized_doses != '' && tt1_date == 'not_done' || tt2_date == 'not_done'"
 
   - template: "{{contact_summary.immunisation_status.tt_status_p}}: Unprotected"
     relevance: "tt_immun_status.contains('ttcv_not_received') || underimmunized_doses <= 1"
@@ -218,8 +218,8 @@ fields:
   - template: "Number of TTVC doses: 0"
     relevance: "tt_immun_status.contains('ttcv_not_received')"
 
-  - template: "Number of TTVC doses: {underimmunized_doses}"
-    relevance: "underimmunized_doses != '' && underimmunized_doses <= 1 && tt_immun_status == '3_doses'"
+  - template: "Number of TTVC doses: {tt1_dose_no}"
+    relevance: "tt1_dose_no != ''"
 
   - template: "{{contact_summary.immunisation_status.tt_dose_1}}: {tt1_date_done_date_today_hidden} {tt1_date_done}"
     relevance: "tt1_date == 'done_today' || tt1_date == 'done_earlier'"

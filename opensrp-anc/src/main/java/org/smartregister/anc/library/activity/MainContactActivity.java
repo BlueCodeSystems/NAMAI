@@ -131,9 +131,12 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         }
         int finished = getRequiredCountTotal();
 
-        //if (finished == 0) {
+        if (finished == 0) {
         finalizeBtn.setEnabled(true);
-        //}
+        ContactWizardJsonFormFragment.contactFinished = true;
+        }else{
+            ContactWizardJsonFormFragment.contactFinished = false;
+        }
 
 
     }

@@ -5422,10 +5422,16 @@
         "openmrs_entity_parent": "84879AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "tt1_dose_no",
-        "type": "native_radio",
         "label": "TTCV dose No.",
         "label_info_text": "TTCV dose No.",
         "label_text_style": "bold",
+        "type": "numbers_selector",
+        "start_number": "1",
+        "number_of_selectors": "4",
+        "max_value": "4",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "options": [
           {
             "key": "one",

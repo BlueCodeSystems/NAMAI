@@ -27,6 +27,13 @@ condition: "step1_ultrasound_done== 'yes' && step1_ultrasound_gest_age_days != '
 actions:
   - "calculation = Math.ceil(((step1_ultrasound_gest_age_wks * 7) + new Integer(step1_ultrasound_gest_age_days)) / 7)"
 ---
+name: step1_ultrasound_done_date
+description: Ultrasound date correction
+priority: 1
+condition: "step1_ultrasound_done_date == 'yes' && step1_edd == '0'"
+actions:
+  - "calculation = helper.getDateToday()"
+---
 name: step1_ultrasound_edd
 description: Ultrasound edd
 priority: 1
@@ -177,7 +184,7 @@ actions:
 name: step6_hiv_positive
 description: hiv_positive
 priority: 1
-condition: "global_hiv_test_result == 'positive' || step10_hiv_test_result == 'Positive' || step6_health_conditions.contains('hiv')"
+condition: "global_hiv_test_result == 'positive' || step10_hiv_test_result == 'positive' || step6_health_conditions.contains('hiv')"
 actions:
   - "calculation = 1"
 ---
@@ -243,6 +250,13 @@ priority: 1
 condition: "(global_underimmunized_doses > 3)"
 actions:
   - "calculation = '3_doses' "
+---
+name: step10_hiv_work_around
+description: hiv_work_around
+priority: 1
+condition: "global_hiv_test_result == 'positive' || step10_hiv_test_result == 'positive'"
+actions:
+  - "calculation = step10_hiv_test_result"
 ---
 name: step10_hiv_test_result
 description: hiv_test_result
