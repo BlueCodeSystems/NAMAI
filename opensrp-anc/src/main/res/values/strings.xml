@@ -113,7 +113,7 @@
     <string name="sync_data">Sync data</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="antenatal_care_module">Antenatal Care \n Module</string>
+    <string name="antenatal_care_module">NAMAI ANC DIGITAL MODULE</string>
     <string name="anc_id_text">ID: %1$s</string>
     <string name="age_text">Age: %1$s</string>
     <string name="ga_text">GA: %1$d weeks</string>
@@ -302,7 +302,7 @@
     <string name="contact_number_due_no_break">CONTACT %1$d &#183; DUE &#183; %2$s</string>
     <string name="last_contact">LAST CONTACT</string>
     <string name="key_figure">KEY FIGURES</string>
-    <string name="recent_test">RECENT TEST: %1$s</string>
+    <string name="recent_test">RECENT TEST<!-- %1$s--></string>
     <string name="previous_contacts">PREVIOUS CONTACTS</string>
     <string name="all_tests_results">All Tests Results</string>
     <string name="contact_details">%1$s Weeks &#183; Contact %2$s</string>

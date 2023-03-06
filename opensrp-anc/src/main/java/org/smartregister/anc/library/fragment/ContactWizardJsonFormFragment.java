@@ -55,6 +55,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     private TextView contactTitle;
     private BottomNavigationListener navigationListener = new BottomNavigationListener();
     private ContactWizardJsonFormFragment formFragment;
+    public static boolean contactFinished;
 
     public static JsonWizardFormFragment getFormFragment(String stepName) {
         ContactWizardJsonFormFragment jsonFormFragment = new ContactWizardJsonFormFragment();
@@ -328,7 +329,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     //go to main contact  to auto populate gestation age then display summary
     public void saveReferral(Dialog dialog)
     {
-        ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
+        //((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
         goToContactFinalize(dialog);
 
     }
@@ -348,10 +349,22 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             buttonLayout.setVisibility(View.VISIBLE);
             proceedButton.setVisibility(View.VISIBLE);
             if (other) {
-                referButton.setVisibility(View.VISIBLE);
+                if(contactFinished == false)
+                {
+                    referButton.setVisibility(View.VISIBLE);
+                }else{
+                    referButton.setVisibility(View.GONE);
+                }
             }
         }
     }
+/*
+    ramTimed = false;
+    public static Boolean phyTimed = false;
+    public static Boolean proTimed = false;
+    public static Boolean tesTimed = false;
+    public static Boolean couTimed = false;
+    public static Boolean symTimed*/
 
     private void setQuickCheckButtonsInvisible(boolean none, boolean other, LinearLayout buttonLayout, Button referButton, Button proceedButton) {
         if ((!none && !other) && buttonLayout != null) {
@@ -390,9 +403,10 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
                 getJsonApi().setPreviousPressed(true);
                 getFragmentManager().popBackStack();
             } else if (view.getId() == R.id.refer) {
-                displayReferralDialog();
+                    displayReferralDialog();
             } else if (view.getId() == R.id.proceed && getActivity() != null) {
                 ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
+                //contactStarted = true;
             }
         }
     }

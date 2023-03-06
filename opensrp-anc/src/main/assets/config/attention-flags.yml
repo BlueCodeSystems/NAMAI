@@ -19,7 +19,7 @@ fields:
     relevance: "parity >= 5"
 
   - template: "{{attention_flags.yellow.past_pregnancy_problems}}: {prev_preg_comps_value}"
-    relevance: "!prev_preg_comps.isEmpty() && !prev_preg_comps.contains('none') && !prev_preg_comps.contains('dont_know')"
+    relevance: "!prev_preg_comps.isEmpty() && !prev_preg_comps.contains('None') && !prev_preg_comps.contains('dont_know')"
 
   - template: "{{attention_flags.yellow.past_alcohol_substances_used}}: {substances_used_value}"
     relevance: "substances_used != null && !substances_used.isEmpty() && (!substances_used.contains('none') && !substances_used.contains('None'))"
@@ -31,13 +31,13 @@ fields:
     relevance: "gdm_risk == 1"
 
   - template: "{{attention_flags.yellow.surgeries}}: {surgeries_value}"
-    relevance: "!surgeries.isEmpty() && !surgeries.contains('none')"
+    relevance: "!surgeries.isEmpty() && !surgeries.contains('None')"
 
   - template: "{{attention_flags.yellow.chronic_health_conditions}}: {health_conditions_value}"
     relevance: "!health_conditions.isEmpty() && !health_conditions.contains('none') && !health_conditions.contains('None') && !health_conditions.contains('dont_know')"
 
   - template: "{{attention_flags.yellow.high_daily_consumption_of_caffeine}}"
-    relevance: "!caffeine_intake.isEmpty() && !caffeine_intake.contains('none')"
+    relevance: "!caffeine_intake.isEmpty() && !caffeine_intake.contains('None')"
 
   - template: "{{attention_flags.yellow.second_hand_exposure_to_tobacco_smoke}}"
     relevance: "!shs_exposure.isEmpty() && shs_exposure.contains('yes')"
@@ -91,7 +91,7 @@ fields:
     relevance: "{c_sections} >= 1"
 
   - template: "{{attention_flags.red.allergies}}: {allergies_value}"
-    relevance: "!allergies.isEmpty() && (!allergies.contains('none') || allergies.contains('None'))"
+    relevance: "!allergies.isEmpty() && !allergies.contains('None')"
 
   - template: "{{attention_flags.red.tobacco_user_or_recently_quit}}"
     relevance: "!tobacco_user.isEmpty() &&

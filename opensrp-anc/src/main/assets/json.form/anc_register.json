@@ -604,7 +604,7 @@
         "key": "phone_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "phone_number",
+        "openmrs_entity_id": "163197AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "{{anc_register.step1.phone_number.hint}}",
         "v_numeric": {
@@ -853,8 +853,8 @@
       {
         "key": "origin",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "origin",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163195AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "native_radio",
         "label": "Origin ",
         "options": [
@@ -872,8 +872,7 @@
         "v_required": {
           "value": true,
           "err": "Please select origin"
-        },
-        "value": "catchment_area"
+        }
       },
       {
         "key": "next_contact",

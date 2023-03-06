@@ -19,9 +19,23 @@
         },
         {
           "column_name": "origin",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
             "field": "attributes.origin"
+          }
+        },
+        {
+          "column_name": "marital_status",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.marital_status"
+          }
+        },
+        {
+          "column_name": "phone_number",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.phone_number"
           }
         },
         {
@@ -192,13 +206,6 @@
           "type": "Client",
           "json_mapping": {
             "field": "attributes.occupation"
-          }
-        },
-        {
-          "column_name": "phone_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.phone_number"
           }
         },
         {

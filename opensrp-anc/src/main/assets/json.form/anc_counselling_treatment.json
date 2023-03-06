@@ -581,7 +581,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Return to Rapid Assessment and Management and fill in Referral form",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
         "toaster_type": "problem",
         "relevance": {
           "step1:referred_hosp": {
@@ -5133,7 +5133,7 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "fansidar",
             "text": "Yes"
           },
           {
@@ -5217,7 +5217,7 @@
         "label_info_text": "CTP is Cotrimoxazole Preventive Therapy; given as cotrimoxazole 960mg daily oral in HIV+ women",
         "options": [
           {
-            "key": "yes",
+            "key": "cotrimoxazole",
             "text": "Yes"
           },
           {
@@ -5299,7 +5299,7 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "mebendazole",
             "text": "Yes"
           },
           {
@@ -5422,10 +5422,16 @@
         "openmrs_entity_parent": "84879AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "tt1_dose_no",
-        "type": "native_radio",
         "label": "TTCV dose No.",
         "label_info_text": "TTCV dose No.",
         "label_text_style": "bold",
+        "type": "numbers_selector",
+        "start_number": "1",
+        "number_of_selectors": "4",
+        "max_value": "4",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "options": [
           {
             "key": "one",
@@ -6135,7 +6141,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Return to Rapid Assessment and Management and fill in Referral form",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
         "toaster_type": "problem",
         "relevance": {
           "step1:referred_hosp": {

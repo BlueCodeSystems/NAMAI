@@ -1106,8 +1106,8 @@ public class Utils extends org.smartregister.util.Utils {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.optJSONObject(i);
                         String text = object.optString(JsonFormConstants.TEXT).trim();
-                        String translatedText = StringUtils.isNotBlank(text) ? NativeFormLangUtils.translateDatabaseString(text, AncLibrary.getInstance().getApplicationContext()) : "";
-                        translatedList.add(translatedText);
+                        //String translatedText = StringUtils.isNotBlank(text) ? NativeFormLangUtils.translateDatabaseString(text, AncLibrary.getInstance().getApplicationContext()) : "";
+                        translatedList.add(text);
                     }
                     return translatedList.size() > 1 ? String.join(",", translatedList) : translatedList.size() == 1 ? translatedList.get(0) : "";
                 } else {
@@ -1125,8 +1125,8 @@ public class Utils extends org.smartregister.util.Utils {
                 List<String> translatedList = new ArrayList<>();
                 for (int i = 0; i < attentionFlagValueArray.size(); i++) {
                     String textToTranslate = attentionFlagValueArray.get(i).trim();
-                    String translatedText = StringUtils.isNotBlank(textToTranslate) ? NativeFormLangUtils.translateDatabaseString(textToTranslate, AncLibrary.getInstance().getApplicationContext()) : "";
-                    translatedList.add(translatedText);
+                    //String translatedText = StringUtils.isNotBlank(textToTranslate) ? NativeFormLangUtils.translateDatabaseString(textToTranslate, AncLibrary.getInstance().getApplicationContext()) : "";
+                    translatedList.add(textToTranslate);
                 }
                 return translatedList.size() > 1 ? String.join(",", translatedList) : translatedList.size() == 1 ? translatedList.get(0) : "";
             }

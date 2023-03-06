@@ -263,14 +263,7 @@ actions:
 name: step1_hiv_positive
 description: hiv_positive
 priority: 1
-condition: "(step1_hiv_test_result == 'positive') || (!global_health_conditions.isEmpty() && global_health_conditions.contains('hiv'))"
-actions:
-  - "calculation = 1"
----
-name: step1_hiv_positive
-description: hiv_positive
-priority: 1
-condition: "(step1_hiv_test_result == 'positive') || (!global_health_conditions.isEmpty() && global_health_conditions.contains('hiv'))"
+condition: "(step1_hiv_test_result == 'positive') || (global_health_conditions.contains('hiv')) || (global_hiv_test_result == 'positive')"
 actions:
   - "calculation = 1"
 ---

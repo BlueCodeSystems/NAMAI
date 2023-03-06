@@ -34,12 +34,14 @@ public abstract class ConstantsUtils {
     public static final String START_CONTACT = "Start Contact";
     public static final String CONTINUE_CONTACT = "Continue Contact";
     public static final String ORIGIN = "origin";
+    public static final String MARITAL_STATUS = "marital_status";
+    public static final String ALT_PHONE_NUMBER = "alt_phone_number";
     public static final String COHABITANTS = "cohabitants";
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";
     public static final String EDD = "edd";
     public static final String DOB = "dob";
-    public static final String PHONE_NUMBER = "phoneNumber";
+    public static final String PHONE_NUMBER = "phone_number";
     public static final String ALT_CONTACT_NAME = "altContactName";
     public static final String CONTACT = "Contact";
     public static final String CURRENT_OPENSRP_ID = "current_opensrp_id";
@@ -183,6 +185,8 @@ public abstract class ConstantsUtils {
         public static final String PHOTO = "photo";
         public static final String AGE_ENTERED = "age_entered";
         public static final String ORIGIN = "origin";
+        public static final String PHONE_NUMBER = "phone_number";
+        public static final String ALT_PHONE_NUMBER = "alt_phone_number";
         public static final String STEP = "step";
         public static final String FORM = "form";
         public static final String CONTACT_NO = "contact_no";
