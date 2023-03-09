@@ -1,5 +1,6 @@
 package org.smartregister.anc.library.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -157,6 +158,7 @@ public class ProfileContactsFragment extends BaseProfileFragment implements Prof
         Utils.processButtonAlertStatus(getActivity(), dueButton, buttonAlertStatus);
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void initializeLastContactDetails(HashMap<String, String> clientDetails) {
         if (clientDetails != null) {
             try {

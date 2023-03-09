@@ -32,13 +32,6 @@
           }
         },
         {
-          "column_name": "phone_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.phone_number"
-          }
-        },
-        {
           "column_name": "alt_phone_number",
           "type": "Client",
           "json_mapping": {
@@ -51,6 +44,14 @@
           "json_mapping": {
             "field": "obs.fieldCode",
             "concept": "163164AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "phone_number",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {

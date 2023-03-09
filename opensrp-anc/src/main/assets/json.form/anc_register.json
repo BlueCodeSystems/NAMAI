@@ -604,7 +604,7 @@
         "key": "phone_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "163197AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "{{anc_register.step1.phone_number.hint}}",
         "v_numeric": {
@@ -667,8 +667,8 @@
       {
         "key": "alt_phone_number",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "alt_phone_number",
         "type": "edit_text",
         "hint": "{{anc_register.step1.alt_phone_number.hint}}",
         "v_numeric": {
