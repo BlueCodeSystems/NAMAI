@@ -116,7 +116,6 @@
     "lmp_known",
     "lmp_known_date",
     "ultrasound_done",
-    "ultrasound_done_date",
     "ultrasound_gest_age_wks",
     "sfh_gest_age",
     "select_gest_age_edd",
@@ -168,7 +167,9 @@
     "underimmunized_doses",
     "ttcv_unprotected",
     "ttcv_protected",
-    "ttcv_full_protected"
+    "ttcv_full_protected",
+    "hiv_test_result",
+    "ultrasound_done_date"
   ],
   "step1": {
     "title": "{{anc_profile.step1.title}}",
@@ -427,6 +428,7 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
+        "value": "0",
         "type": "edit_text",
         "hint": "{{anc_profile.step2.ultrasound_gest_age_days.hint}}",
         "relevance": {
@@ -442,10 +444,6 @@
         "v_numeric_integer": {
           "value": true,
           "err": "Enter a Valid GA from ultrasound - days value"
-        },
-        "v_min": {
-          "value": "1",
-          "err": "GA from ultrasound - days should be equal to or greater than 1"
         },
         "v_max": {
           "value": "6",
@@ -926,7 +924,7 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "time_profile",
-        "type": "edit_text"
+        "type": "hidden"
       }
     ]
   },
@@ -9205,13 +9203,6 @@
         "v_required": {
           "value": false,
           "err": "{{anc_profile.step7.condom_use.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "profile_relevance_rules.yml"
-            }
-          }
         }
       },
       {
@@ -9593,6 +9584,25 @@
         }
       },
       {
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "hiv_work_around",
+        "key": "hiv_work_around",
+        "type": "hidden",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "test_every_three_months_toaster",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -9648,6 +9658,10 @@
             "type": "string",
             "ex": "equalTo(., \"positive\")"
           }
+        },
+        "v_required": {
+          "value": true,
+          "err": "Please state whether on ART"
         }
       },
       {

@@ -604,7 +604,7 @@
         "key": "phone_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "{{anc_register.step1.phone_number.hint}}",
         "v_numeric": {
@@ -612,7 +612,7 @@
           "err": "{{anc_register.step1.phone_number.v_numeric.err}}"
         },
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_register.step1.phone_number.v_required.err}}"
         },
         "v_regex": {
@@ -623,8 +623,8 @@
       {
         "key": "reminders",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "reminders",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163164AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "native_radio",
         "label": "{{anc_register.step1.reminders.label}}",
         "label_info_text": "{{anc_register.step1.reminders.label_info_text}}",
@@ -652,8 +652,8 @@
       {
         "key": "alt_name",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "alt_name",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
         "hint": "{{anc_register.step1.alt_name.hint}}",
         "edit_type": "name",
@@ -769,8 +769,8 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "cohabitants",
         "openmrs_data_type": "select multiple",
-        "label": "{{anc_register.step1.cohabitants.label}}",
-        "label_info_text": "{{anc_register.step1.cohabitants.label_info_text}}",
+        "label": "Co-habitants",
+        "label_info_text": "Who does the client live with? It is important to know whether client lives with parents, other family members, a partner, friends, etc.",
         "type": "check_box",
         "exclusive": [
           "no_one"
@@ -780,73 +780,81 @@
             "key": "parents",
             "text": "{{anc_register.step1.cohabitants.options.parents.text}}",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "parents"
           },
           {
             "key": "siblings",
             "text": "{{anc_register.step1.cohabitants.options.siblings.text}}",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "siblings"
           },
           {
             "key": "children",
             "text": "Child(ren)",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "children"
           },
           {
             "key": "extended_family",
             "text": "{{anc_register.step1.cohabitants.options.extended_family.text}}",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "extended_family"
           },
           {
             "key": "partner",
             "text": "{{anc_register.step1.cohabitants.options.partner.text}}",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "partner"
           },
           {
             "key": "friends",
             "text": "{{anc_register.step1.cohabitants.options.friends.text}}",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "friends"
           },
           {
             "key": "employee",
             "text": "Employee(s)",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "employee"
           },
           {
             "key": "no_one",
             "text": "{{anc_register.step1.cohabitants.options.no_one.text}}",
             "text_size": "18px",
+            "value": "false",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "no_one"
           }
         ]
       },
       {
         "key": "origin",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "origin",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "163195AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "native_radio",
         "label": "Origin ",
         "options": [
@@ -864,8 +872,7 @@
         "v_required": {
           "value": true,
           "err": "Please select origin"
-        },
-        "value": "catchment_area"
+        }
       },
       {
         "key": "next_contact",

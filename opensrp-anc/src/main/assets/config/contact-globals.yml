@@ -89,6 +89,7 @@ fields:
   - "tt_immun_status"
   - "tt_immun_status_value"
   - "flu_immun_status"
+  - "tt1_dose_no"
   - "underimmunized_doses"
   - "underimmunized_doses_value"
   - "prev_preg_comps"
@@ -123,6 +124,7 @@ fields:
   - "ttcv_full_protected"
   -  "anemia_level"
   - "hb_result"
+  - "hiv_work_around"
 ---
 form: anc_profile
 fields:
@@ -148,6 +150,9 @@ fields:
   - "ttcv_protected"
   - "ttcv_full_protected"
   - "tt1_dose_no"
+  - "profile_hiv_test_result"
+  - "on_art"
+  - "hiv_work_around"
 ---
 form: anc_physical_exam
 fields:

@@ -178,7 +178,7 @@
         "openmrs_entity_id": "",
         "type": "toaster_notes",
         "text": "{level} Anemia diagnosis",
-        "toaster_info_text": " {level} Anemia diagnosis  refer to hospital",
+        "toaster_info_text": "Anemia diagnosis  refer to hospital",
         "toaster_info_title": "Anemia diagnosis",
         "toaster_type": "problem",
         "relevance": {
@@ -576,11 +576,31 @@
         }
       },
       {
+        "key": "danger_signs_ref_toaster_one",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
+        "toaster_type": "problem",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "time_counselling",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "time_counselling",
-        "type": "edit_text"
+        "type": "hidden"
       }
     ]
   },
@@ -2290,9 +2310,9 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "ifa_anaemia",
         "type": "native_radio",
-        "label": "Give daily dose of elemental iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label": "Give daily dose of elemental iron 60 mg OD and folic acid 0.4mg OD oral for anaemia",
         "label_info_text": "{{anc_counselling_treatment.step5.ifa_anaemia.label_info_text}}",
-        "label_info_title": "Give daily dose of elemental iron 60 mg TDS and folic acid 0.4mg OD oral for anaemia",
+        "label_info_title": "Give daily dose of elemental iron 60 mg OD and folic acid 0.4mg OD oral for anaemia",
         "label_text_style": "bold",
         "options": [
           {
@@ -4178,7 +4198,7 @@
         "openmrs_entity_id": "od",
         "type": "native_radio",
         "label": "Give daily dose of elemental iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
-        "label_info_text": "If a woman is diagnosed with anaemia during pregnancy, her daily elemental iron should be increased to 120 mg until her haemoglobin (Hb) concentration rises to normal (Hb 11 g/dL or higher). Thereafter, she can resume the standard daily antenatal iron dose to prevent re-occurrence of anaemia.\\n\\nThe equivalent of 120 mg of elemental iron equals 600 mg of ferrous sulfate heptahydrate, 360 mg of ferrous fumarate, or 1000 mg of ferrous gluconate.",
+        "label_info_text": "If a woman is diagnosed with anaemia during pregnancy, her daily elemental iron should be increased to 120 mg until her haemoglobin (Hb) concentration rises to normal (Hb 11 g/dL or higher). Thereafter, she can resume the standard daily antenatal iron dose to prevent re-occurrence of anaemia.\n\nThe equivalent of 120 mg of elemental iron equals 600 mg of ferrous sulfate heptahydrate, 360 mg of ferrous fumarate, or 1000 mg of ferrous gluconate.",
         "label_info_title": "Give daily dose of elemental iron 60mg OD and folic acid 0.4mg OD oral for anaemia",
         "label_text_style": "bold",
         "options": [
@@ -5113,7 +5133,7 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "fansidar",
             "text": "Yes"
           },
           {
@@ -5197,7 +5217,7 @@
         "label_info_text": "CTP is Cotrimoxazole Preventive Therapy; given as cotrimoxazole 960mg daily oral in HIV+ women",
         "options": [
           {
-            "key": "yes",
+            "key": "cotrimoxazole",
             "text": "Yes"
           },
           {
@@ -5279,7 +5299,7 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "mebendazole",
             "text": "Yes"
           },
           {
@@ -5402,10 +5422,16 @@
         "openmrs_entity_parent": "84879AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "tt1_dose_no",
-        "type": "native_radio",
         "label": "TTCV dose No.",
         "label_info_text": "TTCV dose No.",
         "label_text_style": "bold",
+        "type": "numbers_selector",
+        "start_number": "1",
+        "number_of_selectors": "4",
+        "max_value": "4",
+        "text_size": "16px",
+        "text_color": "#000000",
+        "selected_text_color": "#ffffff",
         "options": [
           {
             "key": "one",
@@ -6106,6 +6132,26 @@
             "ex-rules": {
               "rules-file": "ct_relevance_rules.yml"
             }
+          }
+        }
+      },
+      {
+        "key": "danger_signs_ref_toaster_two",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
+        "toaster_type": "problem",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       }

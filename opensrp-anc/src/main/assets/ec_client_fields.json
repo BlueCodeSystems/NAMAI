@@ -11,17 +11,24 @@
           }
         },
         {
-          "column_name": "phone_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.phone_number"
-          }
-        },
-        {
           "column_name": "alt_name",
           "type": "Event",
           "json_mapping": {
             "field": "attributes.alt_name"
+          }
+        },
+        {
+          "column_name": "origin",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.origin"
+          }
+        },
+        {
+          "column_name": "marital_status",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.marital_status"
           }
         },
         {
@@ -40,6 +47,14 @@
           }
         },
         {
+          "column_name": "phone_number",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
           "column_name": "cohabitants",
           "type": "Client",
           "json_mapping": {
@@ -52,13 +67,6 @@
           "json_mapping": {
             "field": "obs.fieldCode",
             "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "alt_phone_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.alt_phone_number"
           }
         },
         {

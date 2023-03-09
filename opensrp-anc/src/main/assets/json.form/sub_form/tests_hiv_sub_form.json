@@ -282,7 +282,7 @@
       "openmrs_entity_id": "",
       "type": "toaster_notes",
       "text": "Give HIV positive counselling",
-      "toaster_info_text": "- Refer for further testing and confirmation\\n- Refer for HIV services\\n- Advise on opportunistic infections and need to seek medical help\\n- Proceed with systematic screening for active TB",
+      "toaster_info_text": "- Refer for further testing and confirmation\n- Refer for HIV services\n- Advise on opportunistic infections and need to seek medical help\n- Proceed with systematic screening for active TB",
       "toaster_info_title": "Give HIV positive counselling",
       "toaster_type": "problem",
       "relevance": {

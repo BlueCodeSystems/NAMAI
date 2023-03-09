@@ -369,10 +369,13 @@ fields:
     isRedFont: "tt_immun_status == 'ttcv_not_received' || tt_immun_status == 'unknown'"
 
   - template: "{{profile_overview.immunisation_status.tt_immunisation_number}}: {underimmunized_doses}"
-    relevance: "underimmunized_doses != ''"
+    relevance: "underimmunized_doses != '' && tt1_date == 'not_done' || tt2_date == 'not_done'"
+
+  - template: "Number of TTVC doses: {tt1_dose_no}"
+    relevance: "tt1_dose_no != ''"
 
   - template: "Protection status: Fully Protected"
-    relevance: "tt_immun_status == '3_doses' && tt_immun_status != ''"
+    relevance: "tt_immun_status == '3_doses' || tt1_dose_no == '4'"
 
   - template: "Protection status: Unprotected"
     relevance: "underimmunized_doses < '2' && tt_immun_status != ''"

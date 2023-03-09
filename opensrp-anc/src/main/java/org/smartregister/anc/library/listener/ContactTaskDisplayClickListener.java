@@ -17,6 +17,9 @@ import org.smartregister.anc.library.fragment.ProfileTasksFragment;
 import org.smartregister.anc.library.model.Task;
 import org.smartregister.anc.library.util.ANCFormUtils;
 import org.smartregister.anc.library.util.ANCJsonFormUtils;
+import org.smartregister.anc.library.util.ConstantsUtils;
+import org.smartregister.anc.library.util.Utils;
+import org.smartregister.util.JsonFormUtils;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -40,7 +43,11 @@ public class ContactTaskDisplayClickListener implements View.OnClickListener {
             } else if (view.getId() == R.id.undo_button) {
                 undoTasksEntries(view);
             } else {
-                prepFormForLaunch(view);
+                try {
+                    prepFormForLaunch(view);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -84,7 +91,7 @@ public class ContactTaskDisplayClickListener implements View.OnClickListener {
      *
      * @param view {@link View}
      */
-    private void prepFormForLaunch(View view) {
+    private void prepFormForLaunch(View view) throws JSONException {
         Context context = ((Context) view.getTag(R.id.accordion_context));
         Task task = ((Task) view.getTag(R.id.task_object));
         JSONObject taskValue = ((JSONObject) view.getTag(R.id.accordion_jsonObject));
@@ -94,6 +101,11 @@ public class ContactTaskDisplayClickListener implements View.OnClickListener {
             Map<String, ExpansionPanelValuesModel> secondaryValuesMap = getSecondaryValues(taskValues);
             JSONArray subFormFields = ANCFormUtils.addExpansionPanelFormValues(loadSubFormFields(taskValue, context).entrySet().iterator().next().getValue(), secondaryValuesMap);
             String taskKey = taskValue.optString(JsonFormConstants.KEY);
+            if(taskKey.contains("accordion_feedback"))
+            {
+                JSONObject idfill = subFormFields.getJSONObject(6);
+                idfill.put(JsonFormUtils.VALUE, Utils.refIDstring);
+            }
             String formTitle = ANCFormUtils.getTranslatedFormTitle(taskKey, context);
             JSONObject form = ANCFormUtils.loadTasksForm(context);
             if (StringUtils.isNotBlank(formTitle)) {

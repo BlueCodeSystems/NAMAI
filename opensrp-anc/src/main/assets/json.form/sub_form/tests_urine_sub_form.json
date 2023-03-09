@@ -540,7 +540,7 @@
       "openmrs_entity_id": "",
       "type": "toaster_notes",
       "text": "Gestational diabetes mellitus (GDM) risk counselling",
-      "toaster_info_text": "Please provide appropriate counselling for GDM risk mitigation, including:\\n\\n - Reasserting dietary interventions\\n\\n- Reasserting physical activity during pregnancy",
+      "toaster_info_text": "Please provide appropriate counselling for GDM risk mitigation, including:\n\n - Reasserting dietary interventions\n\n- Reasserting physical activity during pregnancy",
       "toaster_info_title": "Gestational diabetes mellitus (GDM) risk counselling",
       "toaster_type": "warning",
       "relevance": {
@@ -574,7 +574,7 @@
       "openmrs_entity_id": "",
       "type": "toaster_notes",
       "text": "Seven-day antibiotic regimen for asymptomatic bacteriuria (ASB)",
-      "toaster_info_text": "A woman is considered to have ASB if she has one of the following test results:\\n\\n- Positive culture (> 100,000 bacteria/mL)\\n- Gram-staining positive\\n- Urine dipstick test positive (nitrites or leukocytes)\\n\\nSeven-day antibiotic regimen is recommended for all pregnant women with asymptomatic bacteriuria (ASB) to prevent persistent bacteriuria, preterm birth and low birth weight.",
+      "toaster_info_text": "A woman is considered to have ASB if she has one of the following test results:\n\n- Positive culture (> 100,000 bacteria/mL)\n- Gram-staining positive\n- Urine dipstick test positive (nitrites or leukocytes)\n\nSeven-day antibiotic regimen is recommended for all pregnant women with asymptomatic bacteriuria (ASB) to prevent persistent bacteriuria, preterm birth and low birth weight.",
       "toaster_info_title": "Seven-day antibiotic regimen for asymptomatic bacteriuria (ASB)",
       "toaster_type": "warning",
       "relevance": {

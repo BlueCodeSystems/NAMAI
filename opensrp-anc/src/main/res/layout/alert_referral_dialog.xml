@@ -47,5 +47,18 @@
         android:textColor="@color/text_black"
         android:textSize="@dimen/referral_dialog_text_size" />
 
+    <EditText
+        android:id="@+id/add_gest_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/referral_dialog_padding"
+        android:hint="@string/ga_ref"
+        android:textAllCaps="false"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/text_black"
+        android:textSize="20sp" />
+
 
 </LinearLayout>

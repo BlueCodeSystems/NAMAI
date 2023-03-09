@@ -66,6 +66,7 @@ import org.smartregister.anc.library.event.BaseEvent;
 import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.Task;
+import org.smartregister.anc.library.presenter.ProfilePresenter;
 import org.smartregister.anc.library.repository.ContactTasksRepository;
 import org.smartregister.anc.library.repository.PatientRepository;
 import org.smartregister.anc.library.rule.AlertRule;
@@ -115,6 +116,7 @@ public class Utils extends org.smartregister.util.Utils {
     private static final String OTHER_SUFFIX = ", other]";
     public static Instant startRam = null;
     public static String baseEntityId;
+    public static String refIDstring;
     static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
 
     static ContactModel baseContactModel = new ContactModel();
@@ -248,7 +250,10 @@ public class Utils extends org.smartregister.util.Utils {
             if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
                 JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
                 JSONObject smNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"register_id");
+                //JSONObject phnNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
                 smNumber.put(JsonFormUtils.VALUE, personObjectClient.get("register_id"));
+                refIDstring = personObjectClient.get("register_id");
+                //phnNumber.put(JsonFormUtils.VALUE, personObjectClient.get("phone_number"));
                 ccname.put(JsonFormUtils.VALUE, name);
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -583,6 +588,11 @@ public class Utils extends org.smartregister.util.Utils {
         Integer gestationAge = 0;
         if (StringUtils.isNotBlank(edd)) {
             gestationAge = Utils.getGestationAgeFromEDDate(edd);
+            if(gestationAge < 1){
+                if(ProfilePresenter.gest_age_profile!=null){
+                    gestationAge =  Integer.parseInt(ProfilePresenter.gest_age_profile);
+                }
+            }
             AlertRule alertRule = new AlertRule(gestationAge, nextContactDate);
             alertStatus =
                     StringUtils.isNotBlank(contactStatus) && ConstantsUtils.AlertStatusUtils.ACTIVE.equals(contactStatus) ?
@@ -1096,8 +1106,8 @@ public class Utils extends org.smartregister.util.Utils {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.optJSONObject(i);
                         String text = object.optString(JsonFormConstants.TEXT).trim();
-                        String translatedText = StringUtils.isNotBlank(text) ? NativeFormLangUtils.translateDatabaseString(text, AncLibrary.getInstance().getApplicationContext()) : "";
-                        translatedList.add(translatedText);
+                        //String translatedText = StringUtils.isNotBlank(text) ? NativeFormLangUtils.translateDatabaseString(text, AncLibrary.getInstance().getApplicationContext()) : "";
+                        translatedList.add(text);
                     }
                     return translatedList.size() > 1 ? String.join(",", translatedList) : translatedList.size() == 1 ? translatedList.get(0) : "";
                 } else {
@@ -1115,8 +1125,8 @@ public class Utils extends org.smartregister.util.Utils {
                 List<String> translatedList = new ArrayList<>();
                 for (int i = 0; i < attentionFlagValueArray.size(); i++) {
                     String textToTranslate = attentionFlagValueArray.get(i).trim();
-                    String translatedText = StringUtils.isNotBlank(textToTranslate) ? NativeFormLangUtils.translateDatabaseString(textToTranslate, AncLibrary.getInstance().getApplicationContext()) : "";
-                    translatedList.add(translatedText);
+                    //String translatedText = StringUtils.isNotBlank(textToTranslate) ? NativeFormLangUtils.translateDatabaseString(textToTranslate, AncLibrary.getInstance().getApplicationContext()) : "";
+                    translatedList.add(textToTranslate);
                 }
                 return translatedList.size() > 1 ? String.join(",", translatedList) : translatedList.size() == 1 ? translatedList.get(0) : "";
             }
@@ -1183,7 +1193,7 @@ public class Utils extends org.smartregister.util.Utils {
 
 
         layoutDocument.close();
-        Toast.makeText(context, context.getResources().getString(R.string.pdf_saved_successfully) + filePath, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, context.getResources().getString(R.string.pdf_saved_successfully) + filePath, Toast.LENGTH_SHORT).show();
     }
 
     private String processUnderscores(String string) {

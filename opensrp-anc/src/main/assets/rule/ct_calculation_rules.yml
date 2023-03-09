@@ -9,7 +9,7 @@ actions:
   name: step1_anemia_diagnosis_toaster
   description: Note displaying the anemia level.
   priority: 1
-  condition: "!global_anemia_level.isEmpty()"
+  condition: "global_anemia_level != ''"
   actions:
    - 'calculation = ["level" : global_anemia_level]'
 ---
@@ -264,6 +264,13 @@ priority: 1
 condition: "step11_tt1_date != '' && step11_tt1_date != 'not_done'"
 actions:
   - "calculation = 1"
+---
+name: step11_tt1_date
+description: tt1_date
+priority: 1
+condition: "step11_tt1_date != '' && step11_tt1_date != 'not_done'"
+actions:
+ - "calculation = ['global_underimmunized_doses': step11_tt1_dose_no]"
 ---
 name: step11_tt2_date_done_date_today_hidden
 description: tt2_date_done

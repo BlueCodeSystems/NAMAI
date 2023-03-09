@@ -602,7 +602,8 @@
                   "convulsing",
                   "central_cyanosis",
                   "danger_bleeding",
-                  "drainin"
+                  "drainin",
+                  "other_s"
                 ]
               }
             ]
@@ -1363,7 +1364,7 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "time_ram",
-        "type": "edit_text"
+        "type": "hidden"
       },
       {
         "key": "accordion_feedback",

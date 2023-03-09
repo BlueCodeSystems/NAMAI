@@ -23,6 +23,7 @@ import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
+import org.smartregister.anc.library.fragment.ContactWizardJsonFormFragment;
 import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.PartialContact;
 import org.smartregister.anc.library.model.PreviousContact;
@@ -59,7 +60,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     private final Map<String, String> eventToFileMap = new HashMap<>();
     private final Yaml yaml = new Yaml();
     private final Map<String, List<String>> formGlobalKeys = new HashMap<>();
-    private final Map<String, String> formGlobalValues = new HashMap<>();
+    public static final Map<String, String> formGlobalValues = new HashMap<>();
     private final Set<String> globalKeys = new HashSet<>();
     private final Set<String> defaultValueFields = new HashSet<>();
     private List<String> globalValueFields = new ArrayList<>();
@@ -104,6 +105,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static Instant startPhysical;
     public static Instant startTests;
     public static Instant startCounselling;
+    public String gest_age_ref_yes;
 
     @Override
     protected void onResume() {
@@ -129,9 +131,12 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         }
         int finished = getRequiredCountTotal();
 
-        //if (finished == 0) {
+        if (finished == 0) {
         finalizeBtn.setEnabled(true);
-        //}
+        ContactWizardJsonFormFragment.contactFinished = true;
+        }else{
+            ContactWizardJsonFormFragment.contactFinished = false;
+        }
 
 
     }
@@ -231,6 +236,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
 
             Utils.ramTime(quickCheck);
+            //ContactWizardJsonFormFragment.contactStarted = true;
 
 
         } catch (Exception e) {
