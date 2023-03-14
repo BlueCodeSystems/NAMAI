@@ -106,6 +106,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static Instant startTests;
     public static Instant startCounselling;
     public String gest_age_ref_yes;
+    public int routineCount = 0;
 
     @Override
     protected void onResume() {
@@ -389,6 +390,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             if((fc == 0) && (rac == true)){
                 requiredFieldsx.setVisibility(View.GONE);
                 completeLayoutx.setVisibility(View.VISIBLE);
+                routineCount = fc;
             } else {
                 requiredFieldsx.setText(String.format(this.getString(R.string.required_fields), fc));
                 requiredFieldsx.setVisibility(View.VISIBLE);
@@ -397,6 +399,19 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                 middleLayout.setVisibility(View.VISIBLE);
             }
 
+        }
+
+        if (contact1.getRequiredFields() == 0){
+                if (contact2.getRequiredFields() == 0){
+                    if (contact5.getRequiredFields() == 0){
+                        if (contact6.getRequiredFields() == 0){
+                            if(routineCount == 0){
+                                finalizeBtn.setEnabled(true);
+                                ContactWizardJsonFormFragment.contactFinished = true;
+                            }
+                        }
+                }
+            }
         }
 
 

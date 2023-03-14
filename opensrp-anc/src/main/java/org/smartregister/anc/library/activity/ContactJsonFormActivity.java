@@ -3,6 +3,8 @@ package org.smartregister.anc.library.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -43,6 +45,7 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
     protected AncRulesEngineFactory rulesEngineFactory = null;
     private ProgressDialog progressDialog;
     private String formName;
+    public String dangerValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
                                 }.getType());
                 if (globalValues.containsKey(ConstantsUtils.DANGER_SIGNS + ConstantsUtils.SuffixUtils.VALUE) && StringUtils.isNotBlank(globalValues.get(ConstantsUtils.DANGER_SIGNS + ConstantsUtils.SuffixUtils.VALUE))) {
                     String danger_signs_value = globalValues.get(ConstantsUtils.DANGER_SIGNS + ConstantsUtils.SuffixUtils.VALUE);
+                    dangerValid = danger_signs_value;
                     if (danger_signs_value.contains(",") || (danger_signs_value.contains(".") && danger_signs_value.contains(JsonFormConstants.TEXT))) {
                         List<String> list = Arrays.asList(danger_signs_value.split(",")), finalList = new LinkedList<>();
                         for (int i = 0; i < list.size(); i++) {

@@ -3,6 +3,7 @@ package org.smartregister.anc.library.fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import com.vijay.jsonwizard.interactors.JsonFormInteractor;
 
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.ContactJsonFormActivity;
+import org.smartregister.anc.library.activity.InputFilterMinMax;
 import org.smartregister.anc.library.activity.MainContactActivity;
 import org.smartregister.anc.library.domain.Contact;
 import org.smartregister.anc.library.presenter.ContactWizardJsonFormFragmentPresenter;
@@ -236,6 +238,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             builder.setView(view);
 
             Button yes = view.findViewById(R.id.refer_yes);
+            EditText GAValidation = view.findViewById(R.id.add_gest_age);
 
             final Button no = view.findViewById(R.id.refer_no);
 
@@ -252,11 +255,25 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             yes.setOnClickListener(v -> {
                 EditText gestAgeEditText = view.findViewById(R.id.add_gest_age);
                 String ga_ref_value = gestAgeEditText.getText().toString();
-                ProfilePresenter.gest_age_profile = ga_ref_value;
-
-                Map<String, String> map = new HashMap<>();
-                if (TextUtils.isEmpty(MainContactActivity.formGlobalValues.get(ConstantsUtils.GEST_AGE_OPENMRS))) {
-                    map.put(ConstantsUtils.GEST_AGE_OPENMRS, ga_ref_value);
+                if(gestAgeEditText != null) {
+                    try {
+                        int num = Integer.parseInt(gestAgeEditText.getText().toString());
+                        if(num>39){
+                            gestAgeEditText.setText("39");
+                            ga_ref_value = "39";
+                        }else if(num<12){
+                            gestAgeEditText.setText("12");
+                            ga_ref_value = "12";
+                        }
+                    } catch (NumberFormatException e) {
+                        // Handle the case where the input is not a valid integer
+                    }
+                    //gestAgeEditText.setFilters(new InputFilter[]{new InputFilterMinMax("12", "39")});
+                    ProfilePresenter.gest_age_profile = ga_ref_value;
+                    Map<String, String> map = new HashMap<>();
+                    if (TextUtils.isEmpty(MainContactActivity.formGlobalValues.get(ConstantsUtils.GEST_AGE_OPENMRS))) {
+                        map.put(ConstantsUtils.GEST_AGE_OPENMRS, ga_ref_value);
+                    }
                 }
 
                 saveReferral(dialog);

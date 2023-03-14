@@ -581,7 +581,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive therapy and Treatment section.",
         "toaster_type": "problem",
         "relevance": {
           "step1:referred_hosp": {
@@ -871,93 +871,6 @@
         "edit_type": "name",
         "relevance": {
           "step2:shs_counsel_notdone": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
-          }
-        }
-      },
-      {
-        "key": "condom_counsel",
-        "openmrs_entity_parent": "161594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_counselling_treatment.step2.condom_counsel.label}}",
-        "label_info_text": "{{anc_counselling_treatment.step2.condom_counsel.label_info_text}}",
-        "label_info_title": "{{anc_counselling_treatment.step2.condom_counsel.label_info_title}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "done",
-            "text": "{{anc_counselling_treatment.step2.condom_counsel.options.done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "not_done",
-            "text": "{{anc_counselling_treatment.step2.condom_counsel.options.not_done.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "ct_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "condom_counsel_notdone",
-        "openmrs_entity_parent": "161594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "",
-        "type": "check_box",
-        "label": "{{anc_counselling_treatment.step2.condom_counsel_notdone.label}}",
-        "hint": "{{anc_counselling_treatment.step2.condom_counsel_notdone.hint}}",
-        "label_text_style": "bold",
-        "options": [
-          {
-            "key": "referred_instead",
-            "text": "{{anc_counselling_treatment.step2.condom_counsel_notdone.options.referred_instead.text}}",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "other",
-            "text": "{{anc_counselling_treatment.step2.condom_counsel_notdone.options.other.text}}",
-            "openmrs_entity_parent": "161594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "relevance": {
-          "step2:condom_counsel": {
-            "type": "string",
-            "ex": "equalTo(., \"not_done\")"
-          }
-        }
-      },
-      {
-        "key": "condom_counsel_notdone_other",
-        "openmrs_entity_parent": "161594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "165426AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "edit_text",
-        "hint": "{{anc_counselling_treatment.step2.condom_counsel_notdone_other.hint}}",
-        "edit_type": "name",
-        "relevance": {
-          "step2:condom_counsel_notdone": {
             "ex-checkbox": [
               {
                 "or": [
@@ -6125,7 +6038,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Woman  isn't showing symptoms of TB",
+        "text": "Woman was not diagnosed with TB",
         "toaster_type": "info",
         "relevance": {
           "rules-engine": {
@@ -6141,7 +6054,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive theeapy and Treatment section.",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive therapy and Treatment section.",
         "toaster_type": "problem",
         "relevance": {
           "step1:referred_hosp": {

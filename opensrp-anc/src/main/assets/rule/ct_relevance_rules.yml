@@ -155,13 +155,6 @@ condition: "global_behaviour_persist.contains('shs_exposure') || global_shs_expo
 actions:
   - "isRelevant = true"
 ---
-name: step2_condom_counsel
-description: Condom counselling
-priority: 1
-condition: "global_behaviour_persist.contains('condom_use') || global_condom_use == 'no'"
-actions:
-  - "isRelevant = true"
----
 name: step2_alcohol_substance_counsel
 description: Alcohol / substance use counselling
 priority: 1
@@ -557,14 +550,14 @@ actions:
 name: step13_tb_negative
 description: tb_negative
 priority: 1
-condition: "(global_tb_test_result.contains('positive') && global_Sputum_result.contains('mtb_sensitive') && global_Sputum_result.contains('mtb_resistant'))"
+condition: "(!global_tb_test_result.contains('positive') && !global_Sputum_result.contains('mtb_sensitive') && !global_Sputum_result.contains('mtb_resistant'))"
 actions:
   - "isRelevant = true"
 ---
 name: step13_tb_treatment_done
 description: tb_treatment_done
 priority: 1
-condition: "global_tb_test_result.contains('positive') || !global_Sputum_result.contains('mtb_sensitive') || !global_Sputum_result.contains('mtb_resistant')"
+condition: "(global_tb_test_result != '' && global_tb_test_result == 'positive') || (global_Sputum_result != '' && global_Sputum_result == 'mtb_sensitive') || (global_Sputum_result != '' && global_Sputum_result == 'mtb_resistant')"
 actions:
   - "isRelevant = true"
 ---
@@ -663,7 +656,7 @@ actions:
 name: step10_fansidar
 description: fansidar
 priority: 1
-condition: "!global_hiv_positive == 1 || global_hiv_work_around == 'negative'"
+condition: "global_hiv_work_around != 'positive'"
 actions:
   - "isRelevant = true"
 ---
@@ -753,7 +746,7 @@ actions:
 name: step10_started_on_prep
 description: started_on_prep
 priority: 1
-condition: "(global_hiv_positive != 1 || global_hiv_test_result == 'negative') && (global_partner_hiv_status == 'positive')"
+condition: "(global_hiv_work_around == 'negative' || global_hiv_test_result == 'negative') && (global_partner_hiv_status == 'positive')"
 actions:
   - "isRelevant = true"
 ---

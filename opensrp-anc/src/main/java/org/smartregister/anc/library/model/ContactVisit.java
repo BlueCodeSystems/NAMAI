@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.model;
 
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+
 import android.text.TextUtils;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -11,7 +13,11 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
 import org.smartregister.anc.library.AncLibrary;
+import org.smartregister.anc.library.activity.BaseContactActivity;
+import org.smartregister.anc.library.activity.ContactJsonFormActivity;
+import org.smartregister.anc.library.domain.Contact;
 import org.smartregister.anc.library.domain.WomanDetail;
 import org.smartregister.anc.library.domain.YamlConfig;
 import org.smartregister.anc.library.domain.YamlConfigItem;
@@ -58,6 +64,10 @@ public class ContactVisit {
                     ConstantsUtils.JsonFormUtils.ANC_TEST, ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT);
     private Map<String, Long> currentClientTasks = new HashMap<>();
     private ANCFormUtils ancFormUtils = new ANCFormUtils();
+    static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+    static ContactModel baseContactModel = new ContactModel();
+    ContactJsonFormActivity ConstantJsonFormActivity;
 
     public ContactVisit(Map<String, String> details, String referral, String baseEntityId, int nextContact,
                         String nextContactVisitDate, PartialContactRepository partialContactRepository,
@@ -274,6 +284,8 @@ public class ContactVisit {
 //            }
         } catch (JSONException e) {
             Timber.e(e, " --> processTasks");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -315,7 +327,7 @@ public class ContactVisit {
                 && currentValue.startsWith("[") && currentValue.endsWith("]"));
     }
 
-    private void saveOrDeleteTasks(@NotNull JSONArray stepFields) throws JSONException {
+    private void saveOrDeleteTasks(@NotNull JSONArray stepFields) throws Exception {
         for (int i = 0; i < stepFields.length(); i++) {
             JSONObject field = stepFields.getJSONObject(i);
             if (field != null/* && field.has(JsonFormConstants.IS_VISIBLE) && field.getBoolean(JsonFormConstants.IS_VISIBLE)*/) {
@@ -325,7 +337,7 @@ public class ContactVisit {
                     if (getCurrentClientTasks() != null && !getCurrentClientTasks().containsKey(key)) {
                         if(key.contains("accordion_feedback"))
                         {
-                            if (referral != null){
+                            if (referral != null || BaseContactActivity.dangerValidJson.get(JsonFormUtils.VALUE) != null){
                                 saveTasks(field);
                             }
                         }
