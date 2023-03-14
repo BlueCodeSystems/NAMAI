@@ -54,6 +54,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
     protected ContactContract.Presenter presenter;
     protected Integer contactNo;
     private MeContract.Model model;
+    public static JSONObject dangerValidJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
         if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
             JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
             ccname.put(JsonFormUtils.VALUE, name);
+            dangerValidJson =  getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"danger_signs");
         }
 
         if (ConstantsUtils.JsonFormUtils.ANC_TEST.equals(contact.getFormName()) && contact.getContactNumber() > 1) {

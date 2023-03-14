@@ -30,7 +30,7 @@ actions:
 name: step1_ultrasound_done_date
 description: Ultrasound date correction
 priority: 1
-condition: "step1_ultrasound_done_date == 'yes' && step1_edd == '0'"
+condition: "step1_ultrasound_done_date != '' && step1_edd == '0'"
 actions:
   - "calculation = helper.getDateToday()"
 ---

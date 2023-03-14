@@ -48,7 +48,7 @@ fields:
   - template: "{{attention_flags.yellow.reduced_or_no_fetal_movement_perceived_by_woman}}"
     relevance: "!mat_percept_fetal_move.isEmpty() && mat_percept_fetal_move.contains('normal_fetal_move')"
 
-  - template: "{{attention_flags.yellow.weight_category}}: {weight_cat_value}"
+  - template: "{{attention_flags.yellow.weight_category}}: {weight_cat}"
     relevance: "!weight_cat.isEmpty() && (weight_cat.contains('underweight') || weight_cat.contains('Underweight') || weight_cat.contains('overweight') || weight_cat.contains('Overweight') || weight_cat.contains('obese') || weight_cat.contains('Obese'))"
 
   - template: "{{attention_flags.yellow.abnormal_breast_exam}}: {breast_exam_abnormal_value}"
@@ -77,6 +77,9 @@ fields:
 
   - template: "{{attention_flags.red.danger_sign}}: {danger_signs_value}"
     relevance: "!danger_signs.isEmpty() && !danger_signs.contains('none') && !danger_signs.contains('None') && !danger_signs.contains('danger_none')"
+
+  - template: "{{attention_flags.red.other_sign}}: {other_ds}"
+    relevance: "!danger_signs.contains('danger_none') && other_ds != ''"
 
   - template: "{{attention_flags.red.occupation_informal_employment_sex_worker}}"
     relevance: "!occupation.isEmpty() && occupation.contains('informal_employment_sex_worker')"
