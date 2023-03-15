@@ -292,6 +292,60 @@
 
                 </RelativeLayout>
 
+
+                <View
+                    android:id="@+id/me_hia2_reports_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/me_page_line_separator" />
+
+                <RelativeLayout
+                    android:id="@+id/hia2_reporting_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="@dimen/me_page_initials_background_margin"
+                    android:layout_marginLeft="@dimen/me_page_initials_background_margin"
+                    android:layout_marginEnd="@dimen/me_page_initials_background_margin"
+                    android:layout_marginRight="@dimen/me_page_initials_background_margin">
+
+                    <ImageView
+                        android:id="@+id/hia2_reportImageView"
+                        android:layout_width="@dimen/me_page_section_square_dimension"
+                        android:layout_height="@dimen/me_page_section_square_dimension"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/me_page_initials_background_margin"
+                        android:contentDescription="@string/section_icon"
+                        android:gravity="center"
+                        android:src="@drawable/ic_icon_hia2_report" />
+
+                    <TextView
+                        android:id="@+id/hia2_report_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/me_page_section_text_right_margin"
+                        android:layout_toEndOf="@+id/hia2_reportImageView"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/hia2_report"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/me_page_section_text_size" />
+
+                    <ImageView
+                        android:id="@+id/hia2_reportCaret"
+                        android:layout_width="@dimen/me_page_section_square_dimension"
+                        android:layout_height="@dimen/me_page_section_square_dimension"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/right_arrow"
+                        android:gravity="center"
+                        android:src="@drawable/baseline_keyboard_arrow_right"
+                        app:tint="@color/me_page_arrow" />
+
+                </RelativeLayout>
+
+
                 <View
                     android:id="@+id/contact_summary_separator"
                     android:layout_width="match_parent"
