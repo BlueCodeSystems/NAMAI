@@ -24,6 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AncAppTheme"
         tools:replace="android:theme">
-        <activity android:name=".activity.AncP2pModeSelectActivity" />
+        <activity
+            android:name=".activity.AncP2pModeSelectActivity"
+            android:exported="true" />
     </application>
 </manifest>

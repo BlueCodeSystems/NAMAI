@@ -279,7 +279,7 @@ android {
  */
 private Integer generateVersionCode() {
     //return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch This bit will be activated after we are sure of the clients minimum sdk version.
-    return ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
+    return ext.versionMajor * 10004 + ext.versionMinor * 100 + ext.versionPatch
 }
 
 /**
@@ -288,7 +288,7 @@ private Integer generateVersionCode() {
  * @return version name
  */
 private String generateVersionName() {
-    String versionName = "who_anc_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta8"
+    String versionName = "namai_anc_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta9"
     if (ext.versionClassifier == null && ext.isSnapshot) {
         ext.versionClassifier = "SNAPSHOT"
     }

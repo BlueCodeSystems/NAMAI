@@ -513,6 +513,9 @@ fields:
   - template: "{{contact_summary.maternal_exam.respiratory_exam}}: {respiratory_exam_value}"
     relevance: "respiratory_exam != ''"
 
+  - template: "{{contact_summary.maternal_exam.respiratory_exam}}: {bpm} bpm"
+    relevance: "bpm != ''"
+
   - template: "{{contact_summary.maternal_exam.abnormal_specify}}: {respiratory_exam_abnormal_value}"
     relevance: "!respiratory_exam_abnormal.contains('none') && !respiratory_exam_abnormal.isEmpty()"
 
