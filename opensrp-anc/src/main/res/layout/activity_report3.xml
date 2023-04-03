@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.HIA2ReportsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarx"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/light_grey_background"
+        app:layout_collapseMode="pin"
+        app:theme="@style/ThemeOverlay.AppCompat.Light"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_below="@+id/toolbarx"
+        android:layout_margin="10dp"
+        android:id="@+id/myCardview"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_margin="3dp"
+            android:id="@+id/llayout"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/contact_small_padding"
+            android:paddingBottom="@dimen/contact_small_padding"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/case_status_overview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:text="Health Facility" />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/facility"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Test Facility"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:text="Zone/Village" />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/partner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Zone 1"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:text="CBD Number" />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="099999"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:text="Reporting Period" />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/period"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:text="Generated On" />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/todaydate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="30-03-2023"
+                    android:paddingLeft="@dimen/contact_drawable_padding"
+                    android:paddingTop="@dimen/contact_small_padding"
+                    android:paddingBottom="@dimen/contact_small_padding"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/black_text_color"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:id="@+id/legend"
+        android:layout_margin="8dp"
+        android:layout_below="@id/myCardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_button"
+            android:gravity="center"
+            android:text=" Male "
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/female_round_button"
+            android:gravity="center"
+            android:text="Female"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/na_round_button"
+            android:gravity="center"
+            android:text="   N/A   "
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/title1"
+        android:weightSum="10"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/legend"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_weight="10"
+            android:id="@+id/report_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="#4A4A4A"
+            android:gravity="left"
+            android:paddingLeft="16dp"
+            android:paddingTop="@dimen/contact_drawable_padding"
+            android:paddingBottom="@dimen/contact_drawable_padding"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textAllCaps="true"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/title1"
+        android:id="@+id/recyclerView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <ProgressBar
+        android:id="@+id/loading1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:text="Data not Available yet"
+        android:id="@+id/not_available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
