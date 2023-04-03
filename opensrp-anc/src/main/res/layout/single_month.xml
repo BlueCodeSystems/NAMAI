@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:onClick="onClick"
+    android:id="@+id/monthLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="144dp"
+    tools:ignore="MissingConstraints">
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_view_history"
+                    android:layout_width="89dp"
+                    android:layout_height="89dp"/>
+
+                <TextView
+                    android:id="@+id/month"
+                    android:layout_marginLeft="21dp"
+                    android:textSize="34dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="January 2023 Report"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
