@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.AncP2pModeSelectActivity;
+import org.smartregister.anc.library.activity.HIA2ReportsActivity;
 import org.smartregister.anc.library.activity.PopulationCharacteristicsActivity;
 import org.smartregister.anc.library.activity.SiteCharacteristicsActivity;
 import org.smartregister.anc.library.presenter.MePresenter;
@@ -33,6 +34,7 @@ import timber.log.Timber;
 public class MeFragment extends org.smartregister.view.fragment.MeFragment implements MeContract.View {
     private RelativeLayout mePopCharacteristicsSection;
     private RelativeLayout siteCharacteristicsSection;
+    private RelativeLayout hia2ReportingSection;
     private RelativeLayout languageSwitcherSection;
     private RelativeLayout p2pSyncSetion;
     private TextView languageSwitcherText;
@@ -51,6 +53,7 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         super.setUpViews(view);
         mePopCharacteristicsSection = view.findViewById(R.id.me_pop_characteristics_section);
         siteCharacteristicsSection = view.findViewById(R.id.site_characteristics_section);
+        hia2ReportingSection = view.findViewById(R.id.hia2_reporting_section);
         p2pSyncSetion = view.findViewById(R.id.p2p_section);
 
         if (Utils.enableLanguageSwitching()) {
@@ -80,6 +83,7 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         super.setClickListeners();
         mePopCharacteristicsSection.setOnClickListener(meFragmentActionHandler);
         siteCharacteristicsSection.setOnClickListener(meFragmentActionHandler);
+        hia2ReportingSection.setOnClickListener(meFragmentActionHandler);
         if (Utils.enableLanguageSwitching()) {
             languageSwitcherSection.setOnClickListener(meFragmentActionHandler);
         }
@@ -103,7 +107,13 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
             if (getContext() != null) {
                 getContext().startActivity(new Intent(getContext(), PopulationCharacteristicsActivity.class));
             }
-        } else if (viewId == R.id.language_switcher_section) {
+        }
+        else if (viewId == R.id.hia2_reporting_section) {
+            if (getContext() != null) {
+                getContext().startActivity(new Intent(getContext(), HIA2ReportsActivity.class));
+            }
+        }
+        else if (viewId == R.id.language_switcher_section) {
             languageSwitcherDialog();
         } else if (viewId == R.id.p2p_section) {
             startActivity(new Intent(getContext(), AncP2pModeSelectActivity.class));

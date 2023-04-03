@@ -14,6 +14,9 @@ fields:
   - template: "{{contact_summary.hospital_referral.danger_signs}}: {danger_signs_value}"
     relevance: "!danger_signs.isEmpty() && !danger_signs.contains('danger_none')"
 
+  - template: "{{contact_summary.hospital_referral.other_signs}}: {other_ds}"
+    relevance: "!danger_signs.contains('danger_none') && other_ds != ''"
+
   - template: "{{contact_summary.hospital_referral.additional_contact}}: {additional_contact_value}"
     relevance: "!additional_contact.isEmpty()"
 
@@ -509,6 +512,9 @@ fields:
 
   - template: "{{contact_summary.maternal_exam.respiratory_exam}}: {respiratory_exam_value}"
     relevance: "respiratory_exam != ''"
+
+  - template: "{{contact_summary.maternal_exam.respiratory_exam}}: {bpm} bpm"
+    relevance: "bpm != ''"
 
   - template: "{{contact_summary.maternal_exam.abnormal_specify}}: {respiratory_exam_abnormal_value}"
     relevance: "!respiratory_exam_abnormal.contains('none') && !respiratory_exam_abnormal.isEmpty()"

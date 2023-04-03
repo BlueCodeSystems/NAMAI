@@ -24,6 +24,14 @@
         android:supportsRtl="true"
         android:theme="@style/AncAppTheme"
         tools:replace="android:theme">
-        <activity android:name=".activity.AncP2pModeSelectActivity" />
+        <activity
+            android:name=".activity.AncP2pModeSelectActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.HIA2ReportsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ReportActivity3"
+            android:exported="true" />
     </application>
 </manifest>
