@@ -117,7 +117,7 @@ public class Utils extends org.smartregister.util.Utils {
     public static Instant startRam = null;
     public static String baseEntityId;
     public static String refIDstring;
-    static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+    public static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
 
     static ContactModel baseContactModel = new ContactModel();
 

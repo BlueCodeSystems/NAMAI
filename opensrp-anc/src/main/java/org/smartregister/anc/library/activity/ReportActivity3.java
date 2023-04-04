@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.anc.library.R;
+import org.smartregister.anc.library.model.MeModel;
+import org.smartregister.anc.library.util.Utils;
+import org.smartregister.view.contract.MeContract;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,9 +35,10 @@ public class ReportActivity3 extends AppCompatActivity {
     ProgressBar loading1;
     private ArrayList<ReportModel1> reportList = new ArrayList<>();
     private ArrayList<ReportModel1> feedbackList = new ArrayList<>();
-    private TextView txtToday, txtPeriod, txtReportType;
+    private TextView txtToday, txtPeriod, txtReportType, facilityDB, nameDB;
     String monthName, monthNumber, reportType;
     List<String> emptyList = new ArrayList<>();
+    private MeContract.Model model;
 
 
 
@@ -55,6 +59,8 @@ public class ReportActivity3 extends AppCompatActivity {
         txtToday = findViewById(R.id.todaydate);
         txtPeriod = findViewById(R.id.period);
         txtReportType = findViewById(R.id.report_type);
+        facilityDB = findViewById(R.id.facility);
+        nameDB = findViewById(R.id.phone);
 
         monthName = getIntent().getExtras().getString("month_name");
         monthNumber = getIntent().getExtras().getString("month_number");
@@ -67,6 +73,13 @@ public class ReportActivity3 extends AppCompatActivity {
         String todaysDate = dateFormatter.format(calendar.getTime());
 
         txtToday.setText(todaysDate);
+        String facility = Utils.locationId;
+        String result = facility.replaceAll("_", " ");
+        facilityDB.setText(result);
+
+        model = new MeModel();
+        String name = model.getName();
+        nameDB.setText(name);
 
         //NavigationMenu.getInstance(this, null, toolbar);
 
