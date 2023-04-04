@@ -1,5 +1,8 @@
 package org.smartregister.anc.library.activity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.smartregister.anc.library.model.AttentionFlagModel;
 import org.smartregister.dao.AbstractDao;
 
 import java.time.LocalDate;
@@ -205,6 +208,46 @@ public class ClientDao extends AbstractDao {
         return values;
 
     }
+    public static String getFirstContact(String key,String lowerAge,String upperAge) {
+
+        //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
+        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2'";
+        int count = 0;
+        List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
+        if (values == null || values.size() == 0) {
+            return String.valueOf(count);
+        } else{
+
+            for (int i = 0; i < values.size(); i++) {
+                String jsonString = values.get(i).getValues();
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if( values.get(i).getAge() != null && Double.parseDouble(values.get(i).getAge()) < 15)
+                if (jsonObject.has(key) ) {
+                    int gestationAge = 0;
+                    try {
+                        gestationAge = jsonObject.getInt(key);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (gestationAge > Integer.parseInt(lowerAge) && gestationAge < Integer.parseInt(upperAge)) {
+                        count++;
+                    }
+                }
+            }
+
+            System.out.println("Total number of people between the age of 0 and 15: " + count);
+        }
+
+
+        return String.valueOf(count);
+
+    }
 
     public static List<ClientModel> getAllClientsWithSchedules(int page) {
 
@@ -350,6 +393,8 @@ public class ClientDao extends AbstractDao {
 
     }
 
+
+
     public static String getRefVisitedClientsTotal(String drug_type, String gender, int minAge, int maxAge) {
 
         String sql = "SELECT ec_referral.date_of_birth FROM ec_referral\n" +
@@ -410,6 +455,18 @@ public class ClientDao extends AbstractDao {
             return record;
         };
     }
+
+    public static DataMap<AttentionFlagModel> getAttentionFlagDataMap() {
+        return c -> {
+            AttentionFlagModel record = new AttentionFlagModel();
+            record.setValues(getCursorValue(c, "value"));
+            record.setAge(getCursorValue(c, "age"));
+
+
+            return record;
+        };
+    }
+
 
     public static DataMap<ReportModel1> getFeedbackDataMap() {
         return c -> {

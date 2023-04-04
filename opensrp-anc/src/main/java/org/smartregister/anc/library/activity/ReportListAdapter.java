@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.anc.library.R;
+import org.smartregister.anc.library.domain.AttentionFlag;
+import org.smartregister.anc.library.model.AttentionFlagModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,9 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Monthly Report Form");
+
+                String attentionFlagArrayList = ClientDao.getFirstContact("gest_age_openmrs","8","12");
+
 
                 String[] stringArray = new String[]{"1. Type of Contraceptive [Click to Open]", "2. FP Information, Education and Communication [Click to Open]", "3. Referrals to Health Facilities [Click to Open]", "4. Stockouts of Family Planning Commodities [Click to Open]"};
 
