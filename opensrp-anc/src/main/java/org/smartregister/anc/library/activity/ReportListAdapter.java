@@ -57,7 +57,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Monthly Report Form");
 
-                String[] stringArray = new String[]{"1. Type of Contraceptive [Click to Open]", "2. FP Information, Education and Communication [Click to Open]", "3. Referrals to Health Facilities [Click to Open]", "4. Stockouts of Family Planning Commodities [Click to Open]"};
+                String[] stringArray = new String[]{"1. Monthly detailed reports [Click to Open]"/*, "2. FP Information, Education and Communication [Click to Open]", "3. Referrals to Health Facilities [Click to Open]", "4. Stockouts of Family Planning Commodities [Click to Open]"*/};
 
                 builder.setItems(stringArray, (dialog, which) -> {
 
@@ -68,8 +68,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
                         i.putExtra("month_number", month.getMonthNumber());
                         i.putExtra("report_type", "1");
                         context.startActivity(i);
-
-                    } else if(which == 1){
+                    }/* else if(which == 1){
                         Intent i = new Intent(context, ReportActivity3.class);
                         i.putExtra("month_name", month.getMonthName());
                         i.putExtra("month_number", month.getMonthNumber());
@@ -88,7 +87,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
                         i.putExtra("report_type", "4");
                         context.startActivity(i);
                     }
-
+*/
                     else {
                         //Toasty.info(context, "Coming Soon", Toasty.LENGTH_SHORT).show();
                     }
