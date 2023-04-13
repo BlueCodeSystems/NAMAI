@@ -55,7 +55,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
         holder.setIsRecyclable(false);
 
-        holder.txtProductName.setText(data.getDrug_type());
+        holder.txtProductName.setText(data.getTrimester());
 
             holder.m1.setBackgroundResource(R.drawable.na_round_button);
             holder.m2.setBackgroundResource(R.drawable.na_round_button);
@@ -68,45 +68,103 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         holder.txtTotalMaleServices.setBackgroundResource(R.drawable.na_round_button);
         holder.txtTotalFemaleServices.setBackgroundResource(R.drawable.na_round_button);
 
-        List<ClientreportModel> totalMaleSeen = ClientDao.getRefVisitedClientsMale(data.getQuerry_drug());
-        List<ClientreportModel> totalFemaleSeen = ClientDao.getRefVisitedClientsFemale(data.getQuerry_drug());
+        //List<ClientreportModel> totalMaleSeen = ClientDao.getRefVisitedClientsMale(data.getQuerry_drug());
+        //List<ClientreportModel> totalFemaleSeen = ClientDao.getRefVisitedClientsFemale(data.getQuerry_drug());
 
-        //10-14
-        String totalFemaleSeen10_14 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 10, 15);
-        String totalMaleSeen10_14 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "male", 10, 15);
+        if(data.getTrimester() != null && data.getTrimester().contains("First Trimester")) {
+            //10-14
+            String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
 
-        //15-19
-        String totalFemaleSeen15_19 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 15, 20);
-        String totalMaleSeen15_19 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "male", 15, 20);
+            //15-19
+            String totalFemaleSeen15_19 = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12");
 
-        //20-24
-        String totalFemaleSeen20_24 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 20, 25);
-        String totalMaleSeen20_24 = ClientDao.getVisitedClientsTotal(data.getQuerry_drug(), "male", 20, 25);
+            //20-24
+            String totalFemaleSeen20_24 = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12");
 
-        //25-49
-        String totalFemaleSeen25_49 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 25, 50);
-        String totalMaleSeen25_49 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "male", 25, 50);
+            //25-49
+            String totalFemaleSeen25_49 = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12");
 
+            holder.f1.setText(totalFemaleSeen10_14);
+            //holder.m1.setText(totalMaleSeen10_14);
+
+            holder.f2.setText(totalFemaleSeen15_19);
+            //holder.m2.setText(totalMaleSeen15_19);
+
+            holder.f3.setText(totalFemaleSeen20_24);
+            //holder.m3.setText(totalMaleSeen20_24);
+
+            holder.f4.setText(totalFemaleSeen25_49);
+
+            int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
+            String WT = String.valueOf(womenSeen);
+            holder.txtTotalFemaleSeen.setText(WT);
+        }
+        else if(data.getTrimester() != null && data.getTrimester().contains("Second Trimester")) {
+            //10-14
+            String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "13", "26");
+
+            //15-19
+            String totalFemaleSeen15_19 = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26");
+
+            //20-24
+            String totalFemaleSeen20_24 = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26");
+
+            //25-49
+            String totalFemaleSeen25_49 = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26");
+
+            holder.f1.setText(totalFemaleSeen10_14);
+            //holder.m1.setText(totalMaleSeen10_14);
+
+            holder.f2.setText(totalFemaleSeen15_19);
+            //holder.m2.setText(totalMaleSeen15_19);
+
+            holder.f3.setText(totalFemaleSeen20_24);
+            //holder.m3.setText(totalMaleSeen20_24);
+
+            holder.f4.setText(totalFemaleSeen25_49);
+
+            int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
+            String WT = String.valueOf(womenSeen);
+            holder.txtTotalFemaleSeen.setText(WT);
+        }
+        else if(data.getTrimester() != null && data.getTrimester().contains("Third Trimester")) {
+            //10-14
+            String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "27", "40");
+
+            //15-19
+            String totalFemaleSeen15_19 = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40");
+
+            //20-24
+            String totalFemaleSeen20_24 = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40");
+
+            //25-49
+            String totalFemaleSeen25_49 = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40");
+
+            holder.f1.setText(totalFemaleSeen10_14);
+            //holder.m1.setText(totalMaleSeen10_14);
+
+            holder.f2.setText(totalFemaleSeen15_19);
+            //holder.m2.setText(totalMaleSeen15_19);
+
+            holder.f3.setText(totalFemaleSeen20_24);
+            //holder.m3.setText(totalMaleSeen20_24);
+
+            holder.f4.setText(totalFemaleSeen25_49);
+
+            int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
+            String WT = String.valueOf(womenSeen);
+            holder.txtTotalFemaleSeen.setText(WT);
+        }
         //49-150
-        String totalFemaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 49, 150);
-        String totalMaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "male", 49, 150);
+        //String totalFemaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 49, 150);
+        //String totalMaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "male", 49, 150);
 
 
-        holder.f1.setText(totalFemaleSeen10_14);
-        holder.m1.setText(totalMaleSeen10_14);
+        //holder.m4.setText(totalMaleSeen25_49);
 
-        holder.f2.setText(totalFemaleSeen15_19);
-        holder.m2.setText(totalMaleSeen15_19);
-
-        holder.f3.setText(totalFemaleSeen20_24);
-        holder.m3.setText(totalMaleSeen20_24);
-
-        holder.f4.setText(totalFemaleSeen25_49);
-        holder.m4.setText(totalMaleSeen25_49);
-
-        holder.f5.setText(totalFemaleSeen49_150);
-        holder.m5.setText(totalMaleSeen49_150);
-
+        //holder.f5.setText(totalFemaleSeen49_150);
+        //holder.m5.setText(totalMaleSeen49_150);
+/*
         if(totalMaleSeen == null){
             holder.txtTotalMaleSeen.setText("0");
             holder.txtTotalMaleServices.setText("0");
@@ -114,23 +172,26 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             if(data.getQuerry_drug().equals("Sterilization") || data.getQuerry_drug().equals("Other")){
                 holder.txtTotalMaleSeen.setText(String.valueOf(totalMaleSeen.size()));
             }else{
-                holder.txtTotalMaleSeen.setText("0");
-                holder.m1.setText("0");
-                holder.m2.setText("0");
-                holder.m3.setText("0");
-                holder.m4.setText("0");
-                holder.m5.setText("0");
-            }
-            holder.txtTotalMaleServices.setText("0");
-        }
 
-        if(totalFemaleSeen == null){
-            holder.txtTotalFemaleSeen.setText("0");
-            holder.txtTotalFemaleServices.setText("0");
+            }
+
+        }*/
+
+        holder.txtTotalMaleSeen.setText("0");
+        holder.m1.setText("0");
+        holder.m2.setText("0");
+        holder.m3.setText("0");
+        holder.m4.setText("0");
+        holder.m5.setText("0");
+        holder.txtTotalMaleServices.setText("0");
+        /*if(totalFemaleSeen == null){
+
         } else {
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen.size()));
             holder.txtTotalFemaleServices.setText("0");;
         }
+*/
+        holder.txtTotalFemaleServices.setText("0");
 
 
     }
