@@ -21,6 +21,9 @@ public class ReportModel1 implements Serializable {
     private String countFeedback;
     private String trimester;
     private String age;
+    private String origin;
+    private String originCount;
+
 
     public String getCountFeedback() {
         return countFeedback;
@@ -29,6 +32,22 @@ public class ReportModel1 implements Serializable {
 
     public void setCountFeedback(String countFeedback) {
         this.countFeedback = countFeedback;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOriginCount(String originCount) {
+        this.originCount = originCount;
+    }
+
+    public String getOriginCount() {
+        return originCount;
     }
 
     public String getProduct_name() {

@@ -100,6 +100,13 @@ public class ReportActivity3 extends AppCompatActivity {
                 reportList.add(data);
             }
         }
+
+        List<ReportModel1> originData = ClientDao.getOrigin();
+        for (ReportModel1 data : originData) {
+            if (data.getOrigin() != null) {
+                reportList.add(data);
+            }
+        }
         //feedbackList.addAll(ClientDao.getFeedbackCount());
 
         //int countlist = feedbackList.size();
