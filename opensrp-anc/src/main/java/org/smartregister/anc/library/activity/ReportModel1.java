@@ -1,5 +1,9 @@
 package org.smartregister.anc.library.activity;
 
+import static org.smartregister.anc.library.activity.ReportActivity3.firstTrimesterCounter;
+import static org.smartregister.anc.library.activity.ReportActivity3.secondTrimesterCounter;
+import static org.smartregister.anc.library.activity.ReportActivity3.thirdTrimesterCounter;
+
 import java.io.Serializable;
 
 public class ReportModel1 implements Serializable {
@@ -15,10 +19,13 @@ public class ReportModel1 implements Serializable {
     private String feedback;
     private String querry_drug;
     private String countFeedback;
+    private String trimester;
+    private String age;
 
     public String getCountFeedback() {
         return countFeedback;
     }
+
 
     public void setCountFeedback(String countFeedback) {
         this.countFeedback = countFeedback;
@@ -40,36 +47,189 @@ public class ReportModel1 implements Serializable {
         this.querry_drug = querry_drug;
     }
 
+    public String getTrimester() {
+        return trimester;
+    }
+
+    public void setTrimester(String trimester) {
+        if(trimester.contains("\"gest_age_openmrs\":\"8\"") && firstTrimesterCounter < 1)
+        {
+            this.trimester = "First Trimester";
+            firstTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"9\"") && firstTrimesterCounter < 1)
+        {
+            this.trimester = "First Trimester";
+            firstTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"10\"") && firstTrimesterCounter < 1)
+        {
+            this.trimester = "First Trimester";
+            firstTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"11\"") && firstTrimesterCounter < 1)
+        {
+            this.trimester = "First Trimester";
+            firstTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"12\"") && firstTrimesterCounter < 1)
+        {
+            this.trimester = "First Trimester";
+            firstTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"13\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"14\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"15\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"16\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"17\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"18\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"19\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"20\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"21\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"22\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"23\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"24\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"25\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"26\"") && secondTrimesterCounter < 1)
+        {
+            this.trimester = "Second Trimester";
+            secondTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"27\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"28\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"29\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"30\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"31\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"32\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"33\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"34\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"35\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"36\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"37\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"38\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"39\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        else if(trimester.contains("\"gest_age_openmrs\":\"40\"") && thirdTrimesterCounter < 1)
+        {
+            this.trimester = "Third Trimester";
+            thirdTrimesterCounter = 1;
+        }
+        //this.trimester = trimester;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public void setDrug_type(String drug_type) {
         this.drug_type = drug_type;
-        /*if(drug_type.contains("Condoms"))
-        {
-            this.drug_type = "Number referred for Condoms";
-        }
-        else if(drug_type.contains("Implant"))
-        {
-            this.drug_type = "Number referred for Implants";
-        }
-        else if(drug_type.contains("Injection"))
-        {
-            this.drug_type = "Number referred for Injections";
-        }
-        else if(drug_type.contains("IUCD"))
-        {
-            this.drug_type = "Number referred for IUCD";
-        }
-        else if(drug_type.contains("Tablet"))
-        {
-            this.drug_type = "Number referred for Tablets";
-        }
-        else if(drug_type.contains("Sterilization"))
-        {
-            this.drug_type = "Number referred for Sterilization";
-        }
-        else if(drug_type.contains("Other"))
-        {
-            this.drug_type = "Number referred for Other";
-        }*/
     }
 
     public String getFeedback() {

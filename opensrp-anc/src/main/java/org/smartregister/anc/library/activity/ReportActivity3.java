@@ -40,6 +40,10 @@ public class ReportActivity3 extends AppCompatActivity {
     List<String> emptyList = new ArrayList<>();
     private MeContract.Model model;
 
+    public static int firstTrimesterCounter = 0;
+    public static int secondTrimesterCounter = 0;
+    public static int thirdTrimesterCounter = 0;
+
 
 
     @Override
@@ -88,8 +92,14 @@ public class ReportActivity3 extends AppCompatActivity {
 
     public void loadData1(){
 
-        reportList.addAll(ClientDao.getReport3());
+        //reportList.addAll(ClientDao.getReport3());
 
+        List<ReportModel1> report3Data = ClientDao.getReport3();
+        for (ReportModel1 data : report3Data) {
+            if (data.getTrimester() != null) {
+                reportList.add(data);
+            }
+        }
         //feedbackList.addAll(ClientDao.getFeedbackCount());
 
         //int countlist = feedbackList.size();
@@ -102,7 +112,7 @@ public class ReportActivity3 extends AppCompatActivity {
         recyclerViewadapter1 = new ReportAdapter1(monthNumber, reportList, ReportActivity.this);*/
 
 
-        txtReportType.setText("REFERRALS TO HEALTH FACILITIES");
+        txtReportType.setText("ANC VISITS FOR : " + monthName);
         recyclerViewadapter1 = new ReportAdapter3(monthNumber, reportList, ReportActivity3.this);
         recyclerView1.setAdapter(recyclerViewadapter1);
 

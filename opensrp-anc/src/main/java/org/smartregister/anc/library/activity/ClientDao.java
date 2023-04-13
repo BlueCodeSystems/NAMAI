@@ -249,6 +249,129 @@ public class ClientDao extends AbstractDao {
 
     }
 
+    public static String getFirstContactAbove15(String key,String lowerAge,String upperAge) {
+
+        //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
+        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2'";
+        int count = 0;
+        List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
+        if (values == null || values.size() == 0) {
+            return String.valueOf(count);
+        } else{
+
+            for (int i = 0; i < values.size(); i++) {
+                String jsonString = values.get(i).getValues();
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if( values.get(i).getAge() != null && Double.parseDouble(values.get(i).getAge()) > 15 && Double.parseDouble(values.get(i).getAge()) < 20 )
+                    if (jsonObject.has(key) ) {
+                        int gestationAge = 0;
+                        try {
+                            gestationAge = jsonObject.getInt(key);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (gestationAge > Integer.parseInt(lowerAge) && gestationAge < Integer.parseInt(upperAge)) {
+                            count++;
+                        }
+                    }
+            }
+
+            System.out.println("Total number of people between the age of 15 and 20: " + count);
+        }
+
+
+        return String.valueOf(count);
+
+    }
+
+    public static String getFirstContactAbove20(String key,String lowerAge,String upperAge) {
+
+        //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
+        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2'";
+        int count = 0;
+        List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
+        if (values == null || values.size() == 0) {
+            return String.valueOf(count);
+        } else{
+
+            for (int i = 0; i < values.size(); i++) {
+                String jsonString = values.get(i).getValues();
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if( values.get(i).getAge() != null && Double.parseDouble(values.get(i).getAge()) > 20 && Double.parseDouble(values.get(i).getAge()) < 25 )
+                    if (jsonObject.has(key) ) {
+                        int gestationAge = 0;
+                        try {
+                            gestationAge = jsonObject.getInt(key);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (gestationAge > Integer.parseInt(lowerAge) && gestationAge < Integer.parseInt(upperAge)) {
+                            count++;
+                        }
+                    }
+            }
+
+            System.out.println("Total number of people between the age of 20 and 25: " + count);
+        }
+
+
+        return String.valueOf(count);
+
+    }
+
+    public static String getFirstContactAbove25(String key,String lowerAge,String upperAge) {
+
+        //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
+        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY 'number of women above the age of 25'";
+        int count = 0;
+        List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
+        if (values == null || values.size() == 0) {
+            return String.valueOf(count);
+        } else{
+
+            for (int i = 0; i < values.size(); i++) {
+                String jsonString = values.get(i).getValues();
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if( values.get(i).getAge() != null && Double.parseDouble(values.get(i).getAge()) > 25)
+                    if (jsonObject.has(key) ) {
+                        int gestationAge = 0;
+                        try {
+                            gestationAge = jsonObject.getInt(key);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (gestationAge > Integer.parseInt(lowerAge) && gestationAge < Integer.parseInt(upperAge)) {
+                            count++;
+                        }
+                    }
+            }
+
+            System.out.println("Total number of people above the age of 25: " + count);
+        }
+
+
+        return String.valueOf(count);
+
+    }
+
     public static List<ClientModel> getAllClientsWithSchedules(int page) {
 
         int limit = 20;
@@ -298,9 +421,37 @@ public class ClientDao extends AbstractDao {
        /* String sql = "SELECT ec_visits.product_name, ec_visits.id AS product_id, ec_client.date_of_birth, ec_client.gender, ec_visits.fpnumber AS fpnumber \n" +
                 "FROM ec_visits JOIN ec_client ON ec_visits.fpnumber = ec_client.fpnumber \n" +
                 "WHERE ec_visits.fpnumber IS NOT NULL AND ec_visits.product_name IS NOT NULL" ;*/
-        String sql = "SELECT ec_client.base_entity_id, ec_client.dob, ec_client.last_interacted_with FROM ec_client \n"+
-                "WHERE ec_client.base_entity_id IS NOT NULL AND ec_client.dob IS NOT NULL GROUP BY ec_client.dob "; //+
+        String sql ="SELECT B.value ,C.value As age\n" +
+                "FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A \n" +
+                "JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id \n" +
+                "JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value";
+
+//SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value
+//SELECT B.value As gestation ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE value LIKE '%gest_age_openmrs":"39%') AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value
+                /*"SELECT B.value ,C.value As age " +
+                "FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A " +
+                "JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id " +
+                "JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value";*/
                 //"WHERE ec_mother_details.base_entity_id IS NOT NULL AND ec_mother_details.dob IS NOT NULL GROUP BY ec_mother_details.dob";
+
+        //SELECT B.value AS gestation, C.value AS age
+        //FROM (
+        //    SELECT *
+        //    FROM ec_details
+        //    WHERE key = 'next_contact'
+        //) AS A
+        //JOIN (
+        //    SELECT *
+        //    FROM ec_details
+        //    WHERE value REGEXP 'gest_age_openmrs":"(2[7-9]|[3-3][0-9]|40)'
+        //) AS B ON A.base_entity_id = B.base_entity_id
+        //JOIN (
+        //    SELECT *
+        //    FROM ec_details
+        //    WHERE key = 'age_calculated'
+        //) AS C ON B.base_entity_id = C.base_entity_id
+        //WHERE A.value = '2'
+        //GROUP BY B.value
 
         List<ReportModel1> values = AbstractDao.readData(sql, getReferralDataMap());
 
@@ -448,9 +599,8 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getReferralDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setDrug_type(getCursorValue(c, "dob"));
-            record.setFeedback(getCursorValue(c, "base_entity_id"));
-            record.setQuerry_drug(getCursorValue(c, "dob"));
+            record.setTrimester(getCursorValue(c, "value"));
+            record.setAge(getCursorValue(c, "age"));
 
             return record;
         };
