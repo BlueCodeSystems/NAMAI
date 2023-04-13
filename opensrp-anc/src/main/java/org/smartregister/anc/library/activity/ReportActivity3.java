@@ -107,6 +107,41 @@ public class ReportActivity3 extends AppCompatActivity {
                 reportList.add(data);
             }
         }
+
+        List<ReportModel1> firstData = ClientDao.getFirstC();
+        for (ReportModel1 data : firstData) {
+            if (data.getFirstC() != null) {
+                reportList.add(data);
+            }
+        }
+
+        List<ReportModel1> secondData = ClientDao.getSecondC();
+        for (ReportModel1 data : secondData) {
+            if (data.getSecondC() != null) {
+                reportList.add(data);
+            }
+        }
+
+        List<ReportModel1> thirdData = ClientDao.getThirdC();
+        for (ReportModel1 data : thirdData) {
+            if (data.getThirdC() != null) {
+                reportList.add(data);
+            }
+        }
+
+        List<ReportModel1> FourthToSeventhData = ClientDao.getFourthToSeventhC();
+        for (ReportModel1 data : FourthToSeventhData) {
+            if (data.getFourthToSeventhC() != null) {
+                reportList.add(data);
+            }
+        }
+
+        List<ReportModel1> EighthAboveData = ClientDao.getEighthAboveC();
+        for (ReportModel1 data : EighthAboveData) {
+            if (data.getEighthAboveC() != null) {
+                reportList.add(data);
+            }
+        }
         //feedbackList.addAll(ClientDao.getFeedbackCount());
 
         //int countlist = feedbackList.size();
