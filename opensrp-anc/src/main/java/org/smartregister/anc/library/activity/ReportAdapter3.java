@@ -154,6 +154,17 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
             String WT = String.valueOf(womenSeen);
             holder.txtTotalFemaleSeen.setText(WT);
+        }else if(data.getOrigin() != null){
+            holder.txtProductName.setText("Outside Catchment Area");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllOutside();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+
         }
         //49-150
         //String totalFemaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 49, 150);

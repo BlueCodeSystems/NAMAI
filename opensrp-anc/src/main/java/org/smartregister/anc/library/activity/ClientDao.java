@@ -5,9 +5,6 @@ import org.json.JSONObject;
 import org.smartregister.anc.library.model.AttentionFlagModel;
 import org.smartregister.dao.AbstractDao;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -372,6 +369,14 @@ public class ClientDao extends AbstractDao {
 
     }
 
+    public static int getAllOutside(){
+        String sql = "SELECT ec_mother_details.origin FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getOriginCountDataMap());
+
+        return values.size();
+    }
+
     public static List<ClientModel> getAllClientsWithSchedules(int page) {
 
         int limit = 20;
@@ -457,6 +462,14 @@ public class ClientDao extends AbstractDao {
 
         return values;
 
+    }
+
+    public static List<ReportModel1> getOrigin() {
+        String sql = "SELECT ec_mother_details.origin FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL GROUP BY ec_mother_details.origin";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getOriginDataMap());
+
+        return values;
     }
 
     public static List<ReportModel1> getFeedbackCount() {
@@ -601,6 +614,24 @@ public class ClientDao extends AbstractDao {
             ReportModel1 record = new ReportModel1();
             record.setTrimester(getCursorValue(c, "value"));
             record.setAge(getCursorValue(c, "age"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getOriginDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setOrigin(getCursorValue(c, "origin"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getOriginCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setOriginCount(getCursorValue(c, "origin"));
 
             return record;
         };
