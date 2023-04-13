@@ -23,6 +23,26 @@ public class ReportModel1 implements Serializable {
     private String age;
     private String origin;
     private String originCount;
+    private String firstCount;
+    private String secondCount;
+    private String thirdCount;
+    private String FourthToSeventhCount;
+    private String EighthAboveCount;
+    private String firstID;
+    private String secondID;
+    private String thirdID;
+    private String FourthToSeventhID;
+    private String EighthAboveID;
+    private String firstC;
+    private String secondC;
+    private String thirdC;
+    private String FourthToSeventhC;
+    private String EighthAboveC;
+    private String firstCID;
+    private String secondCID;
+    private String thirdCID;
+    private String FourthToSeventhCID;
+    private String EighthAboveCID;
 
 
     public String getCountFeedback() {
@@ -48,6 +68,134 @@ public class ReportModel1 implements Serializable {
 
     public String getOriginCount() {
         return originCount;
+    }
+
+    public void setFirstCount(String firstCount) {
+        this.firstCount = firstCount;
+    }
+
+    public String getFirstCount() {
+        return firstCount;
+    }
+
+    public void setSecondCount(String secondCount) {
+        this.secondCount = secondCount;
+    }
+
+    public String getsecondCount() {
+        return secondCount;
+    }
+
+    public void setThirdCount(String thirdCount) {
+        this.thirdCount = thirdCount;
+    }
+
+    public String getThirdCount() {
+        return thirdCount;
+    }
+
+    public void setFourthToSeventhCount(String FourthToSeventhCount) {
+        this.FourthToSeventhCount = FourthToSeventhCount;
+    }
+
+    public String getFourthToSeventhCount() {
+        return FourthToSeventhCount;
+    }
+
+    public void setEighthAboveCount(String EighthAboveCount) {
+        this.EighthAboveCount = EighthAboveCount;
+    }
+
+    public String getEighthAboveCount() {
+        return EighthAboveCount;
+    }
+
+    public void setFirstC(String firstC) {
+        this.firstC = firstC;
+    }
+
+    public String getFirstC() {
+        return firstC;
+    }
+
+    public void setSecondC(String secondC) {
+        this.secondC = secondC;
+    }
+
+    public String getSecondC() {
+        return secondC;
+    }
+
+    public void setThirdC(String thirdC) {
+        this.thirdC = thirdC;
+    }
+
+    public String getThirdC() {
+        return thirdC;
+    }
+
+    public void setFourthToSeventhC(String FourthToSeventhC) {
+        this.FourthToSeventhC = FourthToSeventhC;
+    }
+
+    public String getFourthToSeventhC() {
+        return FourthToSeventhC;
+    }
+
+    public void setEighthAboveC(String EighthAboveC) {
+        this.EighthAboveC = EighthAboveC;
+    }
+
+    public String getEighthAboveC() {
+        return EighthAboveC;
+    }
+
+    public void setFirstCID(String firstCID) {
+        this.firstCID = firstCID;
+    }
+
+    public String getFirstCID() {
+        return firstCID;
+    }
+
+    public void setFirstIDCount(String firstID) {
+        this.firstID = firstID;
+    }
+
+    public void setThirdIDCount(String thirdID) {
+        this.thirdID = thirdID;
+    }
+
+    public void setSecondIDCount(String secondID) {
+        this.secondID = secondID;
+    }
+
+    public void setFourthToSeventhIDCount(String FourthToSeventhID) {
+        this.FourthToSeventhID = FourthToSeventhID;
+    }
+
+    public void setEighthAboveIDCount(String EighthAboveID) {
+        this.EighthAboveID = EighthAboveID;
+    }
+
+    public String getFirstIDCount() {
+        return firstID;
+    }
+
+    public String getSecondIDCount() {
+        return secondID;
+    }
+
+    public String getThirdIDCount() {
+        return thirdID;
+    }
+
+    public String getFourthToSeventhIDCount() {
+        return FourthToSeventhID;
+    }
+
+    public String getEighthAboveIDCount() {
+        return EighthAboveID;
     }
 
     public String getProduct_name() {

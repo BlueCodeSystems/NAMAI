@@ -377,6 +377,46 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
+    public static int getAllFirstContact(){
+        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '1' GROUP BY previous_contact.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getFirstContactCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllSecondContact(){
+        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '2' GROUP BY previous_contact.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getSecondContactCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllThirdContact(){
+        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '3' GROUP BY previous_contact.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getThirdContactCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllFourthToSeventhContact(){
+        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '4' OR previous_contact.contact_no IS '5' OR previous_contact.contact_no IS '6' OR previous_contact.contact_no IS '7' GROUP BY previous_contact.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getFourthToSeventhContactCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllEighthAboveContact(){
+        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '8' OR previous_contact.contact_no IS '9' OR previous_contact.contact_no IS '10' OR previous_contact.contact_no IS '11' GROUP BY previous_contact.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getEighthAboveContactCountDataMap());
+
+        return values.size();
+    }
+
     public static List<ClientModel> getAllClientsWithSchedules(int page) {
 
         int limit = 20;
@@ -468,6 +508,46 @@ public class ClientDao extends AbstractDao {
         String sql = "SELECT ec_mother_details.origin FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL GROUP BY ec_mother_details.origin";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getOriginDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getFirstC() {
+        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '1' GROUP BY previous_contact.contact_no";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getFirstCDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getSecondC() {
+        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '2' GROUP BY previous_contact.contact_no";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getSecondCDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getThirdC() {
+        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '3' GROUP BY previous_contact.contact_no";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getThirdCDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getFourthToSeventhC() {
+        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '4' OR previous_contact.contact_no IS '5' OR previous_contact.contact_no IS '6' OR previous_contact.contact_no IS '7' GROUP BY previous_contact.contact_no";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getFourthToSeventhCDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getEighthAboveC() {
+        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '8' OR previous_contact.contact_no IS '9' OR previous_contact.contact_no IS '10' OR previous_contact.contact_no IS '11' GROUP BY previous_contact.contact_no";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getEighthAboveCDataMap());
 
         return values;
     }
@@ -628,11 +708,101 @@ public class ClientDao extends AbstractDao {
         };
     }
 
+    public static DataMap<ReportModel1> getFirstCDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setFirstC(getCursorValue(c, "contact_no"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getSecondCDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setSecondC(getCursorValue(c, "contact_no"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getThirdCDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setThirdC(getCursorValue(c, "contact_no"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getFourthToSeventhCDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setFourthToSeventhC(getCursorValue(c, "contact_no"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getEighthAboveCDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setEighthAboveC(getCursorValue(c, "contact_no"));
+
+            return record;
+        };
+    }
+
     public static DataMap<ReportModel1> getOriginCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
             record.setOriginCount(getCursorValue(c, "origin"));
 
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getFirstContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setFirstCount(getCursorValue(c, "contact_no"));
+            record.setFirstIDCount(getCursorValue(c, "base_entity_id"));
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getSecondContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setSecondCount(getCursorValue(c, "contact_no"));
+            record.setSecondIDCount(getCursorValue(c, "base_entity_id"));
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getThirdContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setThirdCount(getCursorValue(c, "contact_no"));
+            record.setThirdIDCount(getCursorValue(c, "base_entity_id"));
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getFourthToSeventhContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setFourthToSeventhCount(getCursorValue(c, "contact_no"));
+            record.setFourthToSeventhIDCount(getCursorValue(c, "base_entity_id"));
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getEighthAboveContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setEighthAboveCount(getCursorValue(c, "contact_no"));
+            record.setEighthAboveIDCount(getCursorValue(c, "base_entity_id"));
             return record;
         };
     }

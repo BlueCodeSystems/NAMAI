@@ -165,6 +165,56 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             int totalFemaleSeen = ClientDao.getAllOutside();
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
 
+        }else if(data.getFirstC() != null){
+            holder.txtProductName.setText("First ANC Contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllFirstContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }else if(data.getSecondC() != null){
+            holder.txtProductName.setText("Second ANC Contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllSecondContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }else if(data.getThirdC() != null){
+            holder.txtProductName.setText("Third ANC Contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllThirdContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }else if(data.getFourthToSeventhC() != null){
+            holder.txtProductName.setText("Fourth To Seventh ANC Contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllFourthToSeventhContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }else if(data.getEighthAboveC() != null){
+            holder.txtProductName.setText("Eighth Above ANC Contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllEighthAboveContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
         }
         //49-150
         //String totalFemaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 49, 150);
