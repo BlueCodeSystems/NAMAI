@@ -377,6 +377,14 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
+    public static int getAllHighRiskContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'red_flag_count' and ec_details.value IS NOT '0' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
     public static int getAllFirstContact(){
         String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '1' GROUP BY previous_contact.base_entity_id";
 
@@ -417,6 +425,294 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
+    public static int getAllSyphScreenedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%syph_test_status\":\"done_%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllSyphPositiveContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%syphilis_positive\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getSyphScreenedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%syph_test_status\":\"done_%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getSyphScreenedCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getSyphPositiveContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%syphilis_positive\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getSyphPositiveCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllHepBScreenedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%hepb_test_status\":\"done%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getHepBScreenedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%hepb_test_status\":\"done%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getHepbScreenedCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getAnaemiaPositiveContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%anaemic\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getAnaemiaPositiveCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllAnaemiaPositiveContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%anaemic\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getAnaemiaScreenedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%ifa_anaemia\":\"done%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getAnaemiaScreenedCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllAnaemiaScreenedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%ifa_anaemia\":\"done%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllHepBPositiveContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%hepb_positive\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getHepBPositiveContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%hepb_positive\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getHepBPositiveCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllIPTP1Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp1_dose_number\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getIPTP1Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp1_dose_number\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getIPTP1CountDataMap());
+
+        return values;
+    }
+
+    public static int getAllIPTP2Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp2_dose_number\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getIPTP2Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp2_dose_number\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getIPTP2CountDataMap());
+
+        return values;
+    }
+
+    public static int getAllIPTP3Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp3_dose_number\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getIPTP3Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp3_dose_number\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getIPTP3CountDataMap());
+
+        return values;
+    }
+
+    public static int getAllIPTP4Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp4_dose_number\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getIPTP4Contact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp4_dose_number\":\"0%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getIPTP4CountDataMap());
+
+        return values;
+    }
+
+    public static int getAllProvidedITNContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%itn_issued\":\"yes%' GROUP BY ec_client.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getProvidedITNContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%itn_issued\":\"yes%' GROUP BY ec_client.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getProvidedITNCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getProvidedIronContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%ifa_low_prev_value\":\"Given%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getProvidedIronCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllProvidedIronContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%ifa_low_prev_value\":\"Given%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllDewormedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%mebendazole\":\"yes%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getDewormedContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%mebendazole\":\"yes%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getDewormedCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getStartedOnPrepContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_on_prep\":\"yes%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getStartedOnPrepCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllStartedOnPrepContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_on_prep\":\"yes%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllAlreadyOnPrepContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getAlreadyOnPrepContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyOnPrepCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getAlreadyARTinANCContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_art\":\"already%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyOnARTCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllAlreadyARTinANCContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_art\":\"already%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllStartedARTinANCContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_art\":\"yes%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static List<ReportModel1> getStartedARTinANCContact(){
+        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_art\":\"yes%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getStartedOnARTCountDataMap());
+
+        return values;
+    }
+
+    public static int getAllFirstTrimesterContact(){
+        String sql = "SELECT \"_rowid_\" AS 'First Trimester',* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%gest_age_openmrs\":\"8%' OR \"value\" LIKE '%gest_age_openmrs\":\"9%' OR \"value\" LIKE '%gest_age_openmrs\":\"10%' OR \"value\" LIKE '%gest_age_openmrs\":\"11%' OR \"value\" LIKE '%gest_age_openmrs\":\"12%'GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getFirstTrimesterContact(){
+        String sql = "SELECT \"_rowid_\" AS 'First Trimester',* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%gest_age_openmrs\":\"8%' OR \"value\" LIKE '%gest_age_openmrs\":\"9%' OR \"value\" LIKE '%gest_age_openmrs\":\"10%' OR \"value\" LIKE '%gest_age_openmrs\":\"11%' OR \"value\" LIKE '%gest_age_openmrs\":\"12%'GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
     public static List<ClientModel> getAllClientsWithSchedules(int page) {
 
         int limit = 20;
@@ -430,6 +726,7 @@ public class ClientDao extends AbstractDao {
         return values;
 
     }
+
     public static List<ClientModel> getAllClients(int page) {
 
         int limit = 20;
@@ -548,6 +845,14 @@ public class ClientDao extends AbstractDao {
         String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '8' OR previous_contact.contact_no IS '9' OR previous_contact.contact_no IS '10' OR previous_contact.contact_no IS '11' GROUP BY previous_contact.contact_no";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getEighthAboveCDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getHighRiskContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'red_flag_count' and ec_details.value IS NOT '0' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getFirstContactCountDataMap());
 
         return values;
     }
@@ -753,11 +1058,160 @@ public class ClientDao extends AbstractDao {
         };
     }
 
+    public static DataMap<ReportModel1> getAlreadyOnARTCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setAlreadyOnARTC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getStartedOnARTCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setStartedARTC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getAlreadyOnPrepCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setAlreadyOnPrepC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getStartedOnPrepCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setStartedOnPrepC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getDewormedCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setDewormedC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getProvidedIronCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setProvidedIronC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getProvidedITNCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setProvidedITNC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getIPTP4CountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setIPTP4C(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getIPTP3CountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setIPTP3C(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getIPTP2CountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setIPTP2C(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getIPTP1CountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setIPTP1C(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getAnaemiaPositiveCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setAnaemiaPositiveC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getAnaemiaScreenedCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setAnaemiaScreenedC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getHepBPositiveCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setHepBPositiveC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getHepbScreenedCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setHepbScreenedC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getSyphPositiveCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setSyphPositiveC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getSyphScreenedCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setSyphScreenedC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
     public static DataMap<ReportModel1> getOriginCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
             record.setOriginCount(getCursorValue(c, "origin"));
 
+            return record;
+        };
+    }
+
+
+    public static DataMap<ReportModel1> getGeneralCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setGeneralKey(getCursorValue(c, "key"));
+            record.setGeneralValue(getCursorValue(c, "value"));
+            record.setGeneralBaseEntityID(getCursorValue(c, "base_entity_id"));
             return record;
         };
     }

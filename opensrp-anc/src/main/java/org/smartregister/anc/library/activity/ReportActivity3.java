@@ -90,7 +90,7 @@ public class ReportActivity3 extends AppCompatActivity {
         loadData1();
     }
 
-    public void loadData1(){
+    public void loadData1() {
 
         //reportList.addAll(ClientDao.getReport3());
 
@@ -140,6 +140,159 @@ public class ReportActivity3 extends AppCompatActivity {
         for (ReportModel1 data : EighthAboveData) {
             if (data.getEighthAboveC() != null) {
                 reportList.add(data);
+            }
+        }
+
+        if(ClientDao.getSyphPositiveContact() != null) {
+            List<ReportModel1> SyphPositiveData = ClientDao.getSyphPositiveContact();
+            for (ReportModel1 data : SyphPositiveData) {
+                if (data.getSyphPositiveC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getSyphScreenedContact() != null) {
+            List<ReportModel1> SyphScreenedData = ClientDao.getSyphScreenedContact();
+            for (ReportModel1 data : SyphScreenedData) {
+                if (data.getSyphScreenedC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getHepBPositiveContact() != null) {
+            List<ReportModel1> HepBData = ClientDao.getHepBPositiveContact();
+            for (ReportModel1 data : HepBData) {
+                if (data.getHepbScreenedC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getHepBScreenedContact() != null) {
+            List<ReportModel1> HepBScreenedData = ClientDao.getHepBScreenedContact();
+            for (ReportModel1 data : HepBScreenedData) {
+                if (data.getHepbScreenedC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getAnaemiaScreenedContact() != null) {
+            List<ReportModel1> AnaemiaScreenedData = ClientDao.getAnaemiaScreenedContact();
+            for (ReportModel1 data : AnaemiaScreenedData) {
+                if (data.getAnaemiaScreenedC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getAnaemiaPositiveContact() != null) {
+            List<ReportModel1> AnaemiaPositiveData = ClientDao.getAnaemiaPositiveContact();
+            for (ReportModel1 data : AnaemiaPositiveData) {
+                if (data.getAnaemiaPositiveC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getIPTP1Contact() != null) {
+            List<ReportModel1> IPTP1Data = ClientDao.getIPTP1Contact();
+            for (ReportModel1 data : IPTP1Data) {
+                if (data.getIPTP1C() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getIPTP2Contact() != null) {
+            List<ReportModel1> IPTP2Data = ClientDao.getIPTP2Contact();
+            for (ReportModel1 data : IPTP2Data) {
+                if (data.getIPTP2C() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getIPTP3Contact() != null) {
+            List<ReportModel1> IPTP3Data = ClientDao.getIPTP3Contact();
+            for (ReportModel1 data : IPTP3Data) {
+                if (data.getIPTP3C() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getIPTP4Contact() != null) {
+            List<ReportModel1> IPTP4Data = ClientDao.getIPTP4Contact();
+            for (ReportModel1 data : IPTP4Data) {
+                if (data.getIPTP4C() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getProvidedITNContact() != null) {
+            List<ReportModel1> ITNData = ClientDao.getProvidedITNContact();
+            for (ReportModel1 data : ITNData) {
+                if (data.getProvidedITNC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getProvidedIronContact() != null) {
+            List<ReportModel1> IronData = ClientDao.getProvidedIronContact();
+            for (ReportModel1 data : IronData) {
+                if (data.getProvidedIronC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getDewormedContact() != null) {
+            List<ReportModel1> DewormedData = ClientDao.getDewormedContact();
+            for (ReportModel1 data : DewormedData) {
+                if (data.getDewormedC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getStartedOnPrepContact() != null) {
+            List<ReportModel1> StartedOnPrepData = ClientDao.getStartedOnPrepContact();
+            for (ReportModel1 data : StartedOnPrepData) {
+                if (data.getStartedOnPrepC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getAlreadyOnPrepContact() != null) {
+            List<ReportModel1> AlreadyOnPrepData = ClientDao.getAlreadyOnPrepContact();
+            for (ReportModel1 data : AlreadyOnPrepData) {
+                if (data.getAlreadyOnPrepC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getStartedARTinANCContact() != null) {
+            List<ReportModel1> StartedOnARTData = ClientDao.getStartedARTinANCContact();
+            for (ReportModel1 data : StartedOnARTData) {
+                if (data.getStartedARTC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getAlreadyARTinANCContact() != null) {
+            List<ReportModel1> AlreadyOnARTData = ClientDao.getAlreadyARTinANCContact();
+            for (ReportModel1 data : AlreadyOnARTData) {
+                if (data.getAlreadyOnARTC() != null) {
+                    reportList.add(data);
+                }
             }
         }
         //feedbackList.addAll(ClientDao.getFeedbackCount());

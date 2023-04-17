@@ -43,12 +43,82 @@ public class ReportModel1 implements Serializable {
     private String thirdCID;
     private String FourthToSeventhCID;
     private String EighthAboveCID;
+    private String generalBaseEntityID;
+    private String generalValue;
+    private String generalKey;
+    private String KeygeneralBaseEntityID;
+    private String KeygeneralValue;
+    private String KeygeneralKey;
+    private String syphScreenedC;
+    private String syphPositiveC;
+    private String hepbScreenedC;
+    private String ProvidedITNC;
+    private String alreadyOnARTC;
+    private String startedARTC;
+    private String alreadyOnPrepC;
+    private String startedOnPrepC;
+    private String dewormedC;
+    private String providedIronC;
+    private String anaemiaScreenedC;
+    private String hepBPositiveC;
+    private String anaemiaPositiveC;
+    private String IPTP1C;
+    private String IPTP2C;
+    private String IPTP3C;
+    private String IPTP4C;
 
+
+    public String getGeneralKey() {
+        return generalKey;
+    }
+
+    public void setGeneralKey(String generalKey) {
+        this.generalKey = generalKey;
+    }
+
+    public String getGeneralBaseEntityID() {
+        return generalBaseEntityID;
+    }
+
+    public void setGeneralBaseEntityID(String generalBaseEntityID) {
+        this.generalBaseEntityID = generalBaseEntityID;
+    }
+
+    public String getGeneralValue() {
+        return generalValue;
+    }
+
+    public void setGeneralValue(String generalValue) {
+        this.generalValue = generalValue;
+    }
+
+    public String getKeyGeneralKey() {
+        return KeygeneralKey;
+    }
+
+    public void setKeyGeneralKey(String KeygeneralKey) {
+        this.KeygeneralKey = KeygeneralKey;
+    }
+
+    public String getKeyGeneralBaseEntityID() {
+        return KeygeneralBaseEntityID;
+    }
+
+    public void setKeyGeneralBaseEntityID(String KeygeneralBaseEntityID) {
+        this.KeygeneralBaseEntityID = KeygeneralBaseEntityID;
+    }
+
+    public String getKeyGeneralValue() {
+        return KeygeneralValue;
+    }
+
+    public void setKeyGeneralValue(String KeygeneralValue) {
+        this.KeygeneralValue = KeygeneralValue;
+    }
 
     public String getCountFeedback() {
         return countFeedback;
     }
-
 
     public void setCountFeedback(String countFeedback) {
         this.countFeedback = countFeedback;
@@ -458,4 +528,140 @@ public class ReportModel1 implements Serializable {
     public void setFpnumber(String fpnumber) {
         this.fpnumber = fpnumber;
     }
+
+    public void setHepBPositiveC(String hepBPositiveC) {
+        this.hepBPositiveC = hepBPositiveC;
+    }
+
+    public void setAnaemiaScreenedC(String anaemiaScreenedC) {
+        this.anaemiaScreenedC = anaemiaScreenedC;
+    }
+
+    public void setAnaemiaPositiveC(String anaemiaPositiveC) {
+        this.anaemiaPositiveC = anaemiaPositiveC;
+    }
+
+    public void setIPTP1C(String IPTP1C) {
+        this.IPTP1C = IPTP1C;
+    }
+
+    public void setIPTP2C(String IPTP2C) {
+        this.IPTP2C = IPTP2C;
+    }
+
+    public void setIPTP4C(String IPTP4C) {
+        this.IPTP4C = IPTP4C;
+    }
+
+    public void setIPTP3C(String IPTP3C) {
+        this.IPTP3C = IPTP3C;
+    }
+
+    public void setProvidedITNC(String ProvidedITNC) {
+        this.ProvidedITNC = ProvidedITNC;
+    }
+
+    public void setProvidedIronC(String providedIronC) {
+        this.providedIronC = providedIronC;
+    }
+
+    public void setDewormedC(String dewormedC) {
+        this.dewormedC = dewormedC;
+    }
+
+    public void setStartedOnPrepC(String startedOnPrepC) {
+        this.startedOnPrepC = startedOnPrepC;
+    }
+
+    public void setAlreadyOnPrepC(String alreadyOnPrepC) {
+        this.alreadyOnPrepC = alreadyOnPrepC;
+    }
+
+    public void setStartedARTC(String startedARTC) {
+        this.startedARTC = startedARTC;
+    }
+
+    public void setAlreadyOnARTC(String alreadyOnARTC) {
+        this.alreadyOnARTC = alreadyOnARTC;
+    }
+
+    public void setHepbScreenedC(String hepbScreenedC) {
+        this.hepbScreenedC = hepbScreenedC;
+    }
+
+    public void setSyphPositiveC(String syphPositiveC) {
+        this.syphPositiveC = syphPositiveC;
+    }
+
+    public void setSyphScreenedC(String syphScreenedC) {
+        this.syphScreenedC = syphScreenedC;
+    }
+    public String getHepBPositiveC() {
+        return hepBPositiveC;
+    }
+
+    public String getAnaemiaScreenedC() {
+        return anaemiaScreenedC;
+    }
+
+    public String getAnaemiaPositiveC() {
+        return anaemiaPositiveC;
+    }
+
+    public String getIPTP1C() {
+        return IPTP1C;
+    }
+
+    public String getIPTP2C() {
+        return IPTP2C;
+    }
+
+    public String getIPTP3C() {
+        return IPTP3C;
+    }
+
+    public String getIPTP4C() {
+        return IPTP4C;
+    }
+
+    public String getProvidedITNC() {
+        return ProvidedITNC;
+    }
+
+    public String getProvidedIronC() {
+        return providedIronC;
+    }
+
+    public String getDewormedC() {
+        return dewormedC;
+    }
+
+    public String getStartedOnPrepC() {
+        return startedOnPrepC;
+    }
+
+    public String getAlreadyOnPrepC() {
+        return alreadyOnPrepC;
+    }
+
+    public String getStartedARTC() {
+        return startedARTC;
+    }
+
+    public String getAlreadyOnARTC() {
+        return alreadyOnARTC;
+    }
+
+    public String getHepbScreenedC() {
+        return hepbScreenedC;
+    }
+
+    public String getSyphPositiveC() {
+        return syphPositiveC;
+    }
+
+    public String getSyphScreenedC() {
+        return syphScreenedC;
+    }
+
 }

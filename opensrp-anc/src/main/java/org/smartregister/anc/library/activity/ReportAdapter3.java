@@ -154,7 +154,9 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
             String WT = String.valueOf(womenSeen);
             holder.txtTotalFemaleSeen.setText(WT);
-        }else if(data.getOrigin() != null){
+        }
+
+        else if(data.getOrigin() != null){
             holder.txtProductName.setText("Outside Catchment Area");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -165,7 +167,9 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             int totalFemaleSeen = ClientDao.getAllOutside();
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
 
-        }else if(data.getFirstC() != null){
+        }
+
+        else if(data.getFirstC() != null){
             holder.txtProductName.setText("First ANC Contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -175,7 +179,9 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
             int totalFemaleSeen = ClientDao.getAllFirstContact();
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
-        }else if(data.getSecondC() != null){
+        }
+
+        else if(data.getSecondC() != null){
             holder.txtProductName.setText("Second ANC Contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -185,7 +191,9 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
             int totalFemaleSeen = ClientDao.getAllSecondContact();
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
-        }else if(data.getThirdC() != null){
+        }
+
+        else if(data.getThirdC() != null){
             holder.txtProductName.setText("Third ANC Contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -195,7 +203,9 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
             int totalFemaleSeen = ClientDao.getAllThirdContact();
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
-        }else if(data.getFourthToSeventhC() != null){
+        }
+
+        else if(data.getFourthToSeventhC() != null){
             holder.txtProductName.setText("Fourth To Seventh ANC Contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -205,7 +215,9 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
             int totalFemaleSeen = ClientDao.getAllFourthToSeventhContact();
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
-        }else if(data.getEighthAboveC() != null){
+        }
+
+        else if(data.getEighthAboveC() != null){
             holder.txtProductName.setText("Eighth Above ANC Contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -216,6 +228,212 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             int totalFemaleSeen = ClientDao.getAllEighthAboveContact();
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
         }
+
+        else if(data.getSyphScreenedC() != null){
+            holder.txtProductName.setText("Syphilis Screened");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllSyphScreenedContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getSyphPositiveC() != null){
+            holder.txtProductName.setText("Syphilis Positive");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllSyphPositiveContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getHepbScreenedC() != null){
+            holder.txtProductName.setText("Hepatitis B Screened");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllHepBScreenedContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getHepBPositiveC() != null){
+            holder.txtProductName.setText("Hepatitis B Positive");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllHepBPositiveContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getAnaemiaScreenedC() != null){
+            holder.txtProductName.setText("Anaemia Screened");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllAnaemiaScreenedContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getAnaemiaPositiveC() != null){
+            holder.txtProductName.setText("Anaemia Positive");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllAnaemiaPositiveContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getIPTP1C() != null){
+            holder.txtProductName.setText("Given First Dose of Malaria Prophylaxis(Fansidar)");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllIPTP1Contact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getIPTP2C() != null){
+            holder.txtProductName.setText("Given Second Dose of Malaria Prophylaxis(Fansidar)");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllIPTP2Contact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getIPTP3C() != null){
+            holder.txtProductName.setText("Given Third Dose of Malaria Prophylaxis(Fansidar)");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllIPTP3Contact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getIPTP4C() != null){
+            holder.txtProductName.setText("Given Fourth Dose of Malaria Prophylaxis(Fansidar)");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllIPTP4Contact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getProvidedITNC() != null){
+            holder.txtProductName.setText("Provided ITN");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllProvidedITNContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getProvidedIronC() != null){
+            holder.txtProductName.setText("Provided Iron");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllProvidedIronContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getDewormedC() != null){
+            holder.txtProductName.setText("Dewormed");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllDewormedContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getStartedOnPrepC() != null){
+            holder.txtProductName.setText("Started on prep in ANC");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllStartedOnPrepContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getAlreadyOnPrepC() != null){
+            holder.txtProductName.setText("Already on prep");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllAlreadyOnPrepContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getStartedARTC() != null){
+            holder.txtProductName.setText("Started on ART in ANC");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllStartedARTinANCContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getAlreadyOnARTC() != null){
+            holder.txtProductName.setText("Already on ART");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllAlreadyARTinANCContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+
         //49-150
         //String totalFemaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 49, 150);
         //String totalMaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "male", 49, 150);
