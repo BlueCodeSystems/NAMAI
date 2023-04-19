@@ -433,6 +433,186 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
         }
 
+        else if(data.getFollowUpC() != null){
+            holder.txtProductName.setText("Follow Up Contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllFollowUpContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getDiscordantC() != null){
+            holder.txtProductName.setText("Discordant");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllDiscordantContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getMaleStartedARTC() != null){
+            holder.txtProductName.setText("Males started on ART");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllMaleStartedARTinANCContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getMaleAlreadyPositiveC() != null){
+            holder.txtProductName.setText("Males already positive");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllMaleAlreadyPositiveContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getMalePositiveC() != null){
+            holder.txtProductName.setText("Males Tested Positive");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllMalePositiveFirstContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getMaleTestedC() != null){
+            holder.txtProductName.setText("Males Tested");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllMaleTestFirstContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getViralLoadC() != null){
+            holder.txtProductName.setText("Viral Load Results");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllViralLoadResultsContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getOnARTC() != null){
+            holder.txtProductName.setText("All on ART");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllOnARTContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getTestedPositiveC() != null){
+            holder.txtProductName.setText("All Tested Positive");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllTestedPositiveFirstContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getAlreadyPositiveC() != null){
+            holder.txtProductName.setText("Already HIV Positive");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllAlreadyPositiveFirstContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getTestedHIVC() != null){
+            holder.txtProductName.setText("Tested for HIV");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllTestedHIVFirstContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getScreenedTBC() != null){
+            holder.txtProductName.setText("Screened for TB");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllScreenedForTBContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getTTCVPlusTwoC() != null){
+            holder.txtProductName.setText("Receive Two plus shots of TTCV");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllTTCVPlusTwoContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getReferredTBC() != null){
+            holder.txtProductName.setText("Referred for TB Treatment");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllReferredTBContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
+        else if(data.getContactCountC() != null){
+            holder.txtProductName.setText("Number of women who came for ANC Contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllContactCount();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
 
         //49-150
         //String totalFemaleSeen49_150 = ClientDao.getRefVisitedClientsTotal(data.getQuerry_drug(), "female", 49, 150);
@@ -456,13 +636,13 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
         }*/
 
-        holder.txtTotalMaleSeen.setText("0");
-        holder.m1.setText("0");
-        holder.m2.setText("0");
-        holder.m3.setText("0");
-        holder.m4.setText("0");
-        holder.m5.setText("0");
-        holder.txtTotalMaleServices.setText("0");
+        holder.txtTotalMaleSeen.setVisibility(View.GONE);
+        holder.m1.setVisibility(View.GONE);
+        holder.m2.setVisibility(View.GONE);
+        holder.m3.setVisibility(View.GONE);
+        holder.m4.setVisibility(View.GONE);
+        holder.m5.setVisibility(View.GONE);
+        holder.txtTotalMaleServices.setVisibility(View.GONE);
         /*if(totalFemaleSeen == null){
 
         } else {

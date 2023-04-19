@@ -66,6 +66,21 @@ public class ReportModel1 implements Serializable {
     private String IPTP2C;
     private String IPTP3C;
     private String IPTP4C;
+    private String followUpC;
+    private String contactCountC;
+    private String referredTBC;
+    private String discordantC;
+    private String maleStartedARTC;
+    private String maleAlreadyPositiveC;
+    private String malePositiveC;
+    private String maleTestedC;
+    private String viralLoadC;
+    private String onARTC;
+    private String testedPositiveC;
+    private String alreadyPositiveC;
+    private String testedHIVC;
+    private String screenedTBC;
+    private String TTCVPlusTwoC;
 
 
     public String getGeneralKey() {
@@ -539,6 +554,126 @@ public class ReportModel1 implements Serializable {
 
     public void setAnaemiaPositiveC(String anaemiaPositiveC) {
         this.anaemiaPositiveC = anaemiaPositiveC;
+    }
+
+    public void setFollowUpC(String followUpC) {
+        this.followUpC = followUpC;
+    }
+
+    public void setContactCountC(String contactCountC) {
+        this.contactCountC = contactCountC;
+    }
+
+    public void setReferredTBC(String referredTBC) {
+        this.referredTBC = referredTBC;
+    }
+
+    public void setTTCVPlusTwoC(String TTCVPlusTwoC) {
+        this.TTCVPlusTwoC = TTCVPlusTwoC;
+    }
+
+    public void setScreenedTBC(String screenedTBC) {
+        this.screenedTBC = screenedTBC;
+    }
+
+    public void setTestedHIVC(String testedHIVC) {
+        this.testedHIVC = testedHIVC;
+    }
+
+    public void setAlreadyPositiveC(String alreadyPositiveC) {
+        this.alreadyPositiveC = alreadyPositiveC;
+    }
+
+    public void setTestedPositiveC(String testedPositiveC) {
+        this.testedPositiveC = testedPositiveC;
+    }
+
+    public void setOnARTC(String onARTC) {
+        this.onARTC = onARTC;
+    }
+
+    public void setViralLoadC(String viralLoadC) {
+        this.viralLoadC = viralLoadC;
+    }
+
+    public void setMaleTestedC(String maleTestedC) {
+        this.maleTestedC = maleTestedC;
+    }
+
+    public void setMalePositiveC(String malePositiveC) {
+        this.malePositiveC = malePositiveC;
+    }
+
+    public void setMaleAlreadyPositiveC(String maleAlreadyPositiveC) {
+        this.maleAlreadyPositiveC = maleAlreadyPositiveC;
+    }
+
+    public void setMaleStartedARTC(String maleStartedARTC) {
+        this.maleStartedARTC = maleStartedARTC;
+    }
+
+    public void setDiscordantC(String discordantC) {
+        this.discordantC = discordantC;
+    }
+
+    public String getDiscordantC() {
+        return discordantC;
+    }
+
+    public String getMaleStartedARTC() {
+        return maleStartedARTC;
+    }
+
+    public String getMaleAlreadyPositiveC() {
+        return maleAlreadyPositiveC;
+    }
+
+    public String getMalePositiveC() {
+        return malePositiveC;
+    }
+
+    public String getMaleTestedC() {
+        return maleTestedC;
+    }
+
+    public String getViralLoadC() {
+        return viralLoadC;
+    }
+
+    public String getOnARTC() {
+        return onARTC;
+    }
+
+    public String getTestedPositiveC() {
+        return testedPositiveC;
+    }
+
+    public String getAlreadyPositiveC() {
+        return alreadyPositiveC;
+    }
+
+    public String getTestedHIVC() {
+        return testedHIVC;
+    }
+
+    public String getScreenedTBC() {
+        return screenedTBC;
+    }
+
+    public String getTTCVPlusTwoC() {
+        return TTCVPlusTwoC;
+    }
+
+    public String getReferredTBC() {
+        return referredTBC;
+    }
+
+    public String getContactCountC() {
+        return contactCountC;
+    }
+
+    public String getFollowUpC() {
+        return followUpC;
     }
 
     public void setIPTP1C(String IPTP1C) {
