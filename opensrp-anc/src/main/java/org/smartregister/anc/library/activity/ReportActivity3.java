@@ -295,6 +295,133 @@ public class ReportActivity3 extends AppCompatActivity {
                 }
             }
         }
+
+        if(ClientDao.getFollowUpContact() != null) {
+            List<ReportModel1> FollowUPData = ClientDao.getFollowUpContact();
+            for (ReportModel1 data : FollowUPData) {
+                if (data.getFollowUpC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getDiscordantContact() != null) {
+            List<ReportModel1> DiscordantData = ClientDao.getDiscordantContact();
+            for (ReportModel1 data : DiscordantData) {
+                if (data.getDiscordantC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getMaleStartedARTinANCContact() != null) {
+            List<ReportModel1> MaleStartedARTData = ClientDao.getMaleStartedARTinANCContact();
+            for (ReportModel1 data : MaleStartedARTData) {
+                if (data.getMaleStartedARTC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getMaleAlreadyPositiveContact() != null) {
+            List<ReportModel1> MaleAlreadyPositiveData = ClientDao.getMaleAlreadyPositiveContact();
+            for (ReportModel1 data : MaleAlreadyPositiveData) {
+                if (data.getMaleAlreadyPositiveC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getMalePositiveFirstContact() != null) {
+            List<ReportModel1> MalePositiveData = ClientDao.getMalePositiveFirstContact();
+            for (ReportModel1 data : MalePositiveData) {
+                if (data.getMalePositiveC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getViralLoadResultsContact() != null) {
+            List<ReportModel1> ViralLoadData = ClientDao.getViralLoadResultsContact();
+            for (ReportModel1 data : ViralLoadData) {
+                if (data.getViralLoadC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getOnARTContact() != null) {
+            List<ReportModel1> OnARTData = ClientDao.getOnARTContact();
+            for (ReportModel1 data : OnARTData) {
+                if (data.getOnARTC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getTestedPositiveFirstContact() != null) {
+            List<ReportModel1> TestedPositiveData = ClientDao.getTestedPositiveFirstContact();
+            for (ReportModel1 data : TestedPositiveData) {
+                if (data.getTestedPositiveC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getAlreadyPositiveFirstContact() != null) {
+            List<ReportModel1> AlreadyPositiveData = ClientDao.getAlreadyPositiveFirstContact();
+            for (ReportModel1 data : AlreadyPositiveData) {
+                if (data.getAlreadyPositiveC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getTestedHIVFirstContact() != null) {
+            List<ReportModel1> TestedHIVData = ClientDao.getTestedHIVFirstContact();
+            for (ReportModel1 data : TestedHIVData) {
+                if (data.getTestedHIVC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getScreenedForTBContact() != null) {
+            List<ReportModel1> ScreenedTBData = ClientDao.getScreenedForTBContact();
+            for (ReportModel1 data : ScreenedTBData) {
+                if (data.getScreenedTBC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getTTCVPlusTwoContact() != null) {
+            List<ReportModel1> TTCVPlusTwoData = ClientDao.getTTCVPlusTwoContact();
+            for (ReportModel1 data : TTCVPlusTwoData) {
+                if (data.getTTCVPlusTwoC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getReferredTBContact() != null) {
+            List<ReportModel1> ReferredTBData = ClientDao.getReferredTBContact();
+            for (ReportModel1 data : ReferredTBData) {
+                if (data.getReferredTBC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getCountContact() != null) {
+            List<ReportModel1> CountContactData = ClientDao.getCountContact();
+            for (ReportModel1 data : CountContactData) {
+                if (data.getContactCountC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
         //feedbackList.addAll(ClientDao.getFeedbackCount());
 
         //int countlist = feedbackList.size();

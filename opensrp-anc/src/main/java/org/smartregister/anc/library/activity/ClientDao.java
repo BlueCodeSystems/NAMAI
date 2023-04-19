@@ -697,6 +697,255 @@ public class ClientDao extends AbstractDao {
         return values;
     }
 
+
+
+    public static int getAllFollowUpContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'next_contact' AND ec_details.value LIKE '%3%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%4%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%5%'OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%6%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%7%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%8%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllContactCount(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%contact_date%' GROUP BY ec_details.base_entity_id\n";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllReferredTBContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%reason\":\"refer%' GROUP BY ec_details.base_entity_id\n";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllTTCVPlusTwoContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%tt1_dose_no_value\":\"2%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"3%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"4%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllScreenedForTBContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%tb_screening_history\":\"[cough_weeks%' OR ec_details.value LIKE '%tb_screening_history\":\"[fever%' OR ec_details.value LIKE '%tb_screening_history\":\"[weight%' OR ec_details.value LIKE '%tb_screening_history\":\"[night%'  GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllTestedHIVFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.value";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllAlreadyPositiveFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_positive\":\"1%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%art_number\":\"%' GROUP BY ec_details.value";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllTestedPositiveFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.value";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllOnARTContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%on_art\":\"yes%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllViralLoadResultsContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%viral_load\":\"%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllMaleTestFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.value";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllMalePositiveFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.value";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllMaleAlreadyPositiveContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%partner_on_art\":\"%' GROUP BY ec_details.value";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllMaleStartedARTinANCContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%partner_on_art\":\"no\"%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllDiscordantContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%discordant\":\"yes%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+
+
+
+
+    public static List<ReportModel1> getFollowUpContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'next_contact' AND ec_details.value LIKE '%3%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%4%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%5%'OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%6%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%7%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%8%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getFollowUpCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getCountContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%contact_date%' GROUP BY ec_details.key\n";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getContactCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getReferredTBContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%reason\":\"refer%' GROUP BY ec_details.key\n";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getRefferedTBCountDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getTTCVPlusTwoContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%tt1_dose_no_value\":\"2%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"3%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"4%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getTTCVPlusTwoDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getScreenedForTBContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%tb_screening_history\":\"[cough_weeks%' OR ec_details.value LIKE '%tb_screening_history\":\"[fever%' OR ec_details.value LIKE '%tb_screening_history\":\"[weight%' OR ec_details.value LIKE '%tb_screening_history\":\"[night%'  GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getScreenedForTBDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getTestedHIVFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getTestedHIVFirstDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getAlreadyPositiveFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_positive\":\"1%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%art_number\":\"%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyPositiveDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getTestedPositiveFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getTestedPositiveDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getOnARTContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%on_art\":\"yes%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getOnARTDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getViralLoadResultsContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%viral_load\":\"%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getViralLoadDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getMaleTestFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getMaleTestedDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getMalePositiveFirstContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getMalePositiveDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getMaleAlreadyPositiveContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%partner_on_art\":\"%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getMaleAlreadyPositiveDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getMaleStartedARTinANCContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%partner_on_art\":\"no\"%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getMaleStartedARTDataMap());
+
+        return values;
+    }
+
+    public static List<ReportModel1> getDiscordantContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%discordant\":\"yes%' GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getDiscordantDataMap());
+
+        return values;
+    }
+
+
+
+
     public static int getAllFirstTrimesterContact(){
         String sql = "SELECT \"_rowid_\" AS 'First Trimester',* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%gest_age_openmrs\":\"8%' OR \"value\" LIKE '%gest_age_openmrs\":\"9%' OR \"value\" LIKE '%gest_age_openmrs\":\"10%' OR \"value\" LIKE '%gest_age_openmrs\":\"11%' OR \"value\" LIKE '%gest_age_openmrs\":\"12%'GROUP BY ec_details.base_entity_id";
 
@@ -1195,6 +1444,141 @@ public class ClientDao extends AbstractDao {
             return record;
         };
     }
+
+    public static DataMap<ReportModel1> getFollowUpCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setFollowUpC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setContactCountC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+    public static DataMap<ReportModel1> getRefferedTBCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setReferredTBC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getTTCVPlusTwoDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setTTCVPlusTwoC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getScreenedForTBDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setScreenedTBC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getTestedHIVFirstDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setTestedHIVC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getAlreadyPositiveDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setAlreadyPositiveC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getTestedPositiveDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setTestedPositiveC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getOnARTDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setOnARTC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getViralLoadDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setViralLoadC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getMaleTestedDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setMaleTestedC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getMalePositiveDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setMalePositiveC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getMaleAlreadyPositiveDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setMaleAlreadyPositiveC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getMaleStartedARTDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setMaleStartedARTC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getDiscordantDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setDiscordantC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
 
     public static DataMap<ReportModel1> getOriginCountDataMap() {
         return c -> {
