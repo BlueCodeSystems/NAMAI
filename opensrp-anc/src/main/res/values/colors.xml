@@ -91,4 +91,5 @@
     <color name="profile_contact_section_bg">#3F3F4F</color>
     <color name="profile_records_title_grey">#707070</color>
     <color name="profile_records_message_grey">#ADADAD</color>
+    <color name="grey">#9e9e9e</color>
 </resources>
