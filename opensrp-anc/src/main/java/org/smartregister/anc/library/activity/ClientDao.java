@@ -388,6 +388,8 @@ public class ClientDao extends AbstractDao {
     public static int getAllFirstContact(){
         String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '1' GROUP BY previous_contact.base_entity_id";
 
+        int localMonth = HIA2ReportsActivity.month;
+
         List<ReportModel1> values = AbstractDao.readData(sql, getFirstContactCountDataMap());
 
         return values.size();
@@ -1814,3 +1816,12 @@ public class ClientDao extends AbstractDao {
 
     }
 }
+/*
+SELECT *, SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2) AS contact_month
+        FROM ec_details
+        WHERE ec_details.value LIKE '%"contact_date"%';*/
+
+/*SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month
+        FROM ec_details
+        WHERE ec_details.value LIKE '%"contact_date"%';*/
+
