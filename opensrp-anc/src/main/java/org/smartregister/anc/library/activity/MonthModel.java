@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class MonthModel implements Serializable {
 
     private String monthName;
-    private int monthNumber;
+    public static int monthNumber;
 
     public MonthModel(String monthName, int monthNumber) {
         this.monthName = monthName;

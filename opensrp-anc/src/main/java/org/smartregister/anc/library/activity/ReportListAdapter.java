@@ -24,6 +24,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
     Context context;
 
     List<MonthModel> months;
+    public static int selectedMonth;
 
     public ReportListAdapter(List<MonthModel> months, Context context){
 
@@ -55,6 +56,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
         holder.monthLayout.setOnClickListener(v -> {
 
             if (v.getId() == R.id.monthLayout) {
+                selectedMonth = position + 1;
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Monthly Report Form");

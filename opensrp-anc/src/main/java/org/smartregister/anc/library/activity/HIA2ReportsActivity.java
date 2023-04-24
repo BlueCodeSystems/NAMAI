@@ -24,6 +24,7 @@ public class HIA2ReportsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecyclerView.Adapter recyclerViewadapter;
     private Toolbar toolbar;
+    public static int month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class HIA2ReportsActivity extends AppCompatActivity {
         java.util.Date date= new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        int month = cal.get(Calendar.MONTH) + 1;
+        month = cal.get(Calendar.MONTH) + 1;
         if(month == 1)
         {
             months.add(new MonthModel("January", 1));
