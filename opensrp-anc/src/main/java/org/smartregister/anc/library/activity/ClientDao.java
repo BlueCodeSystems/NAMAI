@@ -386,9 +386,11 @@ public class ClientDao extends AbstractDao {
     }
 
     public static int getAllFirstContact(){
-        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '1' GROUP BY previous_contact.base_entity_id";
-
-        int localMonth = HIA2ReportsActivity.month;
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
+                "FROM client \n" +
+                "WHERE client.json LIKE '%contact_date%' \n" +
+                "AND REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') = '" +localMonth +"' AND client.json  LIKE '%next_contact\":\"2%' GROUP BY client.baseEntityId";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getFirstContactCountDataMap());
 
@@ -396,15 +398,22 @@ public class ClientDao extends AbstractDao {
     }
 
     public static int getAllSecondContact(){
-        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '2' GROUP BY previous_contact.base_entity_id";
-
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
+                "FROM client \n" +
+                "WHERE client.json LIKE '%contact_date%' \n" +
+                "AND REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') = '" +localMonth +"' AND client.json  LIKE '%next_contact\":\"3%' GROUP BY client.baseEntityId";
         List<ReportModel1> values = AbstractDao.readData(sql, getSecondContactCountDataMap());
 
         return values.size();
     }
 
     public static int getAllThirdContact(){
-        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '3' GROUP BY previous_contact.base_entity_id";
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
+                "FROM client \n" +
+                "WHERE client.json LIKE '%contact_date%' \n" +
+                "AND REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') = '" +localMonth +"' AND client.json  LIKE '%next_contact\":\"4%' GROUP BY client.baseEntityId";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getThirdContactCountDataMap());
 
@@ -412,16 +421,22 @@ public class ClientDao extends AbstractDao {
     }
 
     public static int getAllFourthToSeventhContact(){
-        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '4' OR previous_contact.contact_no IS '5' OR previous_contact.contact_no IS '6' OR previous_contact.contact_no IS '7' GROUP BY previous_contact.base_entity_id";
-
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
+                "FROM client \n" +
+                "WHERE client.json LIKE '%contact_date%' \n" +
+                "AND REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') = '" +localMonth +"' AND client.json  LIKE '%next_contact\":\"5%' OR client.json  LIKE '%next_contact\":\"6%' OR client.json  LIKE '%next_contact\":\"7%' OR client.json  LIKE '%next_contact\":\"8%' GROUP BY client.baseEntityId";
         List<ReportModel1> values = AbstractDao.readData(sql, getFourthToSeventhContactCountDataMap());
 
         return values.size();
     }
 
     public static int getAllEighthAboveContact(){
-        String sql = "SELECT previous_contact.contact_no, previous_contact.base_entity_id FROM previous_contact where previous_contact.contact_no IS '8' OR previous_contact.contact_no IS '9' OR previous_contact.contact_no IS '10' OR previous_contact.contact_no IS '11' GROUP BY previous_contact.base_entity_id";
-
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
+                "FROM client \n" +
+                "WHERE client.json LIKE '%contact_date%' \n" +
+                "AND REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') = '" +localMonth +"' AND client.json  LIKE '%next_contact\":\"9%' OR client.json  LIKE '%next_contact\":\"10%' OR client.json  LIKE '%next_contact\":\"11%' OR client.json  LIKE '%next_contact\":\"12%' GROUP BY client.baseEntityId";
         List<ReportModel1> values = AbstractDao.readData(sql, getEighthAboveContactCountDataMap());
 
         return values.size();
