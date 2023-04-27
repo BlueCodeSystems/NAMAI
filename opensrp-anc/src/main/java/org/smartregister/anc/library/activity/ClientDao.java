@@ -208,7 +208,15 @@ public class ClientDao extends AbstractDao {
     public static String getFirstContact(String key,String lowerAge,String upperAge) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2'";
+        int localMonth = ReportListAdapter.selectedMonth;
+        String query ="SELECT B.value, C.value AS age\n" +
+                "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'age_calculated') AS C ON B.base_entity_id = C.base_entity_id \n" +
+                "JOIN ec_details AS D ON A.base_entity_id = D.base_entity_id\n" +
+                "WHERE A.value = '2' \n" +
+                "AND D.value LIKE '%contact_date%'\n" +
+                "AND REPLACE(SUBSTR(D.value, INSTR(D.value, '-') + 1, 2), '0', '') = '"+ localMonth +"'";
         int count = 0;
         List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
         if (values == null || values.size() == 0) {
@@ -249,8 +257,15 @@ public class ClientDao extends AbstractDao {
     public static String getFirstContactAbove15(String key,String lowerAge,String upperAge) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2'";
-        int count = 0;
+        int localMonth = ReportListAdapter.selectedMonth;
+        String query ="SELECT B.value, C.value AS age\n" +
+                "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'age_calculated') AS C ON B.base_entity_id = C.base_entity_id \n" +
+                "JOIN ec_details AS D ON A.base_entity_id = D.base_entity_id\n" +
+                "WHERE A.value = '2' \n" +
+                "AND D.value LIKE '%contact_date%'\n" +
+                "AND REPLACE(SUBSTR(D.value, INSTR(D.value, '-') + 1, 2), '0', '') = '"+ localMonth +"'";int count = 0;
         List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
         if (values == null || values.size() == 0) {
             return String.valueOf(count);
@@ -290,8 +305,15 @@ public class ClientDao extends AbstractDao {
     public static String getFirstContactAbove20(String key,String lowerAge,String upperAge) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2'";
-        int count = 0;
+        int localMonth = ReportListAdapter.selectedMonth;
+        String query ="SELECT B.value, C.value AS age\n" +
+                "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'age_calculated') AS C ON B.base_entity_id = C.base_entity_id \n" +
+                "JOIN ec_details AS D ON A.base_entity_id = D.base_entity_id\n" +
+                "WHERE A.value = '2' \n" +
+                "AND D.value LIKE '%contact_date%'\n" +
+                "AND REPLACE(SUBSTR(D.value, INSTR(D.value, '-') + 1, 2), '0', '') = '"+ localMonth +"'";int count = 0;
         List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
         if (values == null || values.size() == 0) {
             return String.valueOf(count);
@@ -331,8 +353,15 @@ public class ClientDao extends AbstractDao {
     public static String getFirstContactAbove25(String key,String lowerAge,String upperAge) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        String query ="SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY 'number of women above the age of 25'";
-        int count = 0;
+        int localMonth = ReportListAdapter.selectedMonth;
+        String query ="SELECT B.value, C.value AS age\n" +
+                "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
+                "JOIN (SELECT * FROM ec_details WHERE key = 'age_calculated') AS C ON B.base_entity_id = C.base_entity_id \n" +
+                "JOIN ec_details AS D ON A.base_entity_id = D.base_entity_id\n" +
+                "WHERE A.value = '2' \n" +
+                "AND D.value LIKE '%contact_date%'\n" +
+                "AND REPLACE(SUBSTR(D.value, INSTR(D.value, '-') + 1, 2), '0', '') = '"+ localMonth +"'";int count = 0;
         List<AttentionFlagModel> values = AbstractDao.readData(query, getAttentionFlagDataMap());// Remember to edit getChildDataMap METHOD Below
         if (values == null || values.size() == 0) {
             return String.valueOf(count);
@@ -370,7 +399,11 @@ public class ClientDao extends AbstractDao {
     }
 
     public static int getAllOutside(){
-        String sql = "SELECT ec_mother_details.origin FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL";
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT * FROM ec_mother_details \n" +
+                "WHERE ec_mother_details.origin <> 'catchment_area' \n" +
+                "AND ec_mother_details.origin IS NOT NULL \n" +
+                "AND CAST(SUBSTR(ec_mother_details.last_contact_record_date, 6, 2) AS INTEGER) = '" + localMonth + "' GROUP BY ec_mother_details.base_entity_id";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getOriginCountDataMap());
 
@@ -378,7 +411,11 @@ public class ClientDao extends AbstractDao {
     }
 
     public static int getAllHighRiskContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'red_flag_count' and ec_details.value IS NOT '0' GROUP BY ec_details.base_entity_id";
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+                " FROM ec_details \n" +
+                " WHERE ec_details.value LIKE '%contact_date%' \n" +
+                " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + " AND ec_details.key IS 'red_flag_count' AND ec_details.value IS NOT '0' AND ec_details.value IS NOT NULL GROUP BY ec_details.base_entity_id";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
@@ -459,7 +496,7 @@ public class ClientDao extends AbstractDao {
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
-                " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%syphilis_positive\":\"1%' GROUP BY ec_details.base_entity_id";
+                " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + " AND ec_details.value LIKE '%syphilis_positive\":\"1%' GROUP BY ec_details.base_entity_id";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
@@ -782,26 +819,6 @@ public class ClientDao extends AbstractDao {
         return values;
     }
 
-/*
-
-    public static int getContactCountByMonth(int month) {
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month
-FROM ec_details
-WHERE ec_details.value LIKE '%contact_date%'
-AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '3'
-GROUP BY ec_details.base_entity_id";
-
-        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap(), month);
-
-        return values.size();
-    }
-
-    int selectedMonth = HIA2ReportsActivity.month;
-    int count = getContactCountByMonth(selectedMonth);
-*/
-
-
-
     public static int getAllFollowUpContact(){
         int localMonth = ReportListAdapter.selectedMonth;
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
@@ -920,6 +937,18 @@ GROUP BY ec_details.base_entity_id";
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%viral_load\":\"%' GROUP BY ec_details.base_entity_id";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
+
+        return values.size();
+    }
+
+    public static int getAllSuppressedViralLoadResultsContact(){
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+                " FROM ec_details \n" +
+                " WHERE ec_details.value LIKE '%contact_date%' \n" +
+                " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + " AND ec_details.value LIKE '%viral_load%' AND CAST(JSON_EXTRACT(ec_details.value, '$.viral_load') AS UNSIGNED) < 1000 GROUP BY ec_details.base_entity_id";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
@@ -1070,6 +1099,14 @@ GROUP BY ec_details.base_entity_id";
         return values;
     }
 
+    public static List<ReportModel1> getSuppressedViralLoadResultsContact(){
+        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%viral_load%' AND CAST(JSON_EXTRACT(ec_details.value, '$.viral_load') AS UNSIGNED) < 1000 GROUP BY ec_details.key";
+
+        List<ReportModel1> values = AbstractDao.readData(sql, getSuppressedViralLoadDataMap());
+
+        return values;
+    }
+
     public static List<ReportModel1> getMaleTestFirstContact(){
         String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
 
@@ -1158,11 +1195,6 @@ GROUP BY ec_details.base_entity_id";
 
     public static List<ReportModel1> getReport1() {
 
-
-
-       /* String sql = "SELECT ec_visits.product_name, ec_visits.id AS product_id, ec_client.date_of_birth, ec_client.gender, ec_visits.fpnumber AS fpnumber \n" +
-                "FROM ec_visits JOIN ec_client ON ec_visits.fpnumber = ec_client.fpnumber \n" +
-                "WHERE ec_visits.fpnumber IS NOT NULL AND ec_visits.product_name IS NOT NULL" ;*/
         String sql = "SELECT ec_visits.product_name FROM ec_visits\n" +
                 "WHERE ec_visits.fpnumber IS NOT NULL AND ec_visits.product_name IS NOT NULL GROUP BY ec_visits.product_name";
 
@@ -1174,42 +1206,11 @@ GROUP BY ec_details.base_entity_id";
 
     public static List<ReportModel1> getReport3() {
 
-
-
-       /* String sql = "SELECT ec_visits.product_name, ec_visits.id AS product_id, ec_client.date_of_birth, ec_client.gender, ec_visits.fpnumber AS fpnumber \n" +
-                "FROM ec_visits JOIN ec_client ON ec_visits.fpnumber = ec_client.fpnumber \n" +
-                "WHERE ec_visits.fpnumber IS NOT NULL AND ec_visits.product_name IS NOT NULL" ;*/
         String sql ="SELECT B.value ,C.value As age\n" +
                 "FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A \n" +
                 "JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id \n" +
                 "JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value";
 
-//SELECT B.value ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value
-//SELECT B.value As gestation ,C.value As age FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A JOIN (SELECT * FROM ec_details WHERE value LIKE '%gest_age_openmrs":"39%') AS B ON A.base_entity_id = B.base_entity_id JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value
-                /*"SELECT B.value ,C.value As age " +
-                "FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A " +
-                "JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id " +
-                "JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value";*/
-                //"WHERE ec_mother_details.base_entity_id IS NOT NULL AND ec_mother_details.dob IS NOT NULL GROUP BY ec_mother_details.dob";
-
-        //SELECT B.value AS gestation, C.value AS age
-        //FROM (
-        //    SELECT *
-        //    FROM ec_details
-        //    WHERE key = 'next_contact'
-        //) AS A
-        //JOIN (
-        //    SELECT *
-        //    FROM ec_details
-        //    WHERE value REGEXP 'gest_age_openmrs":"(2[7-9]|[3-3][0-9]|40)'
-        //) AS B ON A.base_entity_id = B.base_entity_id
-        //JOIN (
-        //    SELECT *
-        //    FROM ec_details
-        //    WHERE key = 'age_calculated'
-        //) AS C ON B.base_entity_id = C.base_entity_id
-        //WHERE A.value = '2'
-        //GROUP BY B.value
 
         List<ReportModel1> values = AbstractDao.readData(sql, getReferralDataMap());
 
@@ -1266,9 +1267,9 @@ GROUP BY ec_details.base_entity_id";
     }
 
     public static List<ReportModel1> getHighRiskContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'red_flag_count' and ec_details.value IS NOT '0' GROUP BY ec_details.key";
+        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'red_flag_count' AND ec_details.value IS NOT '0' AND ec_details.value IS NOT NULL GROUP BY ec_details.key";
 
-        List<ReportModel1> values = AbstractDao.readData(sql, getFirstContactCountDataMap());
+        List<ReportModel1> values = AbstractDao.readData(sql, getHighRiskCountDataMap());
 
         return values;
     }
@@ -1281,14 +1282,6 @@ GROUP BY ec_details.base_entity_id";
 
         return values;
     }
-
-/*
-    SELECT (SELECT COUNT(ec_referral.last_fp_method) AS 'Number referred for injectables' FROM ec_referral
-    WHERE ec_referral.last_fp_method = 'Medroxyprogesterone Acetate 104Mg/0.65Ml' OR ec_referral.last_fp_method = 'Medroxyprogesterone Acetate 150mg'
-    OR ec_referral.last_fp_method = 'Norethisterone Enanthate 200mg/ml') AS 'Number referred for injectables',  (SELECT COUNT(*) AS 'Number of feedbacks' FROM ec_referral WHERE feedback IS NOT NULL) AS 'Number of feedbacks'
-    FROM ec_referral  WHERE ec_referral.last_fp_method IS NOT NULL GROUP BY 'Number referred for injectables'
-*/
-
 
     public static List<ClientreportModel> getVisitedClientsMale(String product_name) {
 
@@ -1469,6 +1462,15 @@ GROUP BY ec_details.base_entity_id";
         return c -> {
             ReportModel1 record = new ReportModel1();
             record.setEighthAboveC(getCursorValue(c, "contact_no"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getHighRiskCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setHighRiskC(getCursorValue(c, "key"));
 
             return record;
         };
@@ -1696,6 +1698,15 @@ GROUP BY ec_details.base_entity_id";
         return c -> {
             ReportModel1 record = new ReportModel1();
             record.setViralLoadC(getCursorValue(c, "key"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getSuppressedViralLoadDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setSuppressedViralLoadC(getCursorValue(c, "key"));
 
             return record;
         };
@@ -1981,12 +1992,3 @@ GROUP BY ec_details.base_entity_id";
 
     }
 }
-/*
-SELECT *, SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2) AS contact_month
-        FROM ec_details
-        WHERE ec_details.value LIKE '%"contact_date"%';*/
-
-/*SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month
-        FROM ec_details
-        WHERE ec_details.value LIKE '%"contact_date"%';*/
-
