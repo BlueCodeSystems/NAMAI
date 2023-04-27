@@ -350,6 +350,24 @@ public class ReportActivity3 extends AppCompatActivity {
             }
         }
 
+        if(ClientDao.getSuppressedViralLoadResultsContact() != null) {
+            List<ReportModel1> SuppressedViralLoadData = ClientDao.getSuppressedViralLoadResultsContact();
+            for (ReportModel1 data : SuppressedViralLoadData) {
+                if (data.getSuppressedViralLoadC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
+        if(ClientDao.getHighRiskContact() != null) {
+            List<ReportModel1> HighRiskData = ClientDao.getHighRiskContact();
+            for (ReportModel1 data : HighRiskData) {
+                if (data.getHighRiskC() != null) {
+                    reportList.add(data);
+                }
+            }
+        }
+
         if(ClientDao.getOnARTContact() != null) {
             List<ReportModel1> OnARTData = ClientDao.getOnARTContact();
             for (ReportModel1 data : OnARTData) {
@@ -470,3 +488,41 @@ public class ReportActivity3 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+/*
+    String url = "https://your-dhis2-instance.org/api/dataValueSets"; // The endpoint for the dataValueSets API
+    String username = "your-username";
+    String password = "your-password";
+    String data = "{\"dataValues\": [{\"dataElement\": \"data-element-uid\", \"period\": \"2018Q1\", \"orgUnit\": \"org-unit-uid\", \"value\": \"10\"}]}"; // Replace with your own data
+
+    String encoding = Base64.getEncoder().encodeToString((username + ":" + password).getBytes()); // Encode the username and password in Base64
+
+    URL obj = new URL(url);
+    HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+// Set the request method and headers
+con.setRequestMethod("POST");
+        con.setRequestProperty("Authorization", "Basic " + encoding);
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Accept", "application/json");
+
+// Send the data
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(data);
+        wr.flush();
+        wr.close();
+
+// Get the response
+        int responseCode = con.getResponseCode();
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+        response.append(inputLine);
+        }
+        in.close();
+
+// Print the response
+        System.out.println(response.toString());
+*/

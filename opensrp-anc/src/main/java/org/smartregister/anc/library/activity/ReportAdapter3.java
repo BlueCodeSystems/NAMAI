@@ -71,7 +71,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         //List<ClientreportModel> totalMaleSeen = ClientDao.getRefVisitedClientsMale(data.getQuerry_drug());
         //List<ClientreportModel> totalFemaleSeen = ClientDao.getRefVisitedClientsFemale(data.getQuerry_drug());
 
-        if(data.getTrimester() != null && data.getTrimester().contains("First Trimester")) {
+        if(data.getTrimester() != null && data.getTrimester().contains("IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER")) {
             //10-14
             String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
 
@@ -99,7 +99,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             String WT = String.valueOf(womenSeen);
             holder.txtTotalFemaleSeen.setText(WT);
         }
-        else if(data.getTrimester() != null && data.getTrimester().contains("Second Trimester")) {
+        else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER")) {
             //10-14
             String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "13", "26");
 
@@ -127,7 +127,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             String WT = String.valueOf(womenSeen);
             holder.txtTotalFemaleSeen.setText(WT);
         }
-        else if(data.getTrimester() != null && data.getTrimester().contains("Third Trimester")) {
+        else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER")) {
             //10-14
             String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "27", "40");
 
@@ -157,7 +157,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getOrigin() != null){
-            holder.txtProductName.setText("Outside Catchment Area");
+            holder.txtProductName.setText("IRH1-105 : Pregnant contacts outside catchment area");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -170,7 +170,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getFirstC() != null){
-            holder.txtProductName.setText("First ANC Contacts");
+            holder.txtProductName.setText("IRH1-100 : Total 1st ANC contact");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -182,7 +182,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getSecondC() != null){
-            holder.txtProductName.setText("Second ANC Contacts");
+            holder.txtProductName.setText("IRH1-115 : 2nd ANC contact");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -194,7 +194,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getThirdC() != null){
-            holder.txtProductName.setText("Third ANC Contacts");
+            holder.txtProductName.setText("IRH1-120 : 3rd ANC contact");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -206,7 +206,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getFourthToSeventhC() != null){
-            holder.txtProductName.setText("Fourth To Seventh ANC Contacts");
+            holder.txtProductName.setText("IRH1-125 : 4th to 7th ANC contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -218,7 +218,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getEighthAboveC() != null){
-            holder.txtProductName.setText("Eighth Above ANC Contacts");
+            holder.txtProductName.setText("IRH1-130 : 8th+ ANC contact");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -229,8 +229,20 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
         }
 
+        else if(data.getHighRiskC() != null){
+            holder.txtProductName.setText("IRH1-110 : High-risk Pregnancies");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllHighRiskContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
         else if(data.getSyphScreenedC() != null){
-            holder.txtProductName.setText("Syphilis Screened");
+            holder.txtProductName.setText("IRH1-155 : Initial syphilis screening");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -242,7 +254,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getSyphPositiveC() != null){
-            holder.txtProductName.setText("Syphilis Positive");
+            holder.txtProductName.setText("IRH1-160 : Reactive to Initial syphilis Test");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -254,7 +266,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getHepbScreenedC() != null){
-            holder.txtProductName.setText("Hepatitis B Screened");
+            holder.txtProductName.setText("IRH1-175 : Screened for Hepatitis B");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -266,7 +278,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getHepBPositiveC() != null){
-            holder.txtProductName.setText("Hepatitis B Positive");
+            holder.txtProductName.setText("IRH1-180 : Positive for Hepatitis B");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -278,7 +290,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getAnaemiaScreenedC() != null){
-            holder.txtProductName.setText("Anaemia Screened");
+            holder.txtProductName.setText("IRH1-145 : Initial anaemia screening");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -290,7 +302,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getAnaemiaPositiveC() != null){
-            holder.txtProductName.setText("Anaemia Positive");
+            holder.txtProductName.setText("IRH1-150 : Diagnosed with Anaemia");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -302,7 +314,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getIPTP1C() != null){
-            holder.txtProductName.setText("Given First Dose of Malaria Prophylaxis(Fansidar)");
+            holder.txtProductName.setText("IRH1-190 : IPTp 1");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -314,7 +326,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getIPTP2C() != null){
-            holder.txtProductName.setText("Given Second Dose of Malaria Prophylaxis(Fansidar)");
+            holder.txtProductName.setText("IRH1-195 : IPTp 2");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -326,7 +338,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getIPTP3C() != null){
-            holder.txtProductName.setText("Given Third Dose of Malaria Prophylaxis(Fansidar)");
+            holder.txtProductName.setText("IRH1-200 : IPTp 3");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -338,7 +350,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getIPTP4C() != null){
-            holder.txtProductName.setText("Given Fourth Dose of Malaria Prophylaxis(Fansidar)");
+            holder.txtProductName.setText("IRH1-205 : IPTp 4");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -350,7 +362,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getProvidedITNC() != null){
-            holder.txtProductName.setText("Provided ITN");
+            holder.txtProductName.setText("IRH1-210 : Provided with ITN");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -362,7 +374,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getProvidedIronC() != null){
-            holder.txtProductName.setText("Provided Iron");
+            holder.txtProductName.setText("IRH1-215 : Provided with Iron");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -374,7 +386,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getDewormedC() != null){
-            holder.txtProductName.setText("Dewormed");
+            holder.txtProductName.setText("IRH1-230 : Dewormed");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -386,7 +398,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getStartedOnPrepC() != null){
-            holder.txtProductName.setText("Started on prep in ANC");
+            holder.txtProductName.setText("HIV2-091 : Started on PrEP in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -398,7 +410,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getAlreadyOnPrepC() != null){
-            holder.txtProductName.setText("Already on prep");
+            holder.txtProductName.setText("HIV2-092 : Currently on PrEP in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -410,7 +422,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getStartedARTC() != null){
-            holder.txtProductName.setText("Started on ART in ANC");
+            holder.txtProductName.setText("HIV2-065 : Started on ART in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -422,7 +434,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getAlreadyOnARTC() != null){
-            holder.txtProductName.setText("Already on ART");
+            holder.txtProductName.setText("HIV2-060 : Already on ART at 1st ANC visit");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -434,7 +446,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getFollowUpC() != null){
-            holder.txtProductName.setText("Follow Up Contacts");
+            holder.txtProductName.setText("IRH1-135 : Total follow up contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -446,7 +458,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getDiscordantC() != null){
-            holder.txtProductName.setText("Discordant");
+            holder.txtProductName.setText("HIV2-130 : Discordant Test Results");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -458,7 +470,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getMaleStartedARTC() != null){
-            holder.txtProductName.setText("Males started on ART");
+            holder.txtProductName.setText("HIV2-126 : Male Partner started on ART in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -470,7 +482,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getMaleAlreadyPositiveC() != null){
-            holder.txtProductName.setText("Males already positive");
+            holder.txtProductName.setText("HIV2-115 : With known status at 1st visit to MCH");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -482,7 +494,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getMalePositiveC() != null){
-            holder.txtProductName.setText("Males Tested Positive");
+            holder.txtProductName.setText("HIV2-125 : Positive results (MCH only)");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -494,7 +506,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getMaleTestedC() != null){
-            holder.txtProductName.setText("Males Tested");
+            holder.txtProductName.setText("HIV2-120 : Tested in MCH");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -506,7 +518,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getViralLoadC() != null){
-            holder.txtProductName.setText("Viral Load Results");
+            holder.txtProductName.setText("HIV2-105 : With VL results");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -517,8 +529,20 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
         }
 
+        else if(data.getSuppressedViralLoadC() != null){
+            holder.txtProductName.setText("HIV2-110 : VL suppressed");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            int totalFemaleSeen = ClientDao.getAllSuppressedViralLoadResultsContact();
+            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+        }
+
         else if(data.getOnARTC() != null){
-            holder.txtProductName.setText("All on ART");
+            holder.txtProductName.setText("HIV2-090 : Total mothers on ART");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -530,7 +554,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getTestedPositiveC() != null){
-            holder.txtProductName.setText("All Tested Positive");
+            holder.txtProductName.setText("HIV2-040 : Positive - Initial test in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -542,7 +566,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getAlreadyPositiveC() != null){
-            holder.txtProductName.setText("Already HIV Positive");
+            holder.txtProductName.setText("HIV2-035 : Known HIV+ at first ANC visit");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -554,7 +578,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getTestedHIVC() != null){
-            holder.txtProductName.setText("Tested for HIV");
+            holder.txtProductName.setText("HIV2-005 : Tested - Initial test in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -566,7 +590,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getScreenedTBC() != null){
-            holder.txtProductName.setText("Screened for TB");
+            holder.txtProductName.setText("IRH1-235 : Presumptive TB");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -578,7 +602,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getTTCVPlusTwoC() != null){
-            holder.txtProductName.setText("Receive Two plus shots of TTCV");
+            holder.txtProductName.setText("IRH1-225 : Tetanus Toxoid (TT2+)");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -590,7 +614,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getReferredTBC() != null){
-            holder.txtProductName.setText("Referred for TB Treatment");
+            holder.txtProductName.setText("IRH1-245 : Referred for TB Treatment");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -602,7 +626,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getContactCountC() != null){
-            holder.txtProductName.setText("Number of women who came for ANC Contacts");
+            holder.txtProductName.setText("IRH1-140 : Total ANC contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
