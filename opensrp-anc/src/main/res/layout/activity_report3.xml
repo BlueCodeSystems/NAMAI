@@ -201,8 +201,7 @@
             android:layout_weight="1"
             android:background="@drawable/female_round_button"
             android:gravity="center"
-            android:text="Female"
-            android:visibility="gone"
+            android:text="Has Value"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
