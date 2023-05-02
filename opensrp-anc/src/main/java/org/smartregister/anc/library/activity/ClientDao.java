@@ -504,7 +504,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getSyphScreenedContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%syph_test_status\":\"done_%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%syph_test_status\":\"done_%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSyphScreenedCountDataMap());
 
@@ -512,7 +512,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getSyphPositiveContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%syphilis_positive\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%syphilis_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSyphPositiveCountDataMap());
 
@@ -532,7 +532,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getHepBScreenedContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%hepb_test_status\":\"done%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hepb_test_status\":\"done%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getHepbScreenedCountDataMap());
 
@@ -540,7 +540,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getAnaemiaPositiveContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%anaemic\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%anaemic\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAnaemiaPositiveCountDataMap());
 
@@ -560,7 +560,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getAnaemiaScreenedContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%ifa_anaemia\":\"done%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%ifa_anaemia\":\"done%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAnaemiaScreenedCountDataMap());
 
@@ -592,7 +592,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getHepBPositiveContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%hepb_positive\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hepb_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getHepBPositiveCountDataMap());
 
@@ -612,7 +612,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getIPTP1Contact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp1_dose_number\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp1_dose_number\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP1CountDataMap());
 
@@ -632,7 +632,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getIPTP2Contact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp2_dose_number\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp2_dose_number\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP2CountDataMap());
 
@@ -652,7 +652,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getIPTP3Contact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp3_dose_number\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp3_dose_number\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP3CountDataMap());
 
@@ -672,7 +672,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getIPTP4Contact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%iptp_sp4_dose_number\":\"0%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp4_dose_number\":\"0%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP4CountDataMap());
 
@@ -692,7 +692,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getProvidedITNContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%itn_issued\":\"yes%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%itn_issued\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getProvidedITNCountDataMap());
 
@@ -700,7 +700,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getProvidedIronContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%ifa_low_prev_value\":\"Given%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%ifa_low_prev_value\":\"Given%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getProvidedIronCountDataMap());
 
@@ -732,7 +732,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getDewormedContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%mebendazole\":\"yes%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%mebendazole\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getDewormedCountDataMap());
 
@@ -740,7 +740,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getStartedOnPrepContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_on_prep\":\"yes%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_on_prep\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getStartedOnPrepCountDataMap());
 
@@ -772,7 +772,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getAlreadyOnPrepContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyOnPrepCountDataMap());
 
@@ -780,7 +780,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getAlreadyARTinANCContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_art\":\"already%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_art\":\"already%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyOnARTCountDataMap());
 
@@ -812,7 +812,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getStartedARTinANCContact(){
-        String sql = "SELECT \"_rowid_\",* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%started_art\":\"yes%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_art\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getStartedOnARTCountDataMap());
 
@@ -1020,7 +1020,12 @@ public class ClientDao extends AbstractDao {
 
 
     public static List<ReportModel1> getFollowUpContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'next_contact' AND ec_details.value LIKE '%3%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%4%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%5%'OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%6%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%7%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%8%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
+                "FROM ec_details\n" +
+                "WHERE ec_details.key = 'next_contact'\n" +
+                "  AND (ec_details.value LIKE '%3%' OR ec_details.value LIKE '%4%' OR ec_details.value LIKE '%5%'\n" +
+                "       OR ec_details.value LIKE '%6%' OR ec_details.value LIKE '%7%' OR ec_details.value LIKE '%8%')\n" +
+                "GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getFollowUpCountDataMap());
 
@@ -1028,7 +1033,8 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getCountContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%contact_date%' GROUP BY ec_details.key\n";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
+                "FROM ec_details WHERE ec_details.value LIKE '%contact_date%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getContactCountDataMap());
 
@@ -1036,7 +1042,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getReferredTBContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%reason\":\"refer%' GROUP BY ec_details.key\n";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%reason\":\"refer%' GROUP BY ec_details.key\n";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getRefferedTBCountDataMap());
 
@@ -1044,7 +1050,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getTTCVPlusTwoContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%tt1_dose_no_value\":\"2%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"3%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"4%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%tt1_dose_no_value\":\"2%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"3%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"4%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getTTCVPlusTwoDataMap());
 
@@ -1052,7 +1058,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getScreenedForTBContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%tb_screening_history\":\"[cough_weeks%' OR ec_details.value LIKE '%tb_screening_history\":\"[fever%' OR ec_details.value LIKE '%tb_screening_history\":\"[weight%' OR ec_details.value LIKE '%tb_screening_history\":\"[night%'  GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%tb_screening_history\":\"[cough_weeks%' OR ec_details.value LIKE '%tb_screening_history\":\"[fever%' OR ec_details.value LIKE '%tb_screening_history\":\"[weight%' OR ec_details.value LIKE '%tb_screening_history\":\"[night%'  GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getScreenedForTBDataMap());
 
@@ -1060,7 +1066,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getTestedHIVFirstContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getTestedHIVFirstDataMap());
 
@@ -1068,7 +1074,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getAlreadyPositiveFirstContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_positive\":\"1%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%art_number\":\"%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_positive\":\"1%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%art_number\":\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyPositiveDataMap());
 
@@ -1076,7 +1082,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getTestedPositiveFirstContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getTestedPositiveDataMap());
 
@@ -1084,7 +1090,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getOnARTContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%on_art\":\"yes%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%on_art\":\"yes%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getOnARTDataMap());
 
@@ -1092,7 +1098,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getViralLoadResultsContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%viral_load\":\"%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%viral_load\":\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getViralLoadDataMap());
 
@@ -1100,7 +1106,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getSuppressedViralLoadResultsContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%viral_load%' AND CAST(JSON_EXTRACT(ec_details.value, '$.viral_load') AS UNSIGNED) < 1000 GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%viral_load%' AND CAST(JSON_EXTRACT(ec_details.value, '$.viral_load') AS UNSIGNED) < 1000 GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSuppressedViralLoadDataMap());
 
@@ -1108,7 +1114,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getMaleTestFirstContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMaleTestedDataMap());
 
@@ -1116,7 +1122,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getMalePositiveFirstContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMalePositiveDataMap());
 
@@ -1124,7 +1130,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getMaleAlreadyPositiveContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%partner_on_art\":\"%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%partner_on_art\":\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMaleAlreadyPositiveDataMap());
 
@@ -1132,7 +1138,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getMaleStartedARTinANCContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%partner_on_art\":\"no\"%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%partner_on_art\":\"no\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMaleStartedARTDataMap());
 
@@ -1140,7 +1146,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getDiscordantContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.value LIKE '%discordant\":\"yes%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%discordant\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getDiscordantDataMap());
 
@@ -1219,7 +1225,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getOrigin() {
-        String sql = "SELECT ec_mother_details.origin FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL GROUP BY ec_mother_details.origin";
+        String sql = "SELECT COALESCE(ec_mother_details.origin, '0') AS value FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL GROUP BY ec_mother_details.origin";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getOriginDataMap());
 
@@ -1227,7 +1233,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getFirstC() {
-        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '1' GROUP BY previous_contact.contact_no";
+        String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '1' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no GROUP BY values_table.contact_no";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getFirstCDataMap());
 
@@ -1235,7 +1241,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getSecondC() {
-        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '2' GROUP BY previous_contact.contact_no";
+        String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '2' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no GROUP BY values_table.contact_no";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSecondCDataMap());
 
@@ -1243,7 +1249,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getThirdC() {
-        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '3' GROUP BY previous_contact.contact_no";
+        String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '3' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no GROUP BY values_table.contact_no";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getThirdCDataMap());
 
@@ -1251,7 +1257,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getFourthToSeventhC() {
-        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '4' OR previous_contact.contact_no IS '5' OR previous_contact.contact_no IS '6' OR previous_contact.contact_no IS '7' GROUP BY previous_contact.contact_no";
+        String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '4' AS contact_no UNION ALL SELECT '5' AS contact_no UNION ALL SELECT '6' AS contact_no UNION ALL SELECT '7' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no LIMIT 1";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getFourthToSeventhCDataMap());
 
@@ -1259,7 +1265,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getEighthAboveC() {
-        String sql = "SELECT previous_contact.contact_no FROM previous_contact where previous_contact.contact_no IS '8' OR previous_contact.contact_no IS '9' OR previous_contact.contact_no IS '10' OR previous_contact.contact_no IS '11' GROUP BY previous_contact.contact_no";
+        String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '8' AS contact_no UNION ALL SELECT '9' AS contact_no UNION ALL SELECT '10' AS contact_no UNION ALL SELECT '11' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no LIMIT 1";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getEighthAboveCDataMap());
 
@@ -1267,7 +1273,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static List<ReportModel1> getHighRiskContact(){
-        String sql = "SELECT * FROM ec_details WHERE ec_details.key IS 'red_flag_count' AND ec_details.value IS NOT '0' AND ec_details.value IS NOT NULL GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.key IS 'red_flag_count' AND ec_details.value IS NOT '0' AND ec_details.value IS NOT NULL GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getHighRiskCountDataMap());
 
