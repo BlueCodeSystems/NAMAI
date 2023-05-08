@@ -16,16 +16,30 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.model.MeModel;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.view.contract.MeContract;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import io.fabric.sdk.android.services.concurrency.AsyncTask;
 
 public class ReportActivity3 extends AppCompatActivity {
 
@@ -452,7 +466,7 @@ public class ReportActivity3 extends AppCompatActivity {
         recyclerViewadapter1 = new ReportAdapter1(monthNumber, reportList, ReportActivity.this);*/
 
 
-        txtReportType.setText("ANC VISITS FOR : " + monthName);
+        txtReportType.setText("ANC CONTACTS FOR : " + monthName);
         recyclerViewadapter1 = new ReportAdapter3(monthNumber, reportList, ReportActivity3.this);
         recyclerView1.setAdapter(recyclerViewadapter1);
 
@@ -470,59 +484,91 @@ public class ReportActivity3 extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        if (item.getItemId() == R.id.send) {/*    Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("message/rfc822");
-                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"mtaps@mtaps.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, txtPeriod.getText().toString() + " Report");
-                i.putExtra(Intent.EXTRA_TEXT   , "1. Type of Contraceptive");
-
-                try {
-                    startActivity(Intent.createChooser(i, "Send Report..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(ReportActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-                }
-
-                return true;*/
-            //Toasty.info(ReportActivity3.this, "Coming Soon", Toasty.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.send) {
+            // Start a new AsyncTask to perform network operations
+            new SendDataTask().execute();
         }
         return super.onOptionsItemSelected(item);
     }
-}
 
-/*
-    String url = "https://your-dhis2-instance.org/api/dataValueSets"; // The endpoint for the dataValueSets API
-    String username = "your-username";
-    String password = "your-password";
-    String data = "{\"dataValues\": [{\"dataElement\": \"data-element-uid\", \"period\": \"2018Q1\", \"orgUnit\": \"org-unit-uid\", \"value\": \"10\"}]}"; // Replace with your own data
+    private class SendDataTask extends AsyncTask<Void, Void, String> {
 
-    String encoding = Base64.getEncoder().encodeToString((username + ":" + password).getBytes()); // Encode the username and password in Base64
+       // @Override
+        protected String doInBackground(Void... voids) {
+            JSONArray dataValues = new JSONArray();
+            for (ReportModel1 data : reportList) {
+                JSONObject dataValue = new JSONObject();
+                try {
+                    dataValue.put("dataElement", data.getGeneralBaseEntityID());
+                    dataValue.put("period", monthName);
+                    dataValue.put("orgUnit", data.getGeneralKey());
+                    dataValue.put("value", data.getGeneralValue());
+                    dataValues.put(dataValue);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            String data = "{\"dataValues\": " + dataValues.toString() + "}";
 
-    URL obj = new URL(url);
-    HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+            String url = "https://102.23.122.128:8080/dhis2/api/dataValueSets"; // The endpoint for the dataValueSets API
+            String username = "dhis2_user";
+            String password = "=8hn7$&!4yf9874rR";
+            String encoding = android.util.Base64.encodeToString((username + ":" + password).getBytes(), android.util.Base64.DEFAULT);
 
-// Set the request method and headers
-con.setRequestMethod("POST");
-        con.setRequestProperty("Authorization", "Basic " + encoding);
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Accept", "application/json");
+            URL obj = null;
+            HttpsURLConnection con = null;
+            try {
+                obj = new URL(url);
+                con = (HttpsURLConnection) obj.openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-// Send the data
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(data);
-        wr.flush();
-        wr.close();
+            // Set the request method and headers
+            try {
+                con.setRequestMethod("POST");
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            }
+            con.setRequestProperty("Authorization", "Basic " + encoding);
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Accept", "application/json");
 
-// Get the response
-        int responseCode = con.getResponseCode();
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-        response.append(inputLine);
+            // Send the data
+            con.setDoOutput(true);
+            DataOutputStream wr = null;
+            try {
+                wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(data);
+                wr.flush();
+                wr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // Get the response
+            StringBuffer response = new StringBuffer();
+            try {
+                int responseCode = con.getResponseCode();
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // Return the response as a string
+            return response.toString();
         }
-        in.close();
 
-// Print the response
-        System.out.println(response.toString());
-*/
+        @Override
+        protected void onPostExecute(String result) {
+            // Handle the result here
+            System.out.println(result);
+        }
+    }
+
+}
