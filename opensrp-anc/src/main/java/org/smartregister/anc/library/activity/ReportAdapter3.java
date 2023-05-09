@@ -17,14 +17,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import android.util.LruCache;
 
 
 public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHolder> {
     Context context;
 
     List<ReportModel1> reportitems;
+    LruCache<Integer, ReportModel1> cache;
 //    List<ReportModel1> feedbackItems;
     String monthNumber;
+    String f1first = null;
+    String f2first = null;
+    String f3first = null;
+    String f4first = null;
+    String f5first = null;
+    String f1second = null;
+    String f2second = null;
+    String f3second = null;
+    String f4second = null;
+    String f5second = null;
+    String f1third = null;
+    String f2third = null;
+    String f3third = null;
+    String f4third = null;
+    String f5third = null;
+    String totalfemalesfirst = null;
+    String totalfemalessecond = null;
+    String totalfemalesthird = null;
+
+
 
 
     public ReportAdapter3(String monthNumber, List<ReportModel1> reportitems, Context context){
@@ -35,6 +57,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         this.reportitems = reportitems;
         this.monthNumber = monthNumber;
         this.context = context;
+        int cacheSize = (int) (Runtime.getRuntime().maxMemory() / 1024) / 8;
+        cache = new LruCache<Integer, ReportModel1>(cacheSize) {
+            @Override
+            protected int sizeOf(Integer key, ReportModel1 value) {
+                // Calculate the size of each object in your cache based on its properties
+                int size = 0;
+                size = reportitems.size();
+                return size;
+            }
+        };
     }
 
     @Override
@@ -50,8 +82,19 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
     @Override
     public void onBindViewHolder(ReportAdapter3.ViewHolder holder, final int position) {
 
-        final ReportModel1 data = reportitems.get(position);
+
+        ReportModel1 data = reportitems.get(position);
         //int feedback = feedbackItems.size();
+        ReportModel1 cachedData = cache.get(position);
+        if (cachedData != null) {
+            data = cachedData;
+        } else {
+            // If the data is not in the cache, process it and add it to the cache
+            // ...
+
+            cache.put(position, data);
+        }
+
 
         holder.setIsRecyclable(false);
 
@@ -73,16 +116,27 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
         if(data.getTrimester() != null && data.getTrimester().contains("IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER")) {
             //10-14
-            String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
-
+            if(f1first == null){
+                f1first = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
+            }
+            String totalFemaleSeen10_14 = f1first;
             //15-19
-            String totalFemaleSeen15_19 = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12");
+            if(f2first == null){
+                f2first = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12");
+            }
+            String totalFemaleSeen15_19 = f2first;
 
             //20-24
-            String totalFemaleSeen20_24 = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12");
+            if(f3first == null){
+                f3first = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12");
+            }
+            String totalFemaleSeen20_24 = f3first;
 
             //25-49
-            String totalFemaleSeen25_49 = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12");
+            if(f4first == null){
+                f4first = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12");
+            }
+            String totalFemaleSeen25_49 = f4first;
 
             holder.f1.setText(totalFemaleSeen10_14);
             //holder.m1.setText(totalMaleSeen10_14);
@@ -101,16 +155,28 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
         else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER")) {
             //10-14
-            String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "13", "26");
+            if(f1second == null){
+                f1second = ClientDao.getFirstContact("gest_age_openmrs", "13", "26");
+            }
+            String totalFemaleSeen10_14 = f1second;
 
             //15-19
-            String totalFemaleSeen15_19 = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26");
+            if(f2second == null){
+                f2second = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26");
+            }
+            String totalFemaleSeen15_19 = f2second;
 
             //20-24
-            String totalFemaleSeen20_24 = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26");
+            if(f3second == null){
+                f3second = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26");
+            }
+            String totalFemaleSeen20_24 = f3second;
 
             //25-49
-            String totalFemaleSeen25_49 = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26");
+            if(f4second == null){
+                f4second = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26");
+            }
+            String totalFemaleSeen25_49 = f4second;
 
             holder.f1.setText(totalFemaleSeen10_14);
             //holder.m1.setText(totalMaleSeen10_14);
@@ -129,16 +195,28 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
         else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER")) {
             //10-14
-            String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "27", "40");
+            if(f1third == null){
+                f1third = ClientDao.getFirstContact("gest_age_openmrs", "27", "40");
+            }
+            String totalFemaleSeen10_14 = f1third;
 
             //15-19
-            String totalFemaleSeen15_19 = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40");
+            if(f2third == null){
+                f2third = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40");
+            }
+            String totalFemaleSeen15_19 = f2third;
 
             //20-24
-            String totalFemaleSeen20_24 = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40");
+            if(f3third == null){
+                f3third = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40");
+            }
+            String totalFemaleSeen20_24 = f3third;
 
             //25-49
-            String totalFemaleSeen25_49 = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40");
+            if(f4third == null){
+                f4third = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40");
+            }
+            String totalFemaleSeen25_49 = f4third;
 
             holder.f1.setText(totalFemaleSeen10_14);
             //holder.m1.setText(totalMaleSeen10_14);
