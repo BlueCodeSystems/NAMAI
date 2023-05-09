@@ -1206,10 +1206,24 @@ public class ClientDao extends AbstractDao {
 
     public static List<ReportModel1> getReport3() {
 
-        String sql ="SELECT B.value ,C.value As age\n" +
-                "FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A \n" +
-                "JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id \n" +
-                "JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value";
+        String sql ="SELECT \n" +
+                "  CASE \n" +
+                "    WHEN CAST(C.value AS UNSIGNED) BETWEEN 7 AND 12 THEN 'First Trimester'\n" +
+                "    WHEN CAST(C.value AS UNSIGNED) BETWEEN 13 AND 24 THEN 'Second Trimester'\n" +
+                "    WHEN CAST(C.value AS UNSIGNED) BETWEEN 25 AND 40 THEN 'Third Trimester'\n" +
+                "  END AS trimester,\n" +
+                "  C.value AS gestational_age\n" +
+                "FROM \n" +
+                "  (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A \n" +
+                "  JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B \n" +
+                "    ON A.base_entity_id = B.base_entity_id \n" +
+                "  JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C \n" +
+                "    ON B.base_entity_id = C.base_entity_id \n" +
+                "WHERE A.value = '2' \n" +
+                "  AND B.value IS NOT NULL\n" +
+                "  AND B.key = 'attention_flag_facts'\n" +
+                "GROUP BY trimester\n" +
+                "HAVING trimester IS NOT NULL;\n";
 
 
         List<ReportModel1> values = AbstractDao.readData(sql, getReferralDataMap());
@@ -1406,8 +1420,8 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getReferralDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setTrimester(getCursorValue(c, "value"));
-            record.setAge(getCursorValue(c, "age"));
+            record.setTrimester(getCursorValue(c, "trimester"));
+            record.setAge(getCursorValue(c, "gestational_age"));
 
             return record;
         };
@@ -1762,6 +1776,15 @@ public class ClientDao extends AbstractDao {
         return c -> {
             ReportModel1 record = new ReportModel1();
             record.setOriginCount(getCursorValue(c, "origin"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getAgeContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setAgeContactCount(getCursorValue(c, "age"));
 
             return record;
         };
