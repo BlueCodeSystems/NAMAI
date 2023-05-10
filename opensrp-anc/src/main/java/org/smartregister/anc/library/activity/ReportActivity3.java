@@ -104,28 +104,11 @@ public class ReportActivity3 extends AppCompatActivity {
         model = new MeModel();
         String name = model.getName();
         nameDB.setText(name);
-//        String totalFemaleSeen10_14 = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
-//
-//        //15-19
-//        String totalFemaleSeen15_19 = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12");
-//
-//        //20-24
-//        String totalFemaleSeen20_24 = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12");
-//
-//        //25-49
-//        String totalFemaleSeen25_49 = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12");
-//
-//
-//        reportAgeData.put("seen_10_14",totalFemaleSeen10_14);
-//        reportAgeData.put("seen_15_19",totalFemaleSeen15_19);
-//        reportAgeData.put("seen_20_24",totalFemaleSeen20_24);
-//        reportAgeData.put("seen_25_29",totalFemaleSeen25_49);
 
-        //NavigationMenu.getInstance(this, null, toolbar);
 
       //  loadData1();
         List<ReportModel1> reportList = new ArrayList<>();
-        txtReportType.setText("ANC CONTACTS FOR : " + monthNumber);
+        txtReportType.setText("ANC CONTACTS FOR : " + monthName);
        recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
         //recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
         recyclerView1.setAdapter(recyclerViewadapter1);
