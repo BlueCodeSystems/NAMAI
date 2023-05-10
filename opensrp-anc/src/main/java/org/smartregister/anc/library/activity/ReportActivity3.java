@@ -405,7 +405,6 @@ public class ReportActivity3 extends AppCompatActivity {
                         int count = callbackCounter.incrementAndGet();
 
                         // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -428,7 +427,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     }
                                 }
                             });
-                        }
+
                     }
                 });
                 ClientDao.getSyphPositiveContact(new ClientDao.DataCallback() {
@@ -443,8 +442,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -468,7 +465,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getSyphScreenedContact(new ClientDao.DataCallback() {
                     @Override
@@ -482,8 +479,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -507,7 +502,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getHepBPositiveContact(new ClientDao.DataCallback() {
                     @Override
@@ -522,7 +517,6 @@ public class ReportActivity3 extends AppCompatActivity {
                         int count = callbackCounter.incrementAndGet();
 
                         // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -546,7 +540,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getHepBScreenedContact(new ClientDao.DataCallback() {
                     @Override
@@ -561,7 +555,6 @@ public class ReportActivity3 extends AppCompatActivity {
                         int count = callbackCounter.incrementAndGet();
 
                         // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -585,7 +578,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getAnaemiaScreenedContact(new ClientDao.DataCallback() {
                     @Override
@@ -599,8 +591,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -624,7 +615,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getAnaemiaPositiveContact(new ClientDao.DataCallback() {
                     @Override
@@ -639,7 +630,6 @@ public class ReportActivity3 extends AppCompatActivity {
                         int count = callbackCounter.incrementAndGet();
 
                         // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -663,7 +653,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getIPTP1Contact(new ClientDao.DataCallback() {
                     @Override
@@ -677,8 +666,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -702,7 +690,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getIPTP2Contact(new ClientDao.DataCallback() {
                     @Override
@@ -716,8 +704,8 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -741,7 +729,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getIPTP3Contact(new ClientDao.DataCallback() {
                     @Override
@@ -756,7 +744,6 @@ public class ReportActivity3 extends AppCompatActivity {
                         int count = callbackCounter.incrementAndGet();
 
                         // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -780,7 +767,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getIPTP4Contact(new ClientDao.DataCallback() {
                     @Override
@@ -794,8 +781,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -819,7 +804,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getProvidedITNContact(new ClientDao.DataCallback() {
                     @Override
@@ -833,8 +818,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -858,7 +842,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getProvidedIronContact(new ClientDao.DataCallback() {
                     @Override
@@ -872,8 +856,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -897,7 +879,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getDewormedContact(new ClientDao.DataCallback() {
                     @Override
@@ -911,8 +893,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -936,7 +916,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getStartedOnPrepContact(new ClientDao.DataCallback() {
                     @Override
@@ -950,8 +929,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -975,7 +953,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getAlreadyOnPrepContact(new ClientDao.DataCallback() {
                     @Override
@@ -989,8 +966,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1014,7 +989,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getStartedARTinANCContact(new ClientDao.DataCallback() {
                     @Override
@@ -1028,8 +1002,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1053,7 +1025,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getAlreadyARTinANCContact(new ClientDao.DataCallback() {
                     @Override
@@ -1067,8 +1038,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1092,7 +1061,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
                     @Override
@@ -1106,8 +1074,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1131,7 +1098,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getDiscordantContact(new ClientDao.DataCallback() {
                     @Override
@@ -1145,8 +1111,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1170,7 +1134,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getMaleAlreadyPositiveContact(new ClientDao.DataCallback() {
                     @Override
@@ -1184,8 +1148,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1209,7 +1171,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getMaleStartedARTinANCContact(new ClientDao.DataCallback() {
                     @Override
@@ -1223,8 +1184,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1248,7 +1207,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getMalePositiveFirstContact(new ClientDao.DataCallback() {
                     @Override
@@ -1262,8 +1221,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1287,7 +1245,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getViralLoadResultsContact(new ClientDao.DataCallback() {
                     @Override
@@ -1301,8 +1258,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1326,7 +1281,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
                     @Override
@@ -1340,8 +1294,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1365,7 +1317,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getOnARTContact(new ClientDao.DataCallback() {
                     @Override
@@ -1379,8 +1331,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1404,7 +1354,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getTestedPositiveFirstContact(new ClientDao.DataCallback() {
                     @Override
@@ -1418,8 +1367,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1443,7 +1390,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getTestedHIVFirstContact(new ClientDao.DataCallback() {
                     @Override
@@ -1457,8 +1404,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
+
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1482,7 +1428,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getScreenedForTBContact(new ClientDao.DataCallback() {
                     @Override
@@ -1496,8 +1441,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1521,7 +1464,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getTTCVPlusTwoContact(new ClientDao.DataCallback() {
                     @Override
@@ -1535,8 +1478,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1560,47 +1501,43 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
                 });
-                ClientDao.getScreenedForTBContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getScreenedTBC() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
+//                ClientDao.getScreenedForTBContact(new ClientDao.DataCallback() {
+//                    @Override
+//                    public void onDataRetrieved(List<ReportModel1> originData) {
+//                        // Add data to reportList
+//                        for (ReportModel1 data : originData) {
+//                            if (data.getScreenedTBC() != null) {
+//                                reportList.add(data);
+//                            }
+//                        }
+//
+//                        int count = callbackCounter.incrementAndGet();
+//
+//                            // Notify the adapter that the data has changed
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+//                                    recyclerView1.setHasFixedSize(true);
+//                                    recyclerView1.setLayoutManager(eLayoutManager);
+//                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
+//                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+//                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
+//                                    recyclerView1.setAdapter(recyclerViewadapter1);
+//                                    recyclerViewadapter1.notifyDataSetChanged();
+//                                    loading1.setVisibility(View.GONE);
+//
+//                                    // Show toast only if data has finished loading
+//                                    if (originData.size() > 0) {
+//                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
+//                                    } else {
+//                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
+//                                    }
+//                                }
+//                            });
+//                        }
+//                });
                 ClientDao.getReferredTBContact(new ClientDao.DataCallback() {
                     @Override
                     public void onDataRetrieved(List<ReportModel1> originData) {
@@ -1613,8 +1550,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1638,7 +1573,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getCountContact(new ClientDao.DataCallback() {
                     @Override
@@ -1652,8 +1587,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -1677,7 +1610,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
-                    }
+
                 });
             }
 
