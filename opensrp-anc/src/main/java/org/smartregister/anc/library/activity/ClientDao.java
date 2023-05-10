@@ -1228,20 +1228,24 @@ public class ClientDao extends AbstractDao {
 //    }
 
     public static void getReport3(DataCallback callback) {
-        String sql = "SELECT B.value, C.value AS age\n" +
-                "FROM ec_details AS A\n" +
-                "INNER JOIN ec_details AS B ON A.base_entity_id = B.base_entity_id\n" +
-                "INNER JOIN ec_details AS C ON B.base_entity_id = C.base_entity_id\n" +
-                "WHERE A.key = 'next_contact'\n" +
+        String sql ="SELECT \n" +
+                "  CASE \n" +
+                "    WHEN CAST(C.value AS UNSIGNED) BETWEEN 7 AND 12 THEN 'First Trimester'\n" +
+                "    WHEN CAST(C.value AS UNSIGNED) BETWEEN 13 AND 24 THEN 'Second Trimester'\n" +
+                "    WHEN CAST(C.value AS UNSIGNED) BETWEEN 25 AND 40 THEN 'Third Trimester'\n" +
+                "  END AS trimester,\n" +
+                "  C.value AS gestational_age\n" +
+                "FROM \n" +
+                "  (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A \n" +
+                "  JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B \n" +
+                "    ON A.base_entity_id = B.base_entity_id \n" +
+                "  JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C \n" +
+                "    ON B.base_entity_id = C.base_entity_id \n" +
+                "WHERE A.value = '2' \n" +
+                "  AND B.value IS NOT NULL\n" +
                 "  AND B.key = 'attention_flag_facts'\n" +
-                "  AND C.key = 'age_calculated'\n" +
-                "  AND A.value = '2'\n" +
-                "GROUP BY B.value";
-//                "SELECT B.value, C.value AS age " +
-//                "FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A " +
-//                "JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id " +
-//                "JOIN (SELECT * FROM ec_details WHERE Key IN ('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value";
-
+                "GROUP BY trimester\n" +
+                "HAVING trimester IS NOT NULL;\n";
         List<ReportModel1> values = AbstractDao.readData(sql, getReferralDataMap());
 
         // Pass the retrieved data to the callback
@@ -1447,8 +1451,8 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getReferralDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setTrimester(getCursorValue(c, "value"));
-            record.setAge(getCursorValue(c, "age"));
+            record.setTrimester(getCursorValue(c, "trimester"));
+            record.setAge(getCursorValue(c, "gestational_age"));
 
             return record;
         };
@@ -1803,6 +1807,15 @@ public class ClientDao extends AbstractDao {
         return c -> {
             ReportModel1 record = new ReportModel1();
             record.setOriginCount(getCursorValue(c, "origin"));
+
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel1> getAgeContactCountDataMap() {
+        return c -> {
+            ReportModel1 record = new ReportModel1();
+            record.setAgeContactCount(getCursorValue(c, "age"));
 
             return record;
         };

@@ -83,6 +83,7 @@ public class ReportModel1 implements Serializable {
     private String screenedTBC;
     private String TTCVPlusTwoC;
     private String highRiskC;
+    private String AgeContactCountC;
 
 
     public String getGeneralKey() {
@@ -306,172 +307,18 @@ public class ReportModel1 implements Serializable {
     }
 
     public void setTrimester(String trimester) {
-        if(trimester.contains("\"gest_age_openmrs\":\"8\"") && firstTrimesterCounter < 1)
+        if(trimester.contains("First"))
         {
             this.trimester = "IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER";
-            firstTrimesterCounter = 1;
         }
-        else if(trimester.contains("\"gest_age_openmrs\":\"9\"") && firstTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER";
-            firstTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"10\"") && firstTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER";
-            firstTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"11\"") && firstTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER";
-            firstTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"12\"") && firstTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER";
-            firstTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"13\"") && secondTrimesterCounter < 1)
+        else if(trimester.contains("Second"))
         {
             this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
         }
-        else if(trimester.contains("\"gest_age_openmrs\":\"14\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"15\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"16\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"17\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"18\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"19\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"20\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"21\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"22\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"23\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"24\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"25\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"26\"") && secondTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER";
-            secondTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"27\"") && thirdTrimesterCounter < 1)
+        else if(trimester.contains("Third") && thirdTrimesterCounter < 1)
         {
             this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
         }
-        else if(trimester.contains("\"gest_age_openmrs\":\"28\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"29\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"30\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"31\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"32\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"33\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"34\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"35\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"36\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"37\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"38\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"39\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        else if(trimester.contains("\"gest_age_openmrs\":\"40\"") && thirdTrimesterCounter < 1)
-        {
-            this.trimester = "IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER";
-            thirdTrimesterCounter = 1;
-        }
-        //this.trimester = trimester;
     }
 
     public String getAge() {
@@ -815,4 +662,7 @@ public class ReportModel1 implements Serializable {
 
     public String getHighRiskC() { return highRiskC; }
 
+    public void setAgeContactCount(String AgeContactCount) {
+        this.AgeContactCountC = AgeContactCountC;
+    }
 }
