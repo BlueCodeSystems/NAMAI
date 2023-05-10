@@ -31,20 +31,26 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
     String f2first = null;
     String f3first = null;
     String f4first = null;
-    String f5first = null;
     String f1second = null;
     String f2second = null;
     String f3second = null;
     String f4second = null;
-    String f5second = null;
     String f1third = null;
     String f2third = null;
     String f3third = null;
     String f4third = null;
-    String f5third = null;
     String totalfemalesfirst = null;
     String totalfemalessecond = null;
     String totalfemalesthird = null;
+    String origin = null;
+    String firstc = null;
+    String secondc = null;
+    String thirdc = null;
+    String fourthToSeventhC = null;
+    String eighthAboveC = null;
+    String highRiskC = null;
+
+
 
 
 
@@ -57,16 +63,6 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         this.reportitems = reportitems;
         this.monthNumber = monthNumber;
         this.context = context;
-        int cacheSize = (int) (Runtime.getRuntime().maxMemory() / 1024) / 8;
-        cache = new LruCache<Integer, ReportModel1>(cacheSize) {
-            @Override
-            protected int sizeOf(Integer key, ReportModel1 value) {
-                // Calculate the size of each object in your cache based on its properties
-                int size = 0;
-                size = reportitems.size();
-                return size;
-            }
-        };
     }
 
     @Override
@@ -85,15 +81,6 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
         ReportModel1 data = reportitems.get(position);
         //int feedback = feedbackItems.size();
-        ReportModel1 cachedData = cache.get(position);
-        if (cachedData != null) {
-            data = cachedData;
-        } else {
-            // If the data is not in the cache, process it and add it to the cache
-            // ...
-
-            cache.put(position, data);
-        }
 
 
         holder.setIsRecyclable(false);
@@ -150,8 +137,11 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setText(totalFemaleSeen25_49);
 
             int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
-            String WT = String.valueOf(womenSeen);
-            holder.txtTotalFemaleSeen.setText(WT);
+            if(totalfemalesfirst == null){
+                totalfemalesfirst = String.valueOf(womenSeen);
+            }
+            //String WT = String.valueOf(womenSeen);
+            holder.txtTotalFemaleSeen.setText(totalfemalesfirst);
         }
         else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER")) {
             //10-14
@@ -190,8 +180,11 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setText(totalFemaleSeen25_49);
 
             int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
-            String WT = String.valueOf(womenSeen);
-            holder.txtTotalFemaleSeen.setText(WT);
+            if(totalfemalessecond == null){
+                totalfemalessecond = String.valueOf(womenSeen);
+            }
+            //String WT = String.valueOf(womenSeen);
+            holder.txtTotalFemaleSeen.setText(totalfemalessecond);
         }
         else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER")) {
             //10-14
@@ -230,8 +223,11 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setText(totalFemaleSeen25_49);
 
             int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
-            String WT = String.valueOf(womenSeen);
-            holder.txtTotalFemaleSeen.setText(WT);
+            if(totalfemalesthird == null){
+                totalfemalesthird = String.valueOf(womenSeen);
+            }
+            //String WT = String.valueOf(womenSeen);
+            holder.txtTotalFemaleSeen.setText(totalfemalesthird);
         }
 
         else if(data.getOrigin() != null){
@@ -242,8 +238,10 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllOutside();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(origin == null) {
+                origin = String.valueOf(ClientDao.getAllOutside());
+            }
+            holder.txtTotalFemaleSeen.setText(origin);
 
         }
 
@@ -255,8 +253,10 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllFirstContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(firstc == null) {
+                firstc = String.valueOf(ClientDao.getAllFirstContact());
+            }
+            holder.txtTotalFemaleSeen.setText(firstc);
         }
 
         else if(data.getSecondC() != null){
@@ -267,8 +267,10 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllSecondContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(secondc == null) {
+                secondc = String.valueOf(ClientDao.getAllSecondContact());
+            }
+            holder.txtTotalFemaleSeen.setText(secondc);
         }
 
         else if(data.getThirdC() != null){
@@ -279,8 +281,10 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllThirdContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(thirdc == null) {
+                thirdc = String.valueOf(ClientDao.getAllThirdContact());
+            }
+            holder.txtTotalFemaleSeen.setText(thirdc);
         }
 
         else if(data.getFourthToSeventhC() != null){
@@ -291,8 +295,10 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllFourthToSeventhContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if (fourthToSeventhC == null) {
+                fourthToSeventhC = String.valueOf(ClientDao.getAllFourthToSeventhContact());
+            }
+            holder.txtTotalFemaleSeen.setText(fourthToSeventhC);
         }
 
         else if(data.getEighthAboveC() != null){
@@ -303,8 +309,10 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllEighthAboveContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(eighthAboveC == null) {
+                eighthAboveC = String.valueOf(ClientDao.getAllEighthAboveContact());
+            }
+            holder.txtTotalFemaleSeen.setText(eighthAboveC);
         }
 
         else if(data.getHighRiskC() != null){
