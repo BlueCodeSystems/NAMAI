@@ -22,7 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.anc.library.R;
-import org.smartregister.anc.library.adapter.ReportHashAdapter;
+//import org.smartregister.anc.library.adapter.ReportHashAdapter;
 import org.smartregister.anc.library.model.MeModel;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.view.contract.MeContract;
