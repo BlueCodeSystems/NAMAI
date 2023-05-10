@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.activity;
 
+import android.provider.ContactsContract;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.anc.library.model.AttentionFlagModel;
@@ -10,7 +12,9 @@ import java.util.List;
 
 public class ClientDao extends AbstractDao {
 
-
+    public interface DataCallback {
+        void onDataRetrieved(List<ReportModel1> dataList);
+    }
     public static String countChildren(String householdID){
 
         String sql = "SELECT COUNT(*) AS childrenCount FROM ec_client_index WHERE household_id = '" + householdID + "'";
@@ -223,28 +227,27 @@ public class ClientDao extends AbstractDao {
             return String.valueOf(count);
         } else{
 
-            for (int i = 0; i < values.size(); i++) {
-                String jsonString = values.get(i).getValues();
-                JSONObject jsonObject = null;
+            for (AttentionFlagModel value : values) {
+                String jsonString = value.getValues();
+                JSONObject jsonObject;
                 try {
                     jsonObject = new JSONObject(jsonString);
+                    if (value.getAge() != null && Double.parseDouble(value.getAge()) < 15 && jsonObject.has(key)) {
+                        int gestationAge;
+                        try {
+                            gestationAge = jsonObject.getInt(key);
+                            if (gestationAge > Integer.parseInt(lowerAge) && gestationAge < Integer.parseInt(upperAge)) {
+                                count++;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if( values.get(i).getAge() != null && Double.parseDouble(values.get(i).getAge()) < 15)
-                if (jsonObject.has(key) ) {
-                    int gestationAge = 0;
-                    try {
-                        gestationAge = jsonObject.getInt(key);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    if (gestationAge > Integer.parseInt(lowerAge) && gestationAge < Integer.parseInt(upperAge)) {
-                        count++;
-                    }
-                }
             }
+
 
             System.out.println("Total number of people between the age of 0 and 15: " + count);
         }
@@ -503,20 +506,20 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getSyphScreenedContact(){
+    public static void getSyphScreenedContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%syph_test_status\":\"done_%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSyphScreenedCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getSyphPositiveContact(){
+    public static void  getSyphPositiveContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%syphilis_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSyphPositiveCountDataMap());
 
-        return values;
+       dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllHepBScreenedContact(){
@@ -531,20 +534,20 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getHepBScreenedContact(){
+    public static void getHepBScreenedContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hepb_test_status\":\"done%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getHepbScreenedCountDataMap());
 
-        return values;
+       dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getAnaemiaPositiveContact(){
+    public static void getAnaemiaPositiveContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%anaemic\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAnaemiaPositiveCountDataMap());
 
-        return values;
+     dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllAnaemiaPositiveContact(){
@@ -559,12 +562,12 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getAnaemiaScreenedContact(){
+    public static void getAnaemiaScreenedContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%ifa_anaemia\":\"done%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAnaemiaScreenedCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllAnaemiaScreenedContact(){
@@ -591,12 +594,12 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getHepBPositiveContact(){
+    public static void getHepBPositiveContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hepb_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getHepBPositiveCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllIPTP1Contact(){
@@ -611,12 +614,12 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getIPTP1Contact(){
+    public static void getIPTP1Contact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp1_dose_number\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP1CountDataMap());
 
-        return values;
+       dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllIPTP2Contact(){
@@ -631,12 +634,12 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getIPTP2Contact(){
+    public static void getIPTP2Contact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp2_dose_number\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP2CountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllIPTP3Contact(){
@@ -651,12 +654,12 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getIPTP3Contact(){
+    public static void getIPTP3Contact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp3_dose_number\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP3CountDataMap());
 
-        return values;
+       dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllIPTP4Contact(){
@@ -671,12 +674,12 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getIPTP4Contact(){
+    public static void getIPTP4Contact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp4_dose_number\":\"0%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP4CountDataMap());
 
-        return values;
+       dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllProvidedITNContact(){
@@ -691,20 +694,20 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getProvidedITNContact(){
+    public static void getProvidedITNContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%itn_issued\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getProvidedITNCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getProvidedIronContact(){
+    public static void getProvidedIronContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%ifa_low_prev_value\":\"Given%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getProvidedIronCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllProvidedIronContact(){
@@ -731,20 +734,20 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getDewormedContact(){
+    public static void getDewormedContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%mebendazole\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getDewormedCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getStartedOnPrepContact(){
+    public static void getStartedOnPrepContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_on_prep\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getStartedOnPrepCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllStartedOnPrepContact(){
@@ -771,20 +774,20 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getAlreadyOnPrepContact(){
+    public static void getAlreadyOnPrepContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyOnPrepCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getAlreadyARTinANCContact(){
+    public static void getAlreadyARTinANCContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_art\":\"already%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyOnARTCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllAlreadyARTinANCContact(){
@@ -811,12 +814,12 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static List<ReportModel1> getStartedARTinANCContact(){
+    public static void getStartedARTinANCContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_art\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getStartedOnARTCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static int getAllFollowUpContact(){
@@ -1019,7 +1022,7 @@ public class ClientDao extends AbstractDao {
 
 
 
-    public static List<ReportModel1> getFollowUpContact(){
+    public static void getFollowUpContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
                 "FROM ec_details\n" +
                 "WHERE ec_details.key = 'next_contact'\n" +
@@ -1029,88 +1032,88 @@ public class ClientDao extends AbstractDao {
 
         List<ReportModel1> values = AbstractDao.readData(sql, getFollowUpCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getCountContact(){
+    public static void getCountContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
                 "FROM ec_details WHERE ec_details.value LIKE '%contact_date%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getContactCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getReferredTBContact(){
+    public static void getReferredTBContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%reason\":\"refer%' GROUP BY ec_details.key\n";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getRefferedTBCountDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getTTCVPlusTwoContact(){
+    public static void  getTTCVPlusTwoContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%tt1_dose_no_value\":\"2%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"3%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"4%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getTTCVPlusTwoDataMap());
 
-        return values;
+       dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getScreenedForTBContact(){
+    public static void getScreenedForTBContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%tb_screening_history\":\"[cough_weeks%' OR ec_details.value LIKE '%tb_screening_history\":\"[fever%' OR ec_details.value LIKE '%tb_screening_history\":\"[weight%' OR ec_details.value LIKE '%tb_screening_history\":\"[night%'  GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getScreenedForTBDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getTestedHIVFirstContact(){
+    public static void getTestedHIVFirstContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getTestedHIVFirstDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getAlreadyPositiveFirstContact(){
+    public static void getAlreadyPositiveFirstContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_positive\":\"1%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%art_number\":\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyPositiveDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getTestedPositiveFirstContact(){
+    public static void getTestedPositiveFirstContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getTestedPositiveDataMap());
 
-        return values;
+       dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getOnARTContact(){
+    public static void getOnARTContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%on_art\":\"yes%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getOnARTDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getViralLoadResultsContact(){
+    public static void getViralLoadResultsContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%viral_load\":\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getViralLoadDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getSuppressedViralLoadResultsContact(){
+    public static void getSuppressedViralLoadResultsContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%viral_load%' AND CAST(JSON_EXTRACT(ec_details.value, '$.viral_load') AS UNSIGNED) < 1000 GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSuppressedViralLoadDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static List<ReportModel1> getMaleTestFirstContact(){
@@ -1121,36 +1124,36 @@ public class ClientDao extends AbstractDao {
         return values;
     }
 
-    public static List<ReportModel1> getMalePositiveFirstContact(){
+    public static void getMalePositiveFirstContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMalePositiveDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getMaleAlreadyPositiveContact(){
+    public static void getMaleAlreadyPositiveContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%partner_on_art\":\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMaleAlreadyPositiveDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getMaleStartedARTinANCContact(){
+    public static void getMaleStartedARTinANCContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%partner_on_art\":\"no\"%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMaleStartedARTDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getDiscordantContact(){
+    public static void getDiscordantContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%discordant\":\"yes%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getDiscordantDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
 
@@ -1210,8 +1213,21 @@ public class ClientDao extends AbstractDao {
 
     }
 
-    public static List<ReportModel1> getReport3() {
+//    public static List<ReportModel1> getReport3() {
+//
+//        String sql ="SELECT B.value ,C.value As age\n" +
+//                "FROM (SELECT * FROM ec_details WHERE key IN ('next_contact')) AS A \n" +
+//                "JOIN (SELECT * FROM ec_details WHERE key IN ('attention_flag_facts')) AS B ON A.base_entity_id = B.base_entity_id \n" +
+//                "JOIN (SELECT * FROM ec_details WHERE Key IN('age_calculated')) AS C ON B.base_entity_id = C.base_entity_id WHERE A.value = '2' GROUP BY B.value";
+//
+//
+//        List<ReportModel1> values = AbstractDao.readData(sql, getReferralDataMap());
+//
+//        return values;
+//
+//    }
 
+    public static void getReport3(DataCallback callback) {
         String sql ="SELECT \n" +
                 "  CASE \n" +
                 "    WHEN CAST(C.value AS UNSIGNED) BETWEEN 7 AND 12 THEN 'First Trimester'\n" +
@@ -1230,68 +1246,77 @@ public class ClientDao extends AbstractDao {
                 "  AND B.key = 'attention_flag_facts'\n" +
                 "GROUP BY trimester\n" +
                 "HAVING trimester IS NOT NULL;\n";
-
-
         List<ReportModel1> values = AbstractDao.readData(sql, getReferralDataMap());
 
-        return values;
-
+        // Pass the retrieved data to the callback
+        callback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getOrigin() {
+
+//    public static List<ReportModel1> getOrigin() {
+//        String sql = "SELECT COALESCE(ec_mother_details.origin, '0') AS value FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL GROUP BY ec_mother_details.origin";
+//
+//        List<ReportModel1> values = AbstractDao.readData(sql, getOriginDataMap());
+//
+//        return values;
+//    }
+
+    public static void getOrigin(DataCallback callback) {
         String sql = "SELECT COALESCE(ec_mother_details.origin, '0') AS value FROM ec_mother_details WHERE ec_mother_details.origin IS NOT 'catchment_area' AND ec_mother_details.origin IS NOT NULL GROUP BY ec_mother_details.origin";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getOriginDataMap());
 
-        return values;
+        // Pass the retrieved data to the callback
+        callback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getFirstC() {
+    public static void getFirstC(DataCallback callback) {
         String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '1' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no GROUP BY values_table.contact_no";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getFirstCDataMap());
 
-        return values;
+        // Pass the retrieved data to the callback
+        callback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getSecondC() {
+    public static void getSecondC(DataCallback callback) {
         String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '2' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no GROUP BY values_table.contact_no";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getSecondCDataMap());
 
-        return values;
+        callback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getThirdC() {
+    public static void getThirdC(DataCallback callback) {
         String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '3' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no GROUP BY values_table.contact_no";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getThirdCDataMap());
 
-        return values;
+        callback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getFourthToSeventhC() {
+    public static void getFourthToSeventhC(DataCallback callback) {
         String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '4' AS contact_no UNION ALL SELECT '5' AS contact_no UNION ALL SELECT '6' AS contact_no UNION ALL SELECT '7' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no LIMIT 1";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getFourthToSeventhCDataMap());
 
-        return values;
+        callback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getEighthAboveC() {
+    public static void getEighthAboveC(DataCallback callback) {
         String sql = "SELECT COALESCE(previous_contact.contact_no, '0') AS contact_no FROM (SELECT '8' AS contact_no UNION ALL SELECT '9' AS contact_no UNION ALL SELECT '10' AS contact_no UNION ALL SELECT '11' AS contact_no) AS values_table LEFT JOIN previous_contact ON previous_contact.contact_no = values_table.contact_no LIMIT 1";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getEighthAboveCDataMap());
 
-        return values;
+        callback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getHighRiskContact(){
+    public static void getHighRiskContact(DataCallback callback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.key IS 'red_flag_count' AND ec_details.value IS NOT '0' AND ec_details.value IS NOT NULL GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getHighRiskCountDataMap());
 
-        return values;
+        callback.onDataRetrieved(values);
     }
 
     public static List<ReportModel1> getFeedbackCount() {
