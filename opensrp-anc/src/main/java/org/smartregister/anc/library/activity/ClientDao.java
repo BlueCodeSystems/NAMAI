@@ -1511,7 +1511,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getHighRiskCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setHighRiskC(getCursorValue(c, "key"));
+            record.setHighRiskC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1520,7 +1520,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getAlreadyOnARTCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setAlreadyOnARTC(getCursorValue(c, "key"));
+            record.setAlreadyOnARTC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1552,7 +1552,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getDewormedCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setDewormedC(getCursorValue(c, "key"));
+            record.setDewormedC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1560,7 +1560,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getProvidedIronCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setProvidedIronC(getCursorValue(c, "key"));
+            record.setProvidedIronC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1568,7 +1568,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getProvidedITNCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setProvidedITNC(getCursorValue(c, "key"));
+            record.setProvidedITNC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1576,7 +1576,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getIPTP4CountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setIPTP4C(getCursorValue(c, "key"));
+            record.setIPTP4C(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1584,7 +1584,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getIPTP3CountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setIPTP3C(getCursorValue(c, "key"));
+            record.setIPTP3C(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1592,7 +1592,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getIPTP2CountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setIPTP2C(getCursorValue(c, "key"));
+            record.setIPTP2C(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1609,7 +1609,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getAnaemiaPositiveCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setAnaemiaPositiveC(getCursorValue(c, "key"));
+            record.setAnaemiaPositiveC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1617,7 +1617,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getAnaemiaScreenedCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setAnaemiaScreenedC(getCursorValue(c, "key"));
+            record.setAnaemiaScreenedC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1625,7 +1625,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getHepBPositiveCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setHepBPositiveC(getCursorValue(c, "key"));
+            record.setHepBPositiveC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1633,7 +1633,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getHepbScreenedCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setHepbScreenedC(getCursorValue(c, "key"));
+            record.setHepbScreenedC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1641,7 +1641,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getSyphPositiveCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setSyphPositiveC(getCursorValue(c, "key"));
+            record.setSyphPositiveC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1649,7 +1649,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getSyphScreenedCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setSyphScreenedC(getCursorValue(c, "key"));
+            record.setSyphScreenedC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1658,7 +1658,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getFollowUpCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setFollowUpC(getCursorValue(c, "key"));
+            record.setFollowUpC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1667,7 +1667,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getContactCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setContactCountC(getCursorValue(c, "key"));
+            record.setContactCountC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1675,7 +1675,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getRefferedTBCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setReferredTBC(getCursorValue(c, "key"));
+            record.setReferredTBC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1684,7 +1684,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getTTCVPlusTwoDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setTTCVPlusTwoC(getCursorValue(c, "key"));
+            record.setTTCVPlusTwoC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1693,7 +1693,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getScreenedForTBDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setScreenedTBC(getCursorValue(c, "key"));
+            record.setScreenedTBC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1702,7 +1702,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getTestedHIVFirstDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setTestedHIVC(getCursorValue(c, "key"));
+            record.setTestedHIVC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1720,7 +1720,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getTestedPositiveDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setTestedPositiveC(getCursorValue(c, "key"));
+            record.setTestedPositiveC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1729,7 +1729,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getOnARTDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setOnARTC(getCursorValue(c, "key"));
+            record.setOnARTC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1765,7 +1765,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getMalePositiveDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setMalePositiveC(getCursorValue(c, "key"));
+            record.setMalePositiveC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1783,7 +1783,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getMaleStartedARTDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setMaleStartedARTC(getCursorValue(c, "key"));
+            record.setMaleStartedARTC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1792,7 +1792,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getDiscordantDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setDiscordantC(getCursorValue(c, "key"));
+            record.setDiscordantC(getCursorValue(c, "value"));
 
             return record;
         };
