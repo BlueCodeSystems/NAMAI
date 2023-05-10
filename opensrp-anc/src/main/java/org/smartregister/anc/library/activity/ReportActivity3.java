@@ -104,6 +104,10 @@ public class ReportActivity3 extends AppCompatActivity {
         model = new MeModel();
         String name = model.getName();
         nameDB.setText(name);
+        progressDialog.setTitle("Report");
+        progressDialog.setMessage("Loading "+monthName +" report please wait.......");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
 
 
       //  loadData1();
@@ -147,13 +151,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (dataList.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
                                 }
                             });
                     }}
@@ -170,8 +167,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -185,17 +180,11 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                    
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getFirstC(new ClientDao.DataCallback() {
                     @Override
@@ -209,8 +198,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -224,17 +211,9 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getSecondC(new ClientDao.DataCallback() {
                     @Override
@@ -248,8 +227,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -263,17 +240,9 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getThirdC(new ClientDao.DataCallback() {
                     @Override
@@ -287,8 +256,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -302,17 +269,9 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getFourthToSeventhC(new ClientDao.DataCallback() {
                     @Override
@@ -326,8 +285,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -341,17 +298,9 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
                                 }
                             });
                         }
-                    }
                 });
                 ClientDao.getEighthAboveC(new ClientDao.DataCallback() {
                     @Override
@@ -365,8 +314,6 @@ public class ReportActivity3 extends AppCompatActivity {
 
                         int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
                             // Notify the adapter that the data has changed
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -381,16 +328,11 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
-                    }
+
                 });
                 ClientDao.getHighRiskContact(new ClientDao.DataCallback() {
                     @Override
@@ -419,12 +361,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
 
@@ -455,13 +392,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
-
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -493,12 +424,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -531,12 +457,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -569,12 +490,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -606,12 +522,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -644,12 +555,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -681,12 +587,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -720,12 +621,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -758,12 +654,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -795,12 +686,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -833,12 +719,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -870,12 +751,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -907,12 +783,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -944,12 +815,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -980,12 +846,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1016,12 +877,6 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
                                 }
                             });
                         }
@@ -1052,12 +907,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1089,12 +939,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1125,12 +970,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1162,12 +1002,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1198,12 +1033,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1236,12 +1066,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1272,12 +1097,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1308,12 +1128,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1345,12 +1160,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1381,12 +1191,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1419,12 +1224,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1455,12 +1255,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1491,13 +1286,9 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerView1.setAdapter(recyclerViewadapter1);
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
+                                    progressDialog.dismiss();
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1564,12 +1355,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
@@ -1601,12 +1387,7 @@ public class ReportActivity3 extends AppCompatActivity {
                                     recyclerViewadapter1.notifyDataSetChanged();
                                     loading1.setVisibility(View.GONE);
 
-                                    // Show toast only if data has finished loading
-                                    if (originData.size() > 0) {
-                                        Toast.makeText(getApplicationContext(), "Data done uploading", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_LONG).show();
-                                    }
+                                   
                                 }
                             });
                         }
