@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import android.util.LruCache;
 
+import io.fabric.sdk.android.services.concurrency.AsyncTask;
+
 
 public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHolder> {
     Context context;
@@ -101,190 +103,267 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         //List<ClientreportModel> totalMaleSeen = ClientDao.getRefVisitedClientsMale(data.getQuerry_drug());
         //List<ClientreportModel> totalFemaleSeen = ClientDao.getRefVisitedClientsFemale(data.getQuerry_drug());
 
-        if(data.getTrimester() != null && data.getTrimester().contains("IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER")) {
-            //10-14
-            if(f1first == null){
-                f1first = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
+        if (data.getTrimester() != null && data.getTrimester().contains("IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER")) {
+            if(f4first == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
             }
-            String totalFemaleSeen10_14 = f1first;
-            //15-19
-            if(f2first == null){
-                f2first = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12");
-            }
-            String totalFemaleSeen15_19 = f2first;
+            new AsyncTask<Void, Void, List<String>>() {
+                @Override
+                protected List<String> doInBackground(Void... voids) {
+                    List<String> results = new ArrayList<>();
+                    if (f1first == null) {
+                        f1first = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
+                    }
+                    results.add(f1first);
 
-            //20-24
-            if(f3first == null){
-                f3first = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12");
-            }
-            String totalFemaleSeen20_24 = f3first;
+                    if (f2first == null) {
+                        f2first = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12");
+                    }
+                    results.add(f2first);
 
-            //25-49
-            if(f4first == null){
-                f4first = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12");
-            }
-            String totalFemaleSeen25_49 = f4first;
+                    if (f3first == null) {
+                        f3first = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12");
+                    }
+                    results.add(f3first);
 
-            holder.f1.setText(totalFemaleSeen10_14);
-            //holder.m1.setText(totalMaleSeen10_14);
+                    if (f4first == null) {
+                        f4first = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12");
+                    }
+                    results.add(f4first);
 
-            holder.f2.setText(totalFemaleSeen15_19);
-            //holder.m2.setText(totalMaleSeen15_19);
+                    return results;
+                }
 
-            holder.f3.setText(totalFemaleSeen20_24);
-            //holder.m3.setText(totalMaleSeen20_24);
+                @Override
+                protected void onPostExecute(List<String> results) {
+                    holder.f1.setText(results.get(0));
+                    holder.f2.setText(results.get(1));
+                    holder.f3.setText(results.get(2));
+                    holder.f4.setText(results.get(3));
 
-            holder.f4.setText(totalFemaleSeen25_49);
+                    int womenSeen = Integer.parseInt(results.get(0)) + Integer.parseInt(results.get(1)) + Integer.parseInt(results.get(2)) + Integer.parseInt(results.get(3));
 
-            int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
-            if(totalfemalesfirst == null){
-                totalfemalesfirst = String.valueOf(womenSeen);
-            }
-            //String WT = String.valueOf(womenSeen);
-            holder.txtTotalFemaleSeen.setText(totalfemalesfirst);
+                    if (totalfemalesfirst == null) {
+                        totalfemalesfirst = String.valueOf(womenSeen);
+                    }
+                    holder.txtTotalFemaleSeen.setText(totalfemalesfirst);
+                }
+            }.execute();
         }
         else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-030 / IRH1-035 / IRH1-040 / IRH1-045 / IRH1-050 : WOMEN WHO CAME FOR ANC DURING THE SECOND TRIMESTER")) {
-            //10-14
-            if(f1second == null){
-                f1second = ClientDao.getFirstContact("gest_age_openmrs", "13", "26");
+            if(f4second == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
             }
-            String totalFemaleSeen10_14 = f1second;
+            new AsyncTask<Void, Void, List<String>>() {
+                @Override
+                protected List<String> doInBackground(Void... voids) {
+                    List<String> results = new ArrayList<>();
+                    if (f1second == null) {
+                        f1second = ClientDao.getFirstContact("gest_age_openmrs", "13", "26");
+                    }
+                    results.add(f1second);
 
-            //15-19
-            if(f2second == null){
-                f2second = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26");
-            }
-            String totalFemaleSeen15_19 = f2second;
+                    if (f2second == null) {
+                        f2second = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26");
+                    }
+                    results.add(f2second);
 
-            //20-24
-            if(f3second == null){
-                f3second = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26");
-            }
-            String totalFemaleSeen20_24 = f3second;
+                    if (f3second == null) {
+                        f3second = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26");
+                    }
+                    results.add(f3second);
 
-            //25-49
-            if(f4second == null){
-                f4second = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26");
-            }
-            String totalFemaleSeen25_49 = f4second;
+                    if (f4second == null) {
+                        f4second = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26");
+                    }
+                    results.add(f4second);
 
-            holder.f1.setText(totalFemaleSeen10_14);
-            //holder.m1.setText(totalMaleSeen10_14);
+                    return results;
+                }
 
-            holder.f2.setText(totalFemaleSeen15_19);
-            //holder.m2.setText(totalMaleSeen15_19);
+                @Override
+                protected void onPostExecute(List<String> results) {
+                    holder.f1.setText(results.get(0));
+                    holder.f2.setText(results.get(1));
+                    holder.f3.setText(results.get(2));
+                    holder.f4.setText(results.get(3));
 
-            holder.f3.setText(totalFemaleSeen20_24);
-            //holder.m3.setText(totalMaleSeen20_24);
+                    int womenSeen = Integer.parseInt(results.get(0)) + Integer.parseInt(results.get(1)) + Integer.parseInt(results.get(2)) + Integer.parseInt(results.get(3));
 
-            holder.f4.setText(totalFemaleSeen25_49);
-
-            int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
-            if(totalfemalessecond == null){
-                totalfemalessecond = String.valueOf(womenSeen);
-            }
-            //String WT = String.valueOf(womenSeen);
-            holder.txtTotalFemaleSeen.setText(totalfemalessecond);
+                    if (totalfemalessecond == null) {
+                        totalfemalessecond = String.valueOf(womenSeen);
+                    }
+                    holder.txtTotalFemaleSeen.setText(totalfemalessecond);
+                }
+            }.execute();
         }
         else if(data.getTrimester() != null && data.getTrimester().contains("IRH1-055 / IRH1-060 / IRH1-065 / IRH1-070 / IRH1-075 : WOMEN WHO CAME FOR ANC DURING THE THIRD TRIMESTER")) {
-            //10-14
-            if(f1third == null){
-                f1third = ClientDao.getFirstContact("gest_age_openmrs", "27", "40");
+            if(f4third == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
             }
-            String totalFemaleSeen10_14 = f1third;
+            new AsyncTask<Void, Void, List<String>>() {
+                @Override
+                protected List<String> doInBackground(Void... voids) {
+                    List<String> results = new ArrayList<>();
+                    if (f1third == null) {
+                        f1third = ClientDao.getFirstContact("gest_age_openmrs", "27", "40");
+                    }
+                    results.add(f1third);
 
-            //15-19
-            if(f2third == null){
-                f2third = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40");
-            }
-            String totalFemaleSeen15_19 = f2third;
+                    if (f2third == null) {
+                        f2third = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40");
+                    }
+                    results.add(f2third);
 
-            //20-24
-            if(f3third == null){
-                f3third = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40");
-            }
-            String totalFemaleSeen20_24 = f3third;
+                    if (f3third == null) {
+                        f3third = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40");
+                    }
+                    results.add(f3third);
 
-            //25-49
-            if(f4third == null){
-                f4third = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40");
-            }
-            String totalFemaleSeen25_49 = f4third;
+                    if (f4third == null) {
+                        f4third = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40");
+                    }
+                    results.add(f4third);
 
-            holder.f1.setText(totalFemaleSeen10_14);
-            //holder.m1.setText(totalMaleSeen10_14);
+                    return results;
+                }
 
-            holder.f2.setText(totalFemaleSeen15_19);
-            //holder.m2.setText(totalMaleSeen15_19);
+                @Override
+                protected void onPostExecute(List<String> results) {
+                    holder.f1.setText(results.get(0));
+                    holder.f2.setText(results.get(1));
+                    holder.f3.setText(results.get(2));
+                    holder.f4.setText(results.get(3));
 
-            holder.f3.setText(totalFemaleSeen20_24);
-            //holder.m3.setText(totalMaleSeen20_24);
+                    int womenSeen = Integer.parseInt(results.get(0)) + Integer.parseInt(results.get(1)) + Integer.parseInt(results.get(2)) + Integer.parseInt(results.get(3));
 
-            holder.f4.setText(totalFemaleSeen25_49);
-
-            int womenSeen = Integer.parseInt(totalFemaleSeen10_14) + Integer.parseInt(totalFemaleSeen15_19) + Integer.parseInt(totalFemaleSeen25_49) + Integer.parseInt(totalFemaleSeen20_24);
-            if(totalfemalesthird == null){
-                totalfemalesthird = String.valueOf(womenSeen);
-            }
-            //String WT = String.valueOf(womenSeen);
-            holder.txtTotalFemaleSeen.setText(totalfemalesthird);
+                    if (totalfemalesthird == null) {
+                        totalfemalesthird = String.valueOf(womenSeen);
+                    }
+                    holder.txtTotalFemaleSeen.setText(totalfemalesthird);
+                }
+            }.execute();
         }
 
-        else if(data.getOrigin() != null){
-            holder.txtProductName.setText("IRH1-105 : Pregnant contacts outside catchment area");
-            holder.f1.setBackgroundResource(R.drawable.na_round_button);
-            holder.f2.setBackgroundResource(R.drawable.na_round_button);
-            holder.f3.setBackgroundResource(R.drawable.na_round_button);
-            holder.f4.setBackgroundResource(R.drawable.na_round_button);
-            holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
+        else if (data.getOrigin() != null) {
             if(origin == null) {
-                origin = String.valueOf(ClientDao.getAllOutside());
+                holder.txtTotalFemaleSeen.setText("Loading...");
             }
-            holder.txtTotalFemaleSeen.setText(origin);
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(Void... voids) {
+                    String originStr = "";
+                    if (origin == null) {
+                        originStr = String.valueOf(ClientDao.getAllOutside());
+                    } else {
+                        originStr = origin;
+                    }
+                    return originStr;
+                }
 
+                @Override
+                protected void onPostExecute(String origin) {
+                    if (origin != null) {
+                        holder.txtTotalFemaleSeen.setText(origin);
+                    }
+                }
+            }.execute();
         }
 
-        else if(data.getFirstC() != null){
+        else if(data.getFirstC() != null) {
             holder.txtProductName.setText("IRH1-100 : Total 1st ANC contact");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
             if(firstc == null) {
-                firstc = String.valueOf(ClientDao.getAllFirstContact());
+                holder.txtTotalFemaleSeen.setText("Loading...");
             }
-            holder.txtTotalFemaleSeen.setText(firstc);
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(Void... voids) {
+                    String firstcStr = "";
+                    if(firstc == null) {
+                        firstcStr = String.valueOf(ClientDao.getAllFirstContact());
+                    } else {
+                        firstcStr = firstc;
+                    }
+                    return firstcStr;
+                }
+
+                @Override
+                protected void onPostExecute(String firstc) {
+
+                    if(firstc != null) {
+                        holder.txtTotalFemaleSeen.setText(firstc);
+                    }
+                }
+            }.execute();
         }
 
-        else if(data.getSecondC() != null){
+        else if(data.getSecondC() != null) {
             holder.txtProductName.setText("IRH1-115 : 2nd ANC contact");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
             if(secondc == null) {
-                secondc = String.valueOf(ClientDao.getAllSecondContact());
+                holder.txtTotalFemaleSeen.setText("Loading...");
             }
-            holder.txtTotalFemaleSeen.setText(secondc);
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(Void... voids) {
+                    String secondcStr = "";
+                    if(secondc == null) {
+                        secondcStr = String.valueOf(ClientDao.getAllSecondContact());
+                    } else {
+                        secondcStr = secondc;
+                    }
+                    return secondcStr;
+                }
+
+                @Override
+                protected void onPostExecute(String secondc) {
+
+                    if(secondc != null) {
+                        holder.txtTotalFemaleSeen.setText(secondc);
+                    }
+                }
+            }.execute();
         }
 
-        else if(data.getThirdC() != null){
+        else if(data.getThirdC() != null) {
             holder.txtProductName.setText("IRH1-120 : 3rd ANC contact");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
             if(thirdc == null) {
-                thirdc = String.valueOf(ClientDao.getAllThirdContact());
+                holder.txtTotalFemaleSeen.setText("Loading...");
             }
-            holder.txtTotalFemaleSeen.setText(thirdc);
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(Void... voids) {
+                    String thirdcStr = "";
+                    if(thirdc == null) {
+                        thirdcStr = String.valueOf(ClientDao.getAllThirdContact());
+                    } else {
+                        thirdcStr = thirdc;
+                    }
+                    return thirdcStr;
+                }
+
+                @Override
+                protected void onPostExecute(String thirdc) {
+
+                    if(thirdc != null) {
+                        holder.txtTotalFemaleSeen.setText(thirdc);
+                    }
+                }
+            }.execute();
         }
 
         else if(data.getFourthToSeventhC() != null){
@@ -295,11 +374,26 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            if (fourthToSeventhC == null) {
-                fourthToSeventhC = String.valueOf(ClientDao.getAllFourthToSeventhContact());
+            if(fourthToSeventhC == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllFourthToSeventhContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        fourthToSeventhC = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(fourthToSeventhC);
             }
-            holder.txtTotalFemaleSeen.setText(fourthToSeventhC);
         }
+
 
         else if(data.getEighthAboveC() != null){
             holder.txtProductName.setText("IRH1-130 : 8th+ ANC contact");
@@ -310,10 +404,25 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
             if(eighthAboveC == null) {
-                eighthAboveC = String.valueOf(ClientDao.getAllEighthAboveContact());
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllEighthAboveContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        eighthAboveC = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(eighthAboveC);
             }
-            holder.txtTotalFemaleSeen.setText(eighthAboveC);
         }
+
 
         else if(data.getHighRiskC() != null){
             holder.txtProductName.setText("IRH1-110 : High-risk Pregnancies");
