@@ -51,6 +51,41 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
     String fourthToSeventhC = null;
     String eighthAboveC = null;
     String highRiskC = null;
+    String syphScreened = null;
+    String syphPositive = null;
+    String HepBScreened = null;
+    String HepBPositive = null;
+    String AnaemiaScreened = null;
+    String AnaemiaPositive = null;
+    String IPTP1 = null;
+    String IPTP2 = null;
+    String IPTP3 = null;
+    String IPTP4 = null;
+    String providedITN = null;
+    String providedIron = null;
+    String dewormed = null;
+    String startedOnPrep = null;
+    String alreadyOnPrep = null;
+    String startedOnART = null;
+    String alreadyOnART = null;
+    String followUp = null;
+    String discordant = null;
+    String maleStartedART = null;
+    String maleAlreadyPositive = null;
+    String malePositive = null;
+    String maleTested = null;
+    String viralLoad = null;
+    String suppressedVL = null;
+    String onART = null;
+    String testedPositive = null;
+    String alreadyPositive = null;
+    String testedHIV = null;
+    String ttcvPlusTwo = null;
+    String referredTB = null;
+    String contactCount = null;
+    String screenedTB = null;
+
+
 
 
 
@@ -104,6 +139,8 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         //List<ClientreportModel> totalFemaleSeen = ClientDao.getRefVisitedClientsFemale(data.getQuerry_drug());
 
         if (data.getTrimester() != null && data.getTrimester().contains("IRH1-005 / IRH1-010 / IRH1-015 / IRH1-020 / IRH1-025 : WOMEN WHO CAME FOR ANC DURING THE FIRST TRIMESTER")) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("First antenatal contacts");
             if(f4first == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
             }
@@ -432,8 +469,25 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllHighRiskContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(highRiskC == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllHighRiskContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        highRiskC = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(highRiskC);
+            }
+
         }
 
         else if(data.getSyphScreenedC() != null){
@@ -444,8 +498,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllSyphScreenedContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(syphScreened == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllSyphScreenedContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        syphScreened = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(syphScreened);
+            }
         }
 
         else if(data.getSyphPositiveC() != null){
@@ -456,8 +526,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllSyphPositiveContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(syphPositive == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllSyphPositiveContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        syphPositive = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(syphPositive);
+            }
         }
 
         else if(data.getHepbScreenedC() != null){
@@ -468,8 +554,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllHepBScreenedContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(HepBScreened == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllHepBScreenedContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        HepBScreened = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(HepBScreened);
+            }
         }
 
         else if(data.getHepBPositiveC() != null){
@@ -480,8 +582,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllHepBPositiveContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(HepBPositive == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllHepBPositiveContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        HepBPositive = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(HepBPositive);
+            }
         }
 
         else if(data.getAnaemiaScreenedC() != null){
@@ -492,8 +610,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllAnaemiaScreenedContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(AnaemiaScreened == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllAnaemiaScreenedContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        AnaemiaScreened = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(AnaemiaScreened);
+            }
         }
 
         else if(data.getAnaemiaPositiveC() != null){
@@ -504,8 +638,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllAnaemiaPositiveContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(AnaemiaPositive == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllAnaemiaPositiveContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        AnaemiaPositive = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(AnaemiaPositive);
+            }
         }
 
         else if(data.getIPTP1C() != null){
@@ -516,8 +666,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllIPTP1Contact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(IPTP1 == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllIPTP1Contact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        IPTP1 = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(IPTP1);
+            }
         }
 
         else if(data.getIPTP2C() != null){
@@ -528,8 +694,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllIPTP2Contact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(IPTP2 == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllIPTP2Contact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        IPTP2 = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(IPTP2);
+            }
         }
 
         else if(data.getIPTP3C() != null){
@@ -540,8 +722,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllIPTP3Contact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(IPTP3 == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllIPTP3Contact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        IPTP3 = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(IPTP3);
+            }
         }
 
         else if(data.getIPTP4C() != null){
@@ -552,8 +750,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllIPTP4Contact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(IPTP4 == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllIPTP4Contact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        IPTP4 = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(IPTP4);
+            }
         }
 
         else if(data.getProvidedITNC() != null){
@@ -564,8 +778,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllProvidedITNContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(providedITN == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllProvidedITNContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        providedITN = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(providedITN);
+            }
         }
 
         else if(data.getProvidedIronC() != null){
@@ -576,8 +806,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllProvidedIronContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(providedIron == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllProvidedIronContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        providedIron = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(providedIron);
+            }
         }
 
         else if(data.getDewormedC() != null){
@@ -588,8 +834,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllDewormedContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(dewormed == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllDewormedContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        dewormed = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(dewormed);
+            }
         }
 
         else if(data.getStartedOnPrepC() != null){
@@ -600,8 +862,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllStartedOnPrepContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(startedOnPrep == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllStartedOnPrepContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        startedOnPrep = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(startedOnPrep);
+            }
         }
 
         else if(data.getAlreadyOnPrepC() != null){
@@ -612,11 +890,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllAlreadyOnPrepContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(alreadyOnPrep == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllAlreadyOnPrepContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        alreadyOnPrep = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(alreadyOnPrep);
+            }
         }
 
         else if(data.getStartedARTC() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Maternal ART");
             holder.txtProductName.setText("HIV2-065 : Started on ART in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -624,8 +920,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllStartedARTinANCContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(startedOnART == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllStartedARTinANCContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        startedOnART = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(startedOnART);
+            }
         }
 
         else if(data.getAlreadyOnARTC() != null){
@@ -636,11 +948,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllAlreadyARTinANCContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(alreadyOnART == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllAlreadyARTinANCContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        alreadyOnART = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(alreadyOnART);
+            }
         }
 
         else if(data.getFollowUpC() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Follow-up Antenantal Contacts");
             holder.txtProductName.setText("IRH1-135 : Total follow up contacts");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -648,8 +978,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllFollowUpContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(followUp == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllFollowUpContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        followUp = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(followUp);
+            }
         }
 
         else if(data.getDiscordantC() != null){
@@ -660,11 +1006,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllDiscordantContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(discordant == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllDiscordantContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        discordant = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(discordant);
+            }
         }
 
         else if(data.getMaleStartedARTC() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Male Partner Involvement");
             holder.txtProductName.setText("HIV2-126 : Male Partner started on ART in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -672,8 +1036,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllMaleStartedARTinANCContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(maleStartedART == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllMaleStartedARTinANCContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        maleStartedART = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(maleStartedART);
+            }
         }
 
         else if(data.getMaleAlreadyPositiveC() != null){
@@ -684,8 +1064,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllMaleAlreadyPositiveContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(maleAlreadyPositive == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllMaleAlreadyPositiveContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        maleAlreadyPositive = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(maleAlreadyPositive);
+            }
         }
 
         else if(data.getMalePositiveC() != null){
@@ -696,8 +1092,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllMalePositiveFirstContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(malePositive == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllMalePositiveFirstContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        malePositive = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(malePositive);
+            }
         }
 
         else if(data.getMaleTestedC() != null){
@@ -708,8 +1120,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllMaleTestFirstContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(maleTested == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllMaleTestFirstContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        maleTested = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(maleTested);
+            }
         }
 
         else if(data.getViralLoadC() != null){
@@ -720,8 +1148,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllViralLoadResultsContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(viralLoad == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllViralLoadResultsContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        viralLoad = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(viralLoad);
+            }
         }
 
         else if(data.getSuppressedViralLoadC() != null){
@@ -732,8 +1176,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllSuppressedViralLoadResultsContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(suppressedVL == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllSuppressedViralLoadResultsContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        suppressedVL = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(suppressedVL);
+            }
         }
 
         else if(data.getOnARTC() != null){
@@ -744,11 +1204,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllOnARTContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(onART == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllOnARTContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        onART = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(onART);
+            }
         }
 
         else if(data.getTestedPositiveC() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("HIV Positive");
             holder.txtProductName.setText("HIV2-040 : Positive - Initial test in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -756,8 +1234,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllTestedPositiveFirstContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(testedPositive == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllTestedPositiveFirstContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        testedPositive = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(testedPositive);
+            }
         }
 
         else if(data.getAlreadyPositiveC() != null){
@@ -768,8 +1262,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllAlreadyPositiveFirstContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(alreadyPositive == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllAlreadyPositiveFirstContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        alreadyPositive = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(alreadyPositive);
+            }
         }
 
         else if(data.getTestedHIVC() != null){
@@ -780,8 +1290,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllTestedHIVFirstContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(testedHIV == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllTestedHIVFirstContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        testedHIV = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(testedHIV);
+            }
         }
 
         else if(data.getScreenedTBC() != null){
@@ -792,8 +1318,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllScreenedForTBContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(screenedTB == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllScreenedForTBContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        screenedTB = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(screenedTB);
+            }
         }
 
         else if(data.getTTCVPlusTwoC() != null){
@@ -804,8 +1346,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllTTCVPlusTwoContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(ttcvPlusTwo == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllTTCVPlusTwoContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        ttcvPlusTwo = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(ttcvPlusTwo);
+            }
         }
 
         else if(data.getReferredTBC() != null){
@@ -816,8 +1374,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllReferredTBContact();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(referredTB == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllReferredTBContact());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        referredTB = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(referredTB);
+            }
         }
 
         else if(data.getContactCountC() != null){
@@ -828,8 +1402,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-            int totalFemaleSeen = ClientDao.getAllContactCount();
-            holder.txtTotalFemaleSeen.setText(String.valueOf(totalFemaleSeen));
+            if(contactCount == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+
+                new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return String.valueOf(ClientDao.getAllContactCount());
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        contactCount = result;
+                        holder.txtTotalFemaleSeen.setText(result);
+                    }
+                }.execute();
+            } else {
+                holder.txtTotalFemaleSeen.setText(contactCount);
+            }
         }
 
 
@@ -898,7 +1488,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView txtProductName, txtTotalMaleSeen, txtTotalFemaleSeen, txtTotalMaleServices, txtTotalFemaleServices, m1,f1, m2, f2, m3, f3, m4, f4, m5, f5;
+        TextView txtProductName, txtTotalMaleSeen, txtTotalFemaleSeen, txtTotalMaleServices, txtTotalFemaleServices, m1,f1, m2, f2, m3, f3, m4, f4, m5, f5, groupLabel;
 
         RelativeLayout rLayout;
 
@@ -928,6 +1518,8 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
             m5 = itemView.findViewById(R.id.m5);
             f5 = itemView.findViewById(R.id.f5);
+
+            groupLabel = itemView.findViewById(R.id.grouping_label);
 
 
         }

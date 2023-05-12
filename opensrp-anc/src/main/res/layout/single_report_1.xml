@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/grouping_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="First Antenatal Contacts"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
 <RelativeLayout
     android:id="@+id/itemm"
     android:layout_margin="8dp"
@@ -492,3 +509,4 @@
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
+</LinearLayout>
