@@ -111,7 +111,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
 
       //  loadData1();
-        List<ReportModel1> reportList = new ArrayList<>();
+        reportList = new ArrayList<>();
         txtReportType.setText("ANC CONTACTS FOR : " + monthName);
        recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
         //recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
