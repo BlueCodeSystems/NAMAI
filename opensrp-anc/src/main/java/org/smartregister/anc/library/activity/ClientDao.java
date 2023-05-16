@@ -1,7 +1,5 @@
 package org.smartregister.anc.library.activity;
 
-import android.provider.ContactsContract;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.anc.library.model.AttentionFlagModel;
@@ -415,7 +413,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllHighRiskContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + " AND ec_details.key IS 'red_flag_count' AND ec_details.value IS NOT '0' AND ec_details.value IS NOT NULL GROUP BY ec_details.base_entity_id";
@@ -615,7 +613,10 @@ public class ClientDao extends AbstractDao {
     }
 
     public static void getIPTP1Contact(DataCallback dataCallback){
-        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp1_dose_number\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
+                "FROM (SELECT 1 AS dummy) AS dummy_table\n" +
+                "LEFT JOIN ec_details ON ec_details.value LIKE '%iptp_sp1_dose_number\":\"1%'\n" +
+                "LIMIT 1;";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP1CountDataMap());
 
@@ -635,7 +636,10 @@ public class ClientDao extends AbstractDao {
     }
 
     public static void getIPTP2Contact(DataCallback dataCallback){
-        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp2_dose_number\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
+                "FROM (SELECT 1 AS dummy) AS dummy_table\n" +
+                "LEFT JOIN ec_details ON ec_details.value LIKE '%iptp_sp2_dose_number\":\"1%'\n" +
+                "LIMIT 1;";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP2CountDataMap());
 
@@ -644,7 +648,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllIPTP3Contact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%iptp_sp3_dose_number\":\"1%' GROUP BY ec_details.base_entity_id";
@@ -655,7 +659,10 @@ public class ClientDao extends AbstractDao {
     }
 
     public static void getIPTP3Contact(DataCallback dataCallback){
-        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp3_dose_number\":\"1%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
+                "FROM (SELECT 1 AS dummy) AS dummy_table\n" +
+                "LEFT JOIN ec_details ON ec_details.value LIKE '%iptp_sp3_dose_number\":\"1%'\n" +
+                "LIMIT 1;";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP3CountDataMap());
 
@@ -664,7 +671,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllIPTP4Contact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%iptp_sp4_dose_number\":\"1%' GROUP BY ec_details.base_entity_id";
@@ -675,7 +682,10 @@ public class ClientDao extends AbstractDao {
     }
 
     public static void getIPTP4Contact(DataCallback dataCallback){
-        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%iptp_sp4_dose_number\":\"0%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(ec_details.value, '0') AS value\n" +
+                "FROM (SELECT 1 AS dummy) AS dummy_table\n" +
+                "LEFT JOIN ec_details ON ec_details.value LIKE '%iptp_sp4_dose_number\":\"1%'\n" +
+                "LIMIT 1;";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getIPTP4CountDataMap());
 
@@ -684,7 +694,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllProvidedITNContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%itn_issued\":\"yes%' GROUP BY ec_details.base_entity_id";
@@ -712,7 +722,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllProvidedIronContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND  ec_details.value LIKE '%ifa_low_prev_value\":\"Given%' GROUP BY ec_details.base_entity_id";
@@ -724,7 +734,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllDewormedContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND  ec_details.value LIKE '%mebendazole\":\"yes%' GROUP BY ec_details.base_entity_id";
@@ -752,7 +762,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllStartedOnPrepContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND  ec_details.value LIKE '%started_on_prep\":\"yes%' GROUP BY ec_details.base_entity_id";
@@ -771,11 +781,29 @@ public class ClientDao extends AbstractDao {
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
-        return values.size();
+        if(values == null)
+        {
+            return 0;
+        }else {
+            return values.size();
+        }
     }
 
     public static void getAlreadyOnPrepContact(DataCallback dataCallback){
-        String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.key";
+        String sql = "SELECT COALESCE(details.value, '0') AS value\n" +
+                "FROM (\n" +
+                "  SELECT key, MAX(value) AS value\n" +
+                "  FROM ec_details\n" +
+                "  WHERE value LIKE '%started_on_prep\":\"already%'\n" +
+                "  GROUP BY key\n" +
+                ") AS details\n" +
+                "UNION ALL\n" +
+                "SELECT '0' AS value\n" +
+                "WHERE NOT EXISTS (\n" +
+                "  SELECT key\n" +
+                "  FROM ec_details\n" +
+                "  WHERE value LIKE '%started_on_prep\":\"already%'\n" +
+                ");\n";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getAlreadyOnPrepCountDataMap());
 
@@ -792,7 +820,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllAlreadyARTinANCContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%started_art\":\"already%' GROUP BY ec_details.base_entity_id";
@@ -804,7 +832,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllStartedARTinANCContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND  ec_details.value LIKE '%started_art\":\"yes%' GROUP BY ec_details.base_entity_id";
@@ -824,7 +852,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllFollowUpContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "' AND ec_details.value LIKE 'next_contact' AND ec_details.value LIKE '%3%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%4%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%5%'OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%6%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%7%' OR ec_details.key IS 'next_contact' AND ec_details.value LIKE '%8%' GROUP BY ec_details.base_entity_id";
@@ -836,7 +864,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllContactCount(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" +
@@ -849,7 +877,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllReferredTBContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%reason\":\"refer%' GROUP BY ec_details.base_entity_id\n";
@@ -861,7 +889,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllTTCVPlusTwoContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%tt1_dose_no_value\":\"2%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"3%' OR ec_details.value LIKE '%tt1_dose_no_value\":\"4%' GROUP BY ec_details.base_entity_id";
@@ -873,7 +901,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllScreenedForTBContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%tb_screening_history\":\"[cough_weeks%' OR ec_details.value LIKE '%tb_screening_history\":\"[fever%' OR ec_details.value LIKE '%tb_screening_history\":\"[weight%' OR ec_details.value LIKE '%tb_screening_history\":\"[night%'  GROUP BY ec_details.base_entity_id";
@@ -885,7 +913,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllTestedHIVFirstContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" +
@@ -900,7 +928,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllAlreadyPositiveFirstContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%hiv_positive\":\"1%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%art_number\":\"%' GROUP BY ec_details.value";
@@ -912,7 +940,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllTestedPositiveFirstContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%hiv_test_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.value";
@@ -924,7 +952,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllOnARTContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%on_art\":\"yes%' AND ec_details.value LIKE '%hiv_positive\":\"1%' GROUP BY ec_details.base_entity_id";
@@ -936,7 +964,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllViralLoadResultsContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%viral_load\":\"%' GROUP BY ec_details.base_entity_id";
@@ -948,7 +976,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllSuppressedViralLoadResultsContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + " AND ec_details.value LIKE '%viral_load%' AND CAST(JSON_EXTRACT(ec_details.value, '$.viral_load') AS UNSIGNED) < 1000 GROUP BY ec_details.base_entity_id";
@@ -960,7 +988,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllMaleTestFirstContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.value";
@@ -972,7 +1000,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllMalePositiveFirstContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.value";
@@ -984,7 +1012,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllMaleAlreadyPositiveContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%partner_hiv_status\":\"positive%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' AND ec_details.value LIKE '%partner_on_art\":\"%' GROUP BY ec_details.value";
@@ -996,7 +1024,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllMaleStartedARTinANCContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%partner_on_art\":\"no\"%' GROUP BY ec_details.base_entity_id";
@@ -1008,7 +1036,7 @@ public class ClientDao extends AbstractDao {
 
     public static int getAllDiscordantContact(){
         int localMonth = ReportListAdapter.selectedMonth;
-        String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
+        String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
                 " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND ec_details.value LIKE '%discordant\":\"yes%' GROUP BY ec_details.base_entity_id";
@@ -1116,12 +1144,12 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static List<ReportModel1> getMaleTestFirstContact(){
+    public static void getMaleTestFirstContact(DataCallback dataCallback){
         String sql = "SELECT COALESCE(ec_details.value, '0') AS value FROM ec_details WHERE ec_details.value LIKE '%hiv_test_partner_status\":\"done_today%' AND ec_details.value LIKE '%contact_reason\":\"first_contact%' GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getMaleTestedDataMap());
 
-        return values;
+        dataCallback.onDataRetrieved(values);
     }
 
     public static void getMalePositiveFirstContact(DataCallback dataCallback){
@@ -1461,7 +1489,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getOriginDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setOrigin(getCursorValue(c, "origin"));
+            record.setOrigin(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1532,7 +1560,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getStartedOnARTCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setStartedARTC(getCursorValue(c, "key"));
+            record.setStartedARTC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1540,7 +1568,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getAlreadyOnPrepCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setAlreadyOnPrepC(getCursorValue(c, "key"));
+            record.setAlreadyOnPrepC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1548,7 +1576,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getStartedOnPrepCountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setStartedOnPrepC(getCursorValue(c, "key"));
+            record.setStartedOnPrepC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1605,7 +1633,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getIPTP1CountDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setIPTP1C(getCursorValue(c, "key"));
+            record.setIPTP1C(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1715,7 +1743,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getAlreadyPositiveDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setAlreadyPositiveC(getCursorValue(c, "key"));
+            record.setAlreadyPositiveC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1742,7 +1770,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getViralLoadDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setViralLoadC(getCursorValue(c, "key"));
+            record.setViralLoadC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1751,7 +1779,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getSuppressedViralLoadDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setSuppressedViralLoadC(getCursorValue(c, "key"));
+            record.setSuppressedViralLoadC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1760,7 +1788,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getMaleTestedDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setMaleTestedC(getCursorValue(c, "key"));
+            record.setMaleTestedC(getCursorValue(c, "value"));
 
             return record;
         };
@@ -1778,7 +1806,7 @@ public class ClientDao extends AbstractDao {
     public static DataMap<ReportModel1> getMaleAlreadyPositiveDataMap() {
         return c -> {
             ReportModel1 record = new ReportModel1();
-            record.setMaleAlreadyPositiveC(getCursorValue(c, "key"));
+            record.setMaleAlreadyPositiveC(getCursorValue(c, "value"));
 
             return record;
         };

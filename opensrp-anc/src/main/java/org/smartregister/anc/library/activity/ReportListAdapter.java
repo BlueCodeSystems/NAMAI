@@ -61,7 +61,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Monthly Report Form");
 
-                String attentionFlagArrayList = ClientDao.getFirstContact("gest_age_openmrs","8","12");
+                //String attentionFlagArrayList = ClientDao.getFirstContact("gest_age_openmrs","8","12");
 
 
                 String[] stringArray = new String[]{"1. Monthly detailed reports [Click to Open]"/*, "2. FP Information, Education and Communication [Click to Open]", "3. Referrals to Health Facilities [Click to Open]", "4. Stockouts of Family Planning Commodities [Click to Open]"*/};
