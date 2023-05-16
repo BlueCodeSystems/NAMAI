@@ -1217,7 +1217,7 @@ public class Utils extends org.smartregister.util.Utils {
         layoutDocument.add(new Paragraph(headerDetails).setHorizontalAlignment(horizontalAlignment));
     }
 
-    private final String getAppPath(Context context) {
+    public static final String getAppPath(Context context) {
         File dir = new File(Environment.getExternalStorageDirectory()+ File.separator + context.getResources().getString(R.string.app_name) + File.separator);
         if (!dir.exists()) {
             dir.mkdir();

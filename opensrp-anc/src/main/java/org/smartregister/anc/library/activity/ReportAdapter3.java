@@ -1,5 +1,8 @@
 package org.smartregister.anc.library.activity;
 
+import static org.smartregister.anc.library.activity.ReportListAdapter.selectedMonth;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +13,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.anc.library.R;
+import org.smartregister.anc.library.util.Utils;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -44,10 +54,10 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
     String totalfemalesfirst = null;
     String totalfemalessecond = null;
     String totalfemalesthird = null;
-    String origin = null;
-    String firstc = null;
-    String secondc = null;
-    String thirdc = null;
+    String origin = null;//null last check
+    String firstc = null;//null last check
+    String secondc = null;//null last check
+    String thirdc = null;//null last check
     String fourthToSeventhC = null;
     String eighthAboveC = null;
     String highRiskC = null;
@@ -65,7 +75,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
     String providedIron = null;
     String dewormed = null;
     String startedOnPrep = null;
-    String alreadyOnPrep = null;
+    String alreadyOnPrep = null;//null last check
     String startedOnART = null;
     String alreadyOnART = null;
     String followUp = null;
@@ -73,17 +83,20 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
     String maleStartedART = null;
     String maleAlreadyPositive = null;
     String malePositive = null;
-    String maleTested = null;
+    String maleTested = null;//null last check
     String viralLoad = null;
-    String suppressedVL = null;
+    String suppressedVL = null;//null last check
     String onART = null;
     String testedPositive = null;
-    String alreadyPositive = null;
+    String alreadyPositive = null;//null last check
     String testedHIV = null;
     String ttcvPlusTwo = null;
     String referredTB = null;
     String contactCount = null;
     String screenedTB = null;
+    String[] monthData = new String[53];
+
+
 
 
 
@@ -100,6 +113,8 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         this.reportitems = reportitems;
         this.monthNumber = monthNumber;
         this.context = context;
+        int localMonth = selectedMonth;
+        loadMonthDataFromFile();
     }
 
     @Override
@@ -112,6 +127,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         return viewHolder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ReportAdapter3.ViewHolder holder, final int position) {
 
@@ -119,6 +135,9 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         ReportModel1 data = reportitems.get(position);
         //int feedback = feedbackItems.size();
 
+        if (monthData[0] == null) {
+                monthData[0] = String.valueOf(selectedMonth);
+        }
 
         holder.setIsRecyclable(false);
 
@@ -148,21 +167,57 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                 @Override
                 protected List<String> doInBackground(Void... voids) {
                     List<String> results = new ArrayList<>();
+                    if(monthData[1] == null) {
+                        if (f1first != null) {
+                            monthData[1] = f1first;
+                        }
+                    }else{
+                        if(f1first == null) {
+                            f1first = monthData[1];
+                        }
+                    }
                     if (f1first == null) {
                         f1first = ClientDao.getFirstContact("gest_age_openmrs", "8", "12");
                     }
                     results.add(f1first);
 
+                    if(monthData[2] == null) {
+                        if (f2first != null) {
+                            monthData[2] = f2first;
+                        }
+                    }else {
+                        if(f2first == null) {
+                            f2first = monthData[2];
+                        }
+                    }
                     if (f2first == null) {
                         f2first = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12");
                     }
                     results.add(f2first);
 
+                    if(monthData[3] == null) {
+                        if (f3first != null) {
+                            monthData[3] = f3first;
+                        }
+                    }else {
+                        if(f3first == null) {
+                            f3first = monthData[3];
+                        }
+                    }
                     if (f3first == null) {
                         f3first = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12");
                     }
                     results.add(f3first);
 
+                    if(monthData[4] == null) {
+                        if (f4first != null) {
+                            monthData[4] = f4first;
+                        }
+                    }else {
+                        if(f4first == null) {
+                            f4first = monthData[4];
+                        }
+                    }
                     if (f4first == null) {
                         f4first = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12");
                     }
@@ -195,25 +250,63 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                 @Override
                 protected List<String> doInBackground(Void... voids) {
                     List<String> results = new ArrayList<>();
+                    if(monthData[5] == null) {
+                        if (f1second != null) {
+                            monthData[5] = f1second;
+                        }
+                    }else {
+                        if(f1second == null) {
+                            f1second = monthData[5];
+                        }
+                    }
                     if (f1second == null) {
                         f1second = ClientDao.getFirstContact("gest_age_openmrs", "13", "26");
                     }
                     results.add(f1second);
 
+                    if(monthData[6] == null) {
+                        if (f2second != null) {
+                            monthData[6] = f2second;
+                        }
+                    }else {
+                        if(f2second == null) {
+                            f2second = monthData[6];
+                        }
+                    }
                     if (f2second == null) {
                         f2second = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26");
                     }
                     results.add(f2second);
 
+                    if(monthData[7] == null) {
+                        if (f3second != null) {
+                            monthData[7] = f3second;
+                        }
+                    }else {
+                        if(f3second == null) {
+                            f3second = monthData[7];
+                        }
+                    }
                     if (f3second == null) {
                         f3second = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26");
                     }
                     results.add(f3second);
 
+
+                    if(monthData[8] == null) {
+                        if (f4second != null) {
+                            monthData[8] = f4second;
+                        }
+                    }else {
+                        if(f4second == null) {
+                            f4second = monthData[8];
+                        }
+                    }
                     if (f4second == null) {
                         f4second = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26");
                     }
                     results.add(f4second);
+
 
                     return results;
                 }
@@ -242,25 +335,65 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                 @Override
                 protected List<String> doInBackground(Void... voids) {
                     List<String> results = new ArrayList<>();
+                    if(monthData[9] == null) {
+                        if (f1third != null) {
+                            monthData[9] = f1third;
+                        }
+                    }else {
+                        if(f1third == null) {
+                            f1third = monthData[9];
+                        }
+                    }
                     if (f1third == null) {
                         f1third = ClientDao.getFirstContact("gest_age_openmrs", "27", "40");
                     }
                     results.add(f1third);
 
+
+                    if(monthData[10] == null) {
+                        if (f2third != null) {
+                            monthData[10] = f2third;
+                        }
+                    }else {
+                        if(f2third == null) {
+                            f2third = monthData[10];
+                        }
+                    }
                     if (f2third == null) {
                         f2third = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40");
                     }
                     results.add(f2third);
 
+
+                    if(monthData[11] == null) {
+                        if (f3third != null) {
+                            monthData[11] = f3third;
+                        }
+                    }else {
+                        if(f3third == null) {
+                            f3third = monthData[11];
+                        }
+                    }
                     if (f3third == null) {
                         f3third = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40");
                     }
                     results.add(f3third);
 
+
+                    if(monthData[12] == null) {
+                        if (f4third != null) {
+                            monthData[12] = f4third;
+                        }
+                    }else {
+                        if(f4third == null) {
+                            f4third = monthData[12];
+                        }
+                    }
                     if (f4third == null) {
                         f4third = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40");
                     }
                     results.add(f4third);
+
 
                     return results;
                 }
@@ -283,8 +416,27 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if (data.getOrigin() != null) {
+            holder.txtProductName.setText("IRH1-100 : Women from outside the catchment area");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if(monthData[13] == null) {
+                if (origin != null) {
+                    monthData[13] = origin;
+                }
+            }else{
+                if(origin == null) {
+                    origin = monthData[13];
+                }
+            }
+
             if(origin == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
+            }else{
+                monthData[13] = origin;
             }
             new AsyncTask<Void, Void, String>() {
                 @Override
@@ -292,6 +444,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     String originStr = "";
                     if (origin == null) {
                         originStr = String.valueOf(ClientDao.getAllOutside());
+                        origin = originStr;
                     } else {
                         originStr = origin;
                     }
@@ -314,8 +467,20 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+            if(monthData[14] == null) {
+                if (firstc != null) {
+                    monthData[14] = firstc;
+                }
+            }else{
+                if(firstc == null) {
+                    firstc = monthData[14];
+                }
+            }
+
             if(firstc == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
+            }else{
+                monthData[14] = firstc;
             }
             new AsyncTask<Void, Void, String>() {
                 @Override
@@ -323,6 +488,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     String firstcStr = "";
                     if(firstc == null) {
                         firstcStr = String.valueOf(ClientDao.getAllFirstContact());
+                        firstc = firstcStr;
                     } else {
                         firstcStr = firstc;
                     }
@@ -346,8 +512,20 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+            if (monthData[15] == null) {
+                if (secondc != null) {
+                    monthData[15] = secondc;
+                }
+            }else{
+                if(secondc == null) {
+                    secondc = monthData[15];
+                }
+            }
+
             if(secondc == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
+            }else{
+                monthData[15] = secondc;
             }
             new AsyncTask<Void, Void, String>() {
                 @Override
@@ -355,6 +533,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     String secondcStr = "";
                     if(secondc == null) {
                         secondcStr = String.valueOf(ClientDao.getAllSecondContact());
+                        secondc = secondcStr;
                     } else {
                         secondcStr = secondc;
                     }
@@ -378,6 +557,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+            if (monthData[16] == null) {
+                if (thirdc != null) {
+                    monthData[16] = thirdc;
+                }
+            }else{
+                if(thirdc == null) {
+                    thirdc = monthData[16];
+                }
+            }
+
             if(thirdc == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
             }
@@ -387,6 +576,7 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     String thirdcStr = "";
                     if(thirdc == null) {
                         thirdcStr = String.valueOf(ClientDao.getAllThirdContact());
+                        thirdc = thirdcStr;
                     } else {
                         thirdcStr = thirdc;
                     }
@@ -410,6 +600,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[17] == null) {
+                if (fourthToSeventhC != null) {
+                    monthData[17] = fourthToSeventhC;
+                }
+            }else{
+                if(fourthToSeventhC == null) {
+                    fourthToSeventhC = monthData[17];
+                }
+            }
 
             if(fourthToSeventhC == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -440,6 +640,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[18] == null) {
+                if (eighthAboveC != null) {
+                    monthData[18] = eighthAboveC;
+                }
+            }else{
+                if(eighthAboveC == null) {
+                    eighthAboveC = monthData[18];
+                }
+            }
+
             if(eighthAboveC == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -469,6 +679,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[19] == null) {
+                if (highRiskC != null) {
+                    monthData[19] = highRiskC;
+                }
+            }else{
+                if(highRiskC == null) {
+                    highRiskC = monthData[19];
+                }
+            }
+
             if(highRiskC == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -491,12 +711,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getSyphScreenedC() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Antenatal Screening");
             holder.txtProductName.setText("IRH1-155 : Initial syphilis screening");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[20] == null) {
+                if (syphScreened != null) {
+                    monthData[20] = syphScreened;
+                }
+            }else{
+                if(syphScreened == null) {
+                    syphScreened = monthData[20];
+                }
+            }
 
             if(syphScreened == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -526,6 +758,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[21] == null) {
+                if (syphPositive != null) {
+                    monthData[21] = syphPositive;
+                }
+            }else{
+                if(syphPositive == null) {
+                    syphPositive = monthData[21];
+                }
+            }
+
             if(syphPositive == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -553,6 +795,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[22] == null) {
+                if (HepBScreened != null) {
+                    monthData[22] = HepBScreened;
+                }
+            }else{
+                if(HepBScreened == null) {
+                    HepBScreened = monthData[22];
+                }
+            }
 
             if(HepBScreened == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -582,6 +834,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[23] == null) {
+                if (HepBPositive != null) {
+                    monthData[23] = HepBPositive;
+                }
+            }else{
+                if(HepBPositive == null) {
+                    HepBPositive = monthData[23];
+                }
+            }
+
             if(HepBPositive == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -609,6 +871,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[24] == null) {
+                if (AnaemiaScreened != null) {
+                    monthData[24] = AnaemiaScreened;
+                }
+            }else{
+                if(AnaemiaScreened == null) {
+                    AnaemiaScreened = monthData[24];
+                }
+            }
 
             if(AnaemiaScreened == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -638,6 +910,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[25] == null) {
+                if (AnaemiaPositive != null) {
+                    monthData[25] = AnaemiaPositive;
+                }
+            }else{
+                if(AnaemiaPositive == null) {
+                    AnaemiaPositive = monthData[25];
+                }
+            }
+
             if(AnaemiaPositive == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -659,12 +941,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getIPTP1C() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Non-HIV Prophylaxis and Services provided");
             holder.txtProductName.setText("IRH1-190 : IPTp 1");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[26] == null) {
+                if (IPTP1 != null) {
+                    monthData[26] = IPTP1;
+                }
+            }else{
+                if(IPTP1 == null) {
+                    IPTP1 = monthData[26];
+                }
+            }
 
             if(IPTP1 == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -694,6 +988,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[27] == null) {
+                if (IPTP2 != null) {
+                    monthData[27] = IPTP2;
+                }
+            }else{
+                if(IPTP2 == null) {
+                    IPTP2 = monthData[27];
+                }
+            }
+
             if(IPTP2 == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -721,6 +1025,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[28] == null) {
+                if (IPTP3 != null) {
+                    monthData[28] = IPTP3;
+                }
+            }else{
+                if(IPTP3 == null) {
+                    IPTP3 = monthData[28];
+                }
+            }
 
             if(IPTP3 == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -750,6 +1064,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[29] == null) {
+                if (IPTP4 != null) {
+                    monthData[29] = IPTP4;
+                }
+            }else{
+                if(IPTP4 == null) {
+                    IPTP4 = monthData[29];
+                }
+            }
+
             if(IPTP4 == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -777,6 +1101,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[30] == null) {
+                if (providedITN != null) {
+                    monthData[30] = providedITN;
+                }
+            }else{
+                if(providedITN == null) {
+                    providedITN = monthData[30];
+                }
+            }
 
             if(providedITN == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -806,6 +1140,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[31] == null) {
+                if (providedIron != null) {
+                    monthData[31] = providedIron;
+                }
+            }else{
+                if(providedIron == null) {
+                    providedIron = monthData[31];
+                }
+            }
+
             if(providedIron == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -833,6 +1177,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[32] == null) {
+                if (dewormed != null) {
+                    monthData[32] = dewormed;
+                }
+            }else{
+                if(dewormed == null) {
+                    dewormed = monthData[32];
+                }
+            }
 
             if(dewormed == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -862,6 +1216,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[33] == null) {
+                if (startedOnPrep != null) {
+                    monthData[33] = startedOnPrep;
+                }
+            }else{
+                if(startedOnPrep == null) {
+                    startedOnPrep = monthData[33];
+                }
+            }
+
             if(startedOnPrep == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -890,18 +1254,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[34] == null) {
+                if (alreadyOnPrep != null) {
+                    monthData[34] = alreadyOnPrep;
+                }
+            }else{
+                if(alreadyOnPrep == null) {
+                    alreadyOnPrep = monthData[34];
+                }
+            }
+
             if(alreadyOnPrep == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
                 new AsyncTask<Void, Void, String>() {
                     @Override
                     protected String doInBackground(Void... voids) {
-                        return String.valueOf(ClientDao.getAllAlreadyOnPrepContact());
+                        alreadyOnPrep = String.valueOf(ClientDao.getAllAlreadyOnPrepContact());
+                        monthData[34] = alreadyOnPrep;
+                        return alreadyOnPrep;
                     }
 
                     @Override
                     protected void onPostExecute(String result) {
-                        alreadyOnPrep = result;
                         holder.txtTotalFemaleSeen.setText(result);
                     }
                 }.execute();
@@ -919,6 +1294,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[35] == null) {
+                if (startedOnART != null) {
+                    monthData[35] = startedOnART;
+                }
+            }else{
+                if(startedOnART == null) {
+                    startedOnART = monthData[35];
+                }
+            }
 
             if(startedOnART == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -947,6 +1332,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[36] == null) {
+                if (alreadyOnART != null) {
+                    monthData[36] = alreadyOnART;
+                }
+            }else{
+                if(alreadyOnART == null) {
+                    alreadyOnART = monthData[36];
+                }
+            }
 
             if(alreadyOnART == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -978,6 +1373,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[37] == null) {
+                if (followUp != null) {
+                    monthData[37] = followUp;
+                }
+            }else{
+                if(followUp == null) {
+                    followUp = monthData[37];
+                }
+            }
+
             if(followUp == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -1005,6 +1410,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[38] == null) {
+                if (discordant != null) {
+                    monthData[38] = discordant;
+                }
+            }else{
+                if(discordant == null) {
+                    discordant = monthData[38];
+                }
+            }
 
             if(discordant == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -1036,6 +1451,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[39] == null) {
+                if (maleStartedART != null) {
+                    monthData[39] = maleStartedART;
+                }
+            }else{
+                if(maleStartedART == null) {
+                    maleStartedART = monthData[39];
+                }
+            }
+
             if(maleStartedART == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -1063,6 +1488,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[40] == null) {
+                if (maleAlreadyPositive != null) {
+                    monthData[40] = maleAlreadyPositive;
+                }
+            }else{
+                if(maleAlreadyPositive == null) {
+                    maleAlreadyPositive = monthData[40];
+                }
+            }
 
             if(maleAlreadyPositive == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -1092,6 +1527,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[41] == null) {
+                if (malePositive != null) {
+                    monthData[41] = malePositive;
+                }
+            }else{
+                if(malePositive == null) {
+                    malePositive = monthData[41];
+                }
+            }
+
             if(malePositive == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -1120,18 +1565,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[42] == null) {
+                if (maleTested != null) {
+                    monthData[42] = maleTested;
+                }
+            }else{
+                if(maleTested == null) {
+                    maleTested = monthData[42];
+                }
+            }
+
             if(maleTested == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
                 new AsyncTask<Void, Void, String>() {
                     @Override
                     protected String doInBackground(Void... voids) {
-                        return String.valueOf(ClientDao.getAllMaleTestFirstContact());
+                        maleTested = String.valueOf(ClientDao.getAllMaleTestFirstContact());
+                        monthData[42] = maleTested;
+                        return maleTested;
                     }
 
                     @Override
                     protected void onPostExecute(String result) {
-                        maleTested = result;
                         holder.txtTotalFemaleSeen.setText(result);
                     }
                 }.execute();
@@ -1141,12 +1597,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getViralLoadC() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Monitoring");
             holder.txtProductName.setText("HIV2-105 : With VL results");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[43] == null) {
+                if (viralLoad != null) {
+                    monthData[43] = viralLoad;
+                }
+            }else{
+                if(viralLoad == null) {
+                    viralLoad = monthData[43];
+                }
+            }
 
             if(viralLoad == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -1176,18 +1644,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[44] == null) {
+                if (suppressedVL != null) {
+                    monthData[44] = suppressedVL;
+                }
+            }else{
+                if(suppressedVL == null) {
+                    suppressedVL = monthData[44];
+                }
+            }
+
             if(suppressedVL == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
                 new AsyncTask<Void, Void, String>() {
                     @Override
                     protected String doInBackground(Void... voids) {
-                        return String.valueOf(ClientDao.getAllSuppressedViralLoadResultsContact());
+                        suppressedVL = String.valueOf(ClientDao.getAllSuppressedViralLoadResultsContact());
+                        monthData[44] = suppressedVL;
+                        return suppressedVL;
                     }
 
                     @Override
                     protected void onPostExecute(String result) {
-                        suppressedVL = result;
                         holder.txtTotalFemaleSeen.setText(result);
                     }
                 }.execute();
@@ -1203,6 +1682,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[45] == null) {
+                if (onART != null) {
+                    monthData[45] = onART;
+                }
+            }else{
+                if(onART == null) {
+                    onART = monthData[45];
+                }
+            }
 
             if(onART == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -1226,13 +1715,23 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
         else if(data.getTestedPositiveC() != null){
             holder.groupLabel.setVisibility(View.VISIBLE);
-            holder.groupLabel.setText("HIV Positive");
+            holder.groupLabel.setText("HIV Positive Results");
             holder.txtProductName.setText("HIV2-040 : Positive - Initial test in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[46] == null) {
+                if (testedPositive != null) {
+                    monthData[46] = testedPositive;
+                }
+            }else{
+                if(testedPositive == null) {
+                    testedPositive = monthData[46];
+                }
+            }
 
             if(testedPositive == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -1262,18 +1761,29 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[47] == null) {
+                if (alreadyPositive != null) {
+                    monthData[47] = alreadyPositive;
+                }
+            }else{
+                if(alreadyPositive == null) {
+                    alreadyPositive = monthData[47];
+                }
+            }
+
             if(alreadyPositive == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
                 new AsyncTask<Void, Void, String>() {
                     @Override
                     protected String doInBackground(Void... voids) {
-                        return String.valueOf(ClientDao.getAllAlreadyPositiveFirstContact());
+                        alreadyPositive = String.valueOf(ClientDao.getAllAlreadyPositiveFirstContact());
+                        monthData[47] = alreadyPositive;
+                        return alreadyPositive;
                     }
 
                     @Override
                     protected void onPostExecute(String result) {
-                        alreadyPositive = result;
                         holder.txtTotalFemaleSeen.setText(result);
                     }
                 }.execute();
@@ -1283,12 +1793,24 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 
         else if(data.getTestedHIVC() != null){
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Elimination of Mother-to-Child Transmission of HIV");
             holder.txtProductName.setText("HIV2-005 : Tested - Initial test in ANC");
             holder.f1.setBackgroundResource(R.drawable.na_round_button);
             holder.f2.setBackgroundResource(R.drawable.na_round_button);
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[48] == null) {
+                if (testedHIV != null) {
+                    monthData[48] = testedHIV;
+                }
+            }else{
+                if(testedHIV == null) {
+                    testedHIV = monthData[48];
+                }
+            }
 
             if(testedHIV == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -1318,6 +1840,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[49] == null) {
+                if (screenedTB != null) {
+                    monthData[49] = screenedTB;
+                }
+            }else{
+                if(screenedTB == null) {
+                    screenedTB = monthData[49];
+                }
+            }
+
             if(screenedTB == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -1345,6 +1877,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f3.setBackgroundResource(R.drawable.na_round_button);
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[50] == null) {
+                if (ttcvPlusTwo != null) {
+                    monthData[50] = ttcvPlusTwo;
+                }
+            }else{
+                if(ttcvPlusTwo == null) {
+                    ttcvPlusTwo = monthData[50];
+                }
+            }
 
             if(ttcvPlusTwo == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
@@ -1374,6 +1916,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[51] == null) {
+                if (referredTB != null) {
+                    monthData[51] = referredTB;
+                }
+            }else{
+                if(referredTB == null) {
+                    referredTB = monthData[51];
+                }
+            }
+
             if(referredTB == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -1402,6 +1954,16 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             holder.f4.setBackgroundResource(R.drawable.na_round_button);
             holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
+            if (monthData[52] == null) {
+                if (contactCount != null) {
+                    monthData[52] = contactCount;
+                }
+            }else{
+                if(contactCount == null) {
+                    contactCount = monthData[52];
+                }
+            }
+
             if(contactCount == null) {
                 holder.txtTotalFemaleSeen.setText("Loading...");
 
@@ -1421,6 +1983,8 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                 holder.txtTotalFemaleSeen.setText(contactCount);
             }
         }
+
+
 
 
         //49-150
@@ -1460,6 +2024,12 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
         }
 */
         holder.txtTotalFemaleServices.setText("0");
+
+        try {
+            saveMonthDataToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -1530,4 +2100,61 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
 
         }
     }
+
+    private void saveMonthDataToFile() throws IOException {
+        if (isMonthDataComplete(monthData)) {
+            String FILENAME = selectedMonth + "_" + "monthData.txt";
+            String filePath = Utils.getAppPath(context) + FILENAME;
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    System.out.println("Attempting to save data to file");
+                    if (monthData != null) {
+                        for (String data : monthData) {
+                            writer.write(data);
+                            writer.newLine();
+                            System.out.println("Writing data to file");
+                        }
+                    }
+                    System.out.println("Data saved successfully");
+                } catch (IOException e) {
+                    System.out.println("Failed to save data to file");
+                }
+            } else {
+                System.out.println("Unable to save incomplete month data");
+            }
+        }
+
+    }
+
+    private void loadMonthDataFromFile() {
+        String FILENAME = selectedMonth+"_"+"monthData.txt";
+        String filePath = Utils.getAppPath(context) + FILENAME;
+        File file = new File(filePath);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            System.out.println("Attempting to load data from file");
+            String line;
+            int index = 0;
+            while ((line = reader.readLine()) != null && index < monthData.length) {
+                monthData[index++] = line;
+                System.out.println("Reading data from file");
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to load data from file");
+        }
+    }
+
+    private boolean isMonthDataComplete(String[] monthData) {
+        for (String data : monthData) {
+            if (data == null || data.isEmpty()) {
+                System.out.println("Data collection is not complete");
+                return false;  // Found an empty or null element
+            }
+        }
+        System.out.println("Data collection has been completed");
+        return true;  // All elements are filled with data
+    }
+
+
 }

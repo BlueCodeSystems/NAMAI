@@ -825,7 +825,7 @@ public class ReportActivity3 extends AppCompatActivity {
                     public void onDataRetrieved(List<ReportModel1> originData) {
                         // Add data to reportList
                         for (ReportModel1 data : originData) {
-                            if (data.getStartedOnPrepC() != null) {
+                            if (data.getAlreadyOnPrepC() != null) {
                                 reportList.add(data);
                             }
                         }
@@ -976,6 +976,37 @@ public class ReportActivity3 extends AppCompatActivity {
                         }
 
                 });
+                ClientDao.getMaleTestFirstContact(new ClientDao.DataCallback() {
+                    @Override
+                    public void onDataRetrieved(List<ReportModel1> originData) {
+                        // Add data to reportList
+                        for (ReportModel1 data : originData) {
+                            if (data.getMaleTestedC() != null) {
+                                reportList.add(data);
+                            }
+                        }
+
+                        int count = callbackCounter.incrementAndGet();
+
+                        // Notify the adapter that the data has changed
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                                recyclerView1.setHasFixedSize(true);
+                                recyclerView1.setLayoutManager(eLayoutManager);
+                                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                                txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                                recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
+                                recyclerView1.setAdapter(recyclerViewadapter1);
+                                recyclerViewadapter1.notifyDataSetChanged();
+                                loading1.setVisibility(View.GONE);
+
+
+                            }
+                        });
+                    }
+                });
                 ClientDao.getMaleAlreadyPositiveContact(new ClientDao.DataCallback() {
                     @Override
                     public void onDataRetrieved(List<ReportModel1> originData) {
@@ -1071,6 +1102,37 @@ public class ReportActivity3 extends AppCompatActivity {
                             });
                         }
                 });
+                ClientDao.getSuppressedViralLoadResultsContact(new ClientDao.DataCallback() {
+                    @Override
+                    public void onDataRetrieved(List<ReportModel1> originData) {
+                        // Add data to reportList
+                        for (ReportModel1 data : originData) {
+                            if (data.getSuppressedViralLoadC() != null) {
+                                reportList.add(data);
+                            }
+                        }
+
+                        int count = callbackCounter.incrementAndGet();
+
+                        // Notify the adapter that the data has changed
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                                recyclerView1.setHasFixedSize(true);
+                                recyclerView1.setLayoutManager(eLayoutManager);
+                                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                                txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                                recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
+                                recyclerView1.setAdapter(recyclerViewadapter1);
+                                recyclerViewadapter1.notifyDataSetChanged();
+                                loading1.setVisibility(View.GONE);
+
+
+                            }
+                        });
+                    }
+                });
                 ClientDao.getViralLoadResultsContact(new ClientDao.DataCallback() {
                     @Override
                     public void onDataRetrieved(List<ReportModel1> originData) {
@@ -1102,7 +1164,7 @@ public class ReportActivity3 extends AppCompatActivity {
                             });
                         }
                 });
-                ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
+                /*ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
                     @Override
                     public void onDataRetrieved(List<ReportModel1> originData) {
                         // Add data to reportList
@@ -1133,7 +1195,7 @@ public class ReportActivity3 extends AppCompatActivity {
                             });
                         }
 
-                });
+                });*/
                 ClientDao.getOnARTContact(new ClientDao.DataCallback() {
                     @Override
                     public void onDataRetrieved(List<ReportModel1> originData) {
@@ -1228,6 +1290,38 @@ public class ReportActivity3 extends AppCompatActivity {
                                 }
                             });
                         }
+                });
+                ClientDao.getAlreadyPositiveFirstContact(new ClientDao.DataCallback() {
+                    @Override
+                    public void onDataRetrieved(List<ReportModel1> originData) {
+                        // Add data to reportList
+                        for (ReportModel1 data : originData) {
+                            if (data.getAlreadyPositiveC() != null) {
+                                reportList.add(data);
+                            }
+                        }
+
+                        int count = callbackCounter.incrementAndGet();
+
+
+                        // Notify the adapter that the data has changed
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                                recyclerView1.setHasFixedSize(true);
+                                recyclerView1.setLayoutManager(eLayoutManager);
+                                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                                txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                                recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
+                                recyclerView1.setAdapter(recyclerViewadapter1);
+                                recyclerViewadapter1.notifyDataSetChanged();
+                                loading1.setVisibility(View.GONE);
+
+
+                            }
+                        });
+                    }
                 });
                 ClientDao.getScreenedForTBContact(new ClientDao.DataCallback() {
                     @Override
