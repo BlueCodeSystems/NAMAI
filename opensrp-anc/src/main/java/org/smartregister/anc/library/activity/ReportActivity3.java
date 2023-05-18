@@ -18,24 +18,34 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.sqlcipher.database.SQLiteDatabase;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 //import org.smartregister.anc.library.adapter.ReportHashAdapter;
+import org.smartregister.anc.library.adapter.ReportHashAdapter;
 import org.smartregister.anc.library.model.MeModel;
+import org.smartregister.anc.library.model.ReportModel;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.view.contract.MeContract;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +67,8 @@ public class ReportActivity3 extends AppCompatActivity {
     private TextView txtToday, txtPeriod, txtReportType, facilityDB, nameDB;
     String monthName, monthNumber, reportType;
     List<String> emptyList = new ArrayList<>();
+    ReportModel monthlyReport;
+    SQLiteDatabase writableDatabase;
     private MeContract.Model model;
 
     public static int firstTrimesterCounter = 0;
@@ -96,6 +108,7 @@ public class ReportActivity3 extends AppCompatActivity {
         ProgressDialog progressDialog = new ProgressDialog(this);
         String todaysDate = dateFormatter.format(calendar.getTime());
         HashMap<String, String> reportAgeData = new HashMap<String, String>();
+        monthlyReport = new ReportModel();
         txtToday.setText(todaysDate);
         String facility = Utils.locationId;
         String result = facility.replaceAll("_", " ");
@@ -113,1186 +126,1227 @@ public class ReportActivity3 extends AppCompatActivity {
       //  loadData1();
         reportList = new ArrayList<>();
         txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-       recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-        //recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-        recyclerView1.setAdapter(recyclerViewadapter1);
+        if(ClientDao.getMonthlyReport(monthName)== null ) {
+            new AsyncTask<Void, Void, ReportModel>() {
+                @Override
+                protected ReportModel doInBackground(Void... voids) {
 
-        Runnable backgroundTask = new Runnable() {
-            @Override
-            public void run() {
-                // Initialize a counter for the callbacks
-                AtomicInteger callbackCounter = new AtomicInteger(0);
+                    monthlyReport.setFirstContact(ClientDao.getFirstContact("gest_age_openmrs", "8", "12"));
+                    monthlyReport.setFirstContactAbove15(ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12"));
+                    monthlyReport.setFirstContactAbove20(ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12"));
+                    monthlyReport.setFirstContactAbove25(ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12"));
 
-                // Define the total number of callbacks expected
-                final int TOTAL_CALLBACKS = 40;
-                ClientDao.getReport3(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> dataList) {
-                        // Add data to reportList
-                        for (ReportModel1 data : dataList) {
-                            if (data.getTrimester() != null) {
-                                reportList.add(data);
-                            }
+                    //second trimester 13 -26
+                    monthlyReport.setSecondTrimesterFirstContact(ClientDao.getFirstContact("gest_age_openmrs", "13", "26"));
+                    monthlyReport.setSecondTrimesterFirstContactAbove15(ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26"));
+                    monthlyReport.setSecondTrimesterFirstContactAbove20(ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26"));
+                    monthlyReport.setSecondTrimesterFirstContactAbove25(ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26"));
+
+                    //third trimester 27 -40
+                    monthlyReport.setThirdTrimesterFirstContact(ClientDao.getFirstContact("gest_age_openmrs", "27", "40"));
+                    monthlyReport.setThirdTrimesterFirstContactAbove15(ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40"));
+                    monthlyReport.setThirdTrimesterFirstContactAbove20(ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40"));
+                    monthlyReport.setThirdTrimesterFirstContactAbove25(ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40"));
+
+                    return monthlyReport;
+
+                }
+
+                @Override
+                protected void onPostExecute(ReportModel results) {
+                    results.setMonth(monthName);
+                     AncLibrary.getInstance().getReportRepository().saveMonthlyReport(results);
+                    loadReportDataFromCallbacks(reportList,progressDialog);
+                    progressDialog.dismiss();
+
+                }
+            }.execute();
+        }else{
+            monthlyReport = ClientDao.getMonthlyReport(monthName);
+            loadReportDataFromCallbacks(reportList,progressDialog);
+        }
+
+
+
+    }
+
+    public void loadReportDataFromCallbacks(ArrayList<ReportModel1> reportList,ProgressDialog progressDialog){
+    Runnable backgroundTask = new Runnable() {
+        @Override
+        public void run() {
+            // Initialize a counter for the callbacks
+            AtomicInteger callbackCounter = new AtomicInteger(0);
+
+            // Define the total number of callbacks expected
+            final int TOTAL_CALLBACKS = 40;
+            ClientDao.getReport3(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> dataList) {
+                    // Add data to reportList
+                    for (ReportModel1 data : dataList) {
+                        if (data.getTrimester() != null) {
+                            reportList.add(data);
                         }
-                        // Increment the counter
-                        int count = callbackCounter.incrementAndGet();
-                        // Notify the adapter that the data has changed
-                        // Check if all callbacks have finished
-                        if (count == TOTAL_CALLBACKS) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber, reportList, ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                }
-                            });
-                    }}
-                });
-                ClientDao.getOrigin(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getOrigin() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber, reportList, ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                    
-                                }
-                            });
-                        }
-
-                });
-                ClientDao.getFirstC(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getFirstC() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                }
-                            });
-                        }
-                });
-                ClientDao.getSecondC(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getSecondC() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                }
-                            });
-                        }
-                });
-                ClientDao.getThirdC(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getThirdC() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                }
-                            });
-                        }
-                });
-                ClientDao.getFourthToSeventhC(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getFourthToSeventhC() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                }
-                            });
-                        }
-                });
-                ClientDao.getEighthAboveC(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getEighthAboveC() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
-                        }
-
-                });
-                ClientDao.getHighRiskContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getHighRiskC() != null) {
-                                reportList.add(data);
-                            }
-                        }
-
-                        int count = callbackCounter.incrementAndGet();
-
-                        // Check if all callbacks have finished
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
-
                     }
-                });
-                ClientDao.getSyphPositiveContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getSyphPositiveC() != null) {
-                                reportList.add(data);
+                    // Increment the counter
+                    int count = callbackCounter.incrementAndGet();
+                    // Notify the adapter that the data has changed
+                    // Check if all callbacks have finished
+                    if (count == TOTAL_CALLBACKS) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                                recyclerView1.setHasFixedSize(true);
+                                recyclerView1.setLayoutManager(eLayoutManager);
+                                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                                txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                                recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                                recyclerView1.setAdapter(recyclerViewadapter1);
+                                recyclerViewadapter1.notifyDataSetChanged();
+                                loading1.setVisibility(View.GONE);
                             }
+                        });
+                    }}
+            });
+            ClientDao.getOrigin(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getOrigin() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getSyphScreenedContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getSyphScreenedC() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getFirstC(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getFirstC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
                         }
-
-                });
-                ClientDao.getHepBPositiveContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getHepBPositiveC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getSecondC(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getSecondC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
                         }
-
-                });
-                ClientDao.getHepBScreenedContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getHepbScreenedC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getThirdC(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getThirdC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
                         }
-                });
-                ClientDao.getAnaemiaScreenedContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getAnaemiaScreenedC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getFourthToSeventhC(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getFourthToSeventhC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
                         }
-
-                });
-                ClientDao.getAnaemiaPositiveContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getAnaemiaPositiveC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getEighthAboveC(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getEighthAboveC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
-                });
-                ClientDao.getIPTP1Contact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getIPTP1C() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+
+            });
+            ClientDao.getHighRiskContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getHighRiskC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Check if all callbacks have finished
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
                         }
+                    });
 
-                });
-                ClientDao.getIPTP2Contact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getIPTP2C() != null) {
-                                reportList.add(data);
-                            }
+                }
+            });
+            ClientDao.getSyphPositiveContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getSyphPositiveC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
                         }
+                    });
+                }
 
-                });
-                ClientDao.getIPTP3Contact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getIPTP3C() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getSyphScreenedContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getSyphScreenedC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                        // Check if all callbacks have finished
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getIPTP4Contact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getIPTP4C() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getHepBPositiveContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getHepBPositiveC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Check if all callbacks have finished
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getProvidedITNContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getProvidedITNC() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getHepBScreenedContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getHepbScreenedC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Check if all callbacks have finished
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
                         }
-
-                });
-                ClientDao.getProvidedIronContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getProvidedIronC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getAnaemiaScreenedContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getAnaemiaScreenedC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getDewormedContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getDewormedC() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getAnaemiaPositiveContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getAnaemiaPositiveC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Check if all callbacks have finished
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
-                });
-                ClientDao.getStartedOnPrepContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getStartedOnPrepC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getIPTP1Contact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getIPTP1C() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
-                });
-                ClientDao.getAlreadyOnPrepContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getStartedOnPrepC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+
+            });
+            ClientDao.getIPTP2Contact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getIPTP2C() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
                         }
-                });
-                ClientDao.getStartedARTinANCContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getStartedARTC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+
+            });
+            ClientDao.getIPTP3Contact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getIPTP3C() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Check if all callbacks have finished
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                }
-                            });
+
                         }
-                });
-                ClientDao.getAlreadyARTinANCContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getAlreadyOnARTC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+
+            });
+            ClientDao.getIPTP4Contact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getIPTP4C() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
-                });
-                ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getFollowUpC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+
+            });
+            ClientDao.getProvidedITNContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getProvidedITNC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
-                });
-                ClientDao.getDiscordantContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getDiscordantC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+
+            });
+            ClientDao.getProvidedIronContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getProvidedIronC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getMaleAlreadyPositiveContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getMaleAlreadyPositiveC() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getDewormedContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getDewormedC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
-                });
-                ClientDao.getMaleStartedARTinANCContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getMaleStartedARTC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getStartedOnPrepContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getStartedOnPrepC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
                         }
-
-                });
-                ClientDao.getMalePositiveFirstContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getMalePositiveC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getAlreadyOnPrepContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getStartedOnPrepC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
                         }
-                });
-                ClientDao.getViralLoadResultsContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getViralLoadC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getStartedARTinANCContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getStartedARTC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
                         }
-                });
-                ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getFollowUpC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getAlreadyARTinANCContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getAlreadyOnARTC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
-
-                });
-                ClientDao.getOnARTContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getOnARTC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getFollowUpC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
                         }
-                });
-                ClientDao.getTestedPositiveFirstContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getTestedPositiveC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getDiscordantContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getDiscordantC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getTestedHIVFirstContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getTestedHIVC() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getMaleAlreadyPositiveContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getMaleAlreadyPositiveC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-
-                                   
-                                }
-                            });
                         }
-                });
-                ClientDao.getScreenedForTBContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getScreenedTBC() != null) {
-                                reportList.add(data);
-                            }
+                    });
+                }
+            });
+            ClientDao.getMaleStartedARTinANCContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getMaleStartedARTC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getTTCVPlusTwoContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getTTCVPlusTwoC() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getMalePositiveFirstContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getMalePositiveC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
-                                    progressDialog.dismiss();
 
-                                   
-                                }
-                            });
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
                         }
-                });
+                    });
+                }
+            });
+            ClientDao.getViralLoadResultsContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getViralLoadC() != null) {
+                            reportList.add(data);
+                        }
+                    }
+
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
+                        }
+                    });
+                }
+            });
+            ClientDao.getFollowUpContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getFollowUpC() != null) {
+                            reportList.add(data);
+                        }
+                    }
+
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
+                        }
+                    });
+                }
+
+            });
+            ClientDao.getOnARTContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getOnARTC() != null) {
+                            reportList.add(data);
+                        }
+                    }
+
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
+                        }
+                    });
+                }
+            });
+            ClientDao.getTestedPositiveFirstContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getTestedPositiveC() != null) {
+                            reportList.add(data);
+                        }
+                    }
+
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
+                        }
+                    });
+                }
+
+            });
+            ClientDao.getTestedHIVFirstContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getTestedHIVC() != null) {
+                            reportList.add(data);
+                        }
+                    }
+
+                    int count = callbackCounter.incrementAndGet();
+
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
+                        }
+                    });
+                }
+            });
+            ClientDao.getScreenedForTBContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getScreenedTBC() != null) {
+                            reportList.add(data);
+                        }
+                    }
+
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+
+
+                        }
+                    });
+                }
+
+            });
+            ClientDao.getTTCVPlusTwoContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getTTCVPlusTwoC() != null) {
+                            reportList.add(data);
+                        }
+                    }
+
+                    int count = callbackCounter.incrementAndGet();
+
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
+                            progressDialog.dismiss();
+
+
+                        }
+                    });
+                }
+            });
 //                ClientDao.getScreenedForTBContact(new ClientDao.DataCallback() {
 //                    @Override
 //                    public void onDataRetrieved(List<ReportModel1> originData) {
@@ -1314,7 +1368,7 @@ public class ReportActivity3 extends AppCompatActivity {
 //                                    recyclerView1.setLayoutManager(eLayoutManager);
 //                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
 //                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-//                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
+//                                    recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
 //                                    recyclerView1.setAdapter(recyclerViewadapter1);
 //                                    recyclerViewadapter1.notifyDataSetChanged();
 //                                    loading1.setVisibility(View.GONE);
@@ -1329,79 +1383,75 @@ public class ReportActivity3 extends AppCompatActivity {
 //                            });
 //                        }
 //                });
-                ClientDao.getReferredTBContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getReferredTBC() != null) {
-                                reportList.add(data);
-                            }
+            ClientDao.getReferredTBContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getReferredTBC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
+                    });
+                }
 
-                });
-                ClientDao.getCountContact(new ClientDao.DataCallback() {
-                    @Override
-                    public void onDataRetrieved(List<ReportModel1> originData) {
-                        // Add data to reportList
-                        for (ReportModel1 data : originData) {
-                            if (data.getContactCountC() != null) {
-                                reportList.add(data);
-                            }
+            });
+            ClientDao.getCountContact(new ClientDao.DataCallback() {
+                @Override
+                public void onDataRetrieved(List<ReportModel1> originData) {
+                    // Add data to reportList
+                    for (ReportModel1 data : originData) {
+                        if (data.getContactCountC() != null) {
+                            reportList.add(data);
                         }
+                    }
 
-                        int count = callbackCounter.incrementAndGet();
+                    int count = callbackCounter.incrementAndGet();
 
-                            // Notify the adapter that the data has changed
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
-                                    recyclerView1.setHasFixedSize(true);
-                                    recyclerView1.setLayoutManager(eLayoutManager);
-                                    recyclerView1.setItemAnimator(new DefaultItemAnimator());
-                                    txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-                                    recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
-                                    recyclerView1.setAdapter(recyclerViewadapter1);
-                                    recyclerViewadapter1.notifyDataSetChanged();
-                                    loading1.setVisibility(View.GONE);
+                    // Notify the adapter that the data has changed
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(ReportActivity3.this);
+                            recyclerView1.setHasFixedSize(true);
+                            recyclerView1.setLayoutManager(eLayoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                            txtReportType.setText("ANC CONTACTS FOR : " + monthName);
+                            recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
+                            recyclerView1.setAdapter(recyclerViewadapter1);
+                            recyclerViewadapter1.notifyDataSetChanged();
+                            loading1.setVisibility(View.GONE);
 
-                                   
-                                }
-                            });
+
                         }
+                    });
+                }
 
-                });
-            }
+            });
+        }
 
-        };
-
-
-
-// Execute the background task
+    };
+        // Execute the background task
         new Thread(backgroundTask).start();
-
 
     }
         public void loadData1() {
@@ -1767,7 +1817,7 @@ public class ReportActivity3 extends AppCompatActivity {
 
 
         txtReportType.setText("ANC CONTACTS FOR : " + monthName);
-     //   recyclerViewadapter1 = new ReportAdapter3(monthNumber,reportList,ReportActivity3.this);
+     //   recyclerViewadapter1 = new ReportHashAdapter(monthNumber,reportList,ReportActivity3.this,monthlyReport);
         recyclerView1.setAdapter(recyclerViewadapter1);
 
 

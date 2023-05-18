@@ -72,7 +72,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
                     if(which == 0){
                         Intent i = new Intent(context, ReportActivity3.class);
                         i.putExtra("month_name", month.getMonthName());
-                        i.putExtra("month_number", month.getMonthNumber());
+                        i.putExtra("month_number",String.valueOf( month.getMonthNumber()));
                         i.putExtra("report_type", "1");
                         context.startActivity(i);
                     }/* else if(which == 1){

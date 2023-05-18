@@ -24,6 +24,7 @@ import org.smartregister.anc.library.repository.ContactTasksRepository;
 import org.smartregister.anc.library.repository.PartialContactRepository;
 import org.smartregister.anc.library.repository.PreviousContactRepository;
 import org.smartregister.anc.library.repository.RegisterQueryProvider;
+import org.smartregister.anc.library.repository.ReportRepository;
 import org.smartregister.anc.library.util.AncMetadata;
 import org.smartregister.anc.library.util.AppExecutors;
 import org.smartregister.anc.library.util.ConstantsUtils;
@@ -57,6 +58,7 @@ public class AncLibrary {
     private PartialContactRepository partialContactRepository;
     private PreviousContactRepository previousContactRepository;
     private ContactTasksRepository contactTasksRepository;
+    private ReportRepository reportRepository;
     private EventClientRepository eventClientRepository;
     private UniqueIdRepository uniqueIdRepository;
     private DetailsRepository detailsRepository;
@@ -209,6 +211,14 @@ public class AncLibrary {
         }
 
         return contactTasksRepository;
+    }
+
+    public ReportRepository getReportRepository() {
+        if (reportRepository == null) {
+            reportRepository = new ReportRepository();
+        }
+
+        return reportRepository;
     }
 
     public EventClientRepository getEventClientRepository() {

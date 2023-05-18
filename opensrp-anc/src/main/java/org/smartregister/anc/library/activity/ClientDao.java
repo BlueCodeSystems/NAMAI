@@ -1,10 +1,9 @@
 package org.smartregister.anc.library.activity;
 
-import android.provider.ContactsContract;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.anc.library.model.AttentionFlagModel;
+import org.smartregister.anc.library.model.ReportModel;
 import org.smartregister.dao.AbstractDao;
 
 import java.util.ArrayList;
@@ -14,6 +13,11 @@ public class ClientDao extends AbstractDao {
 
     public interface DataCallback {
         void onDataRetrieved(List<ReportModel1> dataList);
+    }
+
+    @FunctionalInterface
+    public interface FirstContactCallback {
+        void onResult(String result);
     }
     public static String countChildren(String householdID){
 
@@ -139,6 +143,7 @@ public class ClientDao extends AbstractDao {
         return values.get(0);
 
     }
+
 
     public static String countMales (String householdID){
 
@@ -692,6 +697,18 @@ public class ClientDao extends AbstractDao {
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
         return values.size();
+    }
+
+    public static ReportModel getMonthlyReport(String monthName){
+        int localMonth = ReportListAdapter.selectedMonth;
+        String sql = "SELECT * FROM monthly_report WHERE month = '" + monthName + "'";
+
+        List<ReportModel> values = AbstractDao.readData(sql, getGeneralReportDataMap());
+        if(values ==null || values.size() == 0){
+            return null;
+        }else {
+            return values.get(0);
+        }
     }
 
     public static void getProvidedITNContact(DataCallback dataCallback){
@@ -1828,6 +1845,29 @@ public class ClientDao extends AbstractDao {
             record.setGeneralKey(getCursorValue(c, "key"));
             record.setGeneralValue(getCursorValue(c, "value"));
             record.setGeneralBaseEntityID(getCursorValue(c, "base_entity_id"));
+            return record;
+        };
+    }
+
+    public static DataMap<ReportModel> getGeneralReportDataMap() {
+        return c -> {
+            ReportModel record = new ReportModel();
+            record.setMonth(getCursorValue(c, "month"));
+            record.setFirstContact(getCursorValue(c, "first_contact"));
+            record.setFirstContactAbove15(getCursorValue(c, "first_contact_above_15"));
+            record.setFirstContactAbove20(getCursorValue(c, "first_contact_above_20"));
+            record.setFirstContactAbove25(getCursorValue(c, "first_contact_above_25"));
+
+            record.setSecondTrimesterFirstContact(getCursorValue(c, "second_trimester_first_contact"));
+            record.setSecondTrimesterFirstContactAbove15(getCursorValue(c, "second_trimester_first_contact_above_15"));
+            record.setSecondTrimesterFirstContactAbove20(getCursorValue(c, "second_trimester_first_contact_above_20"));
+            record.setSecondTrimesterFirstContactAbove25(getCursorValue(c, "second_trimester_first_contact_above_25"));
+
+
+            record.setThirdTrimesterFirstContact(getCursorValue(c, "third_trimester_first_contact"));
+            record.setThirdTrimesterFirstContactAbove15(getCursorValue(c, "third_trimester_first_contact_above_15"));
+            record.setThirdTrimesterFirstContactAbove20(getCursorValue(c, "third_trimester_contact_above_20"));
+            record.setThirdTrimesterFirstContactAbove25(getCursorValue(c, "third_trimester_first_contact_above_25"));
             return record;
         };
     }
