@@ -1,6 +1,7 @@
 package org.smartregister.anc.library.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.android.material.navigation.NavigationBarView;
 import com.vijay.jsonwizard.activities.FormConfigurationJsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
@@ -54,7 +56,12 @@ import org.smartregister.listener.BottomNavigationListener;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,6 +69,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import timber.log.Timber;
 
 /**
@@ -79,11 +87,729 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     private String advancedSearchQrText = "";
     private HashMap<String, String> advancedSearchFormData = new HashMap<>();
 
+
+    String[] JanuaryData = new String[53];
+    String[] FebruaryData = new String[53];
+    String[] MarchData = new String[53];
+    String[] AprilData = new String[53];
+    String[] MayData = new String[53];
+    String[] JuneData = new String[53];
+    String[] JulyData = new String[53];
+    String[] AugustData = new String[53];
+    String[] SeptemberData = new String[53];
+    String[] OctoberData = new String[53];
+    String[] NovemberData = new String[53];
+    String[] DecemberData = new String[53];
+    //String[] TotalData = new String[53];
+    int currentMonth = 1;
+    static Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recordBirthAlertDialog = createAlertDialog();
         createAttentionFlagsAlertDialog();
+        this.context = BaseHomeRegisterActivity.this;
+        loadReports();
+    }
+
+    public void loadReports()
+    {
+
+
+        //ReportModel1 data = reportitems.get(position);
+
+        for (int month = currentMonth; month <= currentMonth + 11; month++) {
+            int adjustedMonth = (month - 1) % 12 + 1;
+            int useMonth = month;
+            String FILENAME = useMonth + "_" + "monthData.txt";
+            String filePath = Utils.getAppPath(context) + FILENAME;
+            File file = new File(filePath);
+            if (!file.exists()) {
+                try {
+
+                    new AsyncTask<Void, Void, List<String>>() {
+                        @Override
+                        protected List<String> doInBackground(Void... voids) {
+
+                            List<String> results = new ArrayList<>();
+
+                            String[] monthData = new String[53];
+
+                            for (int i = 0; i < monthData.length; i++) {
+                                monthData[i] = null;
+                            }
+
+                            final String[] f1first = {null};
+                            final String[] f2first = {null};
+                            final String[] f3first = {null};
+                            final String[] f4first = {null};
+                            final String[] f1second = {null};
+                            final String[] f2second = {null};
+                            final String[] f3second = {null};
+                            final String[] f4second = {null};
+                            final String[] f1third = {null};
+                            final String[] f2third = {null};
+                            final String[] f3third = {null};
+                            final String[] f4third = {null};
+                            String totalfemalesfirst = null;
+                            String totalfemalessecond = null;
+                            String totalfemalesthird = null;
+                            final String[] origin = {null};//null last check
+                            final String[] firstc = {null};//null last check
+                            final String[] secondc = {null};//null last check
+                            final String[] thirdc = {null};//null last check
+                            final String[] fourthToSeventhC = {null};
+                            final String[] eighthAboveC = {null};
+                            final String[] highRiskC = {null};
+                            final String[] syphScreened = {null};
+                            final String[] syphPositive = {null};
+                            final String[] HepBScreened = {null};
+                            final String[] HepBPositive = {null};
+                            final String[] AnaemiaScreened = {null};
+                            final String[] AnaemiaPositive = {null};
+                            final String[] IPTP1 = {null};
+                            final String[] IPTP2 = {null};
+                            final String[] IPTP3 = {null};
+                            final String[] IPTP4 = {null};
+                            final String[] providedITN = {null};
+                            final String[] providedIron = {null};
+                            final String[] dewormed = {null};
+                            final String[] startedOnPrep = {null};
+                            final String[] alreadyOnPrep = {null};//null last check
+                            final String[] startedOnART = {null};
+                            final String[] alreadyOnART = {null};
+                            final String[] followUp = {null};
+                            final String[] discordant = {null};
+                            final String[] maleStartedART = {null};
+                            final String[] maleAlreadyPositive = {null};
+                            final String[] malePositive = {null};
+                            final String[] maleTested = {null};//null last check
+                            final String[] viralLoad = {null};
+                            final String[] suppressedVL = {null};//null last check
+                            final String[] onART = {null};
+                            final String[] testedPositive = {null};
+                            final String[] alreadyPositive = {null};//null last check
+                            final String[] testedHIV = {null};
+                            final String[] ttcvPlusTwo = {null};
+                            final String[] referredTB = {null};
+                            final String[] contactCount = {null};
+                            final String[] screenedTB = {null};
+
+                            System.out.println("Loading data for month :" + useMonth);
+
+                            if (monthData[0] == null) {
+                                //Month being loaded
+                                monthData[0] = String.valueOf(useMonth);
+                                //monthData[0] = String.valueOf(selectedMonth);
+                            }
+
+                            results.add(monthData[0]);
+
+                            if (monthData[1] == null) {
+                                f1first[0] = ClientDao.getFirstContact("gest_age_openmrs", "8", "12", monthData[0]);
+                                monthData[1] = f1first[0];
+                                if (monthData[1] == null) {
+                                    monthData[1] = "0";
+                                }
+                            }
+                            results.add(f1first[0]);
+
+                            if (monthData[2] == null) {
+                                f2first[0] = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12", monthData[0]);
+                                monthData[2] = f2first[0];
+                                if (monthData[2] == null) {
+                                    monthData[2] = "0";
+                                }
+                            }
+                            results.add(f2first[0]);
+
+                            if (monthData[3] == null) {
+                                f3first[0] = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12", monthData[0]);
+                                monthData[3] = f3first[0];
+                            }
+                            results.add(f3first[0]);
+
+                            if (monthData[4] == null) {
+                                f4first[0] = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12", monthData[0]);
+                                if (f4first[0] == null) {
+                                    f4first[0] = "0";
+                                }
+                                monthData[4] = f4first[0];
+                            }
+                            results.add(f4first[0]);
+
+
+                            if (monthData[5] == null) {
+                                f1second[0] = ClientDao.getFirstContact("gest_age_openmrs", "13", "26", monthData[0]);
+                                monthData[5] = f1second[0];
+                            }
+                            results.add(f1second[0]);
+
+                            if (monthData[6] == null) {
+                                f2second[0] = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26", monthData[0]);
+                                monthData[6] = f2second[0];
+                            }
+                            results.add(f2second[0]);
+
+                            if (monthData[7] == null) {
+                                f3second[0] = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26", monthData[0]);
+                                monthData[7] = f3second[0];
+                            }
+                            results.add(f3second[0]);
+
+
+                            if (monthData[8] == null) {
+                                f4second[0] = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26", monthData[0]);
+                                monthData[8] = f4second[0];
+                            }
+                            results.add(f4second[0]);
+
+
+                            if (monthData[9] == null) {
+                                f1third[0] = ClientDao.getFirstContact("gest_age_openmrs", "27", "40", monthData[0]);
+                                monthData[9] = f1third[0];
+                            }
+                            results.add(f1third[0]);
+
+
+                            if (monthData[10] == null) {
+                                f2third[0] = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40", monthData[0]);
+                                monthData[10] = f2third[0];
+                            }
+                            results.add(f2third[0]);
+
+
+                            if (monthData[11] == null) {
+                                f3third[0] = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40", monthData[0]);
+                                monthData[11] = f3third[0];
+                            }
+                            results.add(f3third[0]);
+
+
+                            if (monthData[12] == null) {
+                                f4third[0] = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40", monthData[0]);
+                                monthData[12] = f4third[0];
+                            }
+                            results.add(f4third[0]);
+
+
+                            String originStr = "";
+                            if (origin[0] == null) {
+                                originStr = String.valueOf(ClientDao.getAllOutside(monthData[0]));
+                                origin[0] = originStr;
+                            } else {
+                                originStr = origin[0];
+                            }
+
+                            if (origin[0] != null) {
+                                monthData[13] = origin[0];
+                            }
+
+
+                            String firstcStr = "";
+                            if (firstc[0] == null) {
+                                firstcStr = String.valueOf(ClientDao.getAllFirstContact(monthData[0]));
+                                firstc[0] = firstcStr;
+                                monthData[14] = firstc[0];
+                            } else {
+                                firstcStr = firstc[0];
+                                monthData[14] = firstc[0];
+                            }
+
+
+                            String secondcStr = "";
+                            if (secondc[0] == null) {
+                                secondcStr = String.valueOf(ClientDao.getAllSecondContact(monthData[0]));
+                                secondc[0] = secondcStr;
+                                monthData[15] = secondc[0];
+                            } else {
+                                secondcStr = secondc[0];
+                                monthData[15] = secondc[0];
+                            }
+
+                            String thirdcStr = "";
+                            if (thirdc[0] == null) {
+                                thirdcStr = String.valueOf(ClientDao.getAllThirdContact(monthData[0]));
+                                thirdc[0] = thirdcStr;
+                                monthData[16] = thirdc[0];
+                            } else {
+                                thirdcStr = thirdc[0];
+                                monthData[16] = thirdc[0];
+                            }
+
+                            String fourthToSeventhcStr = "";
+                            if (fourthToSeventhC[0] == null) {
+                                fourthToSeventhcStr = String.valueOf(ClientDao.getAllFourthToSeventhContact(monthData[0]));
+                                fourthToSeventhC[0] = fourthToSeventhcStr;
+                                monthData[17] = fourthToSeventhcStr;
+                            } else {
+                                fourthToSeventhcStr = fourthToSeventhC[0];
+                                monthData[17] = fourthToSeventhcStr;
+                            }
+
+                            String eighthAbovecStr = "";
+                            if (eighthAboveC[0] == null) {
+                                eighthAbovecStr = String.valueOf(ClientDao.getAllEighthAboveContact(monthData[0]));
+                                eighthAboveC[0] = eighthAbovecStr;
+                                monthData[18] = eighthAbovecStr;
+                            } else {
+                                eighthAbovecStr = eighthAboveC[0];
+                                monthData[18] = eighthAbovecStr;
+                            }
+
+                            String highRiskStr = "";
+                            if (highRiskC[0] == null) {
+                                highRiskStr = String.valueOf(ClientDao.getAllHighRiskContact(monthData[0]));
+                                highRiskC[0] = highRiskStr;
+                                monthData[19] = highRiskStr;
+                            } else {
+                                highRiskStr = highRiskC[0];
+                                monthData[19] = highRiskStr;
+                            }
+
+                            String syphScreenedStr = "";
+                            if (syphScreened[0] == null) {
+                                syphScreenedStr = String.valueOf(ClientDao.getAllSyphScreenedContact(monthData[0]));
+                                syphScreened[0] = syphScreenedStr;
+                                monthData[20] = syphScreenedStr;
+                            } else {
+                                syphScreenedStr = syphScreened[0];
+                                monthData[20] = syphScreenedStr;
+                            }
+
+                            String syphPositiveStr = "";
+                            if (syphPositive[0] == null) {
+                                syphPositiveStr = String.valueOf(ClientDao.getAllSyphPositiveContact(monthData[0]));
+                                syphPositive[0] = syphPositiveStr;
+                                monthData[21] = syphPositiveStr;
+                            } else {
+                                syphPositiveStr = syphPositive[0];
+                                monthData[21] = syphPositiveStr;
+                            }
+
+                            String HepBScreenedStr = "";
+                            if (HepBScreened[0] == null) {
+                                HepBScreenedStr = String.valueOf(ClientDao.getAllHepBScreenedContact(monthData[0]));
+                                HepBScreened[0] = HepBScreenedStr;
+                                monthData[22] = HepBScreenedStr;
+                            } else {
+                                HepBScreenedStr = HepBScreened[0];
+                                monthData[22] = HepBScreenedStr;
+                            }
+
+                            String HepBPositiveStr = "";
+                            if (HepBPositive[0] == null) {
+                                HepBPositiveStr = String.valueOf(ClientDao.getAllHepBPositiveContact(monthData[0]));
+                                HepBPositive[0] = HepBPositiveStr;
+                                monthData[23] = HepBPositiveStr;
+                            } else {
+                                HepBPositiveStr = HepBPositive[0];
+                                monthData[23] = HepBPositiveStr;
+                            }
+
+                            String AnaemiaScreenedStr = "";
+                            if (AnaemiaScreened[0] == null) {
+                                AnaemiaScreenedStr = String.valueOf(ClientDao.getAllAnaemiaScreenedContact(monthData[0]));
+                                AnaemiaScreened[0] = AnaemiaScreenedStr;
+                                monthData[24] = AnaemiaScreenedStr;
+                            } else {
+                                AnaemiaScreenedStr = AnaemiaScreened[0];
+                                monthData[24] = AnaemiaScreenedStr;
+                            }
+
+                            String AnaemiaPositiveStr = "";
+                            if (AnaemiaPositive[0] == null) {
+                                AnaemiaPositiveStr = String.valueOf(ClientDao.getAllAnaemiaPositiveContact(monthData[0]));
+                                AnaemiaPositive[0] = AnaemiaPositiveStr;
+                                monthData[25] = AnaemiaPositiveStr;
+                            } else {
+                                AnaemiaPositiveStr = AnaemiaPositive[0];
+                                monthData[25] = AnaemiaPositiveStr;
+                            }
+
+                            String IPTP1Str = "";
+                            if (IPTP1[0] == null) {
+                                IPTP1Str = String.valueOf(ClientDao.getAllIPTP1Contact(monthData[0]));
+                                IPTP1[0] = IPTP1Str;
+                                monthData[26] = IPTP1Str;
+                            } else {
+                                IPTP1Str = IPTP1[0];
+                                monthData[26] = IPTP1Str;
+                            }
+
+                            String IPTP2Str = "";
+                            if (IPTP2[0] == null) {
+                                IPTP2Str = String.valueOf(ClientDao.getAllIPTP2Contact(monthData[0]));
+                                IPTP2[0] = IPTP2Str;
+                                monthData[27] = IPTP2Str;
+                            } else {
+                                IPTP2Str = IPTP2[0];
+                                monthData[27] = IPTP2Str;
+                            }
+
+                            String IPTP3Str = "";
+                            if (IPTP3[0] == null) {
+                                IPTP3Str = String.valueOf(ClientDao.getAllIPTP3Contact(monthData[0]));
+                                IPTP3[0] = IPTP3Str;
+                                monthData[28] = IPTP3Str;
+                            } else {
+                                IPTP3Str = IPTP3[0];
+                                monthData[28] = IPTP3Str;
+                            }
+
+                            String IPTP4Str = "";
+                            if (IPTP4[0] == null) {
+                                IPTP4Str = String.valueOf(ClientDao.getAllIPTP4Contact(monthData[0]));
+                                IPTP4[0] = IPTP4Str;
+                                monthData[29] = IPTP4Str;
+                            } else {
+                                IPTP4Str = IPTP4[0];
+                                monthData[29] = IPTP4Str;
+                            }
+
+                            String ProvidedITNStr = "";
+                            if (providedITN[0] == null) {
+                                ProvidedITNStr = String.valueOf(ClientDao.getAllProvidedITNContact(monthData[0]));
+                                providedITN[0] = ProvidedITNStr;
+                                monthData[30] = ProvidedITNStr;
+                            } else {
+                                ProvidedITNStr = providedITN[0];
+                                monthData[30] = ProvidedITNStr;
+                            }
+
+                            String ProvidedIronStr = "";
+                            if (providedIron[0] == null) {
+                                ProvidedIronStr = String.valueOf(ClientDao.getAllProvidedIronContact(monthData[0]));
+                                providedIron[0] = ProvidedIronStr;
+                                monthData[31] = ProvidedIronStr;
+                            } else {
+                                ProvidedIronStr = providedIron[0];
+                                monthData[31] = ProvidedIronStr;
+                            }
+
+                            String DewormedStr = "";
+                            if (dewormed[0] == null) {
+                                DewormedStr = String.valueOf(ClientDao.getAllDewormedContact(monthData[0]));
+                                dewormed[0] = DewormedStr;
+                                monthData[32] = DewormedStr;
+                            } else {
+                                DewormedStr = dewormed[0];
+                                monthData[32] = DewormedStr;
+                            }
+
+                            String StartedOnPrepStr = "";
+                            if (startedOnPrep[0] == null) {
+                                StartedOnPrepStr = String.valueOf(ClientDao.getAllStartedOnPrepContact(monthData[0]));
+                                startedOnPrep[0] = StartedOnPrepStr;
+                                monthData[33] = StartedOnPrepStr;
+                            } else {
+                                StartedOnPrepStr = startedOnPrep[0];
+                                monthData[33] = StartedOnPrepStr;
+                            }
+
+                            String AlreadyOnPrepStr = "";
+                            if (alreadyOnPrep[0] == null) {
+                                AlreadyOnPrepStr = String.valueOf(ClientDao.getAllAlreadyOnPrepContact(monthData[0]));
+                                alreadyOnPrep[0] = AlreadyOnPrepStr;
+                                monthData[34] = AlreadyOnPrepStr;
+                            } else {
+                                AlreadyOnPrepStr = alreadyOnPrep[0];
+                                monthData[34] = AlreadyOnPrepStr;
+                            }
+
+                            String StartedOnARTStr = "";
+                            if (startedOnART[0] == null) {
+                                StartedOnARTStr = String.valueOf(ClientDao.getAllStartedARTinANCContact(monthData[0]));
+                                startedOnART[0] = StartedOnARTStr;
+                                monthData[35] = StartedOnARTStr;
+                            } else {
+                                StartedOnARTStr = startedOnART[0];
+                                monthData[35] = StartedOnARTStr;
+                            }
+
+                            String AlreadyOnARTStr = "";
+                            if (alreadyOnART[0] == null) {
+                                AlreadyOnARTStr = String.valueOf(ClientDao.getAllAlreadyARTinANCContact(monthData[0]));
+                                alreadyOnART[0] = AlreadyOnARTStr;
+                                monthData[36] = AlreadyOnARTStr;
+                            } else {
+                                AlreadyOnARTStr = alreadyOnART[0];
+                                monthData[36] = AlreadyOnARTStr;
+                            }
+
+                            String FollowUpcStr = "";
+                            if (followUp[0] == null) {
+                                FollowUpcStr = String.valueOf(ClientDao.getAllFollowUpContact(monthData[0]));
+                                followUp[0] = FollowUpcStr;
+                                monthData[37] = FollowUpcStr;
+                            } else {
+                                FollowUpcStr = followUp[0];
+                                monthData[37] = FollowUpcStr;
+                            }
+
+                            String DiscordantcStr = "";
+                            if (discordant[0] == null) {
+                                DiscordantcStr = String.valueOf(ClientDao.getAllDiscordantContact(monthData[0]));
+                                discordant[0] = DiscordantcStr;
+                                monthData[38] = DiscordantcStr;
+                            } else {
+                                DiscordantcStr = discordant[0];
+                                monthData[38] = DiscordantcStr;
+                            }
+
+                            String MaleStartedARTStr = "";
+                            if (maleStartedART[0] == null) {
+                                MaleStartedARTStr = String.valueOf(ClientDao.getAllMaleStartedARTinANCContact(monthData[0]));
+                                maleStartedART[0] = MaleStartedARTStr;
+                                monthData[39] = MaleStartedARTStr;
+                            } else {
+                                MaleStartedARTStr = maleStartedART[0];
+                                monthData[39] = MaleStartedARTStr;
+                            }
+
+                            String MaleAlreadyPositiveStr = "";
+                            if (maleAlreadyPositive[0] == null) {
+                                MaleAlreadyPositiveStr = String.valueOf(ClientDao.getAllMaleAlreadyPositiveContact(monthData[0]));
+                                maleAlreadyPositive[0] = MaleAlreadyPositiveStr;
+                                monthData[40] = MaleAlreadyPositiveStr;
+                            } else {
+                                MaleAlreadyPositiveStr = maleAlreadyPositive[0];
+                                monthData[40] = MaleAlreadyPositiveStr;
+                            }
+
+                            String MalePositiveStr = "";
+                            if (malePositive[0] == null) {
+                                MalePositiveStr = String.valueOf(ClientDao.getAllMalePositiveFirstContact(monthData[0]));
+                                malePositive[0] = MalePositiveStr;
+                                monthData[41] = MalePositiveStr;
+                            } else {
+                                MalePositiveStr = malePositive[0];
+                                monthData[41] = MalePositiveStr;
+                            }
+
+                            String MaleTestedStr = "";
+                            if (maleTested[0] == null) {
+                                MaleTestedStr = String.valueOf(ClientDao.getAllMaleTestFirstContact(monthData[0]));
+                                maleTested[0] = MaleTestedStr;
+                                monthData[42] = MaleTestedStr;
+                            } else {
+                                MaleTestedStr = maleTested[0];
+                                monthData[42] = MaleTestedStr;
+                            }
+
+                            String ViralLoadStr = "";
+                            if (viralLoad[0] == null) {
+                                ViralLoadStr = String.valueOf(ClientDao.getAllViralLoadResultsContact(monthData[0]));
+                                viralLoad[0] = ViralLoadStr;
+                                monthData[43] = ViralLoadStr;
+                            } else {
+                                ViralLoadStr = viralLoad[0];
+                                monthData[43] = ViralLoadStr;
+                            }
+
+                            String SuppressedVLStr = "";
+                            if (suppressedVL[0] == null) {
+                                SuppressedVLStr = String.valueOf(ClientDao.getAllSuppressedViralLoadResultsContact(monthData[0]));
+                                suppressedVL[0] = SuppressedVLStr;
+                                monthData[44] = SuppressedVLStr;
+                                if (monthData[44] == null) {
+                                    monthData[44] = "0";
+                                }
+                            } else {
+                                SuppressedVLStr = suppressedVL[0];
+                                monthData[44] = SuppressedVLStr;
+                                if (monthData[44] == null) {
+                                    monthData[44] = "0";
+                                }
+                            }
+
+                            String OnARTStr = "";
+                            if (onART[0] == null) {
+                                OnARTStr = String.valueOf(ClientDao.getAllOnARTContact(monthData[0]));
+                                onART[0] = OnARTStr;
+                                monthData[45] = OnARTStr;
+                                if (monthData[45] == null) {
+                                    monthData[45] = "0";
+                                }
+                            } else {
+                                OnARTStr = onART[0];
+                                monthData[45] = OnARTStr;
+                                if (monthData[45] == null) {
+                                    monthData[45] = "0";
+                                }
+                            }
+
+                            String TestedPositiveStr = "";
+                            if (testedPositive[0] == null) {
+                                TestedPositiveStr = String.valueOf(ClientDao.getAllTestedPositiveFirstContact(monthData[0]));
+                                testedPositive[0] = TestedPositiveStr;
+                                monthData[46] = TestedPositiveStr;
+                            } else {
+                                TestedPositiveStr = testedPositive[0];
+                                monthData[46] = TestedPositiveStr;
+                            }
+
+                            String AlreadyPositiveStr = "";
+                            if (alreadyPositive[0] == null) {
+                                AlreadyPositiveStr = String.valueOf(ClientDao.getAllAlreadyPositiveFirstContact(monthData[0]));
+                                alreadyPositive[0] = AlreadyPositiveStr;
+                                monthData[47] = AlreadyPositiveStr;
+                            } else {
+                                AlreadyPositiveStr = alreadyPositive[0];
+                                monthData[47] = AlreadyPositiveStr;
+                            }
+
+                            String TestedHIVStr = "";
+                            if (testedHIV[0] == null) {
+                                TestedHIVStr = String.valueOf(ClientDao.getAllTestedHIVFirstContact(monthData[0]));
+                                testedHIV[0] = TestedHIVStr;
+                                monthData[48] = TestedHIVStr;
+                            } else {
+                                TestedHIVStr = alreadyPositive[0];
+                                monthData[48] = TestedHIVStr;
+                            }
+
+                            String ScreenedTBStr = "";
+                            if (screenedTB[0] == null) {
+                                ScreenedTBStr = String.valueOf(ClientDao.getAllScreenedForTBContact(monthData[0]));
+                                screenedTB[0] = ScreenedTBStr;
+                                monthData[49] = ScreenedTBStr;
+                            } else {
+                                ScreenedTBStr = screenedTB[0];
+                                monthData[49] = ScreenedTBStr;
+                            }
+
+                            String TTCVPlusTwoStr = "";
+                            if (ttcvPlusTwo[0] == null) {
+                                TTCVPlusTwoStr = String.valueOf(ClientDao.getAllTTCVPlusTwoContact(monthData[0]));
+                                ttcvPlusTwo[0] = TTCVPlusTwoStr;
+                                monthData[50] = TTCVPlusTwoStr;
+                            } else {
+                                TTCVPlusTwoStr = ttcvPlusTwo[0];
+                                monthData[50] = TTCVPlusTwoStr;
+                            }
+
+                            String ReferredTBStr = "";
+                            if (referredTB[0] == null) {
+                                ReferredTBStr = String.valueOf(ClientDao.getAllReferredTBContact(monthData[0]));
+                                referredTB[0] = ReferredTBStr;
+                                monthData[51] = ReferredTBStr;
+                            } else {
+                                ReferredTBStr = referredTB[0];
+                                monthData[51] = ReferredTBStr;
+                            }
+
+                            String ContactCountStr = "";
+                            if (contactCount[0] == null) {
+                                ContactCountStr = String.valueOf(ClientDao.getAllContactCount(monthData[0]));
+                                contactCount[0] = ContactCountStr;
+                                monthData[52] = ContactCountStr;
+                            } else {
+                                ContactCountStr = contactCount[0];
+                                monthData[52] = ContactCountStr;
+                            }
+
+                            if (monthData[0].contains("1")) {
+                                JanuaryData = monthData;
+                            } else if (monthData[0].contains("2")) {
+                                FebruaryData = monthData;
+                            } else if (monthData[0].contains("3")) {
+                                MarchData = monthData;
+                            } else if (monthData[0].contains("4")) {
+                                AprilData = monthData;
+                            } else if (monthData[0].contains("5")) {
+                                MayData = monthData;
+                            } else if (monthData[0].contains("6")) {
+                                JuneData = monthData;
+                            } else if (monthData[0].contains("7")) {
+                                JulyData = monthData;
+                            } else if (monthData[0].contains("8")) {
+                                AugustData = monthData;
+                            } else if (monthData[0].contains("9")) {
+                                SeptemberData = monthData;
+                            } else if (monthData[0].contains("10")) {
+                                OctoberData = monthData;
+                            } else if (monthData[0].contains("11")) {
+                                NovemberData = monthData;
+                            } else if (monthData[0].contains("12")) {
+                                DecemberData = monthData;
+                            }
+
+
+                            return results;
+                        }
+
+                        @Override
+                        protected void onPostExecute(List<String> results) {
+
+                            String[] TotalData = new String[53];
+                            if (results.get(0).contains("1")) {
+                                TotalData = JanuaryData;
+                            } else if (results.get(0).contains("2")) {
+                                TotalData = FebruaryData;
+                            } else if (results.get(0).contains("3")) {
+                                TotalData = MarchData;
+                            } else if (results.get(0).contains("4")) {
+                                TotalData = AprilData;
+                            } else if (results.get(0).contains("5")) {
+                                TotalData = MayData;
+                            } else if (results.get(0).contains("6")) {
+                                TotalData = JuneData;
+                            } else if (results.get(0).contains("7")) {
+                                TotalData = JulyData;
+                            } else if (results.get(0).contains("8")) {
+                                TotalData = AugustData;
+                            } else if (results.get(0).contains("9")) {
+                                TotalData = SeptemberData;
+                            } else if (results.get(0).contains("10")) {
+                                TotalData = OctoberData;
+                            } else if (results.get(0).contains("11")) {
+                                TotalData = NovemberData;
+                            } else if (results.get(0).contains("12")) {
+                                TotalData = DecemberData;
+                            }
+                            if (isMonthDataComplete(TotalData) && Integer.parseInt(TotalData[0]) < 13) {
+                                String FILENAME = TotalData[0] + "_" + "monthData.txt";
+                                String filePath = Utils.getAppPath(context) + FILENAME;
+                                File file = new File(filePath);
+                                if (!file.exists()) {
+                                    try {
+                                        file.createNewFile();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                                        System.out.println("Attempting to save data to file");
+                                        if (TotalData != null) {
+                                            for (String data : TotalData) {
+                                                writer.write(data);
+                                                writer.newLine();
+                                                System.out.println("Writing data to file");
+                                            }
+                                        }
+                                        System.out.println("Data saved successfully for month: " + TotalData[0]);
+                                    } catch (IOException e) {
+                                        System.out.println("Failed to save data to file for month: " + TotalData[0]);
+                                    }
+                                } else {
+                                    System.out.println("Unable to save incomplete data for month: " + TotalData[0]);
+                                }
+                            }
+
+                            //int womenSeen = Integer.parseInt(results.get(0)) + Integer.parseInt(results.get(1)) + Integer.parseInt(results.get(2)) + Integer.parseInt(results.get(3));
+                        }
+                    }.execute();
+
+                    if (adjustedMonth == 12) {
+                        break; // Exit the loop when it reaches the 12th month
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
 
     @Override
@@ -100,7 +826,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                                         getResources()));
             }
 
-            bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+            bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
             if (!isLibraryItemEnabled()) {
                 bottomNavigationView.getMenu().removeItem(R.id.action_library);
@@ -506,4 +1232,45 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     public void setAdvancedSearchFormData(HashMap<String, String> advancedSearchFormData) {
         this.advancedSearchFormData = advancedSearchFormData;
     }
+
+    /*private void saveMonthDataToFile() throws IOException {
+        if (isMonthDataComplete(monthData)) {
+            String FILENAME = currentMonth + "_" + "monthData.txt";
+            String filePath = Utils.getAppPath(context) + FILENAME;
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    System.out.println("Attempting to save data to file");
+                    if (monthData != null) {
+                        for (String data : monthData) {
+                            writer.write(data);
+                            writer.newLine();
+                            System.out.println("Writing data to file");
+                        }
+                    }
+                    System.out.println("Data saved successfully");
+                } catch (IOException e) {
+                    System.out.println("Failed to save data to file");
+                }
+            } else {
+                System.out.println("Unable to save incomplete month data");
+            }
+        }
+
+    }*/
+
+
+    private boolean isMonthDataComplete(String[] TotalData) {
+        for (String data : TotalData) {
+            if (data == null || data.isEmpty()) {
+                System.out.println("Data collection is not complete");
+                return false;  // Found an empty or null element
+            }
+        }
+        System.out.println("Data collection has been completed");
+        return true;  // All elements are filled with data
+    }
 }
+
+
