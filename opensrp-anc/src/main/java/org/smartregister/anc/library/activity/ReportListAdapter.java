@@ -51,6 +51,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
         final MonthModel month = months.get(position);
 
 
+
         holder.txtMonthName.setText(month.getMonthName() + " 2023 Report");
 
         holder.monthLayout.setOnClickListener(v -> {
@@ -58,13 +59,19 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
             if (v.getId() == R.id.monthLayout) {
                 selectedMonth = position + 1;
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Monthly Report Form");
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Monthly Report Form");*/
 
                 //String attentionFlagArrayList = ClientDao.getFirstContact("gest_age_openmrs","8","12");
 
 
-                String[] stringArray = new String[]{"1. Monthly detailed reports [Click to Open]"/*, "2. FP Information, Education and Communication [Click to Open]", "3. Referrals to Health Facilities [Click to Open]", "4. Stockouts of Family Planning Commodities [Click to Open]"*/};
+                Intent i = new Intent(context, ReportActivity3.class);
+                i.putExtra("month_name", month.getMonthName());
+                i.putExtra("month_number", month.getMonthNumber());
+                i.putExtra("report_type", "1");
+                context.startActivity(i);
+
+                /*String[] stringArray = new String[]{"1. Monthly detailed reports [Click to Open]"*//*, "2. FP Information, Education and Communication [Click to Open]", "3. Referrals to Health Facilities [Click to Open]", "4. Stockouts of Family Planning Commodities [Click to Open]"*//*};
 
                 builder.setItems(stringArray, (dialog, which) -> {
 
@@ -75,7 +82,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
                         i.putExtra("month_number", month.getMonthNumber());
                         i.putExtra("report_type", "1");
                         context.startActivity(i);
-                    }/* else if(which == 1){
+                    }*//* else if(which == 1){
                         Intent i = new Intent(context, ReportActivity3.class);
                         i.putExtra("month_name", month.getMonthName());
                         i.putExtra("month_number", month.getMonthNumber());
@@ -95,13 +102,13 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
                         context.startActivity(i);
                     }
 */
-                    else {
+                    /*else {
                         //Toasty.info(context, "Coming Soon", Toasty.LENGTH_SHORT).show();
                     }
 
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                });*/
+                //AlertDialog dialog = builder.create();
+                //dialog.show();
             }
         });
     }

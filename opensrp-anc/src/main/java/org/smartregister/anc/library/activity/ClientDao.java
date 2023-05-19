@@ -207,10 +207,10 @@ public class ClientDao extends AbstractDao {
         return values;
 
     }
-    public static String getFirstContact(String key,String lowerAge,String upperAge) {
+    public static String getFirstContact(String key,String lowerAge,String upperAge, String monthLoading) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        int localMonth = ReportListAdapter.selectedMonth;
+        int localMonth = Integer.parseInt(monthLoading);
         String query ="SELECT B.value, C.value AS age\n" +
                 "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
                 "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
@@ -255,10 +255,10 @@ public class ClientDao extends AbstractDao {
 
     }
 
-    public static String getFirstContactAbove15(String key,String lowerAge,String upperAge) {
+    public static String getFirstContactAbove15(String key,String lowerAge,String upperAge, String monthLoading) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        int localMonth = ReportListAdapter.selectedMonth;
+        int localMonth = Integer.parseInt(monthLoading);
         String query ="SELECT B.value, C.value AS age\n" +
                 "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
                 "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
@@ -303,10 +303,10 @@ public class ClientDao extends AbstractDao {
 
     }
 
-    public static String getFirstContactAbove20(String key,String lowerAge,String upperAge) {
+    public static String getFirstContactAbove20(String key,String lowerAge,String upperAge, String monthLoading) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        int localMonth = ReportListAdapter.selectedMonth;
+        int localMonth = Integer.parseInt(monthLoading);
         String query ="SELECT B.value, C.value AS age\n" +
                 "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
                 "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
@@ -351,10 +351,10 @@ public class ClientDao extends AbstractDao {
 
     }
 
-    public static String getFirstContactAbove25(String key,String lowerAge,String upperAge) {
+    public static String getFirstContactAbove25(String key,String lowerAge,String upperAge, String monthLoading) {
 
         //String sql = "SELECT * FROM ec_client_index WHERE household_id = '"+ householdID +"' AND is_closed = '0'";
-        int localMonth = ReportListAdapter.selectedMonth;
+        int localMonth = Integer.parseInt(monthLoading);;
         String query ="SELECT B.value, C.value AS age\n" +
                 "FROM (SELECT * FROM ec_details WHERE key = 'next_contact') AS A\n" +
                 "JOIN (SELECT * FROM ec_details WHERE key = 'attention_flag_facts') AS B ON A.base_entity_id = B.base_entity_id \n" +
@@ -399,8 +399,8 @@ public class ClientDao extends AbstractDao {
 
     }
 
-    public static int getAllOutside(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllOutside(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);;
         String sql = "SELECT * FROM ec_mother_details \n" +
                 "WHERE ec_mother_details.origin <> 'catchment_area' \n" +
                 "AND ec_mother_details.origin IS NOT NULL \n" +
@@ -411,8 +411,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllHighRiskContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllHighRiskContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);;
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -423,8 +423,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllFirstContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllFirstContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
                 "FROM client \n" +
                 "WHERE client.json LIKE '%contact_date%' \n" +
@@ -435,8 +435,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllSecondContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllSecondContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
                 "FROM client \n" +
                 "WHERE client.json LIKE '%contact_date%' \n" +
@@ -446,8 +446,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllThirdContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllThirdContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
                 "FROM client \n" +
                 "WHERE client.json LIKE '%contact_date%' \n" +
@@ -458,8 +458,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllFourthToSeventhContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllFourthToSeventhContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
                 "FROM client \n" +
                 "WHERE client.json LIKE '%contact_date%' \n" +
@@ -469,8 +469,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllEighthAboveContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllEighthAboveContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(client.json, INSTR(client.json, '-') + 1, 2), '0', '') AS contact_month \n" +
                 "FROM client \n" +
                 "WHERE client.json LIKE '%contact_date%' \n" +
@@ -480,8 +480,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllSyphScreenedContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllSyphScreenedContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -492,8 +492,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllSyphPositiveContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllSyphPositiveContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -520,8 +520,8 @@ public class ClientDao extends AbstractDao {
        dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllHepBScreenedContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllHepBScreenedContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -548,8 +548,8 @@ public class ClientDao extends AbstractDao {
      dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllAnaemiaPositiveContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllAnaemiaPositiveContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -568,8 +568,8 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllAnaemiaScreenedContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllAnaemiaScreenedContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -580,8 +580,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllHepBPositiveContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllHepBPositiveContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -600,8 +600,8 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllIPTP1Contact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllIPTP1Contact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -623,8 +623,8 @@ public class ClientDao extends AbstractDao {
        dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllIPTP2Contact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllIPTP2Contact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -646,8 +646,8 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllIPTP3Contact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllIPTP3Contact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -669,8 +669,8 @@ public class ClientDao extends AbstractDao {
        dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllIPTP4Contact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllIPTP4Contact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -692,8 +692,8 @@ public class ClientDao extends AbstractDao {
        dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllProvidedITNContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllProvidedITNContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -720,8 +720,8 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllProvidedIronContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllProvidedIronContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -732,8 +732,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllDewormedContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllDewormedContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -760,8 +760,8 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllStartedOnPrepContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllStartedOnPrepContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -772,12 +772,14 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllAlreadyOnPrepContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllAlreadyOnPrepContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT *, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
-                " FROM ec_details \n" +
-                " WHERE ec_details.value LIKE '%contact_date%' \n" +
-                " AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" + "AND  ec_details.value\" LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.base_entity_id";
+                "FROM ec_details \n" +
+                "WHERE ec_details.value LIKE '%contact_date%' \n" +
+                "AND REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') = '" + localMonth + "'\n" +
+                "AND ec_details.value LIKE '%started_on_prep\":\"already%' GROUP BY ec_details.base_entity_id";
+
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
@@ -818,8 +820,8 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllAlreadyARTinANCContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllAlreadyARTinANCContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -830,8 +832,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllStartedARTinANCContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllStartedARTinANCContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -850,8 +852,8 @@ public class ClientDao extends AbstractDao {
         dataCallback.onDataRetrieved(values);
     }
 
-    public static int getAllFollowUpContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllFollowUpContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -862,8 +864,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllContactCount(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllContactCount(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -875,8 +877,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllReferredTBContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllReferredTBContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -887,8 +889,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllTTCVPlusTwoContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllTTCVPlusTwoContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -899,8 +901,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllScreenedForTBContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllScreenedForTBContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -911,8 +913,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllTestedHIVFirstContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllTestedHIVFirstContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -926,8 +928,8 @@ public class ClientDao extends AbstractDao {
     }
 
 
-    public static int getAllAlreadyPositiveFirstContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllAlreadyPositiveFirstContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -938,8 +940,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllTestedPositiveFirstContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllTestedPositiveFirstContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -950,8 +952,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllOnARTContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllOnARTContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -962,8 +964,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllViralLoadResultsContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllViralLoadResultsContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -974,8 +976,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllSuppressedViralLoadResultsContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllSuppressedViralLoadResultsContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -983,11 +985,15 @@ public class ClientDao extends AbstractDao {
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
-        return values.size();
+        if(values == null) {
+            return 0;
+        }else {
+            return values.size();
+        }
     }
 
-    public static int getAllMaleTestFirstContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllMaleTestFirstContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -998,8 +1004,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllMalePositiveFirstContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllMalePositiveFirstContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -1010,8 +1016,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllMaleAlreadyPositiveContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllMaleAlreadyPositiveContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -1022,8 +1028,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllMaleStartedARTinANCContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllMaleStartedARTinANCContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +
@@ -1034,8 +1040,8 @@ public class ClientDao extends AbstractDao {
         return values.size();
     }
 
-    public static int getAllDiscordantContact(){
-        int localMonth = ReportListAdapter.selectedMonth;
+    public static int getAllDiscordantContact(String monthLoading){
+        int localMonth = Integer.parseInt(monthLoading);
         String sql = "SELECT ec_details.base_entity_id, REPLACE(SUBSTR(ec_details.value, INSTR(ec_details.value, '-') + 1, 2), '0', '') AS contact_month \n" +
                 " FROM ec_details \n" +
                 " WHERE ec_details.value LIKE '%contact_date%' \n" +

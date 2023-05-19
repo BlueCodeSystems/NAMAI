@@ -2,8 +2,11 @@ package org.smartregister.anc.library.activity;
 
 import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
 
+import static org.smartregister.anc.library.activity.ReportListAdapter.selectedMonth;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,11 +42,18 @@ import org.smartregister.util.JsonFormUtils;
 import org.smartregister.view.activity.SecuredActivity;
 import org.smartregister.view.contract.MeContract;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import timber.log.Timber;
 
 //import androidx.recyclerview.widget.GridLayoutManager;
@@ -56,6 +66,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
     private MeContract.Model model;
     public static JSONObject dangerValidJson;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +75,9 @@ public abstract class BaseContactActivity extends SecuredActivity {
         presenter.setBaseEntityId(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID));
         setupViews();
         model = new MeModel();
+
     }
+
 
     @Override
     protected void onResume() {
@@ -89,7 +102,6 @@ public abstract class BaseContactActivity extends SecuredActivity {
         findViewById(R.id.finalize_contact).setOnClickListener(contactActionHandler);
 
     }
-
 
 
     protected void startFormActivity(JSONObject form, Contact contact) {
@@ -119,10 +131,10 @@ public abstract class BaseContactActivity extends SecuredActivity {
 
         ////////
         String name = model.getName();
-        if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
-            JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+        if (form.optString("encounter_type").equals("Rapid Assessment and Management")) {
+            JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "provider_name");
             ccname.put(JsonFormUtils.VALUE, name);
-            dangerValidJson =  getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"danger_signs");
+            dangerValidJson = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "danger_signs");
         }
 
         if (ConstantsUtils.JsonFormUtils.ANC_TEST.equals(contact.getFormName()) && contact.getContactNumber() > 1) {
@@ -284,7 +296,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
             int i = view.getId();
             if (i == R.id.undo_button) {
                 displayContactSaveDialog();
-            }  else if (i == R.id.finalize_contact) {
+            } else if (i == R.id.finalize_contact) {
                 Utils.finalizeForm(getActivity(),
                         (HashMap<String, String>) getIntent().getSerializableExtra(ConstantsUtils.IntentKeyUtils.CLIENT_MAP),
                         false);
@@ -292,3 +304,4 @@ public abstract class BaseContactActivity extends SecuredActivity {
         }
     }
 }
+
