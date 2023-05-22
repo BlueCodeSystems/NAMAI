@@ -175,7 +175,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Partner HIV test date required"
       }
     },
@@ -211,7 +211,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_result.v_required.err}}"
       },
       "relevance": {

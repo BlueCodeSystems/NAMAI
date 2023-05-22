@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -121,7 +121,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please specify the date of referral"
       }
     },
@@ -149,7 +149,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please specify the date of referral"
       }
     },
@@ -232,7 +232,7 @@
         }
       ],
       "v_required": {
-        "value": "true",
+        "value": "false",
         "err": "Referral reason is required"
       },
       "relevance": {

@@ -46,7 +46,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "HIV test status is required"
       }
     },
@@ -111,7 +111,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "HIV not done reason is required!"
       },
       "relevance": {
@@ -171,7 +171,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "HIV test date is required."
       },
       "calculation": {
@@ -214,7 +214,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please record the HIV test result"
       },
       "relevance": {

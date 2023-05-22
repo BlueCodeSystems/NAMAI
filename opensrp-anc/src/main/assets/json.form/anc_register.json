@@ -70,11 +70,7 @@
         "type": "edit_text",
         "read_only": "true",
         "hint": "{{anc_register.step1.anc_id.hint}}",
-        "value": "0",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.anc_id.v_required.err}}"
-        }
+        "value": "0"
       },
       {
         "key": "study_id",
@@ -94,10 +90,6 @@
         "type": "edit_text",
         "hint": "{{anc_register.step1.first_name.hint}}",
         "edit_type": "name",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.first_name.v_required.err}}"
-        },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "{{anc_register.step1.first_name.v_regex.err}}"
@@ -111,10 +103,6 @@
         "type": "edit_text",
         "hint": "Maiden Name",
         "edit_type": "name",
-        "v_required": {
-          "value": "false",
-          "err": "Please enter the Maiden Name"
-        },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "Please enter a valid name"
@@ -128,10 +116,6 @@
         "type": "edit_text",
         "hint": "{{anc_register.step1.last_name.hint}}",
         "edit_type": "name",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.last_name.v_required.err}}"
-        },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "{{anc_register.step1.last_name.v_regex.err}}"
@@ -144,10 +128,6 @@
         "openmrs_entity_id": "nrc",
         "type": "edit_text",
         "hint": "{{anc_register.step1.nrc.hint}}",
-        "v_required": {
-          "value": "false",
-          "err": "{{anc_register.step1.nrc.v_required.err}}"
-        },
         "v_regex": {
           "value": "([0-9]{6}/[0-9]{2}/[0-9])|\\s*",
           "err": "Number must take the format of ######/##/#"
@@ -196,10 +176,6 @@
         },
         "min_date": "today-100y",
         "max_date": "today-10y",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.dob_entered.v_required.err}}"
-        },
         "relevance": {
           "step1:dob_unknown": {
             "ex-checkbox": [
@@ -289,10 +265,6 @@
               }
             ]
           }
-        },
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.age_entered.v_required.err}}"
         }
       },
       {
@@ -339,10 +311,7 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "tertiary"
           }
-        ],
-        "v_required": {
-          "value": false
-        }
+        ]
       },
       {
         "key": "marital_status",
@@ -394,10 +363,7 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "widowed"
           }
-        ],
-        "v_required": {
-          "value": false
-        }
+        ]
       },
       {
         "key": "occupation",
@@ -444,10 +410,6 @@
             "openmrs_entity_id": "other"
           }
         ],
-        "v_required": {
-          "value": true,
-          "err": "please state occupation"
-        },
         "relevance": {
           "step1:educ_level": {
             "type": "string",
@@ -493,9 +455,6 @@
             "openmrs_entity_id": "other_redacted"
           }
         ],
-        "v_required": {
-          "value": false
-        },
         "relevance": {
           "step1:educ_level": {
             "type": "string",
@@ -517,9 +476,6 @@
             "ex": "equalTo(., \"other\")"
           }
         },
-        "v_required": {
-          "value": false
-        },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*"
         }
@@ -537,9 +493,6 @@
             "type": "string",
             "ex": "equalTo(., \"other_redacted\")"
           }
-        },
-        "v_required": {
-          "value": false
         },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*"
@@ -568,11 +521,7 @@
             "openmrs_entity": "",
             "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
-        ],
-        "v_required": {
-          "value": false,
-          "err": "{{anc_register.step1.reminders.v_required.err}}"
-        }
+        ]
       },
       {
         "key": "home_address",
@@ -581,11 +530,7 @@
         "openmrs_entity_id": "address2",
         "type": "edit_text",
         "hint": "{{anc_register.step1.home_address.hint}}",
-        "edit_type": "name",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.home_address.v_required.err}}"
-        }
+        "edit_type": "name"
       },
       {
         "key": "landmark",
@@ -594,11 +539,7 @@
         "openmrs_entity_id": "landmark",
         "type": "edit_text",
         "hint": "Landmark",
-        "edit_type": "name",
-        "v_required": {
-          "value": "false",
-          "err": "Please a enter a Landmark"
-        }
+        "edit_type": "name"
       },
       {
         "key": "phone_number",
@@ -610,10 +551,6 @@
         "v_numeric": {
           "value": "true",
           "err": "{{anc_register.step1.phone_number.v_numeric.err}}"
-        },
-        "v_required": {
-          "value": "false",
-          "err": "{{anc_register.step1.phone_number.v_required.err}}"
         },
         "v_regex": {
           "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
@@ -643,11 +580,7 @@
             "openmrs_entity": "",
             "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_register.step1.reminders.v_required.err}}"
-        }
+        ]
       },
       {
         "key": "alt_name",
@@ -868,11 +801,7 @@
             "text": "Outside catchment area",
             "text_color": "#000000"
           }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "Please select origin"
-        }
+        ]
       },
       {
         "key": "next_contact",

@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_status.v_required.err}}"
       }
     },
@@ -88,7 +88,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_notdone.v_required.err}}"
       },
       "relevance": {
@@ -155,7 +155,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_date.v_required.err}}"
       }
     },
@@ -198,7 +198,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_hepatitis_b_sub_form.step1.hepb_test_type.v_required.err}}"
       }
     },
@@ -227,7 +227,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_hepatitis_b_sub_form.step1.hbsag_lab_ima.v_required.err}}"
       },
       "relevance": {
@@ -263,7 +263,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_hepatitis_b_sub_form.step1.hbsag_rdt.v_required.err}}"
       },
       "relevance": {
@@ -299,7 +299,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_hepatitis_b_sub_form.step1.hbsag_dbs.v_required.err}}"
       },
       "relevance": {

@@ -123,7 +123,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_close.step1.anc_close_reason.v_required.err}}"
         }
       },
@@ -137,7 +137,7 @@
         "expanded": false,
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_close.step1.delivery_date.v_required.err}}"
         },
         "relevance": {
@@ -180,7 +180,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_close.step1.delivery_place.v_required.err}}"
         },
         "relevance": {
@@ -595,7 +595,7 @@
         "expanded": false,
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_close.step1.miscarriage_abortion_date.v_required.err}}"
         },
         "relevance": {
@@ -640,7 +640,7 @@
         },
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_close.step1.death_date.v_required.err}}"
         },
         "relevance": {
@@ -732,7 +732,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_close.step1.death_cause.v_required.err}}"
         },
         "relevance": {

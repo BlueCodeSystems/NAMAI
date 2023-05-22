@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true
+        "value": false
       }
     },
     {
@@ -87,7 +87,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_ultrasound_sub_form.step1.ultrasound_notdone.v_required.err}}"
       },
       "relevance": {
@@ -152,7 +152,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_ultrasound_sub_form.step1.ultrasound_date.v_required.err}}"
       },
       "calculation": {
@@ -247,7 +247,7 @@
       "text_color": "#000000",
       "selected_text_color": "#ffffff",
       "v_required": {
-        "value": true
+        "value": false
       },
       "relevance": {
         "rules-engine": {
@@ -300,7 +300,7 @@
         }
       ],
       "v_required": {
-        "value": "true",
+        "value": "false",
         "err": "Fetal heartbeat is required"
       },
       "relevance": {
@@ -326,7 +326,7 @@
         }
       },
       "v_required": {
-        "value": "true",
+        "value": "false",
         "err": "enter fetal heart rate"
       },
       "v_numeric": {

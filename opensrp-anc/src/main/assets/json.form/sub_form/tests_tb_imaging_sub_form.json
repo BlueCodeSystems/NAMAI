@@ -45,7 +45,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_tb_screening_sub_form.step1.tb_screening_status.v_required.err}}"
       }
     },
@@ -89,7 +89,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_tb_screening_sub_form.step1.tb_screening_notdone.v_required.err}}"
       }
     },
@@ -149,7 +149,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_tb_screening_sub_form.step1.tb_screening_date.v_required.err}}"
       }
     },
@@ -192,7 +192,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_tb_screening_sub_form.step1.tb_screening_result.v_required.err}}"
       }
     },

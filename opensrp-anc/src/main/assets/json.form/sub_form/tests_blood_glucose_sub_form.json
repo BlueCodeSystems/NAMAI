@@ -45,7 +45,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -89,7 +89,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please select an option"
       },
       "relevance": {
@@ -159,7 +159,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Select the date of the glucose test"
       }
     },
@@ -202,7 +202,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -227,7 +227,7 @@
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the fasting plasma glucose test"
       },
       "relevance": {
@@ -259,7 +259,7 @@
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the initial 75g OGTT - fasting glucose."
       },
       "relevance": {
@@ -291,7 +291,7 @@
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the 75g OGTT - fasting glucose (1 hr)."
       },
       "relevance": {
@@ -323,7 +323,7 @@
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the 75g OGTT - fasting glucose (2 hr)."
       },
       "relevance": {
@@ -355,7 +355,7 @@
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the random plasma glucose test."
       },
       "relevance": {

@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "TB screening status is required"
       }
     },
@@ -96,7 +96,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please record the date TB screening was done"
       }
     },
@@ -132,7 +132,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -174,7 +174,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -245,7 +245,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Reason why tb screen was not done is required"
       }
     },
@@ -296,7 +296,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Tb screen result is required"
       }
     },

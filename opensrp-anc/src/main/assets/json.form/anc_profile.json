@@ -819,7 +819,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.lmp_known.v_required.err}}"
         }
       },
@@ -835,7 +835,7 @@
         "min_date": "today-1y",
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify ultrasound date"
         },
         "relevance": {
@@ -909,7 +909,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.ultrasound_done.v_required.err}}"
         }
       },
@@ -925,7 +925,7 @@
         "min_date": "today-1y",
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify ultrasound date"
         },
         "relevance": {
@@ -987,7 +987,7 @@
           }
         },
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.ultrasound_gest_age_wks.v_required.err}}"
         },
         "v_numeric_integer": {
@@ -1153,7 +1153,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.lmp_gest_age_selection.v_required.err}}"
         },
         "calculation": {
@@ -1190,7 +1190,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.ultrasound_gest_age_selection.v_required.err}}"
         },
         "calculation": {
@@ -1227,7 +1227,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.sfh_gest_age_selection.v_required.err}}"
         },
         "calculation": {
@@ -1255,7 +1255,7 @@
         "label_info_title": "GA from SFH or HOF - weeks",
         "hint": "{{anc_profile.step2.sfh_gest_age.hint}}",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.sfh_gest_age.v_required.err}}"
         },
         "v_numeric_integer": {
@@ -1305,7 +1305,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.lmp_ultrasound_gest_age_selection.v_required.err}}"
         },
         "calculation": {
@@ -1348,7 +1348,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step2.sfh_ultrasound_gest_age_selection.v_required.err}}"
         },
         "calculation": {
@@ -1527,7 +1527,7 @@
         "text": "{{anc_profile.step3.gravida_label.text}}",
         "text_color": "#000000",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step3.gravida_label.v_required.err}}"
         }
       },
@@ -2020,7 +2020,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -2472,7 +2472,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -2924,7 +2924,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -3362,7 +3362,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -3422,7 +3422,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step3.prev_preg_comps.v_required.err}}"
         }
       },
@@ -3519,7 +3519,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step3.prev_preg_comps.v_required.err}}"
         }
       },
@@ -4161,7 +4161,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -4598,7 +4598,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -5035,7 +5035,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -5472,7 +5472,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -5915,7 +5915,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -6353,7 +6353,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -6790,7 +6790,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -7227,7 +7227,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -7670,7 +7670,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -8107,7 +8107,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -8544,7 +8544,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -8674,7 +8674,7 @@
         "hint": "{{anc_profile.step4.health_conditions_cancer_other.hint}}",
         "edit_type": "edit_text",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step4.health_conditions_cancer_other.v_required.err}}"
         },
         "relevance": {
@@ -8979,7 +8979,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step6.medications.v_required.err}}"
         }
       },
@@ -9181,7 +9181,7 @@
         },
         "max_date": "today",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step4.hiv_diagnosis_date.v_required.err}}"
         }
       },
@@ -9285,7 +9285,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step5.tt_immun_status.v_required.err}}"
         }
       },
@@ -9324,7 +9324,7 @@
         "text_color": "#000000",
         "selected_text_color": "#ffffff",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please enter the number of doses"
         },
         "relevance": {
@@ -9487,7 +9487,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step5.hepatitis_immun_status.v_required.err}}"
         }
       },
@@ -9586,7 +9586,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.caffeine_intake.v_required.err}}"
         }
       },
@@ -9649,7 +9649,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
         }
       },
@@ -9686,7 +9686,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
         }
       },
@@ -9782,7 +9782,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.alcohol_substance_enquiry.v_required.err}}"
         }
       },
@@ -9842,7 +9842,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.alcohol_substance_use.v_required.err}}"
         }
       },
@@ -10112,7 +10112,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please select HIV status"
         }
       },
@@ -10193,7 +10193,7 @@
           }
         },
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please state whether on ART"
         }
       },
@@ -10233,7 +10233,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please enter the other reason not on ART"
         },
         "relevance": {
@@ -10298,7 +10298,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please select HIV status"
         }
       },
@@ -10395,7 +10395,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please enter the other reason not on ART"
         },
         "relevance": {
