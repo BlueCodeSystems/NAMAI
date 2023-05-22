@@ -4,6 +4,9 @@ package org.smartregister.anc.library.activity;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,6 +39,16 @@ public class HIA2ReportsActivity extends AppCompatActivity {
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE , PorterDuff.Mode.SRC_ATOP);
         toolbar.setTitle("Reports");
         toolbar.setTitleTextColor(Color.WHITE);
+
+        Button regenerateButton = findViewById(R.id.regenerate);
+        regenerateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Reloading querries, Please Wait...", Toast.LENGTH_SHORT).show();
+                BaseHomeRegisterActivity.reloadQueries();
+            }
+        });
+
         //NavigationMenu.getInstance(this, null, toolbar);
 
         recyclerView = findViewById(R.id.recyclerView);

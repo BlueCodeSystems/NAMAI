@@ -9,8 +9,10 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -53,6 +55,7 @@ import org.smartregister.configurableviews.model.Field;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.helper.BottomNavigationHelper;
 import org.smartregister.listener.BottomNavigationListener;
+import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -76,7 +79,13 @@ import timber.log.Timber;
  * Created by keyman on 26/06/2018.
  */
 
-public class BaseHomeRegisterActivity extends BaseRegisterActivity implements RegisterContract.View {
+public class BaseHomeRegisterActivity extends BaseRegisterActivity implements RegisterContract.View, SyncStatusBroadcastReceiver.SyncStatusListener
+
+
+
+
+
+{
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
     private AlertDialog recordBirthAlertDialog;
@@ -88,20 +97,20 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     private HashMap<String, String> advancedSearchFormData = new HashMap<>();
 
 
-    String[] JanuaryData = new String[53];
-    String[] FebruaryData = new String[53];
-    String[] MarchData = new String[53];
-    String[] AprilData = new String[53];
-    String[] MayData = new String[53];
-    String[] JuneData = new String[53];
-    String[] JulyData = new String[53];
-    String[] AugustData = new String[53];
-    String[] SeptemberData = new String[53];
-    String[] OctoberData = new String[53];
-    String[] NovemberData = new String[53];
-    String[] DecemberData = new String[53];
+    static String[] JanuaryData = new String[53];
+    static String[] FebruaryData = new String[53];
+    static String[] MarchData = new String[53];
+    static String[] AprilData = new String[53];
+    static String[] MayData = new String[53];
+    static String[] JuneData = new String[53];
+    static String[] JulyData = new String[53];
+    static String[] AugustData = new String[53];
+    static String[] SeptemberData = new String[53];
+    static String[] OctoberData = new String[53];
+    static String[] NovemberData = new String[53];
+    static String[] DecemberData = new String[53];
     //String[] TotalData = new String[53];
-    int currentMonth = 1;
+    static int currentMonth = 1;
     static Context context;
 
     @Override
@@ -110,10 +119,11 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         recordBirthAlertDialog = createAlertDialog();
         createAttentionFlagsAlertDialog();
         this.context = BaseHomeRegisterActivity.this;
-        loadReports();
+        SyncStatusBroadcastReceiver.init(this);
+        SyncStatusBroadcastReceiver.getInstance().addSyncStatusListener(this);
     }
 
-    public void loadReports()
+    public static void loadReports()
     {
 
 
@@ -789,6 +799,8 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                                             }
                                         }
                                         System.out.println("Data saved successfully for month: " + TotalData[0]);
+                                        Toast.makeText(context, "Data saved successfully for month: " + TotalData[0], Toast.LENGTH_SHORT).show();
+
                                     } catch (IOException e) {
                                         System.out.println("Failed to save data to file for month: " + TotalData[0]);
                                     }
@@ -810,6 +822,38 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             }
 
         }
+    }
+
+    static void reloadQueries(){
+
+        boolean deletionCompleted = false;
+
+        for (int month = 1; month <= 12; month++) {
+            String FILENAME = month + "_monthData.txt";
+            String filePath = Utils.getAppPath(context) + FILENAME;
+            File file = new File(filePath);
+            if (file.exists()) {
+                boolean deleted = file.delete();
+                if (deleted) {
+                    System.out.println("File deleted successfully for month: " + month);
+                } else {
+                    System.out.println("Failed to delete file for month: " + month);
+                }
+            } else {
+                System.out.println("File does not exist for month: " + month);
+            }
+        }
+
+        deletionCompleted = true;
+
+        if (deletionCompleted) {
+            System.out.println("Deletion completed");
+
+            loadReports();
+
+            System.out.println("Reports reloading");
+        }
+
     }
 
     @Override
@@ -1261,7 +1305,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     }*/
 
 
-    private boolean isMonthDataComplete(String[] TotalData) {
+    private static boolean isMonthDataComplete(String[] TotalData) {
         for (String data : TotalData) {
             if (data == null || data.isEmpty()) {
                 System.out.println("Data collection is not complete");
@@ -1270,6 +1314,22 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         }
         System.out.println("Data collection has been completed");
         return true;  // All elements are filled with data
+    }
+
+    @Override
+    public void onSyncStart() {
+
+    }
+
+    @Override
+    public void onSyncInProgress(FetchStatus fetchStatus) {
+
+    }
+
+    @Override
+    public void onSyncComplete(FetchStatus fetchStatus) {
+        Toast.makeText(context, "Attempting to save data", Toast.LENGTH_SHORT).show();
+        loadReports();
     }
 }
 
