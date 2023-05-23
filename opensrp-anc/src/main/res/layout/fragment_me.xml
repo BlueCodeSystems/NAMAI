@@ -271,7 +271,19 @@
                     android:layout_marginEnd="@dimen/me_page_initials_background_margin"
                     android:contentDescription="@string/section_icon"
                     android:gravity="center"
+                    android:visibility="invisible"
                     android:src="@drawable/ic_view_history" />
+
+                <ProgressBar
+                    android:id="@+id/reportCircle"
+                    android:layout_width="@dimen/me_page_section_square_dimension"
+                    android:layout_height="@dimen/me_page_section_square_dimension"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/me_page_initials_background_margin"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:indeterminate="true" />
+
 
                 <TextView
                     android:id="@+id/hia2_reporting_text"
@@ -284,7 +296,7 @@
                     android:maxLines="1"
                     android:scrollHorizontally="true"
                     android:text="@string/hia2_reporting"
-                    android:textColor="@color/text_black"
+                    android:textColor="@color/black_text_color"
                     android:textSize="@dimen/me_page_section_text_size" />
 
                 <ImageView
