@@ -1,8 +1,11 @@
 package org.smartregister.anc.library.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +75,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
@@ -113,6 +119,10 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     static int currentMonth = 1;
     static Context context;
 
+    private static ImageView hia2ReportingImage;
+    private static TextView hia2ReportingText;
+    private static ProgressBar reportProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +133,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         SyncStatusBroadcastReceiver.getInstance().addSyncStatusListener(this);
     }
 
+    @SuppressLint("ResourceAsColor")
     public static void loadReports()
     {
 
@@ -800,6 +811,18 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                                         }
                                         System.out.println("Data saved successfully for month: " + TotalData[0]);
                                         Toast.makeText(context, "Data saved successfully for month: " + TotalData[0], Toast.LENGTH_SHORT).show();
+                                        if(TotalData[0].contains("12")){
+                                            hia2ReportingImage = MeFragment.changedView.findViewById(R.id.hia2_reportingImageView);
+                                            hia2ReportingText = MeFragment.changedView.findViewById(R.id.hia2_reporting_text);
+                                            reportProgress = MeFragment.changedView.findViewById(R.id.reportCircle);
+
+                                                hia2ReportingText.setText("HIA2 Reporting");
+                                                reportProgress.setVisibility(View.GONE);
+                                                hia2ReportingImage.setVisibility(View.VISIBLE);
+                                                hia2ReportingText.setTextColor(Color.BLACK);
+                                                hia2ReportingImage.setImageResource(R.drawable.ic_view_history);
+
+                                        }
 
                                     } catch (IOException e) {
                                         System.out.println("Failed to save data to file for month: " + TotalData[0]);
@@ -814,7 +837,19 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                     }.execute();
 
                     if (adjustedMonth == 12) {
+                        String timestamp = getCurrentTimestamp();
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("timestamp", timestamp);
+                        editor.apply();
+                        //MeFragment.updateView(context);
+
+                        //MeFragment.restartActivity();
+                        /*if(context instanceof MeFr){
+
+                        }*/
                         break; // Exit the loop when it reaches the 12th month
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -823,6 +858,13 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
         }
     }
+
+    public static String getCurrentTimestamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
+        return timestamp;
+    }
+
 
     static void reloadQueries(){
 
@@ -855,6 +897,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         }
 
     }
+
 
     @Override
     protected void registerBottomNavigation() {
@@ -1328,7 +1371,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     @Override
     public void onSyncComplete(FetchStatus fetchStatus) {
-        Toast.makeText(context, "Attempting to save data", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Attempting to save monthly reports data", Toast.LENGTH_SHORT).show();
         loadReports();
     }
 }

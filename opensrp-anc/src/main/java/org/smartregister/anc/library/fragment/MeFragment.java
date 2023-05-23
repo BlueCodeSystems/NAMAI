@@ -1,12 +1,18 @@
 package org.smartregister.anc.library.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +31,7 @@ import org.smartregister.util.LangUtils;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.MeContract;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -37,9 +44,13 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
     private RelativeLayout hia2ReportingSection;
     private RelativeLayout languageSwitcherSection;
     private RelativeLayout p2pSyncSetion;
+    private static ImageView hia2ReportingImage;
+    private static TextView hia2ReportingText;
+    private static ProgressBar reportProgress;
     private TextView languageSwitcherText;
     private final Map<String, Locale> locales = new HashMap<>();
     private String[] languages;
+    public static View changedView;
 
     @Nullable
     @Override
@@ -51,6 +62,7 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
     @Override
     protected void setUpViews(View view) {
         super.setUpViews(view);
+        changedView = view;
         mePopCharacteristicsSection = view.findViewById(R.id.me_pop_characteristics_section);
         siteCharacteristicsSection = view.findViewById(R.id.site_characteristics_section);
         hia2ReportingSection = view.findViewById(R.id.hia2_reporting_section);
@@ -68,6 +80,31 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         }
 
         setManifestVersion(view);
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void onResume() {
+        super.onResume();
+        hia2ReportingImage = changedView.findViewById(R.id.hia2_reportingImageView);
+        hia2ReportingText = changedView.findViewById(R.id.hia2_reporting_text);
+        reportProgress = changedView.findViewById(R.id.reportCircle);
+
+        String FILENAME = 12 + "_" + "monthData.txt";
+        String filePath = Utils.getAppPath(getActivity()) + FILENAME;
+        File file = new File(filePath);
+        if (!file.exists()) {
+            hia2ReportingText.setText("HIA2 Reporting (Generating...)");
+            hia2ReportingText.setTextColor(Color.GRAY);
+            hia2ReportingImage.setImageResource(R.drawable.ic_icon_settings);
+            reportProgress.setVisibility(View.VISIBLE);
+            hia2ReportingImage.setVisibility(View.INVISIBLE);
+        } else {
+            hia2ReportingText.setText("HIA2 Reporting");
+            hia2ReportingText.setTextColor(Color.BLACK);
+            hia2ReportingImage.setImageResource(R.drawable.ic_view_history);
+            reportProgress.setVisibility(View.GONE);
+            hia2ReportingImage.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setManifestVersion(View view) {
@@ -109,8 +146,16 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
             }
         }
         else if (viewId == R.id.hia2_reporting_section) {
-            if (getContext() != null) {
-                getContext().startActivity(new Intent(getContext(), HIA2ReportsActivity.class));
+
+            String FILENAME = 12 + "_" + "monthData.txt";
+            String filePath = Utils.getAppPath(getActivity()) + FILENAME;
+            File file = new File(filePath);
+            if (!file.exists()) {
+                Toast.makeText(getActivity(), "Reports generation in progress, check back later...", Toast.LENGTH_SHORT).show();
+            }else {
+                if (getContext() != null) {
+                    getContext().startActivity(new Intent(getContext(), HIA2ReportsActivity.class));
+                }
             }
         }
         else if (viewId == R.id.language_switcher_section) {
@@ -187,4 +232,31 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         //locales.put(getString(R.string.portuguese_brazil_language), new Locale("pt"));
     }
 
+    /*public void restartActivity(){
+        Intent intent = get; // Get the current intent
+        finish(); // Finish the current activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Set flags to clear activity stack and start as a new instance
+        startActivity(intent); // Start the new instance of the activity
+    }*/
+
+    /*@SuppressLint("ResourceAsColor")
+    public  static void updateView(Context context)
+    {
+        hia2ReportingImage = changedView.findViewById(R.id.hia2_reportingImageView);
+        hia2ReportingText = changedView.findViewById(R.id.hia2_reporting_text);
+
+        String FILENAME = 12 + "_" + "monthData.txt";
+        String filePath = Utils.getAppPath(context) + FILENAME;
+        File file = new File(filePath);
+        if (!file.exists()) {
+            hia2ReportingText.setText("HIA2 Reporting (Generating...)");
+            hia2ReportingText.setTextColor(R.color.contact_complete_grey_text);
+            hia2ReportingImage.setImageResource(R.drawable.ic_icon_settings);
+        } else {
+            hia2ReportingText.setText("HIA2 Reporting");
+            hia2ReportingText.setTextColor(R.color.black_text_color);
+            hia2ReportingImage.setImageResource(R.drawable.ic_view_history);
+        }
+        //Toast.makeText(context,"this has been hit",Toast.LENGTH_LONG).show();
+    }*/
 }
