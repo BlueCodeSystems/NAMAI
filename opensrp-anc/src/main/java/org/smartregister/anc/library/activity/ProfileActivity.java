@@ -113,6 +113,7 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
         nameView = findViewById(R.id.textview_name);
         imageView = findViewById(R.id.imageview_profile);
         dueButton = findViewById(R.id.profile_overview_due_button);
+        dueButton.setEnabled(true);
         updateTasksTabTitle();
     }
 
@@ -269,13 +270,13 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
         model = new MeModel();
         String name = model.getName();
 
-        if (!buttonAlertStatus.equals(ConstantsUtils.AlertStatusUtils.TODAY)) {
+//        if (!buttonAlertStatus.equals(ConstantsUtils.AlertStatusUtils.TODAY)) {
             String baseEntityId = detailMap.get(DBConstantsUtils.KeyUtils.BASE_ENTITY_ID);
 
             if (StringUtils.isNotBlank(baseEntityId)) {
                 Utils.proceedToContact(baseEntityId, detailMap, ProfileActivity.this, name);
             }
-        }
+       // }
     }
 
     @Override

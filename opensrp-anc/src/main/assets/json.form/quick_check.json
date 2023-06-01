@@ -65,7 +65,7 @@
         "value": "today",
         "hint": "Contact Date",
         "expanded": false,
-        "min_date": "today-20y",
+        "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
           "value": "false",

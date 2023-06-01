@@ -832,7 +832,6 @@
         "value": "today",
         "hint": "LMP Date",
         "expanded": true,
-        "min_date": "today-1y",
         "max_date": "today",
         "v_required": {
           "value": "false",
@@ -922,7 +921,7 @@
         "value": "today",
         "hint": "Ultrasound date",
         "expanded": true,
-        "min_date": "today-1y",
+        "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
           "value": "false",
@@ -1052,6 +1051,25 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "key": "ultrasound_edd",
+        "type": "hidden",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "key": "ultrasound_edd_no_day",
         "type": "hidden",
         "label_text_style": "bold",
         "text_color": "#FF0000",

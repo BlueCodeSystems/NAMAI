@@ -68,7 +68,7 @@
         "openmrs_entity": "person_identifier",
         "openmrs_entity_id": "ANC_ID",
         "type": "edit_text",
-        "read_only": "true",
+        "read_only": "false",
         "hint": "{{anc_register.step1.anc_id.hint}}",
         "value": "0"
       },
@@ -864,8 +864,12 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "last_contact_record_date",
-        "type": "hidden",
-        "value": ""
+        "type": "date_picker",
+        "value": "today",
+        "hint": "Contact Date",
+        "expanded": false,
+        "min_date": "today-49y",
+        "max_date": "today"
       }
     ]
   },
