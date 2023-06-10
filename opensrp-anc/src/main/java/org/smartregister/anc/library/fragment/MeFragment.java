@@ -232,31 +232,4 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         //locales.put(getString(R.string.portuguese_brazil_language), new Locale("pt"));
     }
 
-    /*public void restartActivity(){
-        Intent intent = get; // Get the current intent
-        finish(); // Finish the current activity
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Set flags to clear activity stack and start as a new instance
-        startActivity(intent); // Start the new instance of the activity
-    }*/
-
-    /*@SuppressLint("ResourceAsColor")
-    public  static void updateView(Context context)
-    {
-        hia2ReportingImage = changedView.findViewById(R.id.hia2_reportingImageView);
-        hia2ReportingText = changedView.findViewById(R.id.hia2_reporting_text);
-
-        String FILENAME = 12 + "_" + "monthData.txt";
-        String filePath = Utils.getAppPath(context) + FILENAME;
-        File file = new File(filePath);
-        if (!file.exists()) {
-            hia2ReportingText.setText("HIA2 Reporting (Generating...)");
-            hia2ReportingText.setTextColor(R.color.contact_complete_grey_text);
-            hia2ReportingImage.setImageResource(R.drawable.ic_icon_settings);
-        } else {
-            hia2ReportingText.setText("HIA2 Reporting");
-            hia2ReportingText.setTextColor(R.color.black_text_color);
-            hia2ReportingImage.setImageResource(R.drawable.ic_view_history);
-        }
-        //Toast.makeText(context,"this has been hit",Toast.LENGTH_LONG).show();
-    }*/
 }
