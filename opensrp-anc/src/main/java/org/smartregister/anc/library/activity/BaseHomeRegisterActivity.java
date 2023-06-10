@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -22,10 +24,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 import com.vijay.jsonwizard.activities.FormConfigurationJsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
@@ -33,9 +43,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.anc.library.AncLibrary;
+import org.smartregister.anc.library.BuildConfig;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.contract.RegisterContract;
 import org.smartregister.anc.library.domain.AttentionFlag;
@@ -117,11 +129,15 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     static String[] DecemberData = new String[53];
     //String[] TotalData = new String[53];
     static int currentMonth = 1;
-    static Context context;
+    public static Context context;
 
     private static ImageView hia2ReportingImage;
     private static TextView hia2ReportingText;
     private static ProgressBar reportProgress;
+
+    public static String username;
+
+    public static String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +147,145 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         this.context = BaseHomeRegisterActivity.this;
         SyncStatusBroadcastReceiver.init(this);
         SyncStatusBroadcastReceiver.getInstance().addSyncStatusListener(this);
+
+        if (username != null && password != null) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+            String code = sp.getString("code", "0000");
+
+            if (!sp.contains("code") || code.equals("0000")) {
+
+                getToken(username, password);
+
+            }
+
+        }
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
     }
+
+
+    private void getToken (final String username, final String password) {
+
+        String tag_string_req = "req_login";
+
+        String url = "https://keycloak.zeir.smartregister.org/auth/realms/ecap-stage/protocol/openid-connect/token";
+        StringRequest
+                stringRequest
+                = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+
+
+                        String jsonInString = new Gson().toJson(response.toString().trim());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.toString().trim());
+
+                            String token  = jsonObject.getString("access_token");
+
+                            getCreds(token);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                error -> {
+
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("grant_type","password");
+                params.put("username",username);
+                params.put("password",password);
+                params.put("scope","openid");
+                params.put("client_id", BuildConfig.OAUTH_CLIENT_ID);
+                params.put("client_secret",BuildConfig.OAUTH_CLIENT_SECRET);
+                return params;
+            }};
+
+        addToRequestQueue(stringRequest, tag_string_req);
+
+    }
+
+
+    private void getCreds(String token){
+
+        Log.i("mwamba_Namia_token ", "mwamba_Namia_token" + token);
+
+        String tag_string_creds = "req_creds";
+
+        String url = "https://keycloak.zeir.smartregister.org/auth/realms/ecap-stage/protocol/openid-connect/userinfo";
+        StringRequest
+                stringRequest
+                = new StringRequest(
+                Request.Method.GET,
+                url,
+                (Response.Listener<String>) response -> {
+
+                    try {
+                        JSONObject jObj = new JSONObject(response);
+
+                        String code = jObj.getString("code");
+                        String facility = jObj.getString("facility");
+                        String district = jObj.getString("district");
+
+                        // save user data
+                        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(BaseHomeRegisterActivity.this);
+                        SharedPreferences.Editor edit = sp.edit();
+
+
+                        edit.putString("code", code);
+                        edit.putString("facility", facility);
+                        edit.putString("district", district);
+
+                        edit.commit();
+                        finish();
+                        startActivity(getIntent());
+
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + token);
+                return params;
+            }};
+
+
+        addToRequestQueue(stringRequest, tag_string_creds);
+
+    }
+
+    public void addToRequestQueue(Request<String> request, String tag) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+
+        if (tag != null) {
+            request.setTag(tag);
+        }
+
+        requestQueue.add(request);
+    }
+
+    public static String getFacilityID(){
+
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+            String facilityID = sp.getString("code", "anonymous");
+
+            return facilityID;
+    }
+
 
     @SuppressLint("ResourceAsColor")
     public static void loadReports()

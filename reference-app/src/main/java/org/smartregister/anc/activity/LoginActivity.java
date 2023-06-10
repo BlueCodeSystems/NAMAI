@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
@@ -83,6 +84,15 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
 
     @Override
     public void goToHome(boolean remote) {
+        //setContentView(R.layout.activity_login);
+        getContentView();
+
+        EditText usernameEditText = findViewById(R.id.login_user_name_edit_text);
+        BaseHomeRegisterActivity.username = usernameEditText.getText().toString();
+
+        EditText passwordEditText = findViewById(R.id.login_password_edit_text);
+        BaseHomeRegisterActivity.password = passwordEditText.getText().toString();
+
         if (remote) {
             Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
         }
