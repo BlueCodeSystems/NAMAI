@@ -8,7 +8,10 @@ import androidx.core.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
+import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
+import org.smartregister.anc.library.activity.BaseHomeRegisterActivity;
 import org.smartregister.anc.library.contract.RegisterContract;
 import org.smartregister.anc.library.interactor.RegisterInteractor;
 import org.smartregister.anc.library.model.RegisterModel;
@@ -155,7 +158,9 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int thisYear = year % 100;
-        String smNumber = "30010007" + "/" +entityId+"/"+thisYear;
+        String facilityID = BaseHomeRegisterActivity.getFacilityID();
+
+        String smNumber = facilityID + "/" +entityId+"/"+thisYear;
         try {
             startForm(triple.getLeft(), smNumber, triple.getMiddle(), triple.getRight());
         } catch (Exception e) {

@@ -1,24 +1,41 @@
 package org.smartregister.anc.library.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 import com.vijay.jsonwizard.activities.FormConfigurationJsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
@@ -26,9 +43,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.anc.library.AncLibrary;
+import org.smartregister.anc.library.BuildConfig;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.contract.RegisterContract;
 import org.smartregister.anc.library.domain.AttentionFlag;
@@ -53,6 +72,7 @@ import org.smartregister.configurableviews.model.Field;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.helper.BottomNavigationHelper;
 import org.smartregister.listener.BottomNavigationListener;
+import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -67,6 +87,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
@@ -76,7 +97,13 @@ import timber.log.Timber;
  * Created by keyman on 26/06/2018.
  */
 
-public class BaseHomeRegisterActivity extends BaseRegisterActivity implements RegisterContract.View {
+public class BaseHomeRegisterActivity extends BaseRegisterActivity implements RegisterContract.View, SyncStatusBroadcastReceiver.SyncStatusListener
+
+
+
+
+
+{
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
     private AlertDialog recordBirthAlertDialog;
@@ -88,21 +115,29 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     private HashMap<String, String> advancedSearchFormData = new HashMap<>();
 
 
-    String[] JanuaryData = new String[53];
-    String[] FebruaryData = new String[53];
-    String[] MarchData = new String[53];
-    String[] AprilData = new String[53];
-    String[] MayData = new String[53];
-    String[] JuneData = new String[53];
-    String[] JulyData = new String[53];
-    String[] AugustData = new String[53];
-    String[] SeptemberData = new String[53];
-    String[] OctoberData = new String[53];
-    String[] NovemberData = new String[53];
-    String[] DecemberData = new String[53];
+    static String[] JanuaryData = new String[53];
+    static String[] FebruaryData = new String[53];
+    static String[] MarchData = new String[53];
+    static String[] AprilData = new String[53];
+    static String[] MayData = new String[53];
+    static String[] JuneData = new String[53];
+    static String[] JulyData = new String[53];
+    static String[] AugustData = new String[53];
+    static String[] SeptemberData = new String[53];
+    static String[] OctoberData = new String[53];
+    static String[] NovemberData = new String[53];
+    static String[] DecemberData = new String[53];
     //String[] TotalData = new String[53];
-    int currentMonth = 1;
-    static Context context;
+    static int currentMonth = 1;
+    public static Context context;
+
+    private static ImageView hia2ReportingImage;
+    private static TextView hia2ReportingText;
+    private static ProgressBar reportProgress;
+
+    public static String username;
+
+    public static String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,10 +145,150 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         recordBirthAlertDialog = createAlertDialog();
         createAttentionFlagsAlertDialog();
         this.context = BaseHomeRegisterActivity.this;
-        loadReports();
+        SyncStatusBroadcastReceiver.init(this);
+        SyncStatusBroadcastReceiver.getInstance().addSyncStatusListener(this);
+
+        if (username != null && password != null) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+            String code = sp.getString("code", "0000");
+
+            if (!sp.contains("code") || code.equals("0000")) {
+
+                getToken(username, password);
+
+            }
+
+        }
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
     }
 
-    public void loadReports()
+
+    private void getToken (final String username, final String password) {
+
+        String tag_string_req = "req_login";
+
+        String url = "https://keycloak.zeir.smartregister.org/auth/realms/ecap-stage/protocol/openid-connect/token";
+        StringRequest
+                stringRequest
+                = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+
+
+                        String jsonInString = new Gson().toJson(response.toString().trim());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.toString().trim());
+
+                            String token  = jsonObject.getString("access_token");
+
+                            getCreds(token);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                error -> {
+
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("grant_type","password");
+                params.put("username",username);
+                params.put("password",password);
+                params.put("scope","openid");
+                params.put("client_id", BuildConfig.OAUTH_CLIENT_ID);
+                params.put("client_secret",BuildConfig.OAUTH_CLIENT_SECRET);
+                return params;
+            }};
+
+        addToRequestQueue(stringRequest, tag_string_req);
+
+    }
+
+
+    private void getCreds(String token){
+
+        Log.i("mwamba_Namia_token ", "mwamba_Namia_token" + token);
+
+        String tag_string_creds = "req_creds";
+
+        String url = "https://keycloak.zeir.smartregister.org/auth/realms/ecap-stage/protocol/openid-connect/userinfo";
+        StringRequest
+                stringRequest
+                = new StringRequest(
+                Request.Method.GET,
+                url,
+                (Response.Listener<String>) response -> {
+
+                    try {
+                        JSONObject jObj = new JSONObject(response);
+
+                        String code = jObj.getString("code");
+                        String facility = jObj.getString("facility");
+                        String district = jObj.getString("district");
+
+                        // save user data
+                        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(BaseHomeRegisterActivity.this);
+                        SharedPreferences.Editor edit = sp.edit();
+
+
+                        edit.putString("code", code);
+                        edit.putString("facility", facility);
+                        edit.putString("district", district);
+
+                        edit.commit();
+                        finish();
+                        startActivity(getIntent());
+
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + token);
+                return params;
+            }};
+
+
+        addToRequestQueue(stringRequest, tag_string_creds);
+
+    }
+
+    public void addToRequestQueue(Request<String> request, String tag) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+
+        if (tag != null) {
+            request.setTag(tag);
+        }
+
+        requestQueue.add(request);
+    }
+
+    public static String getFacilityID(){
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String facilityID = sp.getString("code", "anonymous");
+
+        return facilityID;
+    }
+
+
+    @SuppressLint("ResourceAsColor")
+    public static void loadReports()
     {
 
 
@@ -789,6 +964,20 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                                             }
                                         }
                                         System.out.println("Data saved successfully for month: " + TotalData[0]);
+                                        Toast.makeText(context, "Data saved successfully for month: " + TotalData[0], Toast.LENGTH_SHORT).show();
+                                        if(TotalData[0].contains("12")){
+                                            hia2ReportingImage = MeFragment.changedView.findViewById(R.id.hia2_reportingImageView);
+                                            hia2ReportingText = MeFragment.changedView.findViewById(R.id.hia2_reporting_text);
+                                            reportProgress = MeFragment.changedView.findViewById(R.id.reportCircle);
+
+                                            hia2ReportingText.setText("HIA2 Reporting");
+                                            reportProgress.setVisibility(View.GONE);
+                                            hia2ReportingImage.setVisibility(View.VISIBLE);
+                                            hia2ReportingText.setTextColor(Color.BLACK);
+                                            hia2ReportingImage.setImageResource(R.drawable.ic_view_history);
+
+                                        }
+
                                     } catch (IOException e) {
                                         System.out.println("Failed to save data to file for month: " + TotalData[0]);
                                     }
@@ -802,7 +991,19 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                     }.execute();
 
                     if (adjustedMonth == 12) {
+                        String timestamp = getCurrentTimestamp();
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("timestamp", timestamp);
+                        editor.apply();
+                        //MeFragment.updateView(context);
+
+                        //MeFragment.restartActivity();
+                        /*if(context instanceof MeFr){
+
+                        }*/
                         break; // Exit the loop when it reaches the 12th month
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -811,6 +1012,46 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
         }
     }
+
+    public static String getCurrentTimestamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm", Locale.getDefault());
+        String timestamp = sdf.format(new Date());
+        return timestamp;
+    }
+
+
+    static void reloadQueries(){
+
+        boolean deletionCompleted = false;
+
+        for (int month = 1; month <= 12; month++) {
+            String FILENAME = month + "_monthData.txt";
+            String filePath = Utils.getAppPath(context) + FILENAME;
+            File file = new File(filePath);
+            if (file.exists()) {
+                boolean deleted = file.delete();
+                if (deleted) {
+                    System.out.println("File deleted successfully for month: " + month);
+                } else {
+                    System.out.println("Failed to delete file for month: " + month);
+                }
+            } else {
+                System.out.println("File does not exist for month: " + month);
+            }
+        }
+
+        deletionCompleted = true;
+
+        if (deletionCompleted) {
+            System.out.println("Deletion completed");
+
+            loadReports();
+
+            System.out.println("Reports reloading");
+        }
+
+    }
+
 
     @Override
     protected void registerBottomNavigation() {
@@ -821,9 +1062,9 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             if (isMeItemEnabled()) {
                 bottomNavigationView.getMenu()
                         .add(Menu.NONE, org.smartregister.R.string.action_me, Menu.NONE, org.smartregister.R.string.me).setIcon(
-                        bottomNavigationHelper
-                                .writeOnDrawable(org.smartregister.R.drawable.bottom_bar_initials_background, userInitials,
-                                        getResources()));
+                                bottomNavigationHelper
+                                        .writeOnDrawable(org.smartregister.R.drawable.bottom_bar_initials_background, userInitials,
+                                                getResources()));
             }
 
             bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
@@ -1261,7 +1502,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     }*/
 
 
-    private boolean isMonthDataComplete(String[] TotalData) {
+    private static boolean isMonthDataComplete(String[] TotalData) {
         for (String data : TotalData) {
             if (data == null || data.isEmpty()) {
                 System.out.println("Data collection is not complete");
@@ -1270,6 +1511,22 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         }
         System.out.println("Data collection has been completed");
         return true;  // All elements are filled with data
+    }
+
+    @Override
+    public void onSyncStart() {
+
+    }
+
+    @Override
+    public void onSyncInProgress(FetchStatus fetchStatus) {
+
+    }
+
+    @Override
+    public void onSyncComplete(FetchStatus fetchStatus) {
+        Toast.makeText(context, "Attempting to save monthly reports data", Toast.LENGTH_SHORT).show();
+        loadReports();
     }
 }
 

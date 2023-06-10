@@ -401,13 +401,6 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "informal_employment_other"
-          },
-          {
-            "key": "other",
-            "text": "Other",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "other"
           }
         ],
         "relevance": {
@@ -446,13 +439,6 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "informal_employment_other_redacted"
-          },
-          {
-            "key": "other_redacted",
-            "text": "Other",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "other_redacted"
           }
         ],
         "relevance": {
@@ -460,42 +446,6 @@
             "type": "string",
             "ex": "equalTo(.,\"none\")"
           }
-        }
-      },
-      {
-        "key": "occupation_other",
-        "openmrs_entity_parent": "occupation_other",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "occupation_other",
-        "type": "edit_text",
-        "hint": "Other",
-        "edit_type": "name",
-        "relevance": {
-          "step1:occupation": {
-            "type": "string",
-            "ex": "equalTo(., \"other\")"
-          }
-        },
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*"
-        }
-      },
-      {
-        "key": "occupation_other_redacted",
-        "openmrs_entity_parent": "occupation_other_redacted",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "occupation_other_redacted",
-        "type": "edit_text",
-        "hint": "Other",
-        "edit_type": "name",
-        "relevance": {
-          "step1:occupation_redacted": {
-            "type": "string",
-            "ex": "equalTo(., \"other_redacted\")"
-          }
-        },
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*"
         }
       },
       {
@@ -702,7 +652,7 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "cohabitants",
         "openmrs_data_type": "select multiple",
-        "label": "Co-habitants",
+        "label": "Person(s) the client lives with",
         "label_info_text": "Who does the client live with? It is important to know whether client lives with parents, other family members, a partner, friends, etc.",
         "type": "check_box",
         "exclusive": [
@@ -864,12 +814,8 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "last_contact_record_date",
-        "type": "date_picker",
-        "value": "today",
-        "hint": "Contact Date",
-        "expanded": false,
-        "min_date": "today-49y",
-        "max_date": "today"
+        "type": "hidden",
+        "value": ""
       }
     ]
   },

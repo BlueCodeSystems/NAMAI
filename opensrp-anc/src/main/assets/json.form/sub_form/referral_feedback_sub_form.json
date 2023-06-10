@@ -180,6 +180,69 @@
       }
     },
     {
+      "key": "bp_ref",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "bp_ref",
+      "type": "edit_text",
+      "hint": "BP",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      }
+    },
+
+    {
+      "key": "pulse_ref",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "pulse_ref",
+      "type": "edit_text",
+      "hint": "Pulse Rate",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      }
+    },
+
+    {
+      "key": "temp_ref",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "temp_ref",
+      "type": "edit_text",
+      "hint": "Temperature",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      }
+    },
+
+    {
+      "key": "resp_ref",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "resp_ref",
+      "type": "edit_text",
+      "hint": "Respiratory Rate",
+      "relevance": {
+        "rules-engine": {
+          "ex-rules": {
+            "rules-file": "tests_relevance_rules.yml"
+          }
+        }
+      }
+    },
+    {
       "key": "referal_reason",
       "openmrs_entity_parent": "",
       "openmrs_entity": "concept",

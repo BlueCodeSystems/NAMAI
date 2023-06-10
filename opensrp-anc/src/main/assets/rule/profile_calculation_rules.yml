@@ -53,7 +53,7 @@ description: Ultrasound  Gest age
 priority: 1
 condition: "step1_ultrasound_done== 'yes'"
 actions:
-  - "calculation = Math.ceil((helper.formatDate(global_contact_date,'d') - (helper.formatDate(step1_ultrasound_edd_no_day,'d'))) / 7) + 2 + (step1_ultrasound_gest_age_days/step1_ultrasound_gest_age_days)"
+  - "calculation = -(Math.ceil((helper.formatDate(global_contact_date,'d') - (helper.formatDate(step1_ultrasound_done_date,'d'))) / 7) - (new Integer(step1_ultrasound_gest_age_wks)))"
 ---
 name: step1_sfh_edd
 description: SFH edd

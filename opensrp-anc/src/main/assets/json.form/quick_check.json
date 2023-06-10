@@ -993,6 +993,7 @@
         "openmrs_entity_id": "provider_name",
         "type": "edit_text",
         "hint": "Name of Provider",
+        "value": "",
         "edit_type": "name",
         "read_only": "true"
       },

@@ -334,6 +334,7 @@
     "lmp_known",
     "lmp_known_date",
     "ultrasound_done",
+    "ultrasound_done_date",
     "ultrasound_gest_age_wks",
     "sfh_gest_age",
     "select_gest_age_edd",
@@ -747,7 +748,9 @@
     "ttcv_protected",
     "ttcv_full_protected",
     "hiv_test_result",
-    "ultrasound_done_date"
+    "ultrasound_done_date",
+    "lmp_known_date",
+    "sfh_gest_age"
   ],
   "step1": {
     "title": "{{anc_profile.step1.title}}",
@@ -819,7 +822,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step2.lmp_known.v_required.err}}"
         }
       },
@@ -829,12 +832,11 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "date_picker",
-        "value": "today",
         "hint": "LMP Date",
         "expanded": true,
         "max_date": "today",
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please specify ultrasound date"
         },
         "relevance": {
@@ -908,7 +910,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step2.ultrasound_done.v_required.err}}"
         }
       },
@@ -918,13 +920,12 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "163165AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "date_picker",
-        "value": "today",
         "hint": "Ultrasound date",
         "expanded": true,
         "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please specify ultrasound date"
         },
         "relevance": {
@@ -986,7 +987,7 @@
           }
         },
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step2.ultrasound_gest_age_wks.v_required.err}}"
         },
         "v_numeric_integer": {
@@ -1273,7 +1274,7 @@
         "label_info_title": "GA from SFH or HOF - weeks",
         "hint": "{{anc_profile.step2.sfh_gest_age.hint}}",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step2.sfh_gest_age.v_required.err}}"
         },
         "v_numeric_integer": {
