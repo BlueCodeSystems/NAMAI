@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.presenter;
 
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+
 import android.content.Context;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -10,14 +12,17 @@ import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
+import org.smartregister.anc.library.activity.BaseHomeRegisterActivity;
 import org.smartregister.anc.library.contract.ContactContract;
 import org.smartregister.anc.library.domain.Contact;
 import org.smartregister.anc.library.interactor.ContactInteractor;
 import org.smartregister.anc.library.model.ContactModel;
 import org.smartregister.anc.library.model.MeModel;
+import org.smartregister.util.JsonFormUtils;
 import org.smartregister.view.contract.MeContract;
 
 import java.lang.ref.WeakReference;
+import java.time.Instant;
 import java.util.Map;
 
 import timber.log.Timber;
@@ -128,6 +133,15 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
             try {
                 String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
                 JSONObject form = model.getFormAsJson(contact.getFormName(), baseEntityId, locationId);
+
+                if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
+                    JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+                    JSONObject phnNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
+                    String name = BaseHomeRegisterActivity.getName();
+                    String phone = BaseHomeRegisterActivity.getPhone();
+                    ccname.put(JsonFormUtils.VALUE, name);
+                    phnNumber.put(JsonFormUtils.VALUE, phone);
+                }
 
                 if (contact.getGlobals() != null) {
                     for (Map.Entry<String, String> entry : contact.getGlobals().entrySet()) {

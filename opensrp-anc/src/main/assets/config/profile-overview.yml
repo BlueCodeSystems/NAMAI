@@ -3,6 +3,12 @@ properties_file_name: "profile_overview"
 group: overview_of_pregnancy
 sub_group: client_details
 fields:
+  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.provider_name}}: {provider_name}"
+    relevance: "provider_name != ''"
+
+  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.provider_phone_number}}: {provider_phone_number}"
+    relevance: "provider_phone_number != ''"
+
   - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.ga}}: {gest_age}"
     relevance: "gest_age != ''"
     isRedFont: "gest_age > 40"
@@ -37,11 +43,11 @@ fields:
 sub_group: body_mass_index
 fields:
   - template: "{{profile_overview.overview_of_pregnancy.weight.bmi}}: {bmi}"
-    relevance: "bmi != ''"
+    relevance: "bmi > 1"
     isRedFont: "bmi < 18.5 || bmi >= 25"
 
   - template: "{{profile_overview.overview_of_pregnancy.weight.weight_category}}: {weight_cat}"
-    relevance: "weight_cat !='' && weight_cat.contains('Underweight') || weight_cat.contains('Overweight') || weight_cat.contains('Obese')"
+    relevance: "weight_cat > 1 && weight_cat.contains('Underweight') || weight_cat.contains('Overweight') || weight_cat.contains('Obese')"
     isRedFont: "weight_cat.contains('Underweight') || weight_cat.contains('Overweight') || weight_cat.contains('Obese')"
 
   - template: "{{profile_overview.overview_of_pregnancy.weight.expected_weight_gain_during_the_pregnancy}}: {exp_weight_gain} kg"

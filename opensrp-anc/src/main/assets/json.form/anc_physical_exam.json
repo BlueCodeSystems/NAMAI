@@ -15,13 +15,16 @@
     "no_of_fetuses_unknown",
     "no_of_fetuses",
     "ipv_physical_signs_symptoms",
-    "current_weight"
+    "current_weight",
+    "previous_weight"
   ],
   "global_previous": [
-    "current_weight"
+    "current_weight",
+    "previous_weight"
   ],
   "editable_fields": [
     "height",
+    "previous_weight",
     "pregest_weight",
     "pregest_weight_unknown",
     "first_weight",
@@ -880,6 +883,29 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        }
+      },
+      {
+        "key": "previous_weight",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "previous_weight",
+        "readonly": "false",
+        "hidden": "true",
+        "label": "Initial weight",
+        "type": "normal_edit_text",
+        "edit_text_style": "bordered",
+        "edit_type": "number",
+        "v_numeric": {
+          "value": "true",
+          "err": ""
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "physical-exam-calculations-rules.yml"
+            }
+          }
         }
       },
       {

@@ -229,8 +229,21 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
             }
 
 
-            } else if (data.getOrigin() != null) {
-                holder.txtProductName.setText("IRH1-100 : Women from outside the catchment area");
+            } else if (data.getFirstC() != null) {
+            holder.txtProductName.setText("IRH1-100 : Total 1st ANC contact");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[14] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[14]);
+            }
+        } else if (data.getOrigin() != null) {
+                holder.txtProductName.setText("IRH1-105 : Women from outside the catchment area");
                 holder.f1.setBackgroundResource(R.drawable.na_round_button);
                 holder.f2.setBackgroundResource(R.drawable.na_round_button);
                 holder.f3.setBackgroundResource(R.drawable.na_round_button);
@@ -243,21 +256,23 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     holder.txtTotalFemaleSeen.setText(monthData[13]);
                 }
 
-            } else if (data.getFirstC() != null) {
-                holder.txtProductName.setText("IRH1-100 : Total 1st ANC contact");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
+        } else if (data.getHighRiskC() != null) {
+            holder.txtProductName.setText("IRH1-110 : High-risk Pregnancies");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-                if (monthData[14] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[14]);
-                }
+            if (monthData[19] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[19]);
+            }
 
-            } else if (data.getSecondC() != null) {
+        } else if (data.getSecondC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Follow-up antenatal contacts");
                 holder.txtProductName.setText("IRH1-115 : 2nd ANC contact");
                 holder.f1.setBackgroundResource(R.drawable.na_round_button);
                 holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -311,23 +326,65 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                 } else {
                     holder.txtTotalFemaleSeen.setText(monthData[18]);
                 }
-            } else if (data.getHighRiskC() != null) {
-                holder.txtProductName.setText("IRH1-110 : High-risk Pregnancies");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
+            } else if (data.getFollowUpC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Follow-up Antenantal Contacts");
+            holder.txtProductName.setText("IRH1-135 : Total follow up contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-                if (monthData[19] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[19]);
-                }
+            if (monthData[37] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[37]);
+            }
 
-            } else if (data.getSyphScreenedC() != null) {
-                holder.groupLabel.setVisibility(View.VISIBLE);
-                holder.groupLabel.setText("Antenatal Screening");
+        } else if (data.getContactCountC() != null) {
+            holder.txtProductName.setText("IRH1-140 : Total ANC contacts");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[52] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[52]);
+            }
+
+        } else if (data.getAnaemiaScreenedC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Antenatal Screening");
+            holder.txtProductName.setText("IRH1-145 : Initial anaemia screening");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[24] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[24]);
+            }
+        } else if (data.getAnaemiaPositiveC() != null) {
+            holder.txtProductName.setText("IRH1-150 : Diagnosed with Anaemia");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[25] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[25]);
+            }
+        } else if (data.getSyphScreenedC() != null) {
                 holder.txtProductName.setText("IRH1-155 : Initial syphilis screening");
                 holder.f1.setBackgroundResource(R.drawable.na_round_button);
                 holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -378,32 +435,6 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     holder.txtTotalFemaleSeen.setText("Loading...");
                 } else {
                     holder.txtTotalFemaleSeen.setText(monthData[23]);
-                }
-            } else if (data.getAnaemiaScreenedC() != null) {
-                holder.txtProductName.setText("IRH1-145 : Initial anaemia screening");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[24] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[24]);
-                }
-            } else if (data.getAnaemiaPositiveC() != null) {
-                holder.txtProductName.setText("IRH1-150 : Diagnosed with Anaemia");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[25] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[25]);
                 }
             } else if (data.getIPTP1C() != null) {
                 holder.groupLabel.setVisibility(View.VISIBLE);
@@ -491,7 +522,21 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     holder.txtTotalFemaleSeen.setText(monthData[31]);
                 }
 
-            } else if (data.getDewormedC() != null) {
+            } else if (data.getTTCVPlusTwoC() != null) {
+            holder.txtProductName.setText("IRH1-225 : Tetanus Toxoid (TT2+)");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[50] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[50]);
+            }
+
+        } else if (data.getDewormedC() != null) {
                 holder.txtProductName.setText("IRH1-230 : Dewormed");
                 holder.f1.setBackgroundResource(R.drawable.na_round_button);
                 holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -505,7 +550,125 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     holder.txtTotalFemaleSeen.setText(monthData[32]);
                 }
 
-            } else if (data.getStartedOnPrepC() != null) {
+            }else if (data.getScreenedTBC() != null) {
+            holder.txtProductName.setText("IRH1-235 : Presumptive TB");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[49] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[49]);
+            }
+
+        } else if (data.getReferredTBC() != null) {
+            holder.txtProductName.setText("IRH1-245 : Referred for TB Treatment");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[51] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[51]);
+            }
+
+        } else if (data.getTestedHIVC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Elimination of Mother-to-Child Transmission of HIV");
+            holder.txtProductName.setText("HIV2-005 : Tested - Initial test in ANC");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[48] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[48]);
+            }
+
+        } else if (data.getAlreadyPositiveC() != null) {
+            holder.txtProductName.setText("HIV2-035 : Known HIV+ at first ANC visit");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[47] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[47]);
+            }
+
+        } else if (data.getTestedPositiveC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("HIV Positive Results");
+            holder.txtProductName.setText("HIV2-040 : Positive - Initial test in ANC");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[46] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[46]);
+            }
+
+        } else if (data.getAlreadyOnARTC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Maternal ART");
+            holder.txtProductName.setText("HIV2-060 : Already on ART at 1st ANC visit");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[36] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[36]);
+            }
+
+        } else if (data.getStartedARTC() != null) {
+            holder.txtProductName.setText("HIV2-065 : Started on ART in ANC");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[35] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[35]);
+            }
+
+        } else if (data.getOnARTC() != null) {
+            holder.txtProductName.setText("HIV2-090 : Total mothers on ART");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[45] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[45]);
+            }
+
+        } else if (data.getStartedOnPrepC() != null) {
                 holder.txtProductName.setText("HIV2-091 : Started on PrEP in ANC");
                 holder.f1.setBackgroundResource(R.drawable.na_round_button);
                 holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -533,53 +696,95 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     holder.txtTotalFemaleSeen.setText(monthData[34]);
                 }
 
-            } else if (data.getStartedARTC() != null) {
-                holder.groupLabel.setVisibility(View.VISIBLE);
-                holder.groupLabel.setText("Maternal ART");
-                holder.txtProductName.setText("HIV2-065 : Started on ART in ANC");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
+        } else if (data.getViralLoadC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Monitoring");
+            holder.txtProductName.setText("HIV2-105 : With VL results");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-                if (monthData[35] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[35]);
-                }
+            if (monthData[43] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[43]);
+            }
 
-            } else if (data.getAlreadyOnARTC() != null) {
-                holder.txtProductName.setText("HIV2-060 : Already on ART at 1st ANC visit");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
+        } else if (data.getSuppressedViralLoadC() != null) {
+            holder.txtProductName.setText("HIV2-110 : VL suppressed");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-                if (monthData[36] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[36]);
-                }
+            if (monthData[44] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[44]);
+            }
 
-            } else if (data.getFollowUpC() != null) {
-                holder.groupLabel.setVisibility(View.VISIBLE);
-                holder.groupLabel.setText("Follow-up Antenantal Contacts");
-                holder.txtProductName.setText("IRH1-135 : Total follow up contacts");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
+        } else if (data.getMaleAlreadyPositiveC() != null) {
+            holder.groupLabel.setVisibility(View.VISIBLE);
+            holder.groupLabel.setText("Male Partner Involvement");
+            holder.txtProductName.setText("HIV2-115 : With known status at 1st visit to MCH");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
 
-                if (monthData[37] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[37]);
-                }
+            if (monthData[40] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[40]);
+            }
 
-            } else if (data.getDiscordantC() != null) {
+        } else if (data.getMaleTestedC() != null) {
+            holder.txtProductName.setText("HIV2-120 : Tested in MCH");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[42] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[42]);
+            }
+
+        } else if (data.getMalePositiveC() != null) {
+            holder.txtProductName.setText("HIV2-125 : Positive results (MCH only)");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[41] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[41]);
+            }
+
+        } else if (data.getMaleStartedARTC() != null) {
+            holder.txtProductName.setText("HIV2-126 : Male Partner started on ART in ANC");
+            holder.f1.setBackgroundResource(R.drawable.na_round_button);
+            holder.f2.setBackgroundResource(R.drawable.na_round_button);
+            holder.f3.setBackgroundResource(R.drawable.na_round_button);
+            holder.f4.setBackgroundResource(R.drawable.na_round_button);
+            holder.f5.setBackgroundResource(R.drawable.na_round_button);
+
+            if (monthData[39] == null) {
+                holder.txtTotalFemaleSeen.setText("Loading...");
+            } else {
+                holder.txtTotalFemaleSeen.setText(monthData[39]);
+            }
+
+        } else if (data.getDiscordantC() != null) {
                 holder.txtProductName.setText("HIV2-130 : Discordant Test Results");
                 holder.f1.setBackgroundResource(R.drawable.na_round_button);
                 holder.f2.setBackgroundResource(R.drawable.na_round_button);
@@ -591,210 +796,6 @@ public class ReportAdapter3 extends RecyclerView.Adapter< ReportAdapter3.ViewHol
                     holder.txtTotalFemaleSeen.setText("Loading...");
                 } else {
                     holder.txtTotalFemaleSeen.setText(monthData[38]);
-                }
-
-            } else if (data.getMaleStartedARTC() != null) {
-                holder.groupLabel.setVisibility(View.VISIBLE);
-                holder.groupLabel.setText("Male Partner Involvement");
-                holder.txtProductName.setText("HIV2-126 : Male Partner started on ART in ANC");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[39] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[39]);
-                }
-
-            } else if (data.getMaleAlreadyPositiveC() != null) {
-                holder.txtProductName.setText("HIV2-115 : With known status at 1st visit to MCH");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[40] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[40]);
-                }
-
-            } else if (data.getMalePositiveC() != null) {
-                holder.txtProductName.setText("HIV2-125 : Positive results (MCH only)");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[41] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[41]);
-                }
-
-            } else if (data.getMaleTestedC() != null) {
-                holder.txtProductName.setText("HIV2-120 : Tested in MCH");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[42] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[42]);
-                }
-
-            } else if (data.getViralLoadC() != null) {
-                holder.groupLabel.setVisibility(View.VISIBLE);
-                holder.groupLabel.setText("Monitoring");
-                holder.txtProductName.setText("HIV2-105 : With VL results");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[43] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[43]);
-                }
-
-            } else if (data.getSuppressedViralLoadC() != null) {
-                holder.txtProductName.setText("HIV2-110 : VL suppressed");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[44] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[44]);
-                }
-
-            } else if (data.getOnARTC() != null) {
-                holder.txtProductName.setText("HIV2-090 : Total mothers on ART");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[45] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[45]);
-                }
-
-            } else if (data.getTestedPositiveC() != null) {
-                holder.groupLabel.setVisibility(View.VISIBLE);
-                holder.groupLabel.setText("HIV Positive Results");
-                holder.txtProductName.setText("HIV2-040 : Positive - Initial test in ANC");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[46] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[46]);
-                }
-
-            } else if (data.getAlreadyPositiveC() != null) {
-                holder.txtProductName.setText("HIV2-035 : Known HIV+ at first ANC visit");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[47] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[47]);
-                }
-
-            } else if (data.getTestedHIVC() != null) {
-                holder.groupLabel.setVisibility(View.VISIBLE);
-                holder.groupLabel.setText("Elimination of Mother-to-Child Transmission of HIV");
-                holder.txtProductName.setText("HIV2-005 : Tested - Initial test in ANC");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[48] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[48]);
-                }
-
-            } else if (data.getScreenedTBC() != null) {
-                holder.txtProductName.setText("IRH1-235 : Presumptive TB");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[49] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[49]);
-                }
-
-            } else if (data.getTTCVPlusTwoC() != null) {
-                holder.txtProductName.setText("IRH1-225 : Tetanus Toxoid (TT2+)");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[50] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[50]);
-                }
-
-            } else if (data.getReferredTBC() != null) {
-                holder.txtProductName.setText("IRH1-245 : Referred for TB Treatment");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[51] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[51]);
-                }
-
-            } else if (data.getContactCountC() != null) {
-                holder.txtProductName.setText("IRH1-140 : Total ANC contacts");
-                holder.f1.setBackgroundResource(R.drawable.na_round_button);
-                holder.f2.setBackgroundResource(R.drawable.na_round_button);
-                holder.f3.setBackgroundResource(R.drawable.na_round_button);
-                holder.f4.setBackgroundResource(R.drawable.na_round_button);
-                holder.f5.setBackgroundResource(R.drawable.na_round_button);
-
-                if (monthData[52] == null) {
-                    holder.txtTotalFemaleSeen.setText("Loading...");
-                } else {
-                    holder.txtTotalFemaleSeen.setText(monthData[52]);
                 }
 
             }

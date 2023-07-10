@@ -154,6 +154,7 @@ fields:
   - "profile_hiv_test_result"
   - "on_art"
   - "hiv_work_around"
+  - "provider_phone_number"
 ---
 form: anc_physical_exam
 fields:

@@ -351,6 +351,17 @@
           "ex": "equalTo(., \"mtb_resistant\")"
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "problem"
     }
   ],
   "count": 1,

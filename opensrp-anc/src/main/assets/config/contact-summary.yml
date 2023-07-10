@@ -47,9 +47,6 @@ fields:
   - template: "{{contact_summary.hospital_referral.provider_name}}: {provider_name}"
     relevance: "emergency_referal.contains('yes')"
 
-  - template: "{{contact_summary.hospital_referral.provider_phone_number}}: {provider_phone_number}"
-    relevance: "!provider_phone_number.isEmpty()"
-
   - template: "{{contact_summary.hospital_referral.treatment}}: {referral_notes}"
     relevance: "!referral_notes.isEmpty()"
 

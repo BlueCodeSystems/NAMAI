@@ -94,6 +94,9 @@ public class ProfileOverviewFragment extends BaseProfileFragment implements Prof
     @Override
     protected void onResumption() {
         try {
+            dueButton = ((ProfileActivity) getActivity()).getDueButton();
+            dueButton.setEnabled(true);
+            dueButton.setOnClickListener((ProfileActivity) getActivity());
             fetchContactAndAlertStatus();
             yamlConfigListGlobal = new ArrayList<>(); //This makes sure no data duplication happens
             Facts facts = presenter.getImmediatePreviousContact(clientDetails, baseEntityId, contactNo);
