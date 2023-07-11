@@ -554,7 +554,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Gestational diabetes mellitus (GDM) risk counseling",
+        "text": "Gestational diabetes mellitus (GDM) risk counselling",
         "text_color": "#D56900",
         "toaster_info_text": "Please provide appropriate counseling for GDM risk mitigation, including:\n- Reasserting dietary interventions\n- Reasserting physical activity during pregnancy",
         "toaster_type": "warning",

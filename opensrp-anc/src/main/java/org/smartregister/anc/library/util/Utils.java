@@ -250,11 +250,16 @@ public class Utils extends org.smartregister.util.Utils {
             if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
                 JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
                 JSONObject smNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"register_id");
-                //JSONObject phnNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
+                JSONObject phnNumber = JsonFormUtils.getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
+                String dbname = BaseHomeRegisterActivity.getName();
+                String phone = BaseHomeRegisterActivity.getPhone();
+                ccname.put(JsonFormUtils.VALUE, dbname);
+                phnNumber.put(JsonFormUtils.VALUE, phone);
+
                 smNumber.put(JsonFormUtils.VALUE, personObjectClient.get("register_id"));
                 refIDstring = personObjectClient.get("register_id");
                 //phnNumber.put(JsonFormUtils.VALUE, personObjectClient.get("phone_number"));
-                ccname.put(JsonFormUtils.VALUE, name);
+                //ccname.put(JsonFormUtils.VALUE, name);
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     startRam = Instant.now();
