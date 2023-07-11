@@ -235,6 +235,9 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                         String code = jObj.getString("code");
                         String facility = jObj.getString("facility");
                         String district = jObj.getString("district");
+                        String name = jObj.getString("name");
+                        String phone = jObj.getString("phone");
+                        String nrc = jObj.getString("nrc");
 
                         // save user data
                         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(BaseHomeRegisterActivity.this);
@@ -244,6 +247,9 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                         edit.putString("code", code);
                         edit.putString("facility", facility);
                         edit.putString("district", district);
+                        edit.putString("name", name);
+                        edit.putString("phone", phone);
+                        edit.putString("nrc", nrc);
 
                         edit.commit();
                         finish();
@@ -280,10 +286,34 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     public static String getFacilityID(){
 
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-            String facilityID = sp.getString("code", "anonymous");
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String facilityID = sp.getString("code", "anonymous");
 
-            return facilityID;
+        return facilityID;
+    }
+
+    public static String getName(){
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String name = sp.getString("name", "anonymous");
+
+        return name;
+    }
+
+    public static String getPhone(){
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String phone = sp.getString("phone", "anonymous");
+
+        return phone;
+    }
+
+    public static String getNRC(){
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String nrc = sp.getString("nrc", "anonymous");
+
+        return nrc;
     }
 
 

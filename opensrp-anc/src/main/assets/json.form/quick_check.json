@@ -1010,25 +1010,7 @@
         "openmrs_entity_id": "provider_phone_number",
         "type": "edit_text",
         "hint": "Providers phone number",
-        "v_numeric": {
-          "value": "true",
-          "err": "Enter number"
-        },
-        "v_regex": {
-          "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
-          "err": "Number must start with 097|096|095|077|076 and must have be 10 digits in length"
-        },
-        "relevance": {
-          "step1:emergency_referal": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "yes"
-                ]
-              }
-            ]
-          }
-        }
+        "read_only": "true"
       },
       {
         "key": "referral_notes",

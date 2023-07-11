@@ -130,6 +130,7 @@ form: anc_profile
 fields:
   - "total_gravida"
   - "contact_no"
+  - "contact_date"
   - "no_of_fetuses"
   - "bmi"
   - "urine_glucose"
@@ -153,6 +154,7 @@ fields:
   - "profile_hiv_test_result"
   - "on_art"
   - "hiv_work_around"
+  - "provider_phone_number"
 ---
 form: anc_physical_exam
 fields:
