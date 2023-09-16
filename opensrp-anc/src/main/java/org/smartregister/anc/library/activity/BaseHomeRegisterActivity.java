@@ -139,6 +139,13 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     public static String password;
 
+    public static String code;
+    public static String facility;
+    public static String name;
+    public static String nrc;
+    public static String district;
+    public static String phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +176,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
         String tag_string_req = "req_login";
 
-        String url = "https://keycloak.zeir.smartregister.org/auth/realms/ecap-stage/protocol/openid-connect/token";
+        String url = "https://keycloak.zeir.smartregister.org/auth/realms/namai-stage/protocol/openid-connect/token";
         StringRequest
                 stringRequest
                 = new StringRequest(
@@ -221,7 +228,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
         String tag_string_creds = "req_creds";
 
-        String url = "https://keycloak.zeir.smartregister.org/auth/realms/ecap-stage/protocol/openid-connect/userinfo";
+        String url = "https://keycloak.zeir.smartregister.org/auth/realms/namai-stage/protocol/openid-connect/userinfo";
         StringRequest
                 stringRequest
                 = new StringRequest(
@@ -232,12 +239,12 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                     try {
                         JSONObject jObj = new JSONObject(response);
 
-                        String code = jObj.getString("code");
-                        String facility = jObj.getString("facility");
-                        String district = jObj.getString("district");
-                        String name = jObj.getString("name");
-                        String phone = jObj.getString("phone");
-                        String nrc = jObj.getString("nrc");
+                        code = jObj.getString("code");
+                        facility = jObj.getString("facility");
+                        district = jObj.getString("district");
+                        name = jObj.getString("name");
+                        phone = jObj.getString("phone");
+                        nrc = jObj.getString("nrc");
 
                         // save user data
                         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(BaseHomeRegisterActivity.this);
@@ -289,31 +296,43 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String facilityID = sp.getString("code", "anonymous");
 
+        if (facilityID.contains("anonymous")){
+            facilityID = code;
+        }
         return facilityID;
     }
 
     public static String getName(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String name = sp.getString("name", "anonymous");
+        String nameSP = sp.getString("name", "anonymous");
 
-        return name;
+        if (nameSP.contains("anonymous")){
+            nameSP = name;
+        }
+        return nameSP;
     }
 
     public static String getPhone(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String phone = sp.getString("phone", "anonymous");
+        String phoneSP = sp.getString("phone", "anonymous");
 
-        return phone;
+        if (phoneSP.contains("anonymous")){
+            phoneSP = phone;
+        }
+        return phoneSP;
     }
 
     public static String getNRC(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String nrc = sp.getString("nrc", "anonymous");
+        String nrcSP = sp.getString("nrc", "anonymous");
 
-        return nrc;
+        if (nrcSP.contains("anonymous")){
+            nrcSP = code;
+        }
+        return nrcSP;
     }
 
 
@@ -1280,6 +1299,8 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             switchToFragment(BaseRegisterActivity.LIBRARY_POSITION);
             setSelectedBottomBarMenuItem(org.smartregister.R.id.action_library);
         }
+
+        //if (getFacilityID() == formatedLocation.getText().toString()) {}
     }
 
     @Override

@@ -1,15 +1,20 @@
 package org.smartregister.anc.library.presenter;
 
+import static android.view.View.inflate;
+
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Pair;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
-import org.smartregister.AllConstants;
-import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.BaseHomeRegisterActivity;
 import org.smartregister.anc.library.contract.RegisterContract;
@@ -40,10 +45,13 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
     private RegisterContract.Model model;
     private String baseEntityId;
 
+    private RegisterPresenter context;
+
     public RegisterPresenter(RegisterContract.View view) {
         viewReference = new WeakReference<>(view);
         interactor = new RegisterInteractor();
         model = new RegisterModel();
+        context = this;
     }
 
     public void setModel(RegisterContract.Model model) {
@@ -101,23 +109,61 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
         if (locationPickerView == null || StringUtils.isBlank(locationPickerView.getSelectedItem())) {
             getView().displayToast(R.string.no_location_picker);
         } else {
-            String currentLocationId = model.getLocationId(locationPickerView.getSelectedItem());
+            String semiCurrentLocationId = model.getLocationId(locationPickerView.getSelectedItem());
+            String currentLocationId = semiCurrentLocationId.replaceAll("_", "");
             startForm(formName, entityId, metadata, currentLocationId);
         }
     }
 
+
     @Override
     public void startForm(String formName, String entityId, String metadata, String currentLocationId) throws Exception {
+        if ("anc_register".equals(formName)) {
+            Context context = getView().getContext();
 
-        if (StringUtils.isBlank(entityId)) {
-            Triple<String, String, String> triple = Triple.of(formName, metadata, currentLocationId);
-            interactor.getNextUniqueId(triple, this);
-            return;
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+            View view = LayoutInflater.from(context).inflate(R.layout.give_consent_dialog, null);
+            alertDialogBuilder.setView(view);
+
+            Button yes = view.findViewById(R.id.consent_yes);
+            final Button no = view.findViewById(R.id.consent_no);
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            yes.setOnClickListener(v -> {
+                alertDialog.dismiss();
+                if (StringUtils.isBlank(entityId)) {
+                    Triple<String, String, String> triple = Triple.of(formName, metadata, currentLocationId);
+                    interactor.getNextUniqueId(triple, this);
+                    return;
+                }
+
+                JSONObject form = null;
+                try {
+                    form = model.getFormAsJson(formName, entityId, currentLocationId);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                getView().startFormActivity(form);
+            });
+
+            no.setOnClickListener(v -> {
+                alertDialog.dismiss();
+                getView().displayToast("Consent was not given, unable to proceed");
+            });
+
+            alertDialog.show();
+        } else {
+            if (StringUtils.isBlank(entityId)) {
+                Triple<String, String, String> triple = Triple.of(formName, metadata, currentLocationId);
+                interactor.getNextUniqueId(triple, this);
+                return;
+            }
+
+            JSONObject form = model.getFormAsJson(formName, entityId, currentLocationId);
+            getView().startFormActivity(form);
         }
-
-        JSONObject form = model.getFormAsJson(formName, entityId, currentLocationId);
-        getView().startFormActivity(form);
-
     }
 
     @Override

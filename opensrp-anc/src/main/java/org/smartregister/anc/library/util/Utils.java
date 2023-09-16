@@ -1329,7 +1329,7 @@ public class Utils extends org.smartregister.util.Utils {
 
         int identifier = jsonFormView.getResources().getIdentifier(id, ConstantsUtils.IdentifierUtils.STRING_IDENTIFIEER,
                 jsonFormView.getApplicationContext().getPackageName());
-        String locationName = location.getProperties().getName();
+        String locationName = location.getProperties().getName().replaceAll("_", "");
         if (identifier != 0) {
             locationName = jsonFormView.getResources().getString(identifier);
         }

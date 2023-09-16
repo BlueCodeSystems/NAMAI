@@ -105,6 +105,13 @@
           }
         },
         {
+          "column_name": "sc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.sc_id"
+          }
+        },
+        {
           "column_name": "next_contact",
           "type": "Client",
           "json_mapping": {

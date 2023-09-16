@@ -143,7 +143,7 @@ android {
             minifyEnabled false
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
-            resValue "string", 'opensrp_url', '"https://opensrp.ecap.bluecodeltd.com/opensrp/"'
+            resValue "string", 'opensrp_url', '"https://opensrp.namai.bluecodeltd.com/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -159,7 +159,7 @@ android {
         }
 
         debug {
-            resValue "string", 'opensrp_url', '"https://opensrp.ecap.bluecodeltd.com/opensrp/"'
+            resValue "string", 'opensrp_url', '"https://opensrp.namai.bluecodeltd.com/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -279,7 +279,7 @@ android {
  */
 private Integer generateVersionCode() {
     //return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch This bit will be activated after we are sure of the clients minimum sdk version.
-    return ext.versionMajor * 10005 + ext.versionMinor * 100 + ext.versionPatch
+    return ext.versionMajor * 10006 + ext.versionMinor * 100 + ext.versionPatch
 }
 
 /**

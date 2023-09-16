@@ -1,7 +1,6 @@
 package org.smartregister.anc.library.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ import org.smartregister.anc.library.activity.PopulationCharacteristicsActivity;
 import org.smartregister.anc.library.activity.SiteCharacteristicsActivity;
 import org.smartregister.anc.library.presenter.MePresenter;
 import org.smartregister.anc.library.util.Utils;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.util.LangUtils;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.MeContract;
@@ -44,8 +44,11 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
     private RelativeLayout hia2ReportingSection;
     private RelativeLayout languageSwitcherSection;
     private RelativeLayout p2pSyncSetion;
+
+    private RelativeLayout me_location_section;
     private static ImageView hia2ReportingImage;
     private static TextView hia2ReportingText;
+    private static TextView formatedLocation;
     private static ProgressBar reportProgress;
     private TextView languageSwitcherText;
     private final Map<String, Locale> locales = new HashMap<>();
@@ -66,6 +69,7 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         mePopCharacteristicsSection = view.findViewById(R.id.me_pop_characteristics_section);
         siteCharacteristicsSection = view.findViewById(R.id.site_characteristics_section);
         hia2ReportingSection = view.findViewById(R.id.hia2_reporting_section);
+        me_location_section = view.findViewById(R.id.me_location_section);
         p2pSyncSetion = view.findViewById(R.id.p2p_section);
 
         if (Utils.enableLanguageSwitching()) {
@@ -88,6 +92,15 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         hia2ReportingImage = changedView.findViewById(R.id.hia2_reportingImageView);
         hia2ReportingText = changedView.findViewById(R.id.hia2_reporting_text);
         reportProgress = changedView.findViewById(R.id.reportCircle);
+
+        formatedLocation = MeFragment.changedView.findViewById(R.id.location_spaced);
+
+        String spacedFacility = LocationHelper.getInstance().getOpenMrsLocationName(LocationHelper.getInstance().getDefaultLocation());
+        if (spacedFacility != null) {
+            //String abcd = spacedFacility.replaceAll("(.{4})", "$1 ");
+            String facilityName = spacedFacility.replaceAll("_", "");
+            formatedLocation.setText(facilityName);
+        }
 
         String FILENAME = 12 + "_" + "monthData.txt";
         String filePath = Utils.getAppPath(getActivity()) + FILENAME;
