@@ -119,6 +119,8 @@ public class Utils extends org.smartregister.util.Utils {
     public static String refIDstring;
     public static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
 
+    public static String adjContactDate;
+
     static ContactModel baseContactModel = new ContactModel();
 
     //public static int endRamVal = 0;
@@ -657,6 +659,7 @@ public class Utils extends org.smartregister.util.Utils {
         return "";
     }
 
+
     private static String getDisplayTemplate(Context context, String alertStatus,
                                              boolean isProfile) {
         String displayTemplate;
@@ -752,9 +755,9 @@ public class Utils extends org.smartregister.util.Utils {
                         dueButton.setBackground(context.getResources().getDrawable(R.drawable.contact_disabled));
                         dueButton.setBackground(context.getResources().getDrawable(R.drawable.contact_disabled));
                         dueButton.setTextColor(context.getResources().getColor(R.color.dark_grey));
-                        dueButton.setText(String.format(context.getString(R.string.contact_recorded_today_no_break),
-                                Utils.getTodayContact(String.valueOf(buttonAlertStatus.nextContact))));
-                        break;
+//                        dueButton.setText(String.format(context.getString(R.string.contact_recorded_today_no_break),
+//                                Utils.getTodayContact(String.valueOf(buttonAlertStatus.nextContact))));
+//                        break;
                     default:
                         dueButton.setBackground(context.getResources().getDrawable(R.drawable.contact_due));
                         dueButton.setTextColor(context.getResources().getColor(R.color.vaccine_blue_bg_st));
@@ -1025,6 +1028,8 @@ public class Utils extends org.smartregister.util.Utils {
             JSONObject jsonSingleVisitObject = jsonObject.optJSONObject(repeatingGroupKeys.next());
 
             String contactDate = jsonSingleVisitObject.optString(ConstantsUtils.JsonFormKeyUtils.VISIT_DATE);
+
+            adjContactDate = contactDate;
 
             Facts entries = new Facts();
 
@@ -1329,7 +1334,7 @@ public class Utils extends org.smartregister.util.Utils {
 
         int identifier = jsonFormView.getResources().getIdentifier(id, ConstantsUtils.IdentifierUtils.STRING_IDENTIFIEER,
                 jsonFormView.getApplicationContext().getPackageName());
-        String locationName = location.getProperties().getName();
+        String locationName = location.getProperties().getName().replaceAll("_", "");
         if (identifier != 0) {
             locationName = jsonFormView.getResources().getString(identifier);
         }

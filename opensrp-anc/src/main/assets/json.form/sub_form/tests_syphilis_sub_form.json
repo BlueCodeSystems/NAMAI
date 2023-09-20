@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.syph_test_status.v_required.err}}"
       }
     },
@@ -131,7 +131,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.syph_test_notdone.v_required.err}}"
       }
     },
@@ -191,7 +191,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.syphilis_test_date.v_required.err}}"
       }
     },
@@ -234,7 +234,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.syph_test_type.v_required.err}}"
       }
     },
@@ -263,7 +263,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.rapid_syphilis_test.v_required.err}}"
       },
       "relevance": {
@@ -299,7 +299,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.rpr_syphilis_test.v_required.err}}"
       },
       "relevance": {
@@ -335,7 +335,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.lab_syphilis_test.v_required.err}}"
       },
       "relevance": {
@@ -379,6 +379,17 @@
           }
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "problem"
     }
   ],
   "count": 1,

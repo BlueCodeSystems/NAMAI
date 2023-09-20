@@ -1,5 +1,5 @@
 {
-  "validate_on_submit": false,
+  "validate_on_submit": true,
   "display_scroll_bars": true,
   "count": "1",
   "encounter_type": "Rapid Assessment and Management",
@@ -65,7 +65,7 @@
         "value": "today",
         "hint": "Contact Date",
         "expanded": false,
-        "min_date": "today-20y",
+        "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
           "value": "true",
@@ -111,7 +111,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         }
       },
@@ -362,7 +362,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.specific_complaint.v_required.err}}"
         },
         "relevance": {
@@ -663,7 +663,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -795,7 +795,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -883,7 +883,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -993,7 +993,18 @@
         "openmrs_entity_id": "provider_name",
         "type": "edit_text",
         "hint": "Name of Provider",
+        "value": "",
         "edit_type": "name",
+        "read_only": "true"
+      },
+      {
+        "key": "provider_phone_number",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "provider_phone_number",
+        "type": "edit_text",
+        "hint": "Phone number of Provider",
+        "value": "",
         "read_only": "true"
       },
       {
@@ -1002,15 +1013,6 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "register_id",
         "type": "hidden"
-      },
-      {
-        "key": "provider_phone_number",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "provider_phone_number",
-        "type": "edit_text",
-        "hint": "Providers phone number",
-        "read_only": "true"
       },
       {
         "key": "referral_notes",
@@ -1063,7 +1065,7 @@
         "min_date": "today-20y",
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify date of referral"
         },
         "relevance": {
@@ -1090,7 +1092,7 @@
         "min_date": "today-5y",
         "max_date": "today+5y",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify date of schedule"
         },
         "relevance": {
@@ -1178,7 +1180,7 @@
         "text": "No. of live births",
         "text_color": "#000000",
         "v_required": {
-          "value": true
+          "value": false
         },
         "relevance": {
           "rules-engine": {
@@ -1231,7 +1233,7 @@
         "text": "No. of Still  births",
         "text_color": "#000000",
         "v_required": {
-          "value": true
+          "value": false
         },
         "relevance": {
           "rules-engine": {
@@ -1284,7 +1286,7 @@
         "text": " No. of Miscarriages",
         "text_color": "#000000",
         "v_required": {
-          "value": true
+          "value": false
         },
         "relevance": {
           "rules-engine": {

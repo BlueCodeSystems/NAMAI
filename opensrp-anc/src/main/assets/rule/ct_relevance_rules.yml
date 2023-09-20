@@ -656,7 +656,7 @@ actions:
 name: step10_fansidar
 description: fansidar
 priority: 1
-condition: "global_hiv_work_around != 'positive'"
+condition: "(global_hiv_work_around != 'positive' && global_hiv_positive != 1)"
 actions:
   - "isRelevant = true"
 ---
@@ -671,6 +671,13 @@ name: step12_initiate_ctx
 description: initiate_ctx
 priority: 1
 condition: "(global_hiv_positive == 1 && global_hiv_work_around != 'negative') || (global_hiv_work_around == 'positive' && global_hiv_work_around != 'negative')"
+actions:
+  - "isRelevant = true"
+---
+name: step12_inh_prophylaxis
+description: inh_prophylaxis
+priority: 1
+condition: "(global_hiv_positive == 1 && global_hiv_work_around != 'negative') || (global_hiv_work_around == 'positive' && global_hiv_work_around != 'negative') && (!global_tb_test_result.contains('positive') && !global_Sputum_result.contains('mtb_sensitive') && !global_Sputum_result.contains('mtb_resistant'))"
 actions:
   - "isRelevant = true"
 ---

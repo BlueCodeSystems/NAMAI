@@ -1,5 +1,5 @@
 {
-  "validate_on_submit": false,
+  "validate_on_submit": true,
   "display_scroll_bars": true,
   "skip_blank_steps": true,
   "count": "4",
@@ -342,7 +342,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step1.medications.v_required.err}}"
         },
         "relevance": {
@@ -723,7 +723,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step2.behaviour_persist.v_required.err}}"
         },
         "relevance": {
@@ -804,7 +804,7 @@
       {
         "key": "toaster3",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "Counseling regarding condom",
+        "openmrs_entity": "Counselling regarding condom",
         "openmrs_entity_id": "161594",
         "type": "toaster_notes",
         "text": "{{anc_symptoms_follow_up.step2.toaster3.text}}",
@@ -934,7 +934,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step3.phys_symptoms_persist.v_required.err}}"
         },
         "relevance": {
@@ -984,7 +984,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step3.other_sym_lbpp.v_required.err}}"
         },
         "relevance": {
@@ -1031,7 +1031,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step3.other_sym_vvo.v_required.err}}"
         },
         "relevance": {
@@ -1405,7 +1405,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step4.phys_symptoms.v_required.err}}"
         }
       },
@@ -1418,7 +1418,7 @@
         "hint": "Specify",
         "edit_type": "name",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please specify physiological symptoms"
         },
         "relevance": {
@@ -1472,7 +1472,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step4.other_sym_lbpp.v_required.err}}"
         },
         "relevance": {
@@ -1519,7 +1519,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step4.other_sym_vvo.v_required.err}}"
         },
         "relevance": {
@@ -1805,7 +1805,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step4.other_symptoms.v_required.err}}"
         }
       },
@@ -2007,7 +2007,7 @@
           }
         },
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_symptoms_follow_up.step4.mat_percept_fetal_move.v_required.err}}"
         }
       }

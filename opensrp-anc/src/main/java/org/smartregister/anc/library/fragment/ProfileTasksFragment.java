@@ -215,11 +215,13 @@ public class ProfileTasksFragment extends BaseProfileFragment implements Profile
         recyclerView = fragmentView.findViewById(R.id.tasks_display_recyclerview);
 
         dueButton = ((ProfileActivity) getActivity()).getDueButton();
-        if (!ConstantsUtils.AlertStatusUtils.TODAY.equals(buttonAlertStatus.buttonAlertStatus)) {
-            dueButton.setOnClickListener((ProfileActivity) getActivity());
-        } else {
-            dueButton.setEnabled(false);
-        }
+       dueButton.setEnabled(true);
+        dueButton.setOnClickListener((ProfileActivity) getActivity());
+//        if (!ConstantsUtils.AlertStatusUtils.TODAY.equals(buttonAlertStatus.buttonAlertStatus)) {
+//
+//        } else {
+//            dueButton.setEnabled(false);
+//        }
         return fragmentView;
     }
 
