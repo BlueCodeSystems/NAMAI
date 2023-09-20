@@ -279,7 +279,7 @@ android {
  */
 private Integer generateVersionCode() {
     //return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch This bit will be activated after we are sure of the clients minimum sdk version.
-    return ext.versionMajor * 10006 + ext.versionMinor * 100 + ext.versionPatch
+    return ext.versionMajor * 10012 + ext.versionMinor * 100 + ext.versionPatch
 }
 
 /**
@@ -288,7 +288,7 @@ private Integer generateVersionCode() {
  * @return version name
  */
 private String generateVersionName() {
-    String versionName = "namai_backdata_entry_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta9"
+    String versionName = "namai_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
     if (ext.versionClassifier == null && ext.isSnapshot) {
         ext.versionClassifier = "SNAPSHOT"
     }
@@ -384,8 +384,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'org.jeasy:easy-rules-core:3.3.0'
     implementation 'org.jeasy:easy-rules-mvel:3.3.0'
-    implementation 'com.flurry.android:analytics:11.6.0@aar'
-    implementation 'com.flurry.android:analytics:11.6.0@aar'
+    implementation 'com.flurry.android:analytics:14.0.0@aar'
+    implementation 'com.flurry.android:analytics:14.0.0@aar'
     implementation 'androidx.multidex:multidex:2.0.1'
 // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
