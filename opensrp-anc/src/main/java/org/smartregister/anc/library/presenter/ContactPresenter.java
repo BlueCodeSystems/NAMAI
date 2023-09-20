@@ -1,6 +1,6 @@
 package org.smartregister.anc.library.presenter;
 
-import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+import static org.smartregister.util.JsonFormUtils.getFieldJSONObject;
 
 import android.content.Context;
 
@@ -147,6 +147,15 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
                     for (Map.Entry<String, String> entry : contact.getGlobals().entrySet()) {
                         defaultGlobals.put(entry.getKey(), entry.getValue());
                     }
+                }
+
+                if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
+                    JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+                    JSONObject phnNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
+                    String name = BaseHomeRegisterActivity.getName();
+                    String phone = BaseHomeRegisterActivity.getPhone();
+                    ccname.put(JsonFormUtils.VALUE, name);
+                    phnNumber.put(JsonFormUtils.VALUE, phone);
                 }
 
                 if (form != null) {

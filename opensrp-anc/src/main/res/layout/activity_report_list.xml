@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/reportLayout"
         >
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarx"
@@ -19,15 +20,40 @@
             app:layout_collapseMode="pin"
             app:theme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <TextView
+            android:id="@+id/dateGenerated"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/light_grey_text"
+            android:layout_below="@+id/toolbarx"
+            android:text="Last generated on: "
+            app:theme="@style/ThemeOverlay.AppCompat.Light"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbarx"
+            android:layout_below="@+id/dateGenerated"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/regenerate"
+            android:layout_width="140dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:text="Regenerate"
+            android:textSize="16sp"
+            android:background="@color/light_blue"
+            app:layout_collapseMode="pin"
+            app:theme="@style/ThemeOverlay.AppCompat.Light"/>
 
     </RelativeLayout>
 

@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
+import org.smartregister.anc.library.AncLibrary;
 import org.smartregister.anc.library.R;
 //import org.smartregister.anc.library.adapter.ReportHashAdapter;
 import org.smartregister.anc.library.model.MeModel;
@@ -97,7 +99,7 @@ public class ReportActivity3 extends AppCompatActivity {
         String todaysDate = dateFormatter.format(calendar.getTime());
         HashMap<String, String> reportAgeData = new HashMap<String, String>();
         txtToday.setText(todaysDate);
-        String facility = Utils.locationId;
+        String facility = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
         String result = facility.replaceAll("_", " ");
         facilityDB.setText(result);
 

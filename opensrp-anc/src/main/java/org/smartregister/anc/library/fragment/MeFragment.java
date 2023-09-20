@@ -1,6 +1,7 @@
 package org.smartregister.anc.library.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -44,7 +45,6 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
     private RelativeLayout hia2ReportingSection;
     private RelativeLayout languageSwitcherSection;
     private RelativeLayout p2pSyncSetion;
-
     private RelativeLayout me_location_section;
     private static ImageView hia2ReportingImage;
     private static TextView hia2ReportingText;
@@ -101,7 +101,6 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
             String facilityName = spacedFacility.replaceAll("_", "");
             formatedLocation.setText(facilityName);
         }
-
         String FILENAME = 12 + "_" + "monthData.txt";
         String filePath = Utils.getAppPath(getActivity()) + FILENAME;
         File file = new File(filePath);

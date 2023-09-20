@@ -138,7 +138,6 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     public static String username;
 
     public static String password;
-
     public static String code;
     public static String facility;
     public static String name;
@@ -291,6 +290,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         requestQueue.add(request);
     }
 
+
     public static String getFacilityID(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -311,6 +311,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             nameSP = name;
         }
         return nameSP;
+
     }
 
     public static String getPhone(){

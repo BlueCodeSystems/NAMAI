@@ -30,7 +30,8 @@
     "first_weight",
     "no_of_fetuses_unknown",
     "no_of_fetuses",
-    "current_weight"
+    "current_weight",
+    "previous_weight"
   ],
   "metadata": {
     "start": {
@@ -898,6 +899,30 @@
         "edit_type": "number",
         "v_numeric": {
           "value": "true",
+          "err": ""
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "physical-exam-calculations-rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "previous_weight",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "previous_weight",
+        "readonly": "false",
+        "hidden": "true",
+        "label": "Initial weight",
+        "type": "normal_edit_text",
+        "edit_text_style": "bordered",
+        "edit_type": "number",
+        "v_numeric": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step1.current_weight.v_required.err}}"
           "err": ""
         },
         "calculation": {

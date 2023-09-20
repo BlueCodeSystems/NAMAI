@@ -5189,7 +5189,7 @@
         }
       },
       {
-        "key": "other_reason_co_trimoxazole_no",
+        "key": "other_reason_mebendazole_no",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "other_reason_co_trimoxazole_no",
