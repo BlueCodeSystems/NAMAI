@@ -18,7 +18,7 @@ description: LMP Gest age
 priority: 1
 condition: "step1_lmp_known == 'yes'"
 actions:
-  - "calculation = helper.getWeeksAndDaysFromDays(helper.getDifferenceDays(helper.getSecondaryValue(step1_lmp_known_date)))"
+  - "calculation = Math.ceil((helper.formatDate(step1_lmp_known_date,'d') - helper.formatDate(global_contact_date,'d')) / 7)"
 ---
 name: step1_ultrasound_gest_age_concept
 description: Ultrasound  Gest age concept
@@ -41,19 +41,26 @@ condition: "step1_ultrasound_gest_age_wks != ''"
 actions:
   - "calculation = helper.addDuration(helper.getSecondaryValue(step1_ultrasound_done_date), ( (280 - ( (new Integer(step1_ultrasound_gest_age_wks) * 7) +  new Integer(step1_ultrasound_gest_age_days != '' ? step1_ultrasound_gest_age_days : 0)) ) +'d'))"
 ---
+name: step1_ultrasound_edd_no_day
+description: Ultrasound edd no day
+priority: 1
+condition: "step1_ultrasound_gest_age_wks != ''"
+actions:
+  - "calculation = helper.addDuration(helper.getSecondaryValue(step1_ultrasound_done_date), ( (280 - ( (new Integer(step1_ultrasound_gest_age_wks) * 7)) ) +'d'))"
+---
 name: step1_ultrasound_gest_age
 description: Ultrasound  Gest age
 priority: 1
 condition: "step1_ultrasound_done== 'yes'"
 actions:
-  - "calculation =  helper.getWeeksAndDaysFromDays( 280 - helper.getDifferenceDays(helper.getSecondaryValue(step1_ultrasound_edd)) - 1 )"
+  - "calculation = -(Math.ceil((helper.formatDate(global_contact_date,'d') - (helper.formatDate(step1_ultrasound_done_date,'d'))) / 7) - (new Integer(step1_ultrasound_gest_age_wks)))"
 ---
 name: step1_sfh_edd
 description: SFH edd
 priority: 1
 condition: "step1_sfh_gest_age > 0"
 actions:
-  - "calculation = helper.addDuration((280 - (step1_sfh_gest_age * 7)) + 'd')"
+  - "calculation = helper.addDuration(global_contact_date , ((280 - (step1_sfh_gest_age * 7)) + 'd'))"
 ---
 name: step1_sfh_ga_hidden
 description: SFH edd

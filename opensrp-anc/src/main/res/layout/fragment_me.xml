@@ -104,6 +104,21 @@
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/me_page_section_text_size" />
 
+                        <TextView
+                            android:id="@+id/location_spaced"
+                            style="@style/me_page_location_selector"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toEndOf="@+id/location_text"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:text="place holder"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/me_page_section_text_size" />
+
                         <org.smartregister.view.LocationPickerView
                             android:id="@+id/facility_selection"
                             style="@style/me_page_location_selector"
@@ -113,6 +128,7 @@
                             android:layout_marginLeft="8dp"
                             android:layout_toEndOf="@+id/location_text"
                             android:ellipsize="end"
+                            android:visibility="gone"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
                             android:text="Bukesa Urban Health Center" />
@@ -247,27 +263,19 @@
                     android:background="@color/me_page_line_separator" />
 
 
-            <View
-                android:id="@+id/me_language_switcher_separator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/me_page_line_separator"
-                android:visibility="gone"/>
+                <View
+                    android:id="@+id/me_language_switcher_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/me_page_line_separator"
+                    android:visibility="gone"/>
 
-            <RelativeLayout
-                android:id="@+id/hia2_reporting_section"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginStart="@dimen/me_page_initials_background_margin"
-                android:layout_marginLeft="@dimen/me_page_initials_background_margin"
-                android:layout_marginEnd="@dimen/me_page_initials_background_margin"
-                android:layout_marginRight="@dimen/me_page_initials_background_margin">
-
-                <ImageView
-                    android:id="@+id/hia2_reportingImageView"
-                    android:layout_width="@dimen/me_page_section_square_dimension"
-                    android:layout_height="@dimen/me_page_section_square_dimension"
-                    android:layout_centerVertical="true"
+                <RelativeLayout
+                    android:id="@+id/hia2_reporting_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="@dimen/me_page_initials_background_margin"
+                    android:layout_marginLeft="@dimen/me_page_initials_background_margin"
                     android:layout_marginEnd="@dimen/me_page_initials_background_margin"
                     android:contentDescription="@string/section_icon"
                     android:gravity="center"

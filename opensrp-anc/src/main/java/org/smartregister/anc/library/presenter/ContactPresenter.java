@@ -22,6 +22,7 @@ import org.smartregister.util.JsonFormUtils;
 import org.smartregister.view.contract.MeContract;
 
 import java.lang.ref.WeakReference;
+import java.time.Instant;
 import java.util.Map;
 
 import timber.log.Timber;
@@ -132,6 +133,15 @@ public class ContactPresenter implements ContactContract.Presenter, ContactContr
             try {
                 String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
                 JSONObject form = model.getFormAsJson(contact.getFormName(), baseEntityId, locationId);
+
+                if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
+                    JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
+                    JSONObject phnNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
+                    String name = BaseHomeRegisterActivity.getName();
+                    String phone = BaseHomeRegisterActivity.getPhone();
+                    ccname.put(JsonFormUtils.VALUE, name);
+                    phnNumber.put(JsonFormUtils.VALUE, phone);
+                }
 
                 if (contact.getGlobals() != null) {
                     for (Map.Entry<String, String> entry : contact.getGlobals().entrySet()) {

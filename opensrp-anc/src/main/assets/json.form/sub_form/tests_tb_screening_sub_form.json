@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "TB screening status is required"
       }
     },
@@ -96,7 +96,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please record the date TB screening was done"
       }
     },
@@ -132,7 +132,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -174,7 +174,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -245,7 +245,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Reason why tb screen was not done is required"
       }
     },
@@ -296,7 +296,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Tb screen result is required"
       }
     },
@@ -351,6 +351,17 @@
           "ex": "equalTo(., \"mtb_resistant\")"
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "problem"
     }
   ],
   "count": 1,

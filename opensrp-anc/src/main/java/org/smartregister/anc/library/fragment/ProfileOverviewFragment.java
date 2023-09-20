@@ -94,6 +94,9 @@ public class ProfileOverviewFragment extends BaseProfileFragment implements Prof
     @Override
     protected void onResumption() {
         try {
+            dueButton = ((ProfileActivity) getActivity()).getDueButton();
+            dueButton.setEnabled(true);
+            dueButton.setOnClickListener((ProfileActivity) getActivity());
             fetchContactAndAlertStatus();
             yamlConfigListGlobal = new ArrayList<>(); //This makes sure no data duplication happens
             Facts facts = presenter.getImmediatePreviousContact(clientDetails, baseEntityId, contactNo);
@@ -155,11 +158,13 @@ public class ProfileOverviewFragment extends BaseProfileFragment implements Prof
         noHealthRecordLayout = fragmentView.findViewById(R.id.no_health_data_recorded_profile_overview_layout);
         profileOverviewRecycler = fragmentView.findViewById(R.id.profile_overview_recycler);
         dueButton = ((ProfileActivity) getActivity()).getDueButton();
-        if (!ConstantsUtils.AlertStatusUtils.TODAY.equals(buttonAlertStatus.buttonAlertStatus)) {
-            dueButton.setOnClickListener((ProfileActivity) getActivity());
-        } else {
-            dueButton.setEnabled(false);
-        }
+        dueButton.setEnabled(true);
+        dueButton.setOnClickListener((ProfileActivity) getActivity());
+//        if (!ConstantsUtils.AlertStatusUtils.TODAY.equals(buttonAlertStatus.buttonAlertStatus)) {
+//            dueButton.setOnClickListener((ProfileActivity) getActivity());
+//        } else {
+//            dueButton.setEnabled(false);
+//        }
 
         return fragmentView;
     }

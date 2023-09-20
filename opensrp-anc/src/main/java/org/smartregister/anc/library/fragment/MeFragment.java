@@ -27,6 +27,7 @@ import org.smartregister.anc.library.activity.PopulationCharacteristicsActivity;
 import org.smartregister.anc.library.activity.SiteCharacteristicsActivity;
 import org.smartregister.anc.library.presenter.MePresenter;
 import org.smartregister.anc.library.util.Utils;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.util.LangUtils;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.contract.MeContract;
@@ -44,8 +45,10 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
     private RelativeLayout hia2ReportingSection;
     private RelativeLayout languageSwitcherSection;
     private RelativeLayout p2pSyncSetion;
+    private RelativeLayout me_location_section;
     private static ImageView hia2ReportingImage;
     private static TextView hia2ReportingText;
+    private static TextView formatedLocation;
     private static ProgressBar reportProgress;
     private TextView languageSwitcherText;
     private final Map<String, Locale> locales = new HashMap<>();
@@ -66,6 +69,7 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         mePopCharacteristicsSection = view.findViewById(R.id.me_pop_characteristics_section);
         siteCharacteristicsSection = view.findViewById(R.id.site_characteristics_section);
         hia2ReportingSection = view.findViewById(R.id.hia2_reporting_section);
+        me_location_section = view.findViewById(R.id.me_location_section);
         p2pSyncSetion = view.findViewById(R.id.p2p_section);
 
         if (Utils.enableLanguageSwitching()) {
@@ -89,6 +93,14 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         hia2ReportingText = changedView.findViewById(R.id.hia2_reporting_text);
         reportProgress = changedView.findViewById(R.id.reportCircle);
 
+        formatedLocation = MeFragment.changedView.findViewById(R.id.location_spaced);
+
+        String spacedFacility = LocationHelper.getInstance().getOpenMrsLocationName(LocationHelper.getInstance().getDefaultLocation());
+        if (spacedFacility != null) {
+            //String abcd = spacedFacility.replaceAll("(.{4})", "$1 ");
+            String facilityName = spacedFacility.replaceAll("_", "");
+            formatedLocation.setText(facilityName);
+        }
         String FILENAME = 12 + "_" + "monthData.txt";
         String filePath = Utils.getAppPath(getActivity()) + FILENAME;
         File file = new File(filePath);
@@ -232,4 +244,31 @@ public class MeFragment extends org.smartregister.view.fragment.MeFragment imple
         //locales.put(getString(R.string.portuguese_brazil_language), new Locale("pt"));
     }
 
+    /*public void restartActivity(){
+        Intent intent = get; // Get the current intent
+        finish(); // Finish the current activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Set flags to clear activity stack and start as a new instance
+        startActivity(intent); // Start the new instance of the activity
+    }*/
+
+    /*@SuppressLint("ResourceAsColor")
+    public  static void updateView(Context context)
+    {
+        hia2ReportingImage = changedView.findViewById(R.id.hia2_reportingImageView);
+        hia2ReportingText = changedView.findViewById(R.id.hia2_reporting_text);
+
+        String FILENAME = 12 + "_" + "monthData.txt";
+        String filePath = Utils.getAppPath(context) + FILENAME;
+        File file = new File(filePath);
+        if (!file.exists()) {
+            hia2ReportingText.setText("HIA2 Reporting (Generating...)");
+            hia2ReportingText.setTextColor(R.color.contact_complete_grey_text);
+            hia2ReportingImage.setImageResource(R.drawable.ic_icon_settings);
+        } else {
+            hia2ReportingText.setText("HIA2 Reporting");
+            hia2ReportingText.setTextColor(R.color.black_text_color);
+            hia2ReportingImage.setImageResource(R.drawable.ic_view_history);
+        }
+        //Toast.makeText(context,"this has been hit",Toast.LENGTH_LONG).show();
+    }*/
 }

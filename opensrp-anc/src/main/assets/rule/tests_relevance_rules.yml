@@ -697,6 +697,38 @@ actions:
   - "isRelevant = true"
 
 ---
+name: step1_bp_ref
+description: bp_ref
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_pulse_ref
+description: pulse_ref
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_temp_ref
+description: temp_ref
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
+name: step1_resp_ref
+description: resp_ref
+priority: 1
+condition: "step1_referral_test_status == 'done_today' || step1_referral_test_status == 'done_earlier'"
+actions:
+  - "isRelevant = true"
+
+---
 name: step1_client_history_label
 description: client_history_label
 priority: 1

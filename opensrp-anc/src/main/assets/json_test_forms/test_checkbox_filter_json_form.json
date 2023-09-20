@@ -556,7 +556,7 @@
         "type": "toaster_notes",
         "text": "Gestational diabetes mellitus (GDM) risk counselling",
         "text_color": "#D56900",
-        "toaster_info_text": "Please provide appropriate counseling for GDM risk mitigation, including:\n- Reasserting dietary interventions\n- Reasserting physical activity during pregnancy",
+        "toaster_info_text": "Please provide appropriate counselling for GDM risk mitigation, including:\n- Reasserting dietary interventions\n- Reasserting physical activity during pregnancy",
         "toaster_type": "warning",
         "relevance": {
           "rules-engine": {
@@ -573,7 +573,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "toaster_notes",
-        "text": "Healthy eating and keeping physically active counseling",
+        "text": "Healthy eating and keeping physically active counselling",
         "text_color": "#1199F9",
         "toaster_type": "info",
         "toaster_info_text": "Healthy eating and keeping physically active during pregnancy is recommended for pregnant women to stay healthy and to prevent excessive weight gain during pregnancy.",
@@ -585,11 +585,11 @@
         "openmrs_entity": "Weight gain finding",
         "openmrs_entity_id": "122887",
         "type": "toaster_notes",
-        "text": "Increase daily energy and protein intake counseling",
+        "text": "Increase daily energy and protein intake counselling",
         "text_color": "#1199F9",
         "toaster_type": "info",
         "toaster_info_text": "Increase daily energy and protein intake to reduce the risk of low-birth-weight neonates.",
-        "toaster_info_title": "Increase daily energy and protein intake counseling",
+        "toaster_info_title": "Increase daily energy and protein intake counselling",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -605,11 +605,11 @@
         "openmrs_entity": "Weight gain finding",
         "openmrs_entity_id": "122887",
         "type": "toaster_notes",
-        "text": "Balanced energy and protein dietary supplementation counseling",
+        "text": "Balanced energy and protein dietary supplementation counselling",
         "text_color": "#1199F9",
         "toaster_type": "info",
         "toaster_info_text": "Balanced energy and protein dietary supplementation is recommended for pregnant women to reduce the risk of stillbirths and small-for-gestational-age neonates.",
-        "toaster_info_title": "Balanced energy and protein dietary supplementation counseling",
+        "toaster_info_title": "Balanced energy and protein dietary supplementation counselling",
         "relevance": {
           "rules-engine": {
             "ex-rules": {

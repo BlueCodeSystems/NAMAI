@@ -256,7 +256,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
                 EditText gestAgeEditText = view.findViewById(R.id.add_gest_age);
                 String ga_ref_value = gestAgeEditText.getText().toString();
                 if(gestAgeEditText != null) {
-                    try {
+                    /*try {
                         int num = Integer.parseInt(gestAgeEditText.getText().toString());
                         if(num>39){
                             gestAgeEditText.setText("39");
@@ -267,7 +267,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
                         }
                     } catch (NumberFormatException e) {
                         // Handle the case where the input is not a valid integer
-                    }
+                    }*/
                     //gestAgeEditText.setFilters(new InputFilter[]{new InputFilterMinMax("12", "39")});
                     ProfilePresenter.gest_age_profile = ga_ref_value;
                     Map<String, String> map = new HashMap<>();
