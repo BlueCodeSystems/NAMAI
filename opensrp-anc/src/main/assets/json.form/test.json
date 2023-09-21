@@ -94,7 +94,7 @@
         "content_form": "tests_blood_haemoglobin_sub_form",
         "container": "test",
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please test for haemoglobin"
         },
         "relevance": {
@@ -136,7 +136,7 @@
         "content_form": "tests_urine_sub_form",
         "container": "test",
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please test Urine"
         },
         "relevance": {
@@ -196,7 +196,7 @@
         "content_form": "tests_syphilis_sub_form",
         "container": "test",
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please test for Syphilis"
         },
         "relevance": {
@@ -245,7 +245,7 @@
           }
         },
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Provide result"
         }
       },
@@ -304,7 +304,7 @@
           }
         },
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please test for Hepatitis B"
         }
 

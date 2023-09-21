@@ -92,6 +92,9 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step2.bp_systolic_label.text}}",
         "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "step1:cant_record_bp": {
             "ex-checkbox": [
@@ -115,6 +118,10 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        },
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.bp_systolic.v_required.err}}"
         },
         "relevance": {
           "step1:cant_record_bp": {
@@ -153,6 +160,9 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step2.bp_diastolic_label.text}}",
         "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "step1:cant_record_bp": {
             "ex-checkbox": [
@@ -176,6 +186,10 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        },
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.bp_diastolic.v_required.err}}"
         },
         "relevance": {
           "step1:cant_record_bp": {
@@ -228,6 +242,9 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step2.bp_systolic_repeat_label.text}}",
         "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -247,6 +264,10 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        },
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.bp_systolic_repeat.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -270,6 +291,9 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step2.bp_diastolic_repeat_label.text}}",
         "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -289,6 +313,10 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        },
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.bp_diastolic_repeat.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -385,6 +413,10 @@
             "openmrs_entity_parent": ""
           }
         ],
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.symp_sev_preeclampsia.v_required.err}}"
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -444,6 +476,10 @@
             "openmrs_entity_parent": ""
           }
         ],
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.urine_protein.v_required.err}}"
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -673,6 +709,10 @@
             "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.cant_record_bp_reason.v_required.err}}"
+        },
         "relevance": {
           "step1:cant_record_bp": {
             "ex-checkbox": [
@@ -693,6 +733,10 @@
         "type": "edit_text",
         "hint": "Enter other reason ",
         "edit_type": "name",
+        "v_required": {
+          "value": true,
+          "err": "Please enter the other reason pulse rate was unrecordable"
+        },
         "relevance": {
           "step1:cant_record_bp_reason": {
             "ex-checkbox": [
@@ -777,6 +821,10 @@
             "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.cant_record_bp_reason.v_required.err}}"
+        },
         "relevance": {
           "step1:unrecordable_bp": {
             "ex-checkbox": [
@@ -797,6 +845,10 @@
         "type": "edit_text",
         "hint": "Enter other reason ",
         "edit_type": "name",
+        "v_required": {
+          "value": true,
+          "err": "Please enter the other reason Bp was unrecordable"
+        },
         "relevance": {
           "step1:unrecordable_bp_reason": {
             "ex-checkbox": [
@@ -827,7 +879,10 @@
         "type": "label",
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step1.height_label.text}}",
-        "text_color": "#000000"
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
       },
       {
         "key": "height",
@@ -838,6 +893,10 @@
         "type": "normal_edit_text",
         "edit_text_style": "bordered",
         "edit_type": "number",
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step1.height.v_required.err}}"
+        },
         "v_numeric": {
           "value": "true",
           "err": ""
@@ -871,7 +930,10 @@
         "type": "label",
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step1.current_weight_label.text}}",
-        "text_color": "#000000"
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
       },
       {
         "key": "current_weight",
@@ -1068,7 +1130,10 @@
         "type": "label",
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step3.body_temp_label.text}}",
-        "text_color": "#000000"
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
       },
       {
         "key": "body_temp",
@@ -1078,6 +1143,10 @@
         "type": "normal_edit_text",
         "edit_text_style": "bordered",
         "edit_type": "number",
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step3.body_temp.v_required.err}}"
+        },
         "v_numeric": {
           "value": "true",
           "err": ""
@@ -1115,6 +1184,9 @@
         "text": "{{anc_physical_exam.step3.body_temp_repeat_label.text}}",
         "text_color": "#000000",
         "label_info_text": "Retake the woman\u0027s temperature if the first reading was 38ºC or higher.",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -1131,6 +1203,10 @@
         "type": "normal_edit_text",
         "edit_text_style": "bordered",
         "edit_type": "number",
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step3.body_temp_repeat.v_required.err}}"
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -1191,7 +1267,10 @@
         "type": "label",
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step3.pulse_rate_label.text}}",
-        "text_color": "#000000"
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
       },
       {
         "key": "pulse_rate",
@@ -1201,6 +1280,10 @@
         "type": "normal_edit_text",
         "edit_text_style": "bordered",
         "edit_type": "number",
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step3.pulse_rate.v_required.err}}"
+        },
         "v_numeric": {
           "value": "true",
           "err": ""
@@ -1238,6 +1321,9 @@
         "text": "{{anc_physical_exam.step3.pulse_rate_repeat_label.text}}",
         "label_info_text": "Retake the woman\u0027s pulse rate if the first reading was lower 50.",
         "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -1257,6 +1343,10 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        },
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step3.pulse_rate_repeat.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1390,6 +1480,10 @@
             "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step2.cant_record_bp_reason.v_required.err}}"
+        },
         "relevance": {
           "step3:unrecordable_pulse": {
             "ex-checkbox": [
@@ -1410,6 +1504,10 @@
         "type": "edit_text",
         "hint": "Enter other reason ",
         "edit_type": "name",
+        "v_required": {
+          "value": true,
+          "err": "Please enter the other reason pulse rate was unrecordable"
+        },
         "relevance": {
           "step3:unrecordable_pulse_reason": {
             "ex-checkbox": [
@@ -1435,7 +1533,10 @@
         "type": "label",
         "label_text_style": "bold",
         "text": "Respiratory Rate",
-        "text_color": "#000000"
+        "text_color": "#000000",
+        "v_required": {
+          "value": true
+        }
       },
       {
         "key": "bpm",
@@ -1448,6 +1549,10 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        },
+        "v_required": {
+          "value": "true",
+          "err": "Fill in Details"
         }
       },
       {
@@ -1474,6 +1579,9 @@
         "label_text_style": "bold",
         "text": "Second Respiratory Rate",
         "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -1493,6 +1601,10 @@
         "v_numeric": {
           "value": "true",
           "err": ""
+        },
+        "v_required": {
+          "value": "true",
+          "err": "Fill in Details"
         },
         "relevance": {
           "rules-engine": {
@@ -2139,6 +2251,9 @@
         "label_text_style": "bold",
         "text": "How many centimetres (cm) dilated?",
         "text_color": "#000000",
+        "v_required": {
+          "value": false
+        },
         "relevance": {
           "step4:speculum_abnormal_symptoms": {
             "ex-checkbox": [
@@ -2163,7 +2278,10 @@
           "value": "true",
           "err": "Enter valid cervical dilation in cm"
         },
-         "relevance": {
+        "v_required": {
+          "value": false,
+          "err": "Field cervical dilation is required"
+        }, "relevance": {
         "step4:speculum_abnormal_symptoms": {
           "ex-checkbox": [
             {
@@ -2433,7 +2551,10 @@
             "openmrs_entity_parent": "164494AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
-
+        "v_required": {
+          "value": "false",
+          "err": "{{anc_physical_exam.step3.oedema_severity.v_required.err}}"
+        },
         "relevance": {
           "step4:oedema": {
             "type": "string",
@@ -2600,6 +2721,9 @@
         "type": "hidden",
         "label_text_style": "bold",
         "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
         "calculation": {
           "rules-engine": {
             "ex-rules": {
@@ -2760,6 +2884,10 @@
               "rules-file": "physical-exam-relevance-rules.yml"
             }
           }
+        },
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step3.ipv_subject.v_required.err}}"
         }
       },
       {
@@ -2837,15 +2965,15 @@
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "Cannot contain numbers or special characters"
         },
-         "relevance": {
-        "step4:ipv_subject_violence_types": {
-          "ex-checkbox": [
-            {
-              "or": ["other"]
-            }
-          ]
+        "relevance": {
+          "step4:ipv_subject_violence_types": {
+            "ex-checkbox": [
+              {
+                "or": ["other"]
+              }
+            ]
+          }
         }
-         }
       }
     ]
   },
@@ -2877,6 +3005,10 @@
         "v_numeric_integer": {
           "value": "true",
           "err": "Enter a valid sfh"
+        },
+        "v_required": {
+          "value": "false",
+          "err": "{{anc_physical_exam.step4.sfh.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -2928,6 +3060,10 @@
         "v_numeric_integer": {
           "value": "true",
           "err": "Enter a valid sfh"
+        },
+        "v_required": {
+          "value": "false",
+          "err": "{{anc_physical_exam.step4.sfh.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -3135,6 +3271,10 @@
             "openmrs_entity_parent": "165376AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
+        "v_required": {
+          "value": "false",
+          "err": "{{anc_physical_exam.step4.fetal_movement.v_required.err}}"
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -3157,6 +3297,9 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step4.no_of_fetuses_label.text}}",
         "text_color": "#000000",
+        "v_required": {
+          "value": false
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -3177,6 +3320,9 @@
         "text_size": "16px",
         "text_color": "#000000",
         "selected_text_color": "#ffffff",
+        "v_required": {
+          "value": false
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -3263,6 +3409,10 @@
             "openmrs_entity_parent": "165377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ],
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step4.fetal_heartbeat.v_required.err}}"
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -3277,6 +3427,10 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step4.fetal_heart_rate_label.text}}",
         "text_color": "#000000",
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step4.fetal_heart_rate_label.v_required.err}}"
+        },
         "relevance": {
           "step4:fetal_heartbeat": {
             "type": "string",
@@ -3297,6 +3451,10 @@
             "type": "string",
             "ex": "equalTo(., \"yes\")"
           }
+        },
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step4.fetal_heart_rate.v_required.err}}"
         }
       },
       {
@@ -3348,6 +3506,9 @@
         "label_text_style": "bold",
         "text": "{{anc_physical_exam.step4.fetal_heart_rate_repeat_label.text}}",
         "text_color": "#000000",
+        "v_required": {
+          "value": true
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -3364,6 +3525,10 @@
         "type": "normal_edit_text",
         "edit_text_style": "bordered",
         "edit_type": "number",
+        "v_required": {
+          "value": "true",
+          "err": "{{anc_physical_exam.step4.fetal_heart_rate_repeat.v_required.err}}"
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {

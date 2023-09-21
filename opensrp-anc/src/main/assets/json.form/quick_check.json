@@ -111,7 +111,7 @@
           }
         ],
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         }
       },
@@ -362,7 +362,7 @@
           }
         ],
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "{{anc_quick_check.step1.specific_complaint.v_required.err}}"
         },
         "relevance": {
@@ -663,7 +663,7 @@
           }
         ],
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -795,7 +795,7 @@
           }
         ],
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -883,7 +883,7 @@
           }
         ],
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -1065,7 +1065,7 @@
         "min_date": "today-20y",
         "max_date": "today",
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please specify date of referral"
         },
         "relevance": {
@@ -1092,7 +1092,7 @@
         "min_date": "today-5y",
         "max_date": "today+5y",
         "v_required": {
-          "value": "false",
+          "value": "true",
           "err": "Please specify date of schedule"
         },
         "relevance": {
@@ -1180,7 +1180,7 @@
         "text": "No. of live births",
         "text_color": "#000000",
         "v_required": {
-          "value": false
+          "value": true
         },
         "relevance": {
           "rules-engine": {
@@ -1233,7 +1233,7 @@
         "text": "No. of Still  births",
         "text_color": "#000000",
         "v_required": {
-          "value": false
+          "value": true
         },
         "relevance": {
           "rules-engine": {
@@ -1286,7 +1286,7 @@
         "text": " No. of Miscarriages",
         "text_color": "#000000",
         "v_required": {
-          "value": false
+          "value": true
         },
         "relevance": {
           "rules-engine": {

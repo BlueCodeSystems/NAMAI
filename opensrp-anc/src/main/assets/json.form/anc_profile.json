@@ -1546,7 +1546,7 @@
         "text": "{{anc_profile.step3.gravida_label.text}}",
         "text_color": "#000000",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step3.gravida_label.v_required.err}}"
         }
       },
@@ -2039,7 +2039,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -2491,7 +2491,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -2943,7 +2943,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -3381,7 +3381,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -3441,7 +3441,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step3.prev_preg_comps.v_required.err}}"
         }
       },
@@ -3538,7 +3538,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step3.prev_preg_comps.v_required.err}}"
         }
       },
@@ -4180,7 +4180,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -4617,7 +4617,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -5054,7 +5054,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -5491,7 +5491,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -5934,7 +5934,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -6372,7 +6372,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -6809,7 +6809,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -7246,7 +7246,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -7689,7 +7689,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -8126,7 +8126,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -8563,7 +8563,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please specify complications"
         },
         "relevance": {
@@ -8693,7 +8693,7 @@
         "hint": "{{anc_profile.step4.health_conditions_cancer_other.hint}}",
         "edit_type": "edit_text",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step4.health_conditions_cancer_other.v_required.err}}"
         },
         "relevance": {
@@ -8998,7 +8998,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step6.medications.v_required.err}}"
         }
       },
@@ -9200,7 +9200,7 @@
         },
         "max_date": "today",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step4.hiv_diagnosis_date.v_required.err}}"
         }
       },
@@ -9304,7 +9304,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step5.tt_immun_status.v_required.err}}"
         }
       },
@@ -9343,7 +9343,7 @@
         "text_color": "#000000",
         "selected_text_color": "#ffffff",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please enter the number of doses"
         },
         "relevance": {
@@ -9506,7 +9506,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step5.hepatitis_immun_status.v_required.err}}"
         }
       },
@@ -9605,7 +9605,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step7.caffeine_intake.v_required.err}}"
         }
       },
@@ -9668,7 +9668,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
         }
       },
@@ -9705,7 +9705,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
         }
       },
@@ -9801,7 +9801,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step7.alcohol_substance_enquiry.v_required.err}}"
         }
       },
@@ -9861,7 +9861,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "{{anc_profile.step7.alcohol_substance_use.v_required.err}}"
         }
       },
@@ -10131,7 +10131,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please select HIV status"
         }
       },
@@ -10212,7 +10212,7 @@
           }
         },
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please state whether on ART"
         }
       },
@@ -10252,7 +10252,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please enter the other reason not on ART"
         },
         "relevance": {
@@ -10317,7 +10317,7 @@
           }
         ],
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please select HIV status"
         }
       },
@@ -10414,7 +10414,7 @@
         "hint": "Specify ",
         "edit_type": "name",
         "v_required": {
-          "value": false,
+          "value": true,
           "err": "Please enter the other reason not on ART"
         },
         "relevance": {
