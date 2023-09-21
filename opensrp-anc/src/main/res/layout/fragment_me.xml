@@ -319,7 +319,7 @@
                     android:src="@drawable/baseline_keyboard_arrow_right"
                     app:tint="@color/me_page_arrow" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:id="@+id/hia2_reporting_separator"
@@ -584,6 +584,5 @@
                     android:typeface="sans" />
 
             </LinearLayout>
-        </LinearLayout>
     </ScrollView>
 </LinearLayout>
