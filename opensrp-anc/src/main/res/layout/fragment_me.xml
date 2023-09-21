@@ -12,6 +12,12 @@
         android:fillViewport="true"
         android:scrollbars="none">
 
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -584,5 +590,6 @@
                     android:typeface="sans" />
 
             </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
