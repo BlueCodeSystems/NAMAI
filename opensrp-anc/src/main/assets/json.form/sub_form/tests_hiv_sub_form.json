@@ -302,7 +302,7 @@
       "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
       "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
       "toaster_info_title": "Use correct date for tests!",
-      "toaster_type": "problem"
+      "toaster_type": "info"
     }
   ],
   "count": 1,

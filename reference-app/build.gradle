@@ -279,7 +279,7 @@ android {
  */
 private Integer generateVersionCode() {
     //return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch This bit will be activated after we are sure of the clients minimum sdk version.
-    return ext.versionMajor * 10012 + ext.versionMinor * 100 + ext.versionPatch
+    return ext.versionMajor * 10015 + ext.versionMinor * 100 + ext.versionPatch
 }
 
 /**
