@@ -550,7 +550,7 @@ actions:
 name: step13_tb_negative
 description: tb_negative
 priority: 1
-condition: "(!global_tb_test_result.contains('positive') && !global_Sputum_result.contains('mtb_sensitive') && !global_Sputum_result.contains('mtb_resistant'))"
+condition: "global_tb_test_result == null || tb_test_status == null || tb_screening_result == null || !global_tb_test_result.contains('positive')"
 actions:
   - "isRelevant = true"
 ---

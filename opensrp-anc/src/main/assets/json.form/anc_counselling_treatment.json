@@ -5189,25 +5189,6 @@
         }
       },
       {
-        "key": "other_reason_mebendazole_no",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "other_reason_mebendazole_no",
-        "type": "edit_text",
-        "hint": "Other reason(Specify)",
-        "edit_type": "name",
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*",
-          "err": " can only contain letters"
-        },
-        "relevance": {
-          "step10:reason_co_trimoxazole_no": {
-            "type": "string",
-            "ex": "equalTo(., \"other\")"
-          }
-        }
-      },
-      {
         "key": "mebendazole",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",

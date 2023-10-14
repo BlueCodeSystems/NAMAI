@@ -110,14 +110,6 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
         {
            loadContactSummaryData();
         }
-        else if(!isPermissionGranted() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-        {
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            Uri uri = Uri.fromParts("package", this.getPackageName(), null);
-            intent.setData(uri);
-            startActivity(intent);
-        }
     }
 
     @Override
@@ -252,14 +244,6 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
         if (isPermissionGranted() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)) {
             generateFileinStorage(womanName);
         }
-        else if (!isPermissionGranted() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-        {
-            Intent intent = new Intent();
-            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            Uri uri = Uri.fromParts("package", this.getPackageName(), null);
-            intent.setData(uri);
-            startActivity(intent);
-        }
     }
 
     public void generateFileinStorage(String womanName)
@@ -295,16 +279,16 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
     }
 
     protected boolean isPermissionGranted() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-        {
-            if(Environment.isExternalStorageManager())
-                return true;
-            else
-                return false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // For Android 10 and higher (scoped storage), check for read and write permissions.
+            return PermissionUtils.isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE, PermissionUtils.READ_EXTERNAL_STORAGE_REQUEST_CODE)
+                    && PermissionUtils.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+        } else {
+            // For Android versions below R, check for write external storage permission only.
+            return PermissionUtils.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
         }
-        else
-        return PermissionUtils.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
     }
+
 
     public List<YamlConfig> getYamlConfigList() {
         return yamlConfigList;
