@@ -130,7 +130,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       }
@@ -147,14 +147,14 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       },
@@ -197,7 +197,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       },
@@ -225,7 +225,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -249,7 +249,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -273,7 +273,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -297,7 +297,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -321,7 +321,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -337,7 +337,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       }
@@ -353,7 +353,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       }
@@ -371,7 +371,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -389,7 +389,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -406,7 +406,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }

@@ -117,10 +117,16 @@ fields:
 group: current_pregnancy
 fields:
   - template: "{{contact_summary.current_pregnancy.ga}}: {gest_age}"
-    relevance: "gest_age !='' "
+    relevance: "gest_age !=''"
+
+  - template: "{{contact_summary.current_pregnancy.ga_days}}: {gest_age_days}"
+    relevance: "gest_age_days !=''"
 
   - template: "{{contact_summary.current_pregnancy.edd}}: {edd}"
-    relevance: "edd != '' "
+    relevance: "edd != ''"
+
+  - template: "{{contact_summary.current_pregnancy.lmp}}: {lmp_known_date}"
+    relevance: "lmp_known_date != ''"
 
   - template: "{{contact_summary.current_pregnancy.ultrasound_date}}: {ultrasound_date}"
     relevance: "ultrasound_date != ''"

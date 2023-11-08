@@ -42,6 +42,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.jeasy.rules.api.Facts;
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.Weeks;
 import org.joda.time.format.DateTimeFormat;
@@ -644,6 +645,24 @@ public class Utils extends org.smartregister.util.Utils {
             }
         } catch (IllegalArgumentException e) {
             Timber.e(e, " --> getGestationAgeFromEDDate");
+            return 0;
+        }
+    }
+
+    public static int getGestationDaysFromEDDate(String expectedDeliveryDate) {
+        try {
+            if (!"0".equals(expectedDeliveryDate) && expectedDeliveryDate.length() > 0) {
+                LocalDate expectedDate = SQLITE_DATE_DF.parseLocalDate(expectedDeliveryDate);
+                LocalDate lmpDate = expectedDate.minusWeeks(ConstantsUtils.DELIVERY_DATE_WEEKS);
+
+                Weeks weeks = Weeks.weeksBetween(lmpDate, LocalDate.now());
+                int totalDays = weeks.getWeeks() * 7 + Days.daysBetween(lmpDate.plusWeeks(weeks.getWeeks()), LocalDate.now()).getDays();
+                return totalDays % 7;
+            } else {
+                return 0;
+            }
+        } catch (IllegalArgumentException e) {
+            Timber.e(e, " --> getGestationDaysFromEDDate");
             return 0;
         }
     }

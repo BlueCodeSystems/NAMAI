@@ -34,7 +34,7 @@ public class PreviousContactRepository extends BaseRepository {
     public static final String KEY = "key";
     public static final String VALUE = "value";
     public static final String CREATED_AT = "created_at";
-    public static final String GEST_AGE = "gest_age_openmrs";
+    public static final String GEST_AGE = "gest_age";
     private static final String TAG = PreviousContactRepository.class.getCanonicalName();
     private static final String CREATE_TABLE_SQL = "CREATE TABLE " + TABLE_NAME + "("
             + ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"

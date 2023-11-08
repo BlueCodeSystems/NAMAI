@@ -1,0 +1,49 @@
+---
+name: step1_gdm
+description: gdm
+priority: 1
+condition: "(step1_fasting_plasma_gluc >= 92 && step1_fasting_plasma_gluc < 126 ) || (step1_ogtt_fasting >= 92 && step1_ogtt_fasting < 126) || (step1_ogtt_1 >= 180 && step1_ogtt_1 < 200 ) || (step1_ogtt_2 >= 153 && step1_ogtt_2 < 200)"
+actions:
+  - "calculation = 1"
+---
+name: step1_dm_in_preg
+description: dm_in_preg
+priority: 1
+condition: "(step1_fasting_plasma_gluc >= 7) || (step1_ogtt_fasting >= 7) || (step1_ogtt_1 >= 7) || (step1_ogtt_2 >= 7) || (step1_random_plasma >= 7)"
+actions:
+  - "calculation = 1"
+---
+name: step1_glucose_test_date_today_hidden
+description: glucose_test_date
+priority: 1
+condition: "step1_glucose_test_status != '' && step1_glucose_test_status == 'done_today'"
+actions:
+  - "calculation = helper.getDateToday()"
+---
+name: step1_fasting_plasma_gluc_mmol
+description: fasting_plasma_gluc_mmol
+priority: 1
+condition: "step1_fasting_plasma_gluc > 30"
+actions:
+  - "calculation = step1_fasting_plasma_gluc / 18 "
+---
+name: step1_ogtt_fasting_mmol
+description: ogtt_fasting_mmol
+priority: 1
+condition: "step1_ogtt_fasting > 30"
+actions:
+  - "calculation = step1_ogtt_fasting/ 18  "
+---
+name: step1_ogtt_1_mmol
+description:  step1_ogtt_1_mmol
+priority: 1
+condition: " step1_ogtt_1 > 30"
+actions:
+  - "calculation =  step1_ogtt_1 / 18 "
+---
+name: step1_ogtt_2_mmol
+description:  step1_ogtt_2_mmol
+priority: 1
+condition: " step1_ogtt_2 > 30"
+actions:
+  - "calculation =  step1_ogtt_2 / 18 "

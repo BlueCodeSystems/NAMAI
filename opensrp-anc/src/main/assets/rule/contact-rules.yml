@@ -9,23 +9,31 @@ actions:
 name: after_eight
 description: after eight weeks
 priority: 2
-condition: "contactRule.currentVisit < 20"
+condition: "contactRule.currentVisit < 17"
 actions:
   - "contactRule.currentVisit = contactRule.currentVisit - contactRule.currentVisit + 20"
+  - "contactRule.set.add(contactRule.currentVisit)"
+---
+name: at_seventeen
+description: at_seventeen
+priority: 2
+condition: "contactRule.currentVisit >= 17 && contactRule.currentVisit < 18"
+actions:
+  - "contactRule.currentVisit = contactRule.currentVisit - contactRule.currentVisit + 22"
   - "contactRule.set.add(contactRule.currentVisit)"
 ---
 name: after_six
 description: after six weeks
 priority: 2
-condition: "contactRule.currentVisit >= 20 && contactRule.currentVisit < 26"
+condition: "contactRule.currentVisit >= 18 && contactRule.currentVisit < 24"
 actions:
-  - "contactRule.currentVisit = contactRule.currentVisit + 6"
+  - "contactRule.currentVisit = contactRule.currentVisit - contactRule.currentVisit + 26"
   - "contactRule.set.add(contactRule.currentVisit)"
 ---
 name: after_four
 description: after four weeks
 priority: 2
-condition: "contactRule.currentVisit >= 26 && contactRule.currentVisit < 34"
+condition: "contactRule.currentVisit >= 24 && contactRule.currentVisit < 34"
 actions:
   - "contactRule.currentVisit = contactRule.currentVisit + 4"
   - "contactRule.set.add(contactRule.currentVisit)"
