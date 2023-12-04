@@ -77,6 +77,1778 @@
           }
         },
         {
+          "column_name": "gravida",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.gravida"
+          }
+        },
+        {
+          "column_name": "preg_one_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_complications"
+          }
+        },
+        {
+          "column_name": "preg_one_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_one_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_one_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_one_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_outcome"
+          }
+        },
+        {
+          "column_name": "c_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type"
+          }
+        },
+        {
+          "column_name": "labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.labour_type"
+          }
+        },
+        {
+          "column_name": "type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.type_of_assisted"
+          }
+        },
+        {
+          "column_name": "delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.delivery_method"
+          }
+        },
+        {
+          "column_name": "gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.gestational_age"
+          }
+        },
+        {
+          "column_name": "prev_preg_probs",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.prev_preg_probs"
+          }
+        },
+        {
+          "column_name": "prev_preg_comps",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.prev_preg_comps"
+          }
+        },
+        {
+          "column_name": "preg_one_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_one_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_one_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_one_delivery_termination"
+          }
+        },
+        {
+          "column_name": "other_three_com",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.other_three_com"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_complications"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_outcome"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_thirteen",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_thirteen"
+          }
+        },
+        {
+          "column_name": "pregnancy_thirteen_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_thirteen_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_complications"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_outcome"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_fourteen",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_fourteen"
+          }
+        },
+        {
+          "column_name": "pregnancy_fourteen_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_fourteen_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_complications"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_outcome"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_fifteen",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_fifteen"
+          }
+        },
+        {
+          "column_name": "pregnancy_fifteen_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_fifteen_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_delivery_termination"
+          }
+        },
+        {
+          "column_name": "other_four_com",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.other_four_com"
+          }
+        },
+        {
+          "column_name": "preg_four_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_complications"
+          }
+        },
+        {
+          "column_name": "preg_four_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_four_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_four_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_four_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_outcome"
+          }
+        },
+        {
+          "column_name": "preg_four_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_four",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_four"
+          }
+        },
+        {
+          "column_name": "pregnancy_four_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_four_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_four_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_four_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_four_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_four_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_four_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_four_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_five_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_complications"
+          }
+        },
+        {
+          "column_name": "preg_five_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_five_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_five_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_five_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_outcome"
+          }
+        },
+        {
+          "column_name": "preg_five_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_five",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_five"
+          }
+        },
+        {
+          "column_name": "pregnancy_five_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_five_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_five_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_five_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_five_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_five_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_five_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_five_delivery_termination"
+          }
+        },
+        {
+          "column_name": "other_eight_com",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.other_eight_com"
+          }
+        },
+        {
+          "column_name": "preg_eight_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_complications"
+          }
+        },
+        {
+          "column_name": "preg_eight_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_eight_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_eight_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_eight_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_outcome"
+          }
+        },
+        {
+          "column_name": "preg_eight_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_eight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_eight"
+          }
+        },
+        {
+          "column_name": "pregnancy_eight_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_eight_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_eight_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_eight_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_eight_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_eight_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_eight_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eight_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_nine_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_complications"
+          }
+        },
+        {
+          "column_name": "preg_nine_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_nine_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_nine_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_nine_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_outcome"
+          }
+        },
+        {
+          "column_name": "preg_nine_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_nine",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_nine"
+          }
+        },
+        {
+          "column_name": "pregnancy_nine_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_nine_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_nine_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_nine_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_nine_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_nine_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_nine_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_nine_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_ten_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_complications"
+          }
+        },
+        {
+          "column_name": "preg_ten_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_ten_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_ten_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_ten_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_outcome"
+          }
+        },
+        {
+          "column_name": "preg_ten_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_ten",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_ten"
+          }
+        },
+        {
+          "column_name": "pregnancy_ten_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_ten_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_ten_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_ten_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_ten_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_ten_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_ten_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_ten_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_complications"
+          }
+        },
+        {
+          "column_name": "preg_ten_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_ten_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_ten_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_ten_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_outcome"
+          }
+        },
+        {
+          "column_name": "preg_ten_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_ten",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_ten"
+          }
+        },
+        {
+          "column_name": "pregnancy_ten_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_ten_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_ten_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_ten_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_ten_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_ten_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_ten_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_ten_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_twelve_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_complications"
+          }
+        },
+        {
+          "column_name": "preg_twelve_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_twelve_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_twelve_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_twelve_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_outcome"
+          }
+        },
+        {
+          "column_name": "preg_twelve_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_twelve",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_twelve"
+          }
+        },
+        {
+          "column_name": "pregnancy_twelve_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_twelve_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_twelve_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_twelve_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_twelve_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_twelve_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_twelve_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_twelve_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_complications"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_outcome"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_thirteen",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_thirteen"
+          }
+        },
+        {
+          "column_name": "pregnancy_thirteen_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_thirteen_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_thirteen_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_thirteen_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_complications"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_outcome"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_fourteen",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_fourteen"
+          }
+        },
+        {
+          "column_name": "pregnancy_fourteen_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_fourteen_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_fourteen_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fourteen_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_complications"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_outcome"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_fifteen",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_fifteen"
+          }
+        },
+        {
+          "column_name": "pregnancy_fifteen_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_fifteen_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_fifteen_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_fifteen_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_three_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_complications"
+          }
+        },
+        {
+          "column_name": "preg_three_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_three_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_three_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_three_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_outcome"
+          }
+        },
+        {
+          "column_name": "preg_three_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_three",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_three"
+          }
+        },
+        {
+          "column_name": "pregnancy_three_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_three_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_three_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_three_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_three_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_three_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_three_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_three_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_six_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_complications"
+          }
+        },
+        {
+          "column_name": "preg_six_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_six_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_six_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_six_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_outcome"
+          }
+        },
+        {
+          "column_name": "preg_six_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_six",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_six"
+          }
+        },
+        {
+          "column_name": "pregnancy_six_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_six_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_six_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_six_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_six_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_six_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_six_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_six_delivery_termination"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_complications"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_birth_weight"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_sex_infant"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_outcome_early"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_outcome"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_two",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_two"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_delivery_method"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_gestational_age"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_dt_unknown"
+          }
+        },
+        {
+          "column_name": "pregnancy_two_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_two_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_seven_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_complications"
+          }
+        },
+        {
+          "column_name": "preg_seven_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_seven_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_seven_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_seven_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_outcome"
+          }
+        },
+        {
+          "column_name": "preg_seven_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_seven",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_seven"
+          }
+        },
+        {
+          "column_name": "pregnancy_seven_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_seven_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_seven_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_seven_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_seven_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_seven_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_seven_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_seven_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_eleven_complications",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_complications"
+          }
+        },
+        {
+          "column_name": "preg_eleven_birth_weight",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_birth_weight"
+          }
+        },
+        {
+          "column_name": "preg_eleven_sex_infant",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_sex_infant"
+          }
+        },
+        {
+          "column_name": "preg_eleven_outcome_early",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_outcome_early"
+          }
+        },
+        {
+          "column_name": "preg_eleven_outcome",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_outcome"
+          }
+        },
+        {
+          "column_name": "preg_eleven_labour_type",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_labour_type"
+          }
+        },
+        {
+          "column_name": "c_type_eleven",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.c_type_eleven"
+          }
+        },
+        {
+          "column_name": "pregnancy_eleven_type_of_assisted",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.pregnancy_eleven_type_of_assisted"
+          }
+        },
+        {
+          "column_name": "preg_eleven_delivery_method",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_delivery_method"
+          }
+        },
+        {
+          "column_name": "preg_eleven_gestational_age",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_gestational_age"
+          }
+        },
+        {
+          "column_name": "preg_eleven_estimated_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_estimated_delivery_termination"
+          }
+        },
+        {
+          "column_name": "preg_eleven_dt_unknown",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_dt_unknown"
+          }
+        },
+        {
+          "column_name": "preg_eleven_delivery_termination",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.preg_eleven_delivery_termination"
+          }
+        },
+
+        {
           "column_name": "red_flag_count",
           "type": "Client",
           "json_mapping": {

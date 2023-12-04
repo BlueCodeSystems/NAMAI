@@ -558,8 +558,7 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.NRC_NUMBER)) {
             String nrcNumber = womanClient.get(DBConstantsUtils.KeyUtils.NRC_NUMBER);
             jsonObject.put(ANCJsonFormUtils.VALUE, nrcNumber);
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.WOM_IMAGE)) {
-            } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.STUDY_ID)) {
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.STUDY_ID)) {
             String studyID = womanClient.get(DBConstantsUtils.KeyUtils.STUDY_ID);
             jsonObject.put(ANCJsonFormUtils.VALUE, studyID);
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.RELATION_NK)) {
@@ -571,6 +570,12 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PHONE_NUMBER)) {
             String phoneNumber = womanClient.get(DBConstantsUtils.KeyUtils.PHONE_NUMBER);
             jsonObject.put(ANCJsonFormUtils.VALUE, phoneNumber);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREV_PREG_PROBS)) {
+            String prevPregProbs = womanClient.get(DBConstantsUtils.KeyUtils.PREV_PREG_PROBS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, prevPregProbs);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREV_PREG_COMPS)) {
+            String prevPregComps = womanClient.get(DBConstantsUtils.KeyUtils.PREV_PREG_COMPS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, prevPregComps);
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.OCCUPATION)) {
             String occupation = womanClient.get(DBConstantsUtils.KeyUtils.OCCUPATION);
             jsonObject.put(ANCJsonFormUtils.VALUE, occupation);
@@ -589,6 +594,607 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.MARITAL_STATUS)) {
             String maritalStatus = womanClient.get(DBConstantsUtils.KeyUtils.MARITAL_STATUS);
             jsonObject.put(ANCJsonFormUtils.VALUE, maritalStatus);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.WOM_IMAGE)) {
+            getPhotoFieldValue(womanClient, jsonObject);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.GRAVIDA)) {
+            String gravida = womanClient.get(DBConstantsUtils.KeyUtils.GRAVIDA);
+            jsonObject.put(ANCJsonFormUtils.VALUE, gravida);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_COMPLICATIONS)) {
+            String pregOneComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_BIRTH_WEIGHT)) {
+            String pregOneBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_SEX_INFANT)) {
+            String pregOneSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_OUTCOME_EARLY)) {
+            String pregOneOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_OUTCOME)) {
+            String pregOneOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.LABOUR_TYPE)) {
+            String pregOneLabourType = womanClient.get(DBConstantsUtils.KeyUtils.LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE)) {
+            String cTypeOne = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeOne);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.TYPE_OF_ASSISTED)) {
+            String pregnancyOneTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyOneTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.DELIVERY_METHOD)) {
+            String pregOneDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.GESTATIONAL_AGE)) {
+            String pregOneGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregOneEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_DT_UNKNOWN)) {
+            String pregOneDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ONE_DELIVERY_TERMINATION)) {
+            String pregOneDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ONE_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregOneDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_COMPLICATIONS)) {
+            String pregTwoComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_BIRTH_WEIGHT)) {
+            String pregTwoBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_SEX_INFANT)) {
+            String pregTwoSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_OUTCOME_EARLY)) {
+            String pregTwoOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_OUTCOME)) {
+            String pregTwoOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_LABOUR_TYPE)) {
+            String pregTwoLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_TWO)) {
+            String cTypeTwo = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_TWO);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeTwo);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_TYPE_OF_ASSISTED)) {
+            String pregnancyTwoTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyTwoTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_DELIVERY_METHOD)) {
+            String pregTwoDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_GESTATIONAL_AGE)) {
+            String pregTwoGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregTwoEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_DT_UNKNOWN)) {
+            String pregTwoDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_DELIVERY_TERMINATION)) {
+            String pregTwoDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWO_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwoDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_COMPLICATIONS)) {
+            String pregThreeComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_BIRTH_WEIGHT)) {
+            String pregThreeBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_SEX_INFANT)) {
+            String pregThreeSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_OUTCOME_EARLY)) {
+            String pregThreeOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_OUTCOME)) {
+            String pregThreeOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_LABOUR_TYPE)) {
+            String pregThreeLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_THREE)) {
+            String cTypeThree = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_THREE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeThree);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_THREE_TYPE_OF_ASSISTED)) {
+            String pregnancyThreeTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_THREE_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyThreeTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_DELIVERY_METHOD)) {
+            String pregThreeDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_GESTATIONAL_AGE)) {
+            String pregThreeGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregThreeEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_DT_UNKNOWN)) {
+            String pregThreeDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THREE_DELIVERY_TERMINATION)) {
+            String pregThreeDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THREE_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThreeDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_COMPLICATIONS)) {
+            String pregFourComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_BIRTH_WEIGHT)) {
+            String pregFourBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_SEX_INFANT)) {
+            String pregFourSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_OUTCOME_EARLY)) {
+            String pregFourOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_OUTCOME)) {
+            String pregFourOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourOutcome);
+        }// Continue this pattern for Pregnancy Four
+        else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_LABOUR_TYPE)) {
+            String pregFourLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_FOUR)) {
+            String cTypeFour = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_FOUR);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeFour);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_FOUR_TYPE_OF_ASSISTED)) {
+            String pregnancyFourTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_FOUR_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyFourTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_DELIVERY_METHOD)) {
+            String pregFourDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_GESTATIONAL_AGE)) {
+            String pregFourGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregFourEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_DT_UNKNOWN)) {
+            String pregFourDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOUR_DELIVERY_TERMINATION)) {
+            String pregFourDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOUR_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_COMPLICATIONS)) {
+            String pregFiveComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_BIRTH_WEIGHT)) {
+            String pregFiveBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_SEX_INFANT)) {
+            String pregFiveSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_OUTCOME_EARLY)) {
+            String pregFiveOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_OUTCOME)) {
+            String pregFiveOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_LABOUR_TYPE)) {
+            String pregFiveLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_FIVE)) {
+            String cTypeFive = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_FIVE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeFive);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_FIVE_TYPE_OF_ASSISTED)) {
+            String pregnancyFiveTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_FIVE_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyFiveTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_DELIVERY_METHOD)) {
+            String pregFiveDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_GESTATIONAL_AGE)) {
+            String pregFiveGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregFiveEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_DT_UNKNOWN)) {
+            String pregFiveDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIVE_DELIVERY_TERMINATION)) {
+            String pregFiveDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIVE_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFiveDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_COMPLICATIONS)) {
+            String pregSixComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_BIRTH_WEIGHT)) {
+            String pregSixBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_SEX_INFANT)) {
+            String pregSixSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_OUTCOME_EARLY)) {
+            String pregSixOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_OUTCOME)) {
+            String pregSixOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_LABOUR_TYPE)) {
+            String pregSixLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_SIX)) {
+            String cTypeSix = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_SIX);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeSix);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_SIX_TYPE_OF_ASSISTED)) {
+            String pregnancySixTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_SIX_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancySixTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_DELIVERY_METHOD)) {
+            String pregSixDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_GESTATIONAL_AGE)) {
+            String pregSixGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregSixEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_DT_UNKNOWN)) {
+            String pregSixDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SIX_DELIVERY_TERMINATION)) {
+            String pregSixDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SIX_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSixDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_COMPLICATIONS)) {
+            String pregSevenComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_BIRTH_WEIGHT)) {
+            String pregSevenBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_SEX_INFANT)) {
+            String pregSevenSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_OUTCOME_EARLY)) {
+            String pregSevenOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_OUTCOME)) {
+            String pregSevenOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_LABOUR_TYPE)) {
+            String pregSevenLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_SEVEN)) {
+            String cTypeSeven = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_SEVEN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeSeven);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_SEVEN_TYPE_OF_ASSISTED)) {
+            String pregnancySevenTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_SEVEN_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancySevenTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_DELIVERY_METHOD)) {
+            String pregSevenDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_GESTATIONAL_AGE)) {
+            String pregSevenGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregSevenEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_DT_UNKNOWN)) {
+            String pregSevenDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_SEVEN_DELIVERY_TERMINATION)) {
+            String pregSevenDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_SEVEN_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregSevenDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_COMPLICATIONS)) {
+            String pregEightComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_BIRTH_WEIGHT)) {
+            String pregEightBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_SEX_INFANT)) {
+            String pregEightSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_OUTCOME_EARLY)) {
+            String pregEightOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_OUTCOME)) {
+            String pregEightOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_LABOUR_TYPE)) {
+            String pregEightLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_EIGHT)) {
+            String cTypeEight = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_EIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeEight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_EIGHT_TYPE_OF_ASSISTED)) {
+            String pregnancyEightTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_EIGHT_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyEightTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_DELIVERY_METHOD)) {
+            String pregEightDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_GESTATIONAL_AGE)) {
+            String pregEightGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregEightEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_DT_UNKNOWN)) {
+            String pregEightDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_EIGHT_DELIVERY_TERMINATION)) {
+            String pregEightDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_EIGHT_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregEightDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_COMPLICATIONS)) {
+            String pregNineComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_BIRTH_WEIGHT)) {
+            String pregNineBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_SEX_INFANT)) {
+            String pregNineSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_OUTCOME_EARLY)) {
+            String pregNineOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_OUTCOME)) {
+            String pregNineOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_LABOUR_TYPE)) {
+            String pregNineLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_NINE)) {
+            String cTypeNine = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_NINE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeNine);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_NINE_TYPE_OF_ASSISTED)) {
+            String pregnancyNineTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_NINE_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyNineTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_DELIVERY_METHOD)) {
+            String pregNineDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_GESTATIONAL_AGE)) {
+            String pregNineGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregNineEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_DT_UNKNOWN)) {
+            String pregNineDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_NINE_DELIVERY_TERMINATION)) {
+            String pregNineDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_NINE_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregNineDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_COMPLICATIONS)) {
+            String pregTenComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_BIRTH_WEIGHT)) {
+            String pregTenBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_SEX_INFANT)) {
+            String pregTenSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_OUTCOME_EARLY)) {
+            String pregTenOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_OUTCOME)) {
+            String pregTenOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_LABOUR_TYPE)) {
+            String pregTenLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_TEN)) {
+            String cTypeTen = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_TEN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeTen);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TEN_TYPE_OF_ASSISTED)) {
+            String pregnancyTenTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TEN_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyTenTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_DELIVERY_METHOD)) {
+            String pregTenDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_GESTATIONAL_AGE)) {
+            String pregTenGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregTenEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_DT_UNKNOWN)) {
+            String pregTenDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TEN_DELIVERY_TERMINATION)) {
+            String pregTenDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TEN_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTenDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_COMPLICATIONS)) {
+            String pregElevenComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_BIRTH_WEIGHT)) {
+            String pregElevenBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_SEX_INFANT)) {
+            String pregElevenSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_OUTCOME_EARLY)) {
+            String pregElevenOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_OUTCOME)) {
+            String pregElevenOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_LABOUR_TYPE)) {
+            String pregElevenLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_ELEVEN)) {
+            String cTypeEleven = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_ELEVEN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeEleven);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_ELEVEN_TYPE_OF_ASSISTED)) {
+            String pregnancyElevenTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_ELEVEN_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyElevenTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_DELIVERY_METHOD)) {
+            String pregElevenDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_GESTATIONAL_AGE)) {
+            String pregElevenGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregElevenEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_DT_UNKNOWN)) {
+            String pregElevenDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_ELEVEN_DELIVERY_TERMINATION)) {
+            String pregElevenDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_ELEVEN_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregElevenDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_COMPLICATIONS)) {
+            String pregTwelveComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_BIRTH_WEIGHT)) {
+            String pregTwelveBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_SEX_INFANT)) {
+            String pregTwelveSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_OUTCOME_EARLY)) {
+            String pregTwelveOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_OUTCOME)) {
+            String pregTwelveOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_LABOUR_TYPE)) {
+            String pregTwelveLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_TWELVE)) {
+            String cTypeTwelve = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_TWELVE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeTwelve);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_TWELVE_TYPE_OF_ASSISTED)) {
+            String pregnancyTwelveTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_TWELVE_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyTwelveTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_DELIVERY_METHOD)) {
+            String pregTwelveDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_GESTATIONAL_AGE)) {
+            String pregTwelveGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregTwelveEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_DT_UNKNOWN)) {
+            String pregTwelveDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_TWELVE_DELIVERY_TERMINATION)) {
+            String pregTwelveDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_TWELVE_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregTwelveDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_COMPLICATIONS)) {
+            String pregThirteenComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_BIRTH_WEIGHT)) {
+            String pregThirteenBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_SEX_INFANT)) {
+            String pregThirteenSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_OUTCOME_EARLY)) {
+            String pregThirteenOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_OUTCOME)) {
+            String pregThirteenOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_LABOUR_TYPE)) {
+            String pregThirteenLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_THIRTEEN)) {
+            String cTypeThirteen = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_THIRTEEN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeThirteen);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_THIRTEEN_TYPE_OF_ASSISTED)) {
+            String pregnancyThirteenTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_THIRTEEN_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyThirteenTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_DELIVERY_METHOD)) {
+            String pregThirteenDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_GESTATIONAL_AGE)) {
+            String pregThirteenGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregThirteenEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_DT_UNKNOWN)) {
+            String pregThirteenDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_DELIVERY_TERMINATION)) {
+            String pregThirteenDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_THIRTEEN_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregThirteenDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_COMPLICATIONS)) {
+            String pregFourteenComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_BIRTH_WEIGHT)) {
+            String pregFourteenBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_SEX_INFANT)) {
+            String pregFourteenSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_OUTCOME_EARLY)) {
+            String pregFourteenOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_OUTCOME)) {
+            String pregFourteenOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_LABOUR_TYPE)) {
+            String pregFourteenLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_FOURTEEN)) {
+            String cTypeFourteen = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_FOURTEEN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeFourteen);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_FOURTEEN_TYPE_OF_ASSISTED)) {
+            String pregnancyFourteenTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_FOURTEEN_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyFourteenTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_DELIVERY_METHOD)) {
+            String pregFourteenDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_GESTATIONAL_AGE)) {
+            String pregFourteenGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregFourteenEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_DT_UNKNOWN)) {
+            String pregFourteenDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_DELIVERY_TERMINATION)) {
+            String pregFourteenDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FOURTEEN_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFourteenDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_COMPLICATIONS)) {
+            String pregFifteenComplications = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_COMPLICATIONS);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenComplications);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_BIRTH_WEIGHT)) {
+            String pregFifteenBirthWeight = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_BIRTH_WEIGHT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenBirthWeight);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_SEX_INFANT)) {
+            String pregFifteenSexInfant = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_SEX_INFANT);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenSexInfant);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_OUTCOME_EARLY)) {
+            String pregFifteenOutcomeEarly = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_OUTCOME_EARLY);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenOutcomeEarly);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_OUTCOME)) {
+            String pregFifteenOutcome = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_OUTCOME);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenOutcome);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_LABOUR_TYPE)) {
+            String pregFifteenLabourType = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_LABOUR_TYPE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenLabourType);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.C_TYPE_FIFTEEN)) {
+            String cTypeFifteen = womanClient.get(DBConstantsUtils.KeyUtils.C_TYPE_FIFTEEN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, cTypeFifteen);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREGNANCY_FIFTEEN_TYPE_OF_ASSISTED)) {
+            String pregnancyFifteenTypeOfAssisted = womanClient.get(DBConstantsUtils.KeyUtils.PREGNANCY_FIFTEEN_TYPE_OF_ASSISTED);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregnancyFifteenTypeOfAssisted);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_DELIVERY_METHOD)) {
+            String pregFifteenDeliveryMethod = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_DELIVERY_METHOD);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenDeliveryMethod);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_GESTATIONAL_AGE)) {
+            String pregFifteenGestationalAge = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_GESTATIONAL_AGE);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenGestationalAge);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_ESTIMATED_DELIVERY_TERMINATION)) {
+            String pregFifteenEstimatedDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_ESTIMATED_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenEstimatedDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_DT_UNKNOWN)) {
+            String pregFifteenDtUnknown = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_DT_UNKNOWN);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenDtUnknown);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_DELIVERY_TERMINATION)) {
+            String pregFifteenDeliveryTermination = womanClient.get(DBConstantsUtils.KeyUtils.PREG_FIFTEEN_DELIVERY_TERMINATION);
+            jsonObject.put(ANCJsonFormUtils.VALUE, pregFifteenDeliveryTermination);
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.DOB_UNKNOWN)) {
+            jsonObject.put(ANCJsonFormUtils.READ_ONLY, false);
+            JSONObject optionsObject = jsonObject.getJSONArray(ConstantsUtils.JsonFormKeyUtils.OPTIONS).getJSONObject(0);
+            optionsObject.put(ANCJsonFormUtils.VALUE, womanClient.get(DBConstantsUtils.KeyUtils.DOB_UNKNOWN));
+
+        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.KeyUtils.AGE_ENTERED)) {
+            jsonObject.put(ANCJsonFormUtils.READ_ONLY, false);
+            if (StringUtils.isNotBlank(womanClient.get(DBConstantsUtils.KeyUtils.DOB))) {
+                jsonObject.put(ANCJsonFormUtils.VALUE, Utils.getAgeFromDate(womanClient.get(DBConstantsUtils.KeyUtils.DOB)));
+            }
         } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.COHABITANTS)) {
             String cohabitants = womanClient.get(DBConstantsUtils.KeyUtils.COHABITANTS);
             Integer numberOfCohabitants = jsonObject.getJSONArray("options").length();
@@ -601,18 +1207,6 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
                 }
             }
 
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.WOM_IMAGE)) {
-            getPhotoFieldValue(womanClient, jsonObject);
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(DBConstantsUtils.KeyUtils.DOB_UNKNOWN)) {
-            jsonObject.put(ANCJsonFormUtils.READ_ONLY, false);
-            JSONObject optionsObject = jsonObject.getJSONArray(ConstantsUtils.JsonFormKeyUtils.OPTIONS).getJSONObject(0);
-            optionsObject.put(ANCJsonFormUtils.VALUE, womanClient.get(DBConstantsUtils.KeyUtils.DOB_UNKNOWN));
-
-        } else if (jsonObject.getString(ANCJsonFormUtils.KEY).equalsIgnoreCase(ConstantsUtils.KeyUtils.AGE_ENTERED)) {
-            jsonObject.put(ANCJsonFormUtils.READ_ONLY, false);
-            if (StringUtils.isNotBlank(womanClient.get(DBConstantsUtils.KeyUtils.DOB))) {
-                jsonObject.put(ANCJsonFormUtils.VALUE, Utils.getAgeFromDate(womanClient.get(DBConstantsUtils.KeyUtils.DOB)));
-            }
         } else if (ancMetadata != null && ancMetadata.getFieldsWithLocationHierarchy() != null &&
                 ancMetadata.getFieldsWithLocationHierarchy().contains(jsonObject.optString(ANCJsonFormUtils.KEY))) {
             reverseLocationTree(jsonObject, womanClient.get(jsonObject.optString(ANCJsonFormUtils.KEY)));
