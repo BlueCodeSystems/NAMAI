@@ -69,7 +69,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     private String womanAge = "";
     private final List<String> invisibleRequiredFields = new ArrayList<>();
     private final String[] contactForms = new String[]{ConstantsUtils.JsonFormUtils.ANC_QUICK_CHECK, ConstantsUtils.JsonFormUtils.ANC_PROFILE,
-            ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP, ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM,
+            ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP, ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM, ConstantsUtils.JsonFormUtils.ANC_PREV_PREGNANCY,
             ConstantsUtils.JsonFormUtils.ANC_TEST, ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT, ConstantsUtils.JsonFormUtils.ANC_TEST_TASKS};
     private String formInvalidFields = null;
     /*    public List<Contact> contacts = new ArrayList<>();
@@ -83,6 +83,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static TextView requiredFields4;
     public static TextView requiredFields5;
     public static TextView requiredFields6;
+    public static TextView requiredFields7;
     public TextView requiredFieldsx;
     public LinearLayout completeLayout;
     public static LinearLayout completeLayout2;
@@ -90,6 +91,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static LinearLayout completeLayout4;
     public static LinearLayout completeLayout5;
     public static LinearLayout completeLayout6;
+    public static LinearLayout completeLayout7;
     public LinearLayout completeLayoutx;
     public LinearLayout mainlayout;
     public LinearLayout middleLayout;
@@ -209,6 +211,18 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             physicalExam.setFormName(ConstantsUtils.JsonFormUtils.ANC_PHYSICAL_EXAM);
             contacts.add(physicalExam);
 
+            /*-- 7: Counselling Container --*/
+
+            Contact PreviousPregnancy = new Contact();
+            PreviousPregnancy.setName(getString(R.string.prev_preg_container));
+            PreviousPregnancy.setContactNumber(contactNo);
+            PreviousPregnancy.setBackground(R.drawable.ic_woman_with_baby);
+            PreviousPregnancy.setActionBarBackground(R.color.radio_light_blue);
+            PreviousPregnancy.setNavigationBackground(R.color.radio_light_blue);
+            setRequiredFields(PreviousPregnancy);
+            PreviousPregnancy.setFormName(ConstantsUtils.JsonFormUtils.ANC_PREV_PREGNANCY);
+            contacts.add(PreviousPregnancy);
+
             /*-- 5: Tests Container --*/
 
             Contact tests = new Contact();
@@ -236,6 +250,8 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
 
 
+
+
             Utils.ramTime(quickCheck);
             //ContactWizardJsonFormFragment.contactStarted = true;
 
@@ -260,6 +276,8 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         completeLayout5 = findViewById(R.id.complete_layout5);
         requiredFields6 = findViewById(R.id.required_fields6);
         completeLayout6 = findViewById(R.id.complete_layout6);
+        requiredFields7 = findViewById(R.id.required_fields7);
+        completeLayout7 = findViewById(R.id.complete_layout7);
         requiredFieldsx = findViewById(R.id.required_fieldsx);
         completeLayoutx = findViewById(R.id.complete_layoutx);
         mainlayout = findViewById(R.id.mainlayout);
@@ -276,8 +294,9 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         Contact contact2 = contacts.get(1);
         Contact contact3 = contacts.get(2);
         Contact contact4 = contacts.get(3);
-        Contact contact5 = contacts.get(4);
-        Contact contact6 = contacts.get(5);
+        Contact contact7 = contacts.get(4);
+        Contact contact5 = contacts.get(5);
+        Contact contact6 = contacts.get(6);
 
         if (contact1.getRequiredFields() == null) {
             requiredFields.setVisibility(View.GONE);
@@ -316,6 +335,19 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             requiredFields3.setText(String.format(this.getString(R.string.required_fields), contact3.getRequiredFields()));
             requiredFields3.setVisibility(View.VISIBLE);
             completeLayout3.setVisibility(View.GONE);
+        }
+
+        if (contact7.getRequiredFields() == null) {
+            requiredFields7.setVisibility(View.GONE);
+            completeLayout7.setVisibility(View.GONE);
+        } else if (contact7.getRequiredFields() == 0) {
+            completeLayout7.setVisibility(View.VISIBLE);
+            requiredFields7.setVisibility(View.GONE);
+            //runContact7 = true;
+        } else {
+            requiredFields7.setText(String.format(this.getString(R.string.required_fields), contact7.getRequiredFields()));
+            requiredFields7.setVisibility(View.VISIBLE);
+            completeLayout7.setVisibility(View.GONE);
         }
 
         if (contact4.getRequiredFields() == null) {
@@ -359,6 +391,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             completeLayout6.setVisibility(View.GONE);
         }
 
+
         if ((contact3.getRequiredFields() == null) && (contact4.getRequiredFields() == null) ) {
             requiredFieldsx.setVisibility(View.GONE);
             completeLayoutx.setVisibility(View.GONE);
@@ -401,13 +434,16 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
 
         }
 
+
         if (contact1.getRequiredFields() == 0){
                 if (contact2.getRequiredFields() == 0){
                     if (contact5.getRequiredFields() == 0){
                         if (contact6.getRequiredFields() == 0){
-                            if(routineCount == 0){
-                                finalizeBtn.setEnabled(true);
-                                ContactWizardJsonFormFragment.contactFinished = true;
+                            if (contact7.getRequiredFields() == 0) {
+                                if (routineCount == 0) {
+                                    finalizeBtn.setEnabled(true);
+                                    ContactWizardJsonFormFragment.contactFinished = true;
+                                }
                             }
                         }
                 }
@@ -437,17 +473,20 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 startPhysical = Instant.now();
             }
-        }else if (i == R.id.imaging){
+        }else if (i == R.id.pregnancy){
             presenter.startForm(contacts.get(4));
+        } else if (i == R.id.imaging){
+            presenter.startForm(contacts.get(5));
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 startTests = Instant.now();
             }
         }else if (i == R.id.counselling){
-            presenter.startForm(contacts.get(5));
+            presenter.startForm(contacts.get(6));
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 startCounselling = Instant.now();
             }
-        } else if (i == R.id.routine){
+        }
+        else if (i == R.id.routine){
             mainlayout.setVisibility(View.GONE);
             middleLayout.setVisibility(View.VISIBLE);
         } else if (i == R.id.containerBack){
@@ -584,6 +623,10 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             if (contactNo > 1 && ConstantsUtils.JsonFormUtils.ANC_PROFILE_ENCOUNTER_TYPE.equals(encounterType)
                     && !PatientRepository.isFirstVisit(baseEntityId)) {
                 requiredFieldsMap.put(ConstantsUtils.JsonFormUtils.ANC_PROFILE_ENCOUNTER_TYPE, 0);
+            }
+            if (contactNo > 1 && ConstantsUtils.JsonFormUtils.ANC_PREV_PREGNANCY_ENCOUNTER_TYPE.equals(encounterType)
+                    && !PatientRepository.isFirstVisit(baseEntityId)) {
+                requiredFieldsMap.put(ConstantsUtils.JsonFormUtils.ANC_PREV_PREGNANCY_ENCOUNTER_TYPE, 0);
             }
 
             if (ConstantsUtils.JsonFormUtils.ANC_TEST_TASKS_ENCOUNTER_TYPE.equals(encounterType)) {
@@ -787,6 +830,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             eventToFileMap.put(getString(R.string.tests), ConstantsUtils.JsonFormUtils.ANC_TEST);
             eventToFileMap.put(getString(R.string.counselling_treatment), ConstantsUtils.JsonFormUtils.ANC_COUNSELLING_TREATMENT);
             eventToFileMap.put(getString(R.string.symptoms_follow_up), ConstantsUtils.JsonFormUtils.ANC_SYMPTOMS_FOLLOW_UP);
+            eventToFileMap.put(getString(R.string.prev_preg), ConstantsUtils.JsonFormUtils.ANC_PREV_PREGNANCY);
         } catch (Exception e) {
             Timber.e(e, " --> createContacts");
         }

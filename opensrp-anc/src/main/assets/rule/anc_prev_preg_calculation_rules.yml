@@ -1,0 +1,35 @@
+---
+name: step1_previous_pregnancies
+description: Previous pregnancies
+priority: 1
+condition: "step1_gravida > 0"
+actions:
+  - "calculation = step1_gravida + 1 "
+---
+name: step1_parity
+description: Parity calculation
+priority: 1
+condition: "true"
+actions:
+  - "calculation = step1_live_births + step1_stillbirths"
+---
+name: step1_preeclampsia_risk
+description: preeclampsia_risk
+priority: 1
+condition: "((global_no_of_fetuses != null && global_no_of_fetuses != '' && global_no_of_fetuses >= 2) || (!step1_prev_preg_comps.isEmpty() && (step1_prev_preg_comps.contains('pre_eclampsia') || step1_prev_preg_comps.contains('eclampsia') || step1_prev_preg_comps.contains('convulsions'))) || (!step6_health_conditions.isEmpty() && (step6_health_conditions.contains('autoimmune_disease') || step6_health_conditions.contains('diabetes') || step6_health_conditions.contains('gest_diabetes') || step6_health_conditions.contains('diabetes_other') || step6_health_conditions.contains('diabetes_type2') || step6_health_conditions.contains('hypertension') || step6_health_conditions.contains('kidney_disease'))))"
+actions:
+  - "calculation = 1"
+---
+name: step1_gdm_risk
+description: gdm_risk
+priority: 1
+condition: "(global_bmi != null && global_bmi != '' && global_bmi >= 30) || (!step1_prev_preg_comps.isEmpty() && (step1_prev_preg_comps.contains('gestational_diabetes') || step1_prev_preg_comps.contains('macrosomia'))) || (global_urine_glucose != null && global_urine_glucose != '' && (global_urine_glucose == '++' || global_urine_glucose == '+++' ||  global_urine_glucose == '++++'))"
+actions:
+  - "calculation = 1"
+---
+name: step2_preeclampsia_risk
+description: preeclampsia_risk
+priority: 1
+condition: "((global_no_of_fetuses != null && global_no_of_fetuses != '' && global_no_of_fetuses >= 2) || (!step1_prev_preg_comps.isEmpty() && (step1_prev_preg_comps.contains('pre_eclampsia') || step1_prev_preg_comps.contains('eclampsia') || step1_prev_preg_comps.contains('convulsions'))) || (!step6_health_conditions.isEmpty() && (step6_health_conditions.contains('autoimmune_disease') || step6_health_conditions.contains('diabetes') || step6_health_conditions.contains('gest_diabetes') || step6_health_conditions.contains('diabetes_other') || step6_health_conditions.contains('diabetes_type2') || step6_health_conditions.contains('hypertension') || step6_health_conditions.contains('kidney_disease'))))"
+actions:
+  - "calculation = 1"
