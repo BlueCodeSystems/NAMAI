@@ -105,8 +105,14 @@ public abstract class BaseContactActivity extends SecuredActivity {
 
 
     protected void startFormActivity(JSONObject form, Contact contact) {
-        Intent intent = new Intent(this, ContactJsonFormActivity.class);
-        formStartActions(form, contact, intent);
+        if(form.optString("encounter_type").equals("Diagnostic Tests and Imaging")){
+            Intent intent = new Intent(this, TestsActivity.class);
+            formStartActions(form, contact, intent);
+
+        }else{
+            Intent intent = new Intent(this, ContactJsonFormActivity.class);
+            formStartActions(form, contact, intent);
+        }
     }
 
     private void formStartActions(JSONObject form, Contact contact, Intent intent) {
