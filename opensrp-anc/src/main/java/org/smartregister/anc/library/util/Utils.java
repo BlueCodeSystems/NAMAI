@@ -122,6 +122,8 @@ public class Utils extends org.smartregister.util.Utils {
 
     public static String adjContactDate;
 
+    public static int contactTestNumber;
+
     static ContactModel baseContactModel = new ContactModel();
 
     //public static int endRamVal = 0;
@@ -239,6 +241,7 @@ public class Utils extends org.smartregister.util.Utils {
             PartialContact partialContactRequest = new PartialContact();
             partialContactRequest.setBaseEntityId(baseEntityId);
             partialContactRequest.setContactNo(quickCheck.getContactNumber());
+            contactTestNumber = quickCheck.getContactNumber();
             partialContactRequest.setType(quickCheck.getFormName());
 
             JSONObject form = baseContactModel.getFormAsJson(quickCheck.getFormName(), baseEntityId, locationId);
@@ -381,6 +384,10 @@ public class Utils extends org.smartregister.util.Utils {
 
                     JSONObject durTes = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_tests");
 
+                    //JSONObject contactTest = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_tests");
+
+                    //contactTest.put(JsonFormUtils.VALUE, contactTestNumber);
+
                     durTes.put(JsonFormUtils.VALUE, timeElapsedTests.toString());
 
                     MainContactActivity.tesTimed = true;
@@ -389,6 +396,10 @@ public class Utils extends org.smartregister.util.Utils {
             }
         }
     }
+/*    public static JSONObject testForm(Contact contact5) throws Exception {
+        JSONObject form = baseContactModel.getFormAsJson(contact5.getFormName(), baseEntityId, locationId);
+        return form;
+    }*/
 
     public static void symptomsTime(Contact contact3) throws Exception {
         if(MainContactActivity.symTimed==false)

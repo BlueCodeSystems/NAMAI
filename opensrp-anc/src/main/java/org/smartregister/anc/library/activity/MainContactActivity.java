@@ -102,6 +102,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static Boolean symTimed = false;
     public static Instant startProfile;
     public static Instant startSymptoms;
+    public static int contactTestNumber;
     public static Instant startPhysical;
     public static Instant startTests;
     public static Instant startCounselling;
@@ -441,6 +442,10 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             presenter.startForm(contacts.get(4));
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 startTests = Instant.now();
+                contactTestNumber = contactNo;
+                //JSONObject form = Utils.testForm(contacts.get(4));
+                //JSONObject contactTest = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_tests");
+                //contactTest.put(JsonFormUtils.VALUE, contactTestNumber);
             }
         }else if (i == R.id.counselling){
             presenter.startForm(contacts.get(5));

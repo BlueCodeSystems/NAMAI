@@ -747,6 +747,7 @@
     "ttcv_unprotected",
     "ttcv_protected",
     "ttcv_full_protected",
+    "lmp_known",
     "hiv_test_result",
     "ultrasound_done_date",
     "lmp_known_date",
