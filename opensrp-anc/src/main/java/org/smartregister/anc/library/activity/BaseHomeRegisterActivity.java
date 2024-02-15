@@ -432,7 +432,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                             results.add(monthData[0]);
 
                             if (monthData[1] == null) {
-                                f1first[0] = ClientDao.getFirstContact("gest_age_openmrs", "8", "12", monthData[0]);
+                                f1first[0] = ClientDao.getFirstContact("gest_age", "8", "12", monthData[0]);
                                 monthData[1] = f1first[0];
                                 if (monthData[1] == null) {
                                     monthData[1] = "0";
@@ -441,7 +441,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                             results.add(f1first[0]);
 
                             if (monthData[2] == null) {
-                                f2first[0] = ClientDao.getFirstContactAbove15("gest_age_openmrs", "8", "12", monthData[0]);
+                                f2first[0] = ClientDao.getFirstContactAbove15("gest_age", "8", "12", monthData[0]);
                                 monthData[2] = f2first[0];
                                 if (monthData[2] == null) {
                                     monthData[2] = "0";
@@ -450,13 +450,13 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                             results.add(f2first[0]);
 
                             if (monthData[3] == null) {
-                                f3first[0] = ClientDao.getFirstContactAbove20("gest_age_openmrs", "8", "12", monthData[0]);
+                                f3first[0] = ClientDao.getFirstContactAbove20("gest_age", "8", "12", monthData[0]);
                                 monthData[3] = f3first[0];
                             }
                             results.add(f3first[0]);
 
                             if (monthData[4] == null) {
-                                f4first[0] = ClientDao.getFirstContactAbove25("gest_age_openmrs", "8", "12", monthData[0]);
+                                f4first[0] = ClientDao.getFirstContactAbove25("gest_age", "8", "12", monthData[0]);
                                 if (f4first[0] == null) {
                                     f4first[0] = "0";
                                 }
@@ -466,54 +466,54 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
 
                             if (monthData[5] == null) {
-                                f1second[0] = ClientDao.getFirstContact("gest_age_openmrs", "13", "26", monthData[0]);
+                                f1second[0] = ClientDao.getFirstContact("gest_age", "13", "26", monthData[0]);
                                 monthData[5] = f1second[0];
                             }
                             results.add(f1second[0]);
 
                             if (monthData[6] == null) {
-                                f2second[0] = ClientDao.getFirstContactAbove15("gest_age_openmrs", "13", "26", monthData[0]);
+                                f2second[0] = ClientDao.getFirstContactAbove15("gest_age", "13", "26", monthData[0]);
                                 monthData[6] = f2second[0];
                             }
                             results.add(f2second[0]);
 
                             if (monthData[7] == null) {
-                                f3second[0] = ClientDao.getFirstContactAbove20("gest_age_openmrs", "13", "26", monthData[0]);
+                                f3second[0] = ClientDao.getFirstContactAbove20("gest_age", "13", "26", monthData[0]);
                                 monthData[7] = f3second[0];
                             }
                             results.add(f3second[0]);
 
 
                             if (monthData[8] == null) {
-                                f4second[0] = ClientDao.getFirstContactAbove25("gest_age_openmrs", "13", "26", monthData[0]);
+                                f4second[0] = ClientDao.getFirstContactAbove25("gest_age", "13", "26", monthData[0]);
                                 monthData[8] = f4second[0];
                             }
                             results.add(f4second[0]);
 
 
                             if (monthData[9] == null) {
-                                f1third[0] = ClientDao.getFirstContact("gest_age_openmrs", "27", "40", monthData[0]);
+                                f1third[0] = ClientDao.getFirstContact("gest_age", "27", "40", monthData[0]);
                                 monthData[9] = f1third[0];
                             }
                             results.add(f1third[0]);
 
 
                             if (monthData[10] == null) {
-                                f2third[0] = ClientDao.getFirstContactAbove15("gest_age_openmrs", "27", "40", monthData[0]);
+                                f2third[0] = ClientDao.getFirstContactAbove15("gest_age", "27", "40", monthData[0]);
                                 monthData[10] = f2third[0];
                             }
                             results.add(f2third[0]);
 
 
                             if (monthData[11] == null) {
-                                f3third[0] = ClientDao.getFirstContactAbove20("gest_age_openmrs", "27", "40", monthData[0]);
+                                f3third[0] = ClientDao.getFirstContactAbove20("gest_age", "27", "40", monthData[0]);
                                 monthData[11] = f3third[0];
                             }
                             results.add(f3third[0]);
 
 
                             if (monthData[12] == null) {
-                                f4third[0] = ClientDao.getFirstContactAbove25("gest_age_openmrs", "27", "40", monthData[0]);
+                                f4third[0] = ClientDao.getFirstContactAbove25("gest_age", "27", "40", monthData[0]);
                                 monthData[12] = f4third[0];
                             }
                             results.add(f4third[0]);

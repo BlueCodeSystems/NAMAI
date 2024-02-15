@@ -121,6 +121,12 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
     @Override
     public void startForm(String formName, String entityId, String metadata, String currentLocationId) throws Exception {
         if ("anc_register".equals(formName)) {
+            if (StringUtils.isBlank(entityId)) {
+                Triple<String, String, String> triple = Triple.of(formName, metadata, currentLocationId);
+                interactor.getNextUniqueId(triple, this);
+                return;
+            }
+
             Context context = getView().getContext();
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -134,12 +140,6 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
             AlertDialog alertDialog = alertDialogBuilder.create();
 
             yes.setOnClickListener(v -> {
-                alertDialog.dismiss();
-                if (StringUtils.isBlank(entityId)) {
-                    Triple<String, String, String> triple = Triple.of(formName, metadata, currentLocationId);
-                    interactor.getNextUniqueId(triple, this);
-                    return;
-                }
 
                 JSONObject form = null;
                 try {
@@ -148,6 +148,7 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
                     throw new RuntimeException(e);
                 }
                 getView().startFormActivity(form);
+                alertDialog.dismiss();
             });
 
             no.setOnClickListener(v -> {

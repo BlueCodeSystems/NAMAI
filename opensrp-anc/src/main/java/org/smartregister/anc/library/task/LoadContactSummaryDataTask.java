@@ -50,12 +50,12 @@ public class LoadContactSummaryDataTask extends AsyncTask<Void, Void, Void> {
 
     }
 
-    @Override
+/*    @Override
     protected void onPreExecute() {
         ((ContactSummaryFinishActivity) context).showProgressDialog(R.string.please_wait_message);
         ((ContactSummaryFinishActivity) context).getProgressDialog().setMessage(String.format(context.getString(R.string.summarizing_contact_number), intent.getExtras().getInt(ConstantsUtils.IntentKeyUtils.CONTACT_NO)) + " data");
         ((ContactSummaryFinishActivity) context).getProgressDialog().show();
-    }
+    }*/
 
     @Override
     protected void onPostExecute(Void result) {

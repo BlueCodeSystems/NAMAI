@@ -88,9 +88,21 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
     public static boolean isFieldRequired(JSONObject fieldObject) throws JSONException {
         boolean isValueRequired = false;
         if (fieldObject.has(JsonFormConstants.V_REQUIRED)) {
-            JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
-            String value = valueRequired.getString(JsonFormConstants.VALUE);
-            isValueRequired = Boolean.parseBoolean(value);
+            if(fieldObject.getString(JsonFormConstants.KEY).contains("accordion")){
+                if(Utils.contactTestNumber == 1){
+                    JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+                    String value = valueRequired.getString(JsonFormConstants.VALUE);
+                    isValueRequired = true;
+                }else{
+                    JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+                    String value = valueRequired.getString(JsonFormConstants.VALUE);
+                    isValueRequired = false;
+                }
+            }else {
+                JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+                String value = valueRequired.getString(JsonFormConstants.VALUE);
+                isValueRequired = Boolean.parseBoolean(value);
+            }
         }
         //Don't check required for hidden, toaster notes, spacer and label widgets
         return (!fieldObject.getString(JsonFormConstants.TYPE).equals(JsonFormConstants.LABEL) &&
@@ -99,6 +111,42 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
                 !fieldObject.getString(JsonFormConstants.TYPE).equals(JsonFormConstants.HIDDEN)) &&
                 isValueRequired;
     }
+
+    /*public static boolean isFieldRequired(JSONObject fieldObject) throws JSONException {
+        boolean isValueRequired = false;
+
+        if (fieldObject != null && fieldObject.has(JsonFormConstants.V_REQUIRED) &&
+                fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED) != null) {
+
+            JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+
+            if (fieldObject.has(JsonFormConstants.KEY) && fieldObject.getString(JsonFormConstants.KEY).contains("accordion")) {
+                // Directly using the condition as a boolean expression
+                isValueRequired = Utils.contactTestNumber == 1;
+
+            } else {
+                // Use optString to handle null and avoid JSONException
+                String value = valueRequired.optString(JsonFormConstants.VALUE, "false");
+                isValueRequired = Boolean.parseBoolean(value);
+            }
+        }
+
+        return isValueRequired && isWidgetTypeNotExcluded(fieldObject);
+    }*/
+
+    /*private static boolean isWidgetTypeNotExcluded(JSONObject fieldObject) throws JSONException {
+        if (fieldObject == null || !fieldObject.has(JsonFormConstants.TYPE)) {
+            // If fieldObject or type is missing, return false
+            return false;
+        }
+
+        // Assuming valid fieldObject and type exists
+        String fieldType = fieldObject.getString(JsonFormConstants.TYPE);
+        return !fieldType.equals(JsonFormConstants.LABEL) &&
+                !fieldType.equals(JsonFormConstants.SPACER) &&
+                !fieldType.equals(JsonFormConstants.TOASTER_NOTES) &&
+                !fieldType.equals(JsonFormConstants.HIDDEN);
+    }*/
 
     public static JSONObject getFormAsJson(JSONObject form, String formName, String id, String currentLocationId)
             throws Exception {

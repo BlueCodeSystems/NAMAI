@@ -1,0 +1,7 @@
+---
+name: step1_tb_test_date_today_hidden
+description: tb_test_date
+priority: 1
+condition: "step1_tb_test_status == 'done_today'"
+actions:
+  - "calculation = helper.getDateToday()"

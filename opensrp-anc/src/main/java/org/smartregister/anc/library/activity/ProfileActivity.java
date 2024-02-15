@@ -195,7 +195,7 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
     }
 
     protected void launchPhoneDialer(String phoneNumber) {
-        if (isPermissionGranted()) {
+        /*if (isPermissionGranted()) {*/
             try {
                 Intent intent = getTelephoneIntent(phoneNumber);
                 startActivity(intent);
@@ -206,7 +206,7 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
                 copyToClipboardDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 copyToClipboardDialog.show();
             }
-        }
+        //}
     }
 
     protected boolean isPermissionGranted() {
@@ -369,8 +369,8 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
     }
 
     @Override
-    public void setProfileGestationAge(String gestationAge) {
-        gestationAgeView.setText(gestationAge != null ? "GA: " + gestationAge + " WEEKS" : "GA");
+    public void setProfileGestationAge(String gestationAge, String gestationAgeDays) {
+        gestationAgeView.setText(gestationAge != null ? "GA: " + gestationAge + " WEEKS " + gestationAgeDays + " DAYS" : "GA");
     }
 
     @Override

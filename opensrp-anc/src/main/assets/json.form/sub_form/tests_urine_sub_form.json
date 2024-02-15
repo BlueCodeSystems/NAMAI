@@ -83,7 +83,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       },
@@ -111,7 +111,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -127,7 +127,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "urine_calculation_rules.yml"
           }
         }
       }
@@ -144,14 +144,14 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "urine_calculation_rules.yml"
           }
         }
       },
@@ -196,7 +196,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       },
@@ -250,7 +250,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -286,7 +286,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -343,7 +343,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -400,7 +400,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -457,7 +457,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -514,7 +514,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -528,7 +528,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "urine_calculation_rules.yml"
           }
         }
       }
@@ -546,7 +546,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -562,7 +562,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "urine_calculation_rules.yml"
           }
         }
       }
@@ -580,7 +580,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }
@@ -598,7 +598,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "urine_relevance_rules.yml"
           }
         }
       }

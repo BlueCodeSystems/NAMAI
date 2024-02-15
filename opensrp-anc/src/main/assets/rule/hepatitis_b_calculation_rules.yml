@@ -1,0 +1,28 @@
+---
+name: step1_hepb_positive
+description: hepb_positive
+priority: 1
+condition: "(step1_hbsag_lab_ima == 'positive') || (step1_hbsag_rdt == 'positive') || (step1_hbsag_dbs == 'positive')"
+actions:
+  - "calculation = 1"
+---
+name: step1_partner_hepb_positive
+description: partner_hepb_positive
+priority: 1
+condition: "(step1_partner_hbsag_lab_ima == 'positive') || (step1_partner_hbsag_rdt == 'positive') || (step1_partner_hbsag_dbs == 'positive')"
+actions:
+  - "calculation = 1"
+---
+name: step1_hepb_test_date_today_hidden
+description: hepb_test_date
+priority: 1
+condition: "step1_hepb_test_status == 'done_today'"
+actions:
+  - "calculation = helper.getDateToday()"
+---
+name: step1_partner_hepb_test_date_today_hidden
+description: partner_hepb_test_date
+priority: 1
+condition: "step1_partner_hepb_test_status == 'done_today'"
+actions:
+  - "calculation = helper.getDateToday()"

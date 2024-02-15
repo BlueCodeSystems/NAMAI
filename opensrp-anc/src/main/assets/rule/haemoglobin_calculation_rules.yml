@@ -1,0 +1,57 @@
+---
+name: step1_hb_result
+description: hb_result
+priority: 1
+condition: "true"
+actions:
+  - "calculation = (step1_hb_test_type == 'complete_blood_count' && step1_hb_test_type != '' && step1_cbc != '') ? step1_cbc : (step1_hb_test_type == 'hb_test_haemoglobinometer' && step1_hb_test_type != '' && step1_hb_gmeter != '') ? step1_hb_gmeter :  (step1_hb_test_type == 'hb_test_colour_scale' && step1_hb_test_type != '' && step1_hb_colour != '') ? step1_hb_colour : '' "
+---
+name: step1_hb_result
+description: hb_result
+priority: 1
+condition: "true"
+actions:
+  - "calculation = (step1_hb_test_type == 'complete_blood_count' && step1_hb_test_type != '' && step1_cbc != '') ? step1_cbc : (step1_hb_test_type == 'hb_test_haemoglobinometer' && step1_hb_test_type != '' && step1_hb_gmeter != '') ? step1_hb_gmeter :  (step1_hb_test_type == 'hb_test_colour_scale' && step1_hb_test_type != '' &&  step1_hb_colour != '') ? step1_hb_colour : '' "
+---
+name: step1_anaemic
+description: anaemic
+priority: 1
+condition: "(step1_hb_result != ''  && step1_hb_result > 0 && step1_hb_result < 11)"
+actions:
+  - "calculation = 1"
+---
+name: step1_anemia_level
+description: anaemic level
+priority: 1
+condition: "(step1_hb_result != ''  && step1_hb_result > 8 && step1_hb_result <= 10.9)"
+actions:
+  - "calculation = 'Mild'"
+---
+name: step1_anemia_level
+description: anaemic level
+priority: 2
+condition: "(step1_hb_result != ''  && step1_hb_result >= 7 && step1_hb_result <= 8.9)"
+actions:
+  - "calculation = 'Moderate'"
+
+---
+name: step1_anemia_level
+description: anaemic level
+priority: 3
+condition: "(step1_hb_result != ''  && step1_hb_result > 0 && step1_hb_result < 7)"
+actions:
+  - "calculation = 'Severe'"
+---
+name: step1_anaemia_diagnosis_danger_toaster
+description: Note displaying the weight gain.
+priority: 1
+condition: "true"
+actions:
+  - "calculation = ['level' : step1_anemia_level]"
+---
+name: step1_hb_test_date_today_hidden
+description: hb_test_date
+priority: 1
+condition: "step1_hb_test_status != '' && step1_hb_test_status == 'done_today'"
+actions:
+  - "calculation = helper.getDateToday()"

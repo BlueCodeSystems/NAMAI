@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.activity;
 
+import static org.smartregister.anc.library.presenter.ProfilePresenter.gest_age_days_profile;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -183,11 +185,11 @@ public class ProfileActivityTest extends BaseActivityUnitTest {
 
         Whitebox.setInternalState(spyActivity, "gestationAgeView", textView);
 
-        spyActivity.setProfileGestationAge(TEST_STRING);
+        spyActivity.setProfileGestationAge(TEST_STRING, gest_age_days_profile);
 
         Mockito.verify(textView).setText("GA: " + TEST_STRING + " WEEKS");
 
-        spyActivity.setProfileGestationAge(null);
+        spyActivity.setProfileGestationAge(null, gest_age_days_profile);
 
         Mockito.verify(textView).setText("GA");
     }

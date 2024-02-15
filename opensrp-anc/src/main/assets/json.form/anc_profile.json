@@ -56,6 +56,12 @@
     }
   },
   "editable_fields": [
+    "gest_age_days",
+    "lmp_gest_age_weeks",
+    "lmp_gest_age",
+    "lmp_gest_age_days",
+    "lmp_ultrasound_gest_age_selection",
+    "gest_age",
     "discordant_out",
     "educ_level",
     "marital_status",
@@ -68,8 +74,8 @@
     "underimmunized_doses",
     "ultrasound_done_date",
     "ultrasound_gest_age_wks",
+    "ultrasound_gest_age_days",
     "sfh_gest_age",
-    "select_gest_age_edd",
     "gravida",
     "previous_pregnancies",
     "miscarriages_abortions",
@@ -79,6 +85,7 @@
     "c_sections",
     "prev_preg_comps",
     "allergies",
+    "medications_history",
     "allergies_other",
     "surgeries",
     "surgeries_other_gyn_proced",
@@ -88,7 +95,6 @@
     "hiv_diagnosis_date",
     "tt_immun_status",
     "flu_immun_status",
-    "medications",
     "medications_other",
     "caffeine_intake",
     "tobacco_user",
@@ -326,6 +332,16 @@
     "preg_thirteen_delivery_termination"
   ],
   "default_values": [
+    "medications_history",
+    "gest_age_days",
+    "gest_age",
+    "dating_chosen",
+    "date_sfh_recorded",
+    "lmp_gest_age",
+    "lmp_gest_age_days",
+    "lmp_gest_age_days",
+    "lmp_gest_age_text",
+    "initial_sfh",
     "discordant_out",
     "educ_level",
     "marital_status",
@@ -335,9 +351,10 @@
     "lmp_known_date",
     "ultrasound_done",
     "ultrasound_done_date",
+    "ultrasound_gest_age",
+    "ultrasound_gest_age_days",
     "ultrasound_gest_age_wks",
     "sfh_gest_age",
-    "select_gest_age_edd",
     "gravida",
     "previous_pregnancies",
     "miscarriages_abortions",
@@ -364,7 +381,6 @@
     "hiv_diagnosis_date",
     "tt_immun_status",
     "flu_immun_status",
-    "medications",
     "medications_other",
     "caffeine_intake",
     "tobacco_user",
@@ -749,7 +765,6 @@
     "ttcv_full_protected",
     "hiv_test_result",
     "ultrasound_done_date",
-    "lmp_known_date",
     "sfh_gest_age"
   ],
   "step1": {
@@ -840,9 +855,10 @@
           "err": "Please specify ultrasound date"
         },
         "relevance": {
-          "step1:lmp_known": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         }
       },
@@ -869,7 +885,64 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
+        "key": "lmp_gest_age_weeks",
+        "type": "hidden",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "key": "lmp_gest_age_days",
+        "type": "hidden",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
         "key": "lmp_gest_age",
+        "type": "hidden",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "key": "lmp_gest_age_text",
         "type": "hidden",
         "label_text_style": "bold",
         "text_color": "#FF0000",
@@ -929,9 +1002,10 @@
           "err": "Please specify ultrasound date"
         },
         "relevance": {
-          "step1:ultrasound_done": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         }
       },
@@ -981,9 +1055,10 @@
         "type": "edit_text",
         "hint": "{{anc_profile.step2.ultrasound_gest_age_wks.hint}}",
         "relevance": {
-          "step1:ultrasound_done": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         },
         "v_required": {
@@ -1008,13 +1083,13 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
-        "value": "0",
         "type": "edit_text",
         "hint": "{{anc_profile.step2.ultrasound_gest_age_days.hint}}",
         "relevance": {
-          "step1:ultrasound_done": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
           }
         },
         "v_required": {
@@ -1168,7 +1243,7 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{anc_profile.step2.lmp_gest_age_selection.options.lmp.text}}",
-            "extra_info": "GA: {lmp_gest_age}\u003cbr/\u003eEDD: {lmp_edd}"
+            "extra_info": "GA weeks: {lmp_gest_age}<br/> GA days:{lmp_gest_age_days}\u003cbr/\u003eEDD: {lmp_edd}"
           }
         ],
         "v_required": {
@@ -1289,6 +1364,95 @@
           "value": "40",
           "err": "GA from SFH or HOF - weeks should be 40 or less"
         },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "date_sfh_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "Date SFH recorded",
+        "text_color": "#000000",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "date_sfh_recorded",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "read_only": "true",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "initial_sfh_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "Initial SFH recorded",
+        "text_color": "#000000",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "initial_sfh",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "read_only": "true",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        },
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -1312,7 +1476,7 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "text": "{{anc_profile.step2.lmp_ultrasound_gest_age_selection.options.lmp.text}}",
-            "extra_info": "GA: {lmp_gest_age}\u003cbr/\u003eEDD: {lmp_edd}"
+            "extra_info": "GA weeks: {lmp_gest_age}<br/> GA days:{lmp_gest_age_days}\u003cbr/\u003eEDD: {lmp_edd}"
           },
           {
             "key": "ultrasound",
@@ -1369,6 +1533,40 @@
         "v_required": {
           "value": true,
           "err": "{{anc_profile.step2.sfh_ultrasound_gest_age_selection.v_required.err}}"
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "dating_chosen_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "Dating method chosen",
+        "text_color": "#000000"
+      },
+      {
+        "key": "dating_chosen",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "read_only": "true",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
         },
         "calculation": {
           "rules-engine": {
@@ -1463,6 +1661,25 @@
       },
       {
         "key": "gest_age",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "hidden",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "gest_age_days",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
@@ -8855,39 +9072,38 @@
         }
       },
       {
-        "key": "medications",
-        "openmrs_entity_parent": "160741AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "key": "medications_history",
+        "openmrs_entity_parent": "160714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "159367AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity_id": "medications_history",
+        "openmrs_data_type": "select multiple",
         "type": "check_box",
-        "label": "{{anc_profile.step6.medications.label}}",
+        "label": "Drug history?",
         "label_text_style": "bold",
-        "text_color": "#000000",
+        "hint": "Drug history?",
+
         "exclusive": [
           "none",
           "dont_know"
         ],
         "options": [
           {
-            "key": "none",
-            "text": "{{anc_profile.step6.medications.options.none.text}}",
-            "value": false,
-            "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept"
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "key": "none",
+            "text": "{{anc_profile.step6.medications.options.none.text}}"
           },
           {
-            "key": "dont_know",
-            "text": "{{anc_profile.step6.medications.options.dont_know.text}}",
-            "value": false,
-            "openmrs_entity_id": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept"
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "key": "dont_know",
+            "text": "{{anc_profile.step6.medications.options.dont_know.text}}"
           },
           {
             "key": "antacids",
             "text": "{{anc_profile.step6.medications.options.antacids.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "944AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -8895,7 +9111,6 @@
           {
             "key": "aspirin",
             "text": "{{anc_profile.step6.medications.options.aspirin.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "71617AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -8903,7 +9118,6 @@
           {
             "key": "calcium",
             "text": "{{anc_profile.step6.medications.options.calcium.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "72650AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -8911,7 +9125,6 @@
           {
             "key": "magnesium",
             "text": "{{anc_profile.step6.medications.options.magnesium.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "79224AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -8919,7 +9132,6 @@
           {
             "key": "metoclopramide",
             "text": "{{anc_profile.step6.medications.options.metoclopramide.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "79755AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -8927,7 +9139,6 @@
           {
             "key": "carbamazepine",
             "text": "Carbamazepine",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "carbamazepine",
             "openmrs_entity_parent": ""
@@ -8935,7 +9146,6 @@
           {
             "key": "phenytoin",
             "text": "Phenytoin",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "phenytoin",
             "openmrs_entity_parent": ""
@@ -8943,7 +9153,6 @@
           {
             "key": "metformin",
             "text": "Metformin",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "metformin",
             "openmrs_entity_parent": ""
@@ -8951,7 +9160,6 @@
           {
             "key": "glibenclamide",
             "text": "Glibenclamide (Daonil)",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "glibenclamide",
             "openmrs_entity_parent": ""
@@ -8959,7 +9167,6 @@
           {
             "key": "nifedipine",
             "text": "Nifedipine",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "nifedipine",
             "openmrs_entity_parent": ""
@@ -8967,7 +9174,6 @@
           {
             "key": "methyldopa",
             "text": "Methyldopa",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "methyldopa",
             "openmrs_entity_parent": ""
@@ -8975,7 +9181,6 @@
           {
             "key": "arvs",
             "text": "{{anc_profile.step6.medications.options.arvs.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -8983,7 +9188,6 @@
           {
             "key": "salbutamol",
             "text": "Salbutamol",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -8991,7 +9195,6 @@
           {
             "key": "other",
             "text": "{{anc_profile.step6.medications.options.other.text}}",
-            "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "openmrs_entity_parent": ""
@@ -9015,7 +9218,7 @@
           "err": "{{anc_profile.step6.medications_other.v_required.err}}"
         },
         "relevance": {
-          "step6:medications": {
+          "step6:medications_history": {
             "ex-checkbox": [
               {
                 "or": [

@@ -39,6 +39,7 @@ public class ANCFormUtils extends FormUtils {
 
     public static String obtainValue(String key, JSONArray value) throws JSONException {
         String result = "";
+        long startTime = System.currentTimeMillis();
         for (int j = 0; j < value.length(); j++) {
             JSONObject valueItem = value.getJSONObject(j);
             if (valueItem.getString(JsonFormConstants.KEY).equals(key)) {
@@ -48,6 +49,9 @@ public class ANCFormUtils extends FormUtils {
                 break;
             }
         }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time for values: " + (endTime - startTime) + "ms");
         return result;
     }
 
@@ -125,6 +129,7 @@ public class ANCFormUtils extends FormUtils {
         //Value already good for radio buttons so no keylist
         JSONArray jsonArray = widget.getJSONArray(JsonFormConstants.OPTIONS_FIELD_NAME);
 
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -150,6 +155,10 @@ public class ANCFormUtils extends FormUtils {
             }
         }
 
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time radio buttons: " + (endTime - startTime) + "ms");
+
         if (valueList.size() > 0) {
             widget.put(getSecondaryKey(widget), getListValuesAsString(valueList));
         }
@@ -158,6 +167,7 @@ public class ANCFormUtils extends FormUtils {
     private static void processCheckBoxSpecialWidget(JSONObject widget, List<String> keyList, List<String> valueList)
             throws Exception {
         //Clear previous selected values from the widget first
+        long startTime = System.currentTimeMillis();
         if (widget.has(JsonFormConstants.VALUE)) {
             widget.remove(JsonFormConstants.VALUE);
         }
@@ -191,6 +201,10 @@ public class ANCFormUtils extends FormUtils {
             }
         }
 
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time for checkboxes: " + (endTime - startTime) + "ms");
+
         if (keyList.size() > 0) {
             widget.put(JsonFormConstants.VALUE, keyList);
             widget.put(getSecondaryKey(widget), getListValuesAsString(valueList));
@@ -209,6 +223,7 @@ public class ANCFormUtils extends FormUtils {
     }
 
     private static void setSecondaryValues(JSONObject itemField, JSONArray secondaryValues) throws JSONException {
+        long startTime = System.currentTimeMillis();
         for (int j = 0; j < secondaryValues.length(); j++) {
             JSONObject secValue = secondaryValues.getJSONObject(j);
 
@@ -227,6 +242,9 @@ public class ANCFormUtils extends FormUtils {
                 setItemSecondaryValues(itemField, secValue, keyList, valueList);
             }
         }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time for secondary values: " + (endTime - startTime) + "ms");
     }
 
     private static void setItemSecondaryValues(JSONObject itemField, JSONObject secValue, List<String> keyList, List<String> valueList) throws JSONException {
@@ -309,6 +327,7 @@ public class ANCFormUtils extends FormUtils {
     }
 
     public static void processRequiredStepsField(Facts facts, JSONObject object) throws Exception {
+        long startTime = System.currentTimeMillis();
         if (object != null) {
             Iterator<String> keys = object.keys();
             while (keys.hasNext()) {
@@ -355,10 +374,15 @@ public class ANCFormUtils extends FormUtils {
                 }
             }
         }
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time for required fields: " + (endTime - startTime) + "ms");
     }
 
     private static void processOtherCheckBoxField(Facts facts, JSONObject fieldObject) throws Exception {
         //Other field for check boxes
+        long startTime = System.currentTimeMillis();
         if (fieldObject.has(JsonFormConstants.VALUE) && !TextUtils.isEmpty(fieldObject.getString(JsonFormConstants.VALUE)) &&
                 fieldObject.getString(ConstantsUtils.KeyUtils.KEY).endsWith(ConstantsUtils.SuffixUtils.OTHER) && facts.get(
                 fieldObject.getString(ConstantsUtils.KeyUtils.KEY).replace(ConstantsUtils.SuffixUtils.OTHER, ConstantsUtils.SuffixUtils.VALUE)) != null) {
@@ -375,6 +399,9 @@ public class ANCFormUtils extends FormUtils {
             String newValue = factValue.replace(parentLabel, fieldObject.getString(JsonFormConstants.VALUE));
             facts.put(parentKey, newValue);
         }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time for other checkbox times: " + (endTime - startTime) + "ms");
     }
 
     /**
@@ -385,6 +412,7 @@ public class ANCFormUtils extends FormUtils {
      * @throws Exception {@link JSONException}
      */
     private static void processRequiredStepsFieldsSecondaryValues(Facts facts, JSONObject fieldObject) throws Exception {
+        long startTime = System.currentTimeMillis();
         if (fieldObject.has(ConstantsUtils.KeyUtils.SECONDARY_VALUES)) {
             fieldObject.put(ConstantsUtils.KeyUtils.SECONDARY_VALUES, sortSecondaryValues(fieldObject));//sort and reset
 
@@ -395,6 +423,9 @@ public class ANCFormUtils extends FormUtils {
                 processAbnormalValues(facts, jsonObject);
             }
         }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time for required steps secondary values: " + (endTime - startTime) + "ms");
     }
 
     /**
@@ -405,6 +436,8 @@ public class ANCFormUtils extends FormUtils {
      * @throws Exception {@link JSONException}
      */
     private static void processRequiredStepsExpansionPanelValues(Facts facts, JSONObject fieldObject) throws Exception {
+        long startTime = System.currentTimeMillis();
+
         if (fieldObject.has(JsonFormConstants.TYPE) &&
                 JsonFormConstants.EXPANSION_PANEL.equals(fieldObject.getString(JsonFormConstants.TYPE)) &&
                 fieldObject.has(JsonFormConstants.VALUE)) {
@@ -427,6 +460,10 @@ public class ANCFormUtils extends FormUtils {
                 }
             }
         }
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time required expansion panels: " + (endTime - startTime) + "ms");
     }
 
     /***
@@ -450,6 +487,8 @@ public class ANCFormUtils extends FormUtils {
     }
 
     public static JSONArray sortSecondaryValues(JSONObject fieldObject) throws JSONException {
+        long startTime = System.currentTimeMillis();
+
         JSONObject otherValue = null;
         JSONArray newJsonArray = new JSONArray();
 
@@ -470,11 +509,16 @@ public class ANCFormUtils extends FormUtils {
             newJsonArray.put(otherValue);
         }
 
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time to sort secondary values: " + (endTime - startTime) + "ms");
+
         return newJsonArray;
     }
 
     private static void processAbnormalValues(Facts facts, JSONObject jsonObject) throws Exception {
 
+        long startTime = System.currentTimeMillis();
         //Expansion panel widgets have "values" attribute with no "value" do not process them
         //We will handle the processing somewhere else.
         if (jsonObject.has(JsonFormConstants.VALUES) && !jsonObject.has(JsonFormConstants.VALUE)) {
@@ -499,6 +543,10 @@ public class ANCFormUtils extends FormUtils {
             facts.put(fieldKey, fieldValue);
         }
 
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Execution time to process abnormal values: " + (endTime - startTime) + "ms");
+
     }
 
     public static String getSecondaryKey(JSONObject jsonObject) throws JSONException {
@@ -512,6 +560,7 @@ public class ANCFormUtils extends FormUtils {
     public static String getListValuesAsString(List<String> list) {
         List<String> returnList = new ArrayList<>();
         if (list.size() != 0) {
+            long startTime = System.currentTimeMillis();
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).contains(JsonFormConstants.TEXT) || list.get(i).contains("_")) {
                     if (StringUtils.isNotBlank(list.get(i))) {
@@ -521,6 +570,9 @@ public class ANCFormUtils extends FormUtils {
                     returnList.add(list.get(i));
                 }
             }
+            long endTime = System.currentTimeMillis();
+
+            System.out.println("Execution time to get list values as string: " + (endTime - startTime) + "ms");
             return String.join(",", returnList);
 
         }

@@ -42,6 +42,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.jeasy.rules.api.Facts;
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.Weeks;
 import org.joda.time.format.DateTimeFormat;
@@ -120,6 +121,8 @@ public class Utils extends org.smartregister.util.Utils {
     public static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
 
     public static String adjContactDate;
+
+    public static int contactTestNumber;
 
     static ContactModel baseContactModel = new ContactModel();
 
@@ -238,6 +241,7 @@ public class Utils extends org.smartregister.util.Utils {
             PartialContact partialContactRequest = new PartialContact();
             partialContactRequest.setBaseEntityId(baseEntityId);
             partialContactRequest.setContactNo(quickCheck.getContactNumber());
+            contactTestNumber = quickCheck.getContactNumber();
             partialContactRequest.setType(quickCheck.getFormName());
 
             JSONObject form = baseContactModel.getFormAsJson(quickCheck.getFormName(), baseEntityId, locationId);
@@ -358,8 +362,13 @@ public class Utils extends org.smartregister.util.Utils {
                     Duration timeElapsedCounselling = Duration.between(MainContactActivity.startCounselling, endCounselling);
 
                     JSONObject durCou = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_counselling");
+                    JSONObject fullContact = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_time");
 
                     durCou.put(JsonFormUtils.VALUE, timeElapsedCounselling.toString());
+
+                    Duration totalContactTime = Duration.between(Utils.startRam, endCounselling);
+
+                    fullContact.put(JsonFormUtils.VALUE, totalContactTime.toString());
 
                     MainContactActivity.couTimed = true;
                     System.out.println("Time taken: " + timeElapsedCounselling.toMillis() + " milliseconds");
@@ -380,6 +389,10 @@ public class Utils extends org.smartregister.util.Utils {
 
                     JSONObject durTes = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_tests");
 
+                    //JSONObject contactTest = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_tests");
+
+                    //contactTest.put(JsonFormUtils.VALUE, contactTestNumber);
+
                     durTes.put(JsonFormUtils.VALUE, timeElapsedTests.toString());
 
                     MainContactActivity.tesTimed = true;
@@ -388,6 +401,10 @@ public class Utils extends org.smartregister.util.Utils {
             }
         }
     }
+/*    public static JSONObject testForm(Contact contact5) throws Exception {
+        JSONObject form = baseContactModel.getFormAsJson(contact5.getFormName(), baseEntityId, locationId);
+        return form;
+    }*/
 
     public static void symptomsTime(Contact contact3) throws Exception {
         if(MainContactActivity.symTimed==false)
@@ -644,6 +661,24 @@ public class Utils extends org.smartregister.util.Utils {
             }
         } catch (IllegalArgumentException e) {
             Timber.e(e, " --> getGestationAgeFromEDDate");
+            return 0;
+        }
+    }
+
+    public static int getGestationDaysFromEDDate(String expectedDeliveryDate) {
+        try {
+            if (!"0".equals(expectedDeliveryDate) && expectedDeliveryDate.length() > 0) {
+                LocalDate expectedDate = SQLITE_DATE_DF.parseLocalDate(expectedDeliveryDate);
+                LocalDate lmpDate = expectedDate.minusWeeks(ConstantsUtils.DELIVERY_DATE_WEEKS);
+
+                Weeks weeks = Weeks.weeksBetween(lmpDate, LocalDate.now());
+                int totalDays = weeks.getWeeks() * 7 + Days.daysBetween(lmpDate.plusWeeks(weeks.getWeeks()), LocalDate.now()).getDays();
+                return totalDays % 7;
+            } else {
+                return 0;
+            }
+        } catch (IllegalArgumentException e) {
+            Timber.e(e, " --> getGestationDaysFromEDDate");
             return 0;
         }
     }

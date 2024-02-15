@@ -1194,7 +1194,7 @@ public class ClientDao extends AbstractDao {
 
 
     public static int getAllFirstTrimesterContact(){
-        String sql = "SELECT \"_rowid_\" AS 'First Trimester',* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%gest_age_openmrs\":\"8%' OR \"value\" LIKE '%gest_age_openmrs\":\"9%' OR \"value\" LIKE '%gest_age_openmrs\":\"10%' OR \"value\" LIKE '%gest_age_openmrs\":\"11%' OR \"value\" LIKE '%gest_age_openmrs\":\"12%'GROUP BY ec_details.base_entity_id";
+        String sql = "SELECT \"_rowid_\" AS 'First Trimester',* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%gest_age\":\"8%' OR \"value\" LIKE '%gest_age\":\"9%' OR \"value\" LIKE '%gest_age_openmrs\":\"10%' OR \"value\" LIKE '%gest_age_openmrs\":\"11%' OR \"value\" LIKE '%gest_age_openmrs\":\"12%'GROUP BY ec_details.base_entity_id";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 
@@ -1202,7 +1202,7 @@ public class ClientDao extends AbstractDao {
     }
 
     public static int getFirstTrimesterContact(){
-        String sql = "SELECT \"_rowid_\" AS 'First Trimester',* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%gest_age_openmrs\":\"8%' OR \"value\" LIKE '%gest_age_openmrs\":\"9%' OR \"value\" LIKE '%gest_age_openmrs\":\"10%' OR \"value\" LIKE '%gest_age_openmrs\":\"11%' OR \"value\" LIKE '%gest_age_openmrs\":\"12%'GROUP BY ec_details.key";
+        String sql = "SELECT \"_rowid_\" AS 'First Trimester',* FROM \"main\".\"ec_details\" WHERE \"value\" LIKE '%gest_age\":\"8%' OR \"value\" LIKE '%gest_age_openmrs\":\"9%' OR \"value\" LIKE '%gest_age_openmrs\":\"10%' OR \"value\" LIKE '%gest_age_openmrs\":\"11%' OR \"value\" LIKE '%gest_age_openmrs\":\"12%'GROUP BY ec_details.key";
 
         List<ReportModel1> values = AbstractDao.readData(sql, getGeneralCountDataMap());
 

@@ -1,5 +1,6 @@
 package org.smartregister.anc.library.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.ContactJsonFormActivity;
 import org.smartregister.anc.library.activity.InputFilterMinMax;
 import org.smartregister.anc.library.activity.MainContactActivity;
+import org.smartregister.anc.library.activity.TestsActivity;
 import org.smartregister.anc.library.domain.Contact;
 import org.smartregister.anc.library.presenter.ContactWizardJsonFormFragmentPresenter;
 import org.smartregister.anc.library.presenter.ProfilePresenter;
@@ -83,6 +85,8 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     private Contact getContact() {
         if (getActivity() != null && getActivity() instanceof ContactJsonFormActivity) {
             return ((ContactJsonFormActivity) getActivity()).getContact();
+        }else if (getActivity() != null && getActivity() instanceof TestsActivity) {
+                return ((TestsActivity) getActivity()).getContact();
         }
         return null;
     }
@@ -169,6 +173,26 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Activity currentActivity = getActivity();
+        if (item.getItemId() == R.id.action_save && currentActivity != null) {
+            if (currentActivity instanceof ContactJsonFormActivity) {
+                ((ContactJsonFormActivity) currentActivity).proceedToMainContactPage();
+            } else if (currentActivity instanceof TestsActivity) {
+                ((TestsActivity) currentActivity).proceedToMainContactPage();
+            } else {
+                Timber.e("Unhandled Activity type: %s", currentActivity.getClass().getCanonicalName());
+            }
+            return true;
+        }
+
+        if (item.getItemId() == MENU_NAVIGATION) {
+            Toast.makeText(currentActivity, "Right navigation item clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+    }
+
+    /*public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_save && getActivity() != null) {
             ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
         }
@@ -178,7 +202,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             return true;
         }
         return false;
-    }
+    }*/
 
     @Override
     protected ContactJsonFormFragmentViewState createViewState() {
@@ -203,7 +227,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
         }
     }
 
-    @Override
+    /*@Override
     protected void save() {
         try {
             if (savePartial) {
@@ -218,6 +242,26 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             this.save(false);
         }
 
+    }*/
+
+    @Override
+    protected void save() {
+        try {
+            if (savePartial) {
+                Activity currentActivity = getActivity(); // Get the current attached Activity instance
+                if (currentActivity instanceof ContactJsonFormActivity) {
+                    // If the currentActivity is an instance of ContactJsonFormActivity, cast and call method
+                    ((ContactJsonFormActivity) currentActivity).proceedToMainContactPage();
+                } else if (currentActivity instanceof TestsActivity) {
+                    ((TestsActivity) currentActivity).proceedToMainContactPage();
+                }
+            } else {
+                super.save();
+            }
+        } catch (Exception e) {
+            Timber.e(e, "%s --> save", this.getClass().getCanonicalName());
+            this.save(false);
+        }
     }
 
     @Override
@@ -346,7 +390,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     //go to main contact  to auto populate gestation age then display summary
     public void saveReferral(Dialog dialog)
     {
-        //((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
+        ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
         goToContactFinalize(dialog);
 
     }

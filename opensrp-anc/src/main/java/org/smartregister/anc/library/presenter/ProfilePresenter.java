@@ -36,6 +36,7 @@ public class ProfilePresenter implements ProfileContract.Presenter, RegisterCont
     private RegisterContract.Interactor mRegisterInteractor;
     private ContactInteractor contactInteractor;
     public static String gest_age_profile = null;
+    public static String gest_age_days_profile = null;
 
     public ProfilePresenter(ProfileContract.View profileView) {
         mProfileView = new WeakReference<>(profileView);
@@ -146,18 +147,18 @@ public class ProfilePresenter implements ProfileContract.Presenter, RegisterCont
                 if(client.containsKey(DBConstantsUtils.KeyUtils.EDD) && client.get(DBConstantsUtils.KeyUtils.EDD) != null)
                     if(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD)) <= 40) {
                         if(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD)) < 1) {
-                            getProfileView().setProfileGestationAge(gest_age_profile);
+                            getProfileView().setProfileGestationAge(gest_age_profile, gest_age_days_profile);
                         }else {
                             getProfileView().setProfileGestationAge(
-                                    String.valueOf(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD))));
+                                    String.valueOf(Utils.getGestationAgeFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD))), String.valueOf(Utils.getGestationDaysFromEDDate(client.get(DBConstantsUtils.KeyUtils.EDD))));
                         }
                     }
 
             } catch (Exception e) {
                 if(gest_age_profile!=null){
-                    getProfileView().setProfileGestationAge(gest_age_profile);
+                    getProfileView().setProfileGestationAge(gest_age_profile, gest_age_days_profile);
                 }else{
-                    getProfileView().setProfileGestationAge("0");
+                    getProfileView().setProfileGestationAge("0", " ");
                 }
             }
             getProfileView().setProfileID(client.get(DBConstantsUtils.KeyUtils.ANC_ID));

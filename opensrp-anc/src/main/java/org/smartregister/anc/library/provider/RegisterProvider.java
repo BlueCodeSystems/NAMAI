@@ -143,15 +143,19 @@ public class RegisterProvider implements RecyclerViewProvider<RegisterProvider.R
             if(Utils.getGestationAgeFromEDDate(edd) > 40)
             {
                 fillValue(viewHolder.ga, "");
+                fillValue(viewHolder.ga_days, "");
             }
             else {
                 fillValue((viewHolder.ga),
                         String.format(context.getString(R.string.ga_text), Utils.getGestationAgeFromEDDate(edd)));
+                fillValue((viewHolder.ga_days),
+                String.format(context.getString(R.string.ga_days_text), Utils.getGestationDaysFromEDDate(edd)));
                 viewHolder.period.setVisibility(View.VISIBLE);
             }
         } else {
 
             fillValue((viewHolder.ga), "");
+            fillValue((viewHolder.ga_days), "");
         }
 
         View patient = viewHolder.patientColumn;
@@ -245,6 +249,7 @@ public class RegisterProvider implements RecyclerViewProvider<RegisterProvider.R
         private TextView age;
         private TextView period;
         private TextView ga;
+        private TextView ga_days;
         private TextView ancId;
         private TextView risk;
         private Button dueButton;
@@ -257,6 +262,7 @@ public class RegisterProvider implements RecyclerViewProvider<RegisterProvider.R
             patientName = itemView.findViewById(R.id.patient_name);
             age = itemView.findViewById(R.id.age);
             ga = itemView.findViewById(R.id.ga);
+            ga_days = itemView.findViewById(R.id.ga_days);
             period = itemView.findViewById(R.id.period);
             ancId = itemView.findViewById(R.id.anc_id);
             risk = itemView.findViewById(R.id.risk);
