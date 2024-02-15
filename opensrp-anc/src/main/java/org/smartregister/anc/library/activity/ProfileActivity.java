@@ -195,7 +195,7 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
     }
 
     protected void launchPhoneDialer(String phoneNumber) {
-        if (isPermissionGranted()) {
+        /*if (isPermissionGranted()) {*/
             try {
                 Intent intent = getTelephoneIntent(phoneNumber);
                 startActivity(intent);
@@ -206,7 +206,7 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
                 copyToClipboardDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 copyToClipboardDialog.show();
             }
-        }
+        //}
     }
 
     protected boolean isPermissionGranted() {

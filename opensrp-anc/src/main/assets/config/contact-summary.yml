@@ -110,8 +110,8 @@ fields:
   - template: "{{contact_summary.demographic_info.occupation}}: {occupation_value}"
     relevance: "occupation_value != ''"
 
-  - template: "{{contact_summary.demographic_info.discordant}}: {discordant_out}"
-    relevance: "discordant_set != ''"
+  - template: "{{contact_summary.demographic_info.discordant}}: {discordant_out_value}"
+    relevance: "discordant_out_value != ''"
 
 ---
 group: current_pregnancy
@@ -134,8 +134,8 @@ fields:
   - template: "{{contact_summary.current_pregnancy.no_of_fetuses}}: {no_of_fetuses}"
     relevance: "no_of_fetuses != ''"
 
-  - template: "{{contact_summary.current_pregnancy.fetal_presentation}}: {fetal_presentation_value}"
-    relevance: "fetal_presentation != ''"
+  - template: "{{contact_summary.current_pregnancy.fetal_presentation}}: {baby_lie_value}"
+    relevance: "baby_lie_value != ''"
 
   - template: "{{contact_summary.current_pregnancy.amniotic_fluid}}: {amniotic_fluid_value}"
     relevance: "amniotic_fluid != ''"
@@ -248,7 +248,7 @@ fields:
 group: medications
 fields:
 
-  - template: "{{contact_summary.medications.current_medications}}: {medications_value}"
+  - template: "{{contact_summary.medications.current_medications}}: {medications_history_value}"
     relevance: "!medications_value.isEmpty()"
 
   - template: "{{contact_summary.medications.medications_prescribed}}: {vita_supp_value}, {mag_calc_value}, {nausea_pharma_value}, {antacid_value}, {penicillin_value}, {antibiotic_value}, {prep_value}, {iptp_sp1}, {ifa_value}, {ifa_medication_value}, {aspirin_comply_value}, {calcium}, {mebendazole}, {fansidar}, {co_trimoxazole}"
@@ -570,10 +570,10 @@ fields:
   - template: "{{contact_summary.maternal_exam.sfh}}: {sfh} cm"
     relevance: "sfh != ''"
 
-  - template: "{{contact_summary.maternal_exam.fetal_movement_felt}}: {fetal_movement}"
+  - template: "{{contact_summary.maternal_exam.fetal_movement_felt}}: {fetal_movement_value}"
     relevance: "fetal_movement != ''"
 
-  - template: "{{contact_summary.maternal_exam.fetal_heartbeat_present}}: {fetal_heartbeat}"
+  - template: "{{contact_summary.maternal_exam.fetal_heartbeat_present}}: {fetal_heartbeat_value}"
     relevance: "fetal_heartbeat != ''"
 
   - template: "{{contact_summary.maternal_exam.fetal_heart_rate}}: {fetal_heart_rate} bpm"

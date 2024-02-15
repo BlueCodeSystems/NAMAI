@@ -130,9 +130,11 @@ fields:
 form: anc_profile
 fields:
   - "total_gravida"
+  - "medications_history"
   - "contact_date"
   - "contact_no"
   - "contact_date"
+  - "initial_sfh"
   - "no_of_fetuses"
   - "bmi"
   - "urine_glucose"
@@ -171,6 +173,7 @@ fields:
   - "current_weight"
   - "gdm"
   - "dm_in_preg"
+  - "fetal_presentation"
   - "gest_age"
   - "gest_age_days"
   - "gest_age_openmrs"
@@ -296,7 +299,6 @@ fields:
   - "sfh_gest_age"
   - "sfh_edd"
   - "no_of_fetuses"
-  - "fetal_presentation"
   - "prev_preg_comps"
   - "health_conditions"
   - "rh_factor"

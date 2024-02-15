@@ -22,8 +22,8 @@ fields:
   - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.lmp}}: {lmp_known_date}"
     relevance: "lmp_known_date != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.fetal_presentation}}: {fetal_presentation}"
-    relevance: "fetal_presentation != ''"
+  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.fetal_presentation}}: {baby_lie_value}"
+    relevance: "baby_lie_value != ''"
 
   - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.gravida}}: {total_gravida}"
     relevance: "total_gravida != ''"

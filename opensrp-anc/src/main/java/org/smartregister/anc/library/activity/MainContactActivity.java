@@ -334,8 +334,14 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         }
 
         if (contact5.getRequiredFields() == null) {
-            requiredFields5.setVisibility(View.GONE);
-            completeLayout5.setVisibility(View.GONE);
+            if(contactNo != 1) {
+                contact5.setRequiredFields(0);
+                completeLayout5.setVisibility(View.VISIBLE);
+                requiredFields5.setVisibility(View.GONE);
+            }else {
+                requiredFields5.setVisibility(View.GONE);
+                completeLayout5.setVisibility(View.GONE);
+            }
         } else if (contact5.getRequiredFields() == 0) {
             Utils.testsTime(contact5);
             completeLayout5.setVisibility(View.VISIBLE);
@@ -884,10 +890,15 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                 String mapValue = getMapValue(defaultKey);
 
                 if (mapValue != null) {
-                    fieldObject.put(JsonFormConstants.VALUE, mapValue);
-                    fieldObject.put(JsonFormConstants.EDITABLE, editableFields.contains(defaultKey));
-                    fieldObject.put(JsonFormConstants.READ_ONLY, editableFields.contains(defaultKey));
-                }
+                    if(defaultKey.contains("initial_sfh") || defaultKey.contains("date_sfh_recorded") || defaultKey.contains("dating_chosen")) {
+                        fieldObject.put(JsonFormConstants.VALUE, mapValue);
+                        fieldObject.put(JsonFormConstants.EDITABLE, editableFields.contains(defaultKey));
+                    } else{
+                            fieldObject.put(JsonFormConstants.VALUE, mapValue);
+                            fieldObject.put(JsonFormConstants.EDITABLE, editableFields.contains(defaultKey));
+                            fieldObject.put(JsonFormConstants.READ_ONLY, editableFields.contains(defaultKey));
+                        }
+                    }
 
             }
 

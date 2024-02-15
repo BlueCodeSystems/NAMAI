@@ -362,8 +362,13 @@ public class Utils extends org.smartregister.util.Utils {
                     Duration timeElapsedCounselling = Duration.between(MainContactActivity.startCounselling, endCounselling);
 
                     JSONObject durCou = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_counselling");
+                    JSONObject fullContact = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_time");
 
                     durCou.put(JsonFormUtils.VALUE, timeElapsedCounselling.toString());
+
+                    Duration totalContactTime = Duration.between(Utils.startRam, endCounselling);
+
+                    fullContact.put(JsonFormUtils.VALUE, totalContactTime.toString());
 
                     MainContactActivity.couTimed = true;
                     System.out.println("Time taken: " + timeElapsedCounselling.toMillis() + " milliseconds");

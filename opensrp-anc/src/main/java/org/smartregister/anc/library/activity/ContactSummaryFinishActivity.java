@@ -102,10 +102,10 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
     @Override
     public void onResume() {
         super.onResume();
-        if(isPermissionGranted())
-        {
+        /*if(isPermissionGranted())
+        {*/
            loadContactSummaryData();
-        }
+        //}
     }
 
     @Override
@@ -237,9 +237,9 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
     @Override
     public void createContactSummaryPdf(String womanName) {
 
-        if (isPermissionGranted() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)) {
+        /*if (isPermissionGranted() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)) {*/
             generateFileinStorage(womanName);
-        }
+        //}
     }
 
     public void generateFileinStorage(String womanName)
@@ -265,13 +265,13 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        /*if (requestCode == PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {*/
                loadContactSummaryData();
-            } else {
+            /*} else {
                 displayToast(R.string.allow_phone_call_management);
             }
-        }
+        }*/
     }
 
     protected boolean isPermissionGranted() {

@@ -601,6 +601,13 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "time_counselling",
         "type": "hidden"
+      },
+      {
+        "key": "contact_time",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "contact_time",
+        "type": "hidden"
       }
     ]
   },
