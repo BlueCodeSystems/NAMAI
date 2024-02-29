@@ -890,7 +890,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                 String mapValue = getMapValue(defaultKey);
 
                 if (mapValue != null) {
-                    if(defaultKey.contains("initial_sfh") || defaultKey.contains("date_sfh_recorded") || defaultKey.contains("dating_chosen")) {
+                    if(defaultKey.contains("initial_sfh") || defaultKey.contains("date_sfh_recorded") || defaultKey.contains("dating_chosen") || defaultKey.contains("discordant_set")) {
                         fieldObject.put(JsonFormConstants.VALUE, mapValue);
                         fieldObject.put(JsonFormConstants.EDITABLE, editableFields.contains(defaultKey));
                     } else{

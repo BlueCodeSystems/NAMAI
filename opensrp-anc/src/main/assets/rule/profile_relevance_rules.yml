@@ -55,6 +55,13 @@ condition: "step1_sfh_gest_age_selection.contains('sfh') || step1_dating_chosen 
 actions:
   - "isRelevant = true"
 ---
+name: step11_discordant_set
+description: discordant_set
+priority: 1
+condition: "true"
+actions:
+  - "isRelevant = true"
+---
 name: step1_dating_chosen
 description: dating_chosen
 priority: 1

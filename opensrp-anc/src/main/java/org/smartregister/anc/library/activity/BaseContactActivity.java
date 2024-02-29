@@ -106,7 +106,7 @@ public abstract class BaseContactActivity extends SecuredActivity {
 
     protected void startFormActivity(JSONObject form, Contact contact) {
         if(form.optString("encounter_type").equals("Diagnostic Tests and Imaging")){
-            Intent intent = new Intent(this, TestsActivity.class);
+            Intent intent = new Intent(this, TestsActivity.class);  
             formStartActions(form, contact, intent);
 
         }else{

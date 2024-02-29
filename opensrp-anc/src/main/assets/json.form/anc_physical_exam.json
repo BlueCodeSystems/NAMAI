@@ -815,7 +815,7 @@
           },
           {
             "key": "other",
-            "text": "Other",
+            "text": "Other (specify)",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1473,7 +1473,7 @@
           },
           {
             "key": "other",
-            "text": "Other",
+            "text": "Other (specify)",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1650,10 +1650,13 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "5245AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_physical_exam.step3.pallor.label}}",
         "label_text_style": "bold",
         "text_color": "#000000",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",
@@ -1708,12 +1711,16 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165367AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_physical_exam.step3.respiratory_exam.label}}",
         "label_text_style": "bold",
         "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "3",
+        "exclusive": [
+          "1",
+          "2"
+        ],
         "options": [
           {
             "key": "1",
@@ -1807,8 +1814,11 @@
         ],
         "relevance": {
           "step4:respiratory_exam": {
-            "type": "string",
-            "ex": "equalTo(., \"3\")"
+            "ex-checkbox": [
+              {
+                "or": ["3"]
+              }
+            ]
           }
         }
       },
@@ -1818,7 +1828,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
-        "hint": "Specify",
+        "hint": "Other (specify)",
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "Please enter valid content"
@@ -1846,8 +1856,11 @@
         "toaster_type": "problem",
         "relevance": {
           "step4:respiratory_exam": {
-            "type": "string",
-            "ex": "equalTo(., \"3\")"
+            "ex-checkbox": [
+              {
+                "or": ["3"]
+              }
+            ]
           }
         }
       },
@@ -1934,12 +1947,16 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_physical_exam.step3.cardiac_exam.label}}",
         "label_text_style": "bold",
         "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "3",
+        "exclusive": [
+          "1",
+          "2"
+        ],
         "options": [
           {
             "key": "1",
@@ -1967,6 +1984,116 @@
             "openmrs_entity_id": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ]
+      },
+      {
+        "key": "cardiac_exam_abnormal",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "1124AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "Cardiac exam: abnormal",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "options": [
+          {
+            "key": "heart_murmur",
+            "text": "Heart murmur",
+            "value": false,
+            "openmrs_entity_parent": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_id": "139063AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity": "concept"
+          },
+          {
+            "key": "weak_pulse",
+            "text": "Weak pulse",
+            "value": false,
+            "openmrs_entity_parent": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_id": "124823AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity": "concept"
+          },
+          {
+            "key": "tachycardia",
+            "text": "Tachycardia",
+            "value": false,
+            "openmrs_entity_parent": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_id": "125063AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity": "concept"
+          },
+          {
+            "key": "bradycardia",
+            "text": "Bradycardia",
+            "value": false,
+            "openmrs_entity_parent": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_id": "147020AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity": "concept"
+          },
+          {
+            "key": "arrhythmia",
+            "text": "Arrhythmia",
+            "value": false,
+            "openmrs_entity_parent": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_id": "120148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity": "concept"
+          },
+          {
+            "key": "cyanosis",
+            "text": "Cyanosis",
+            "value": false,
+            "openmrs_entity_parent": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_id": "143050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity": "concept"
+          },
+          {
+            "key": "cold_sweats",
+            "text": "Cold sweats",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165281AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other",
+            "text": "Other (specify)",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "1124AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step4:cardiac_exam": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "3"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "cardiac_exam_abnormal_other",
+        "openmrs_entity_parent": "1124AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "cardiac_exam_abnormal_other",
+        "type": "edit_text",
+        "hint": "Other (specify)",
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Please use valid characters"
+        },
+        "relevance": {
+          "step4:cardiac_exam_abnormal": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
       },
       {
         "key": "toaster22",
@@ -1998,12 +2125,16 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_physical_exam.step3.breast_exam.label}}",
         "label_text_style": "bold",
         "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "3",
+        "exclusive": [
+          "1",
+          "2"
+        ],
         "options": [
           {
             "key": "1",
@@ -2031,6 +2162,108 @@
             "openmrs_entity_id": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ]
+      },
+      {
+        "key": "breast_exam_abnormal",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "159780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "Breast exam: abnormal",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "options": [
+          {
+            "key": "nodule",
+            "text": "Nodule",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "146931AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "discharge",
+            "text": "Discharge",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "142248AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "flushing",
+            "text": "Flushing",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "140039AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "local_pain",
+            "text": "Local pain",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "131021AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "bleeding",
+            "text": "Bleeding",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "147236AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "increased_temperature",
+            "text": "Increased temperature",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other",
+            "text": "Other (specify)",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "159780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step4:breast_exam": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "3"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "breast_exam_abnormal_other",
+        "openmrs_entity_parent": "159780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "hint": "Other (specify)",
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Use correct format"
+        },
+        "relevance": {
+          "step4:breast_exam_abnormal": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
       },
       {
         "key": "toaster23",
@@ -2062,12 +2295,16 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_physical_exam.step3.pelvic_exam.label}}",
         "label_text_style": "bold",
         "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "3",
+        "exclusive": [
+          "1",
+          "2"
+        ],
         "options": [
           {
             "key": "1",
@@ -2095,6 +2332,165 @@
             "openmrs_entity_id": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ]
+      },
+      {
+        "key": "pelvic_exam_abnormal",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165372AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "Pelvic exam: abnormal",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "options": [
+          {
+            "key": "abnormal_vaginal_discharge",
+            "text": "Abnormal vaginal discharge",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "123395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "amniotic_fluid_evidence",
+            "text": "Amniotic fluid evidence",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "148968AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "smelling_vaginal_discharge",
+            "text": "Smelling vaginal discharge",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165162AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "erythematous_papules",
+            "text": "Erythematous papules",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165286AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "vesicles",
+            "text": "Vesicles",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "133798AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "genital_ulcer",
+            "text": "Genital ulcers",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "153872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "genital_pain",
+            "text": "Genital pain",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "123385AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "femoral_lymphadenopathy",
+            "text": "Femoral lymphadenopathy",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": ""
+          },
+          {
+            "key": "cervical_friability",
+            "text": "Cervical friability",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165288AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "mucopurulent_ervicitis",
+            "text": "Mucopurulent cervicitis",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165371AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "vaginal_discharge_curd_like",
+            "text": "Vaginal discharge curd like",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165290AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "other",
+            "text": "Other (specify)",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "165372AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step4:pelvic_exam": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "3"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "evaluate_labour_toaster",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Evaluate labor. Urgent referral if GA is less than 37 weeks.",
+        "text_color": "#E20000",
+        "toaster_type": "problem",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "physical-exam-relevance-rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "pelvic_exam_abnormal_other",
+        "openmrs_entity_parent": "165372AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "hint": "Other (specify)",
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Please use correct format"
+        },
+        "relevance": {
+          "step4:pelvic_exam_abnormal": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "other"
+                ]
+              }
+            ]
+          }
+        }
       },
       {
         "key": "toaster25",
@@ -2126,12 +2522,16 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "Speculum exam",
         "label_text_style": "bold",
         "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "1",
+        "exclusive": [
+          "1",
+          "2"
+        ],
         "options": [
           {
             "key": "2",
@@ -2167,6 +2567,9 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "check_box",
+        "label": "Speculum exam: abnormal",
+        "label_text_style": "bold",
+        "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "yes",
         "exclusive": [
@@ -2175,7 +2578,7 @@
         "options": [
           {
             "key": "cervix_inflamed",
-            "text": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.cervix_inflamed.text}}",
+            "text": "Cervix inflamed",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
@@ -2183,7 +2586,7 @@
           },
           {
             "key": "curd_like_discharge",
-            "text": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.cervix_has_curd_like_discharge.text}}",
+            "text": "Curd like discharge",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
@@ -2191,7 +2594,7 @@
           },
           {
             "key": "cervix_draining",
-            "text": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.cervix_draining.text}}",
+            "text": "Cervix draining",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
@@ -2199,7 +2602,7 @@
           },
           {
             "key": "cervical_lesion",
-            "text": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.cervical_lesion.text}}",
+            "text": "Cervical lesion",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
@@ -2207,7 +2610,7 @@
           },
           {
             "key": "foul_cervix_discharge",
-            "text": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.foul_cervical_discharge.text}}",
+            "text": "Foul cervix discharge",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
@@ -2215,7 +2618,7 @@
           },
           {
             "key": "cervix_dilated",
-            "text": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.cervix_dilated.text}}",
+            "text": "Cervix dilated",
             "value": false,
             "openmrs_entity": "concept",
             "specify_info": "specify type...",
@@ -2227,7 +2630,7 @@
           },
           {
             "key": "other_abnormal_speculum",
-            "text": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.others.text}}",
+            "text": "Other (specify)",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
@@ -2236,8 +2639,13 @@
         ],
         "relevance": {
           "step4:cervical_exam": {
-            "type": "string",
-            "ex": "equalTo(., \"3\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "3"
+                ]
+              }
+            ]
           }
         }
       },
@@ -2299,7 +2707,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "{{anc_physical_exam.step3.speculum_abnormal_symptoms.options.others.text}}",
+        "hint": "Other (specify)",
         "edit_type": "name",
         "relevance": {
           "step4:speculum_abnormal_symptoms": {
@@ -2362,12 +2770,15 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_physical_exam.step3.oedema.label}}",
         "label_text_style": "bold",
         "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "yes",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",
@@ -2388,6 +2799,69 @@
             "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         ]
+      },
+      {
+        "key": "oedema_type",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "165292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "check_box",
+        "label": "Oedema type",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "options": [
+          {
+            "key": "ankle_oedema",
+            "text": "Ankle oedema",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "155113AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "hands_feet_oedema",
+            "text": "Hands and feet oedema",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165375AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "lower_back_oedema",
+            "text": "Lower back oedema",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "165291AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "leg_swelling",
+            "text": "Leg swelling",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "141478AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "openmrs_entity_parent": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "varicose_veins",
+            "text": "Varicose veins",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "varicose_veins",
+            "openmrs_entity_parent": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ],
+        "relevance": {
+          "step4:oedema": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
       },
       {
         "key": "uni_bi",
@@ -2566,12 +3040,15 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "varicose",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "Varicose veins",
         "label_text_style": "bold",
         "text_color": "#000000",
         "extra_rel": true,
         "has_extra_rel": "yes",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",
@@ -2592,6 +3069,73 @@
             "openmrs_entity_id": "no"
           }
         ]
+      },
+      {
+        "key": "varicose_type",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "varicose_type",
+        "type": "check_box",
+        "label": "Varicose Type",
+        "label_text_style": "bold",
+        "text_color": "#000000",
+        "options": [
+          {
+            "key": "leg_pain",
+            "text": "Leg Pain",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "leg_pain",
+            "openmrs_entity_parent": ""
+          },
+          {
+            "key": "leg_redness",
+            "text": "Leg Redness",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "leg_redness",
+            "openmrs_entity_parent": ""
+          },
+          {
+            "key": "varicose_other",
+            "text": "Other(specify)",
+            "value": false,
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "varicose_other",
+            "openmrs_entity_parent": ""
+          }
+        ],
+        "relevance": {
+          "step4:varicose": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "other_specify",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "edit_text",
+        "hint": "Other(Specify)",
+        "edit_type": "name",
+        "relevance": {
+          "step4:varicose_type": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "varicose_other"
+                ]
+              }
+            ]
+          }
+        }
       },
       {
         "key": "ipv_physical_signs_symptoms",
@@ -2937,7 +3481,7 @@
           },
           {
             "key": "other",
-            "text": "Other specify",
+            "text": "Other (specify)",
             "value": false,
             "openmrs_entity": "concept",
             "openmrs_entity_id": "",
