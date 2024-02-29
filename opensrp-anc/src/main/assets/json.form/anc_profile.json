@@ -337,6 +337,7 @@
     "gest_age",
     "dating_chosen",
     "date_sfh_recorded",
+    "discordant_set",
     "lmp_gest_age",
     "lmp_gest_age_days",
     "lmp_gest_age_days",
@@ -1280,7 +1281,7 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "159618AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "extra_info": "GA: {ultrasound_gest_age} \u003cbr/\u003e EDD: {ultrasound_edd}"
+            "extra_info": "GA: {ultrasound_gest_age} weeks \u003cbr/\u003e EDD: {ultrasound_edd}"
           }
         ],
         "v_required": {
@@ -1484,7 +1485,7 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "159618AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "extra_info": "GA: {ultrasound_gest_age} \u003cbr/\u003e EDD: {ultrasound_edd}"
+            "extra_info": "GA: {ultrasound_gest_age} weeks \u003cbr/\u003e EDD: {ultrasound_edd}"
           }
         ],
         "v_required": {
@@ -1519,7 +1520,7 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "159618AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "extra_info": "GA: {ultrasound_gest_age} \u003cbr/\u003e EDD: {ultrasound_edd}"
+            "extra_info": "GA: {ultrasound_gest_age} weeks \u003cbr/\u003e EDD: {ultrasound_edd}"
           },
           {
             "key": "sfh",
@@ -9843,10 +9844,14 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "163731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_profile.step7.tobacco_user.label}}",
         "label_text_style": "bold",
         "multi_relevance": true,
+        "exclusive": [
+          "yes",
+          "no"
+        ],
         "options": [
           {
             "key": "yes",
@@ -9880,10 +9885,14 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "tobacco_user_sniffing",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "Tobacco use - Sniffing(Insunko)",
         "label_text_style": "bold",
         "multi_relevance": true,
+        "exclusive": [
+          "yes",
+          "no"
+        ],
         "options": [
           {
             "key": "yes",
@@ -9936,9 +9945,12 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "152721AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_profile.step7.shs_exposure.label}}",
         "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",
@@ -9973,8 +9985,13 @@
         "toaster_type": "warning",
         "relevance": {
           "step8:shs_exposure": {
-            "type": "string",
-            "ex": "equalTo(., \"yes\")"
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
           }
         }
       },
@@ -9983,10 +10000,13 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "165268AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_profile.step7.alcohol_substance_enquiry.label}}",
         "label_text_style": "bold",
         "label_info_text": "{{anc_profile.step7.alcohol_substance_enquiry.label_info_text}}",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",
@@ -10642,17 +10662,38 @@
             "type": "string",
             "ex": "equalTo(., \"no\")"
           }
-        }},
+        }
+      },
+      {
+        "key": "discordant_text_label",
+        "type": "label",
+        "label_text_style": "bold",
+        "text": "Discordant",
+        "text_color": "#000000"
+      },
       {
         "key": "discordant_set",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "",
         "openmrs_entity_id": "discordant_set",
-        "type": "hidden",
+        "type": "edit_text",
+        "read_only": "true",
+        "label_text_style": "bold",
+        "text_color": "#FF0000",
+        "v_required": {
+          "value": false
+        },
         "calculation": {
           "rules-engine": {
             "ex-rules": {
               "rules-file": "profile_calculation_rules.yml"
+            }
+          }
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "profile_relevance_rules.yml"
             }
           }
         }
@@ -10662,10 +10703,13 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "discordant_out",
-        "type": "native_radio",
+        "type": "hidden",
         "label": "Discordant",
         "read_only": true,
         "label_text_style": "bold",
+        "exclusive": [
+          "yes"
+        ],
         "options": [
           {
             "key": "yes",

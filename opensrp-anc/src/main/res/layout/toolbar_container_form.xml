@@ -27,8 +27,7 @@
                 android:layout_centerVertical="true"
                 android:background="@android:color/transparent"
                 android:paddingEnd="@dimen/form_container_small_padding"
-                android:paddingStart="@dimen/form_container_drawable_padding"
-                android:src="@drawable/ic_action_back" />
+                android:paddingStart="@dimen/form_container_drawable_padding" />
 
 
             <TextView
@@ -54,8 +53,7 @@
                 android:layout_centerVertical="true"
                 android:background="@android:color/transparent"
                 android:paddingEnd="@dimen/form_container_drawable_padding"
-                android:paddingStart="@dimen/form_container_small_padding"
-                android:src="@drawable/ic_action_next" />
+                android:paddingStart="@dimen/form_container_small_padding" />
 
 
         </RelativeLayout>

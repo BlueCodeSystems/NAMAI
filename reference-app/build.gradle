@@ -25,7 +25,7 @@ jacoco {
 // This variables are used by the version code & name generators
 ext.versionMajor = 1
 ext.versionMinor = 0
-ext.versionPatch = 0
+ext.versionPatch = 1
 ext.versionClassifier =
         ext.isSnapshot = false
 ext.minimumSdkVersion = androidMinSdkVersion
@@ -279,7 +279,7 @@ android {
  */
 private Integer generateVersionCode() {
     //return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch This bit will be activated after we are sure of the clients minimum sdk version.
-    return ext.versionMajor * 10029 + ext.versionMinor * 100 + ext.versionPatch
+    return ext.versionMajor * 10038 + ext.versionMinor * 100 + ext.versionPatch
 }
 
 /**

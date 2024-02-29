@@ -9,7 +9,7 @@ actions:
 name: step2_bmi
 description: This is a calculated field for purposes of making weight calculations simpler. It fixes which weight to use as pre-gestational weight.
 priority: 1
-condition: "(step2_previous_weight > 0 && global_gest_age < 12 && global_contact_no < 2)
+condition: "(step2_previous_weight > 0 && global_gest_age < 12 && global_contact_no < 2)"
 actions:
   - "calculation = (step2_previous_weight/((step2_height/100)*(step2_height/100)))"
 ---

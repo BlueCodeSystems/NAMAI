@@ -16,6 +16,7 @@ import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 import com.vijay.jsonwizard.fragments.JsonWizardFormFragment;
 import com.vijay.jsonwizard.utils.NativeFormLangUtils;
+import com.vijay.jsonwizard.utils.PropertyManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
@@ -302,6 +303,14 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
         contact.setJsonForm(ancFormUtils.addFormDetails(currentJsonState()));
         contact.setContactNumber(contactNo);
         ANCFormUtils.persistPartial(baseEntityId, getContact());
+        try {
+            if (propertyManager == null) {
+                propertyManager = new PropertyManager(this);
+            }
+            ContactWizardJsonFormFragment.updateEndProperties(propertyManager, getmJSONObject());
+        } catch (Exception e) {
+            Timber.e(e);
+        }
         this.startActivity(intent);
         this.finish();
     }

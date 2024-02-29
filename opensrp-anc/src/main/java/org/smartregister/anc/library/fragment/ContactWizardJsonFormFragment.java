@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.fragment;
 
+import static com.vijay.jsonwizard.utils.FormUtils.METADATA_PROPERTY;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,9 +29,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 
 import com.vijay.jsonwizard.activities.FormConfigurationJsonFormActivity;
+import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.fragments.JsonWizardFormFragment;
 import com.vijay.jsonwizard.interactors.JsonFormInteractor;
+import com.vijay.jsonwizard.utils.PropertyManager;
 
+import org.json.JSONObject;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.ContactJsonFormActivity;
 import org.smartregister.anc.library.activity.InputFilterMinMax;
@@ -44,7 +49,10 @@ import org.smartregister.anc.library.util.DBConstantsUtils;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.anc.library.viewstate.ContactJsonFormFragmentViewState;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
@@ -60,6 +68,11 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
     private BottomNavigationListener navigationListener = new BottomNavigationListener();
     private ContactWizardJsonFormFragment formFragment;
     public static boolean contactFinished;
+    public static final String NATIIVE_FORM_DATE_FORMAT_PATTERN = "dd-MM-yyyy";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
+            NATIIVE_FORM_DATE_FORMAT_PATTERN, Locale.ENGLISH);
+    private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
     public static JsonWizardFormFragment getFormFragment(String stepName) {
         ContactWizardJsonFormFragment jsonFormFragment = new ContactWizardJsonFormFragment();
@@ -468,6 +481,76 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
             } else if (view.getId() == R.id.proceed && getActivity() != null) {
                 ((ContactJsonFormActivity) getActivity()).proceedToMainContactPage();
                 //contactStarted = true;
+            }
+        }
+    }
+
+    public static void updateEndProperties(PropertyManager propertyManager, JSONObject form)
+            throws Exception {
+        if (form.has(METADATA_PROPERTY)) {
+            if (form.getJSONObject(METADATA_PROPERTY).has("end")) {
+                Calendar calendar = Calendar.getInstance();
+                JSONObject end = form.getJSONObject(METADATA_PROPERTY).getJSONObject("end");
+                String value = DATE_TIME_FORMAT.format(calendar.getTime());
+                if (value == null) {
+                    value = "";
+                }
+                end.put(JsonFormConstants.VALUE, value);
+            }
+
+            if (form.getJSONObject(METADATA_PROPERTY).has("today")) {
+                Calendar calendar = Calendar.getInstance();
+                JSONObject today = form.getJSONObject(METADATA_PROPERTY)
+                        .getJSONObject("today");
+                String value = DATE_FORMAT.format(calendar.getTime());
+                if (value == null) {
+                    value = "";
+                }
+                today.put(JsonFormConstants.VALUE, value);
+            }
+
+            if (form.getJSONObject(METADATA_PROPERTY).has(PropertyManager.DEVICE_ID_PROPERTY)) {
+                JSONObject deviceId = form.getJSONObject(METADATA_PROPERTY)
+                        .getJSONObject(PropertyManager.DEVICE_ID_PROPERTY);
+                String value = propertyManager.getSingularProperty(
+                        PropertyManager.DEVICE_ID_PROPERTY);
+                if (value == null) {
+                    value = "";
+                }
+                deviceId.put(JsonFormConstants.VALUE, value);
+            }
+
+            if (form.getJSONObject(METADATA_PROPERTY).has(PropertyManager.SUBSCRIBER_ID_PROPERTY)) {
+                JSONObject subscriberId = form.getJSONObject(METADATA_PROPERTY)
+                        .getJSONObject(PropertyManager.SUBSCRIBER_ID_PROPERTY);
+                String value = propertyManager.getSingularProperty(
+                        PropertyManager.SUBSCRIBER_ID_PROPERTY);
+                if (value == null) {
+                    value = "";
+                }
+                subscriberId.put(JsonFormConstants.VALUE, value);
+            }
+
+            if (form.getJSONObject(METADATA_PROPERTY).has(PropertyManager.SIM_SERIAL_PROPERTY)) {
+                JSONObject simSerial = form.getJSONObject(METADATA_PROPERTY)
+                        .getJSONObject(PropertyManager.SIM_SERIAL_PROPERTY);
+                String value = propertyManager.getSingularProperty(
+                        PropertyManager.SIM_SERIAL_PROPERTY);
+                if (value == null) {
+                    value = "";
+                }
+                simSerial.put(JsonFormConstants.VALUE, value);
+            }
+
+            if (form.getJSONObject(METADATA_PROPERTY).has(PropertyManager.PHONE_NUMBER_PROPERTY)) {
+                JSONObject simSerial = form.getJSONObject(METADATA_PROPERTY)
+                        .getJSONObject(PropertyManager.PHONE_NUMBER_PROPERTY);
+                String value = propertyManager.getSingularProperty(
+                        PropertyManager.PHONE_NUMBER_PROPERTY);
+                if (value == null) {
+                    value = "";
+                }
+                simSerial.put(JsonFormConstants.VALUE, value);
             }
         }
     }

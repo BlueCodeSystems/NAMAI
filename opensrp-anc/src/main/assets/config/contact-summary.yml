@@ -110,8 +110,8 @@ fields:
   - template: "{{contact_summary.demographic_info.occupation}}: {occupation_value}"
     relevance: "occupation_value != ''"
 
-  - template: "{{contact_summary.demographic_info.discordant}}: {discordant_out_value}"
-    relevance: "discordant_out_value != ''"
+  - template: "{{contact_summary.demographic_info.discordant}}: {discordant_set}"
+    relevance: "discordant_set != ''"
 
 ---
 group: current_pregnancy
@@ -424,10 +424,10 @@ fields:
     relevance: "first_weight != ''"
 
   - template: "{{contact_summary.height_and_weight.bmi}} = {bmi}"
-    relevance: "bmi != ''"
+    relevance: "bmi != '' && bmi > 1"
 
   - template: "{{contact_summary.height_and_weight.weight_category}}: {weight_cat}"
-    relevance: "weight_cat !=''"
+    relevance: "weight_cat !='' && bmi > 1"
 
   - template: "{{contact_summary.height_and_weight.weight_gain_during_pregnancy}}: {exp_weight_gain}"
     relevance: "exp_weight_gain != ''"
@@ -436,7 +436,7 @@ fields:
     relevance: "current_weight != ''"
 
   - template: "{{contact_summary.height_and_weight.weight_gain_per_last_contact}}: {weight_gain} kg"
-    relevance: "weight_gain != ''"
+    relevance: "weight_gain != '' && weight_gain > 1"
 
   - template: "{{contact_summary.height_and_weight.total_weight_pregnancy}}: {tot_weight_gain} kg"
     relevance: "tot_weight_gain != ''"

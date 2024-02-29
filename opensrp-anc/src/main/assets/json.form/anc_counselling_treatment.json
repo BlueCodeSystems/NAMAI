@@ -3337,9 +3337,12 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "159758AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_counselling_treatment.step7.delivery_place.label}}",
         "label_text_style": "bold",
+        "exclusive": [
+          "facility"
+        ],
         "options": [
           {
             "key": "facility",
