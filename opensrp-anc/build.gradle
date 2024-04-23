@@ -104,6 +104,13 @@ android {
                 buildConfigField "String", "FLURRY_API_KEY", "\"sample_key\""
             }
 
+            if (properties != null && properties.containsKey("textit.api.key")) {
+                buildConfigField "String", "TEXTIT_API_KEY", properties["textit.api.key"]
+            } else {
+                println("Textit API key config variables is not set in your local.properties")
+                buildConfigField "String", "TEXTIT_API_KEY", "\"sample_key\""
+            }
+
             if (properties != null && properties.containsKey("oauth.client.id")) {
                 buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id"]
 

@@ -136,22 +136,28 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     }
 
     protected boolean isPermissionGranted() {
-         if (Build.VERSION.SDK_INT >= 33){
-             if(allfiles == false) {
-                 Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                 startActivityForResult(intent, REQUEST_CODE);
-                 allfiles = true;
-             }
-             return true;
-         }
+        if (Build.VERSION.SDK_INT >= 33) {
+            if (!Environment.isExternalStorageManager()) {
+                // Permission is not yet granted, show the permission request
+                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, REQUEST_CODE);
+                allfiles = true;
+            }
+            return true; // If permission is already granted, we continue with true
+        }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             // For Android 10 and higher (scoped storage), check for read and write permissions.
-            return PermissionUtils.isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE, PermissionUtils.READ_EXTERNAL_STORAGE_REQUEST_CODE)
-                    && PermissionUtils.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+            if (!Environment.isExternalStorageManager()) {
+                // Permission is not yet granted, show the permission request
+                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, REQUEST_CODE);
+                allfiles = true;
+            }
+            return true;
+            //return PermissionUtils.isPermissionGranted(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE, 15140);
         } else {
             // For Android versions below R, check for write external storage permission only.
-            return PermissionUtils.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
-                    &&PermissionUtils.isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE, PermissionUtils.READ_EXTERNAL_STORAGE_REQUEST_CODE);
+            return PermissionUtils.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionUtils.WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
         }
     }
 

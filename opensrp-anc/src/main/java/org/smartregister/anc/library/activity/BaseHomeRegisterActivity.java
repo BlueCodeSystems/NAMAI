@@ -1,5 +1,7 @@
 package org.smartregister.anc.library.activity;
 
+import static com.vijay.jsonwizard.utils.FormUtils.getFieldJSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -30,6 +32,8 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -43,6 +47,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
@@ -78,6 +83,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -89,6 +95,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import timber.log.Timber;
@@ -245,7 +252,6 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                         phone = jObj.getString("phone");
                         nrc = jObj.getString("nrc");
 
-                        // save user data
                         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(BaseHomeRegisterActivity.this);
                         SharedPreferences.Editor edit = sp.edit();
 
@@ -1262,6 +1268,72 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                     switch (form.getString(ANCJsonFormUtils.ENCOUNTER_TYPE)) {
                         case ConstantsUtils.EventTypeUtils.REGISTRATION:
                             ((RegisterContract.Presenter) presenter).saveRegistrationForm(jsonString, false);
+                            String tag_string_req = "req_login";
+                            String url = "https://textit.com/api/v2/contacts.json";
+
+                            JSONObject jsonBody = new JSONObject();
+                            try {
+                                JSONObject fname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"first_name");
+                                JSONObject lname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"last_name");
+                                JSONObject pnum = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"phone_number");
+
+                                String firstName = fname.getString(ANCJsonFormUtils.VALUE);
+                                String lastName = lname.getString(ANCJsonFormUtils.VALUE);
+                                String phoneNumber = "+260" + pnum.getString(ANCJsonFormUtils.VALUE);
+
+                                jsonBody.put("uuid", firstName + " " + lastName);
+
+
+                                jsonBody.put("name", firstName + " " + lastName);
+                                jsonBody.put("language", "eng");
+                                JSONArray urnsArray = new JSONArray();
+                                urnsArray.put("tel:" + phoneNumber);
+                                jsonBody.put("urns", urnsArray);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                                    Request.Method.POST,
+                                    url,
+                                    jsonBody,
+                                    new Response.Listener<JSONObject>() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            Log.e("TextItAPIResponse", "Response Received: " + response.toString());
+                                        }
+                                    },
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            if (error.networkResponse != null) {
+                                                Log.e("TextItAPIError", "Error response code: " + error.networkResponse.statusCode);
+                                            }
+                                        }
+                                    }
+                            ) {
+                                @Override
+                                public byte[] getBody() {
+                                    return jsonBody.toString().getBytes();
+                                }
+
+                                @Override
+                                public String getBodyContentType() {
+                                    return "application/json";
+                                }
+
+                                @Override
+                                public Map<String, String> getHeaders() throws AuthFailureError {
+                                    String apiKey = BuildConfig.TEXTIT_API_KEY;
+                                    HashMap<String, String> headers = new HashMap<String, String>();
+                                    if(apiKey != null) {
+                                        headers.put("Authorization", apiKey);
+                                    }
+                                    return headers;
+                                }
+                            };
+
+                            addToJSONRequestQueue(jsonObjectRequest, tag_string_req);
                             break;
                         case ConstantsUtils.EventTypeUtils.CLOSE:
                             ((RegisterContract.Presenter) presenter).closeAncRecord(jsonString);
@@ -1286,6 +1358,17 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             }
 
         }
+    }
+
+    public static void addToJSONRequestQueue(Request<JSONObject> request, String tag) {
+        Context context = AncLibrary.getInstance().getApplicationContext();
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        if (tag != null) {
+            request.setTag(tag);
+        }
+
+        requestQueue.add(request);
     }
 
     @Override

@@ -290,6 +290,11 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
      * @author dubdabasoduba
      */
     public void proceedToMainContactPage() {
+        try {
+            ContactWizardJsonFormFragment.updateEndProperties(propertyManager, getmJSONObject());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Intent intent = new Intent(this, AncLibrary.getInstance().getActivityConfiguration().getMainContactActivityClass());
 
         int contactNo = getIntent().getIntExtra(ConstantsUtils.IntentKeyUtils.CONTACT_NO, 0);
@@ -307,7 +312,6 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
             if (propertyManager == null) {
                 propertyManager = new PropertyManager(this);
             }
-            ContactWizardJsonFormFragment.updateEndProperties(propertyManager, getmJSONObject());
         } catch (Exception e) {
             Timber.e(e);
         }

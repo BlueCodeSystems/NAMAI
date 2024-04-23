@@ -108,6 +108,7 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static Instant startCounselling;
     public String gest_age_ref_yes;
     public int routineCount = 0;
+    public static Contact checkRAM;
 
     @Override
     protected void onResume() {
@@ -279,6 +280,8 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         Contact contact4 = contacts.get(3);
         Contact contact5 = contacts.get(4);
         Contact contact6 = contacts.get(5);
+
+        checkRAM = contacts.get(0);
 
         if (contact1.getRequiredFields() == null) {
             requiredFields.setVisibility(View.GONE);

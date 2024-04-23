@@ -6,7 +6,7 @@
   "encounter_type": "Client profile",
   "entity_id": "",
   "relational_id": "",
-  "form_version": "0.0.15",
+  "form_version": "0.0.1",
   "metadata": {
     "start": {
       "openmrs_entity_parent": "",
@@ -85,7 +85,7 @@
     "c_sections",
     "prev_preg_comps",
     "allergies",
-    "medications_history",
+    "medications",
     "allergies_other",
     "surgeries",
     "surgeries_other_gyn_proced",
@@ -332,7 +332,7 @@
     "preg_thirteen_delivery_termination"
   ],
   "default_values": [
-    "medications_history",
+    "medications",
     "gest_age_days",
     "gest_age",
     "dating_chosen",
@@ -999,7 +999,7 @@
         "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify ultrasound date"
         },
         "relevance": {
@@ -9073,10 +9073,10 @@
         }
       },
       {
-        "key": "medications_history",
+        "key": "medications",
         "openmrs_entity_parent": "160714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "medications_history",
+        "openmrs_entity_id": "medications",
         "openmrs_data_type": "select multiple",
         "type": "check_box",
         "label": "Drug history?",
@@ -9219,7 +9219,7 @@
           "err": "{{anc_profile.step6.medications_other.v_required.err}}"
         },
         "relevance": {
-          "step6:medications_history": {
+          "step6:medications": {
             "ex-checkbox": [
               {
                 "or": [
@@ -9876,7 +9876,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
         }
       },
@@ -9917,7 +9917,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.tobacco_user.v_required.err}}"
         }
       },
@@ -10024,7 +10024,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.alcohol_substance_enquiry.v_required.err}}"
         }
       },
@@ -10084,7 +10084,7 @@
           }
         ],
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "{{anc_profile.step7.alcohol_substance_use.v_required.err}}"
         }
       },

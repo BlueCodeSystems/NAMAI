@@ -50,7 +50,7 @@ public class LastContactAdapter extends RecyclerView.Adapter<LastContactAdapter.
             String resultGA = facts.get("gest_age");
             String gestAge = null;
 
-            if(resultGA != null){
+            if(resultGA != null && resultGA.length() > 2){
                 gestAge = resultGA.substring(0, resultGA.length() - 2);
             }
 

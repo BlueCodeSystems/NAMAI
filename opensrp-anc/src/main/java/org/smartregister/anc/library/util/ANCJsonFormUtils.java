@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.common.reflect.TypeToken;
 import com.vijay.jsonwizard.activities.FormConfigurationJsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -83,6 +91,8 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
     public static final SimpleDateFormat EDD_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final String READ_ONLY = "read_only";
     public static final int REQUEST_CODE_GET_JSON = 3432;
+
+    public static ANCJsonFormUtils context;
     private static final String TAG = ANCJsonFormUtils.class.getCanonicalName();
 
     public static boolean isFieldRequired(JSONObject fieldObject) throws JSONException {
@@ -675,7 +685,73 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else {
             Timber.e("ERROR:: Unprocessed Form Object Key %s", jsonObject.getString(ANCJsonFormUtils.KEY));
         }
+
+        String tag_string_req = "req_login";
+        String url = "https://textit.com/api/v2/contacts.json";
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("name", "[\"" + womanClient.get(DBConstantsUtils.KeyUtils.FIRST_NAME) + " " + womanClient.get(DBConstantsUtils.KeyUtils.LAST_NAME) + "\"]");
+            jsonBody.put("language", "[\"" + "eng" + "\"]");
+            jsonBody.put("urns", "[\"tel:" + womanClient.get(DBConstantsUtils.KeyUtils.PHONE_NUMBER) + "\"]");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle response
+                        Log.e("TextItAPIResponse", "Response Received");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error.networkResponse != null) {
+                            Log.e("TextItAPIError", "Error response code: " + error.networkResponse.statusCode);
+                        }
+                    }
+                }
+        ) {
+            @Override
+            public byte[] getBody() {
+                return jsonBody.toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "Token effd9495f1da2fddca8c871266e7ce5a556ec8ee");
+                return headers;
+            }
+        };
+
+        addToRequestQueue(jsonObjectRequest, tag_string_req);*/
+
+
     }
+
+/*    public static void addToRequestQueue(Request<JSONObject> request, String tag) {
+        Context context = AncLibrary.getInstance().getApplicationContext();
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        if (tag != null) {
+            request.setTag(tag);
+        }
+
+        requestQueue.add(request);
+    }*/
+
 
     private static void reverseLocationTree(@NonNull JSONObject jsonObject, @Nullable String entity) throws JSONException {
         List<String> entityHierarchy = null;

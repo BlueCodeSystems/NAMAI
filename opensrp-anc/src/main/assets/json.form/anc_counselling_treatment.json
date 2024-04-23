@@ -485,14 +485,14 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "done",
             "text": "{{anc_counselling_treatment.step1.referred_hosp.options.yes.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
-            "key": "no",
+            "key": "not_done",
             "text": "{{anc_counselling_treatment.step1.referred_hosp.options.no.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -553,7 +553,7 @@
             "ex-checkbox": [
               {
                 "or": [
-                  "no"
+                  "not_done"
                 ]
               }
             ]
@@ -576,6 +576,177 @@
         }
       },
       {
+        "key": "treatment",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "treatment",
+        "type": "native_radio",
+        "label": "Any treatment given before referral",
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "yes"
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "no"
+          }
+        ],
+        "v_required": {
+          "value": "false",
+          "err": "Please fill in"
+        },
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "treatment_specify",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "treatment_specify",
+        "type": "edit_text",
+        "hint": "Specify treatment given",
+        "edit_type": "edit_text",
+        "v_required": {
+          "value": false,
+          "err": "Specify treatment given"
+        },
+        "relevance": {
+          "step1:treatment": {
+            "type": "string",
+            "ex": "equalTo(., \"yes\")"
+          }
+        }
+      },
+      {
+        "key": "receiving",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "receiving",
+        "type": "edit_text",
+        "hint": "Receiving Facility",
+        "edit_type": "name",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "referral_notes",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "referral_notes",
+        "type": "edit_text",
+        "hint": "Referral notes",
+        "edit_type": "name",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "referral_feedback",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "referral_feedback",
+        "type": "edit_text",
+        "hint": "Referral feedback",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "date_referral",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "date_referral",
+        "type": "date_picker",
+        "value": "today",
+        "hint": "Date referral was made",
+        "expanded": false,
+        "min_date": "today-20y",
+        "max_date": "today",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify date of referral"
+        },
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "date_scheduled",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "date_scheduled",
+        "type": "date_picker",
+        "value": "today",
+        "hint": "Date of scheduled referral",
+        "expanded": false,
+        "min_date": "today-5y",
+        "max_date": "today+5y",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify date of schedule"
+        },
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "danger_signs_ref_toaster_one",
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
@@ -588,7 +759,7 @@
             "ex-checkbox": [
               {
                 "or": [
-                  "yes"
+                  "done"
                 ]
               }
             ]
@@ -6181,7 +6352,7 @@
             "ex-checkbox": [
               {
                 "or": [
-                  "yes"
+                  "done"
                 ]
               }
             ]
