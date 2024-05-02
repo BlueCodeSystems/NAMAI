@@ -314,13 +314,39 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
             int medicationsIndex = jsonString.indexOf("medications");
             if (medicationsIndex != -1) {
                 int start = jsonString.indexOf(":", medicationsIndex) + 1;
-                int end = jsonString.indexOf("}", start);
+                int end = jsonString.indexOf("]", start);
                 String medicationsValue = jsonString.substring(start, end).trim();
 
-                medicationsValue = medicationsValue.replaceAll("[^a-zA-Z]|\\b(value|text)\\b", "");
+                String[] medicationObjects = medicationsValue.split("\\},\\s*\\{");
 
-                medications = medicationsValue;
-                System.out.println("medications Value: " + medicationsValue);
+                List<String> medicationTexts = new ArrayList<>();
+                for (String medicationObj : medicationObjects) {
+
+                    medicationObj = medicationObj.replaceAll("\\{\\s*|\\s*\\}", "");
+
+                    String[] keyValuePairs = medicationObj.split(",");
+                    for (String pair : keyValuePairs) {
+
+                        if (pair.contains("text")) {
+                            String[] keyValue = pair.split(":");
+                            if (keyValue.length == 2) {
+                                String medicationText = keyValue[1].replaceAll("\"", "").trim();
+                                medicationTexts.add(medicationText);
+                            }
+                        }
+                    }
+                }
+
+                StringBuilder finalMedicationsString = new StringBuilder();
+                for (String medicationText : medicationTexts) {
+                    finalMedicationsString.append(medicationText).append(", ");
+                }
+                if (finalMedicationsString.length() > 0) {
+                    finalMedicationsString.setLength(finalMedicationsString.length() - 2);
+                }
+
+                medications = finalMedicationsString.toString();
+                System.out.println("medications Value: " + medications);
             }
 
 
@@ -412,6 +438,7 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_contact_summary_finish_activity, menu);
+
         return true;
     }
 
