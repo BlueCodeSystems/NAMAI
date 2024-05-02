@@ -248,7 +248,7 @@ fields:
 group: medications
 fields:
 
-  - template: "{{contact_summary.medications.current_medications}}: {medications_history_value}"
+  - template: "{{contact_summary.medications.current_medications}}: {medications}"
     relevance: "!medications_value.isEmpty()"
 
   - template: "{{contact_summary.medications.medications_prescribed}}: {vita_supp_value}, {mag_calc_value}, {nausea_pharma_value}, {antacid_value}, {penicillin_value}, {antibiotic_value}, {prep_value}, {iptp_sp1}, {ifa_value}, {ifa_medication_value}, {aspirin_comply_value}, {calcium}, {mebendazole}, {fansidar}, {co_trimoxazole}"

@@ -80,6 +80,14 @@
           "openmrs_entity_id": "165299AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
+          "key": "declined",
+          "text": "Declined"
+        },
+        {
+          "key": "not_available",
+          "text": "Not available"
+        },
+        {
           "key": "other",
           "text": "Other(specify)",
           "openmrs_entity_parent": "161475AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",

@@ -25,7 +25,7 @@ jacoco {
 // This variables are used by the version code & name generators
 ext.versionMajor = 1
 ext.versionMinor = 0
-ext.versionPatch = 1
+ext.versionPatch = 3
 ext.versionClassifier =
         ext.isSnapshot = false
 ext.minimumSdkVersion = androidMinSdkVersion
@@ -104,6 +104,13 @@ android {
             } else {
                 println("Flurry Analytics API key config variables is not set in your local.properties")
                 buildConfigField "String", "FLURRY_API_KEY", "\"sample_key\""
+            }
+
+            if (properties != null && properties.containsKey("textit.api.key")) {
+                buildConfigField "String", "TEXTIT_API_KEY", properties["textit.api.key"]
+            } else {
+                println("Textit API key config variables is not set in your local.properties")
+                buildConfigField "String", "TEXTIT_API_KEY", "\"sample_key\""
             }
 
             if (properties != null && properties.containsKey("oauth.client.id")) {
@@ -279,7 +286,7 @@ android {
  */
 private Integer generateVersionCode() {
     //return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch This bit will be activated after we are sure of the clients minimum sdk version.
-    return ext.versionMajor * 10038 + ext.versionMinor * 100 + ext.versionPatch
+    return ext.versionMajor * 10043 + ext.versionMinor * 100 + ext.versionPatch
 }
 
 /**
@@ -364,6 +371,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife:10.2.3'
     implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
     implementation 'commons-validator:commons-validator:1.7'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.greenrobot:eventbus:3.2.0'
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.2.0'
