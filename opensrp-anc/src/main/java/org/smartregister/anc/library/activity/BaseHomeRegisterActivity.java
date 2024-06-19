@@ -15,8 +15,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -37,13 +35,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
-import com.vijay.jsonwizard.activities.FormConfigurationJsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Triple;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -81,21 +78,27 @@ import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
+import java.util.Random;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import timber.log.Timber;
@@ -121,6 +124,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     private String advancedSearchQrText = "";
     private HashMap<String, String> advancedSearchFormData = new HashMap<>();
 
+    private RegisterContract.Interactor interactor;
 
     static String[] JanuaryData = new String[53];
     static String[] FebruaryData = new String[53];
@@ -151,6 +155,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     public static String nrc;
     public static String district;
     public static String phone;
+    String locationId =  null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1233,6 +1238,261 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         startActivityForResult(intent, ANCJsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
+        public void saveKafkaRegistration(JSONObject data){
+            String jsonString = data.toString();
+        ((RegisterContract.Presenter) presenter).saveRegistrationForm(jsonString, false);
+    }
+
+    private JSONObject remoteRegister() {
+        new FetchDataTask().execute();
+        return null;
+    }
+
+    private class FetchDataTask extends AsyncTask<Void, Void, JSONArray> {
+
+        @Override
+        protected JSONArray doInBackground(Void... voids) {
+            try {
+                String urlString = "https://kafka.namai.bluecodeltd.com/getRegistrations";
+                URL url = new URL(urlString);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Content-Type", "application/json");
+
+                String userCredentials = "admin:nNhwi773#mai";
+                String basicAuth = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    basicAuth = "Basic " + Base64.getEncoder().encodeToString(userCredentials.getBytes());
+                }
+                conn.setRequestProperty("Authorization", basicAuth);
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder content = new StringBuilder();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
+                in.close();
+                conn.disconnect();
+
+                JSONArray jsonArray = new JSONArray(content.toString());
+                JSONArray transformedArray = new JSONArray();
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject clientData = jsonArray.getJSONObject(i);
+
+                    String locationString = clientData.optString("facilityname", "");
+
+                    //if(locationString == locationId){
+                        JSONObject transformedData = transformKafkaData(clientData.toString());
+                        transformedArray.put(transformedData);
+                        return transformedArray;
+                    //}
+
+                    /*JSONObject transformedData = transformKafkaData(clientData.toString());
+                    transformedArray.put(transformedData);*/
+                }
+                /*return transformedArray;*/
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray result) {
+            if (result != null) {
+                try {
+                    Timber.d("Remote Data JSON Array: %s", result.toString(2));
+
+                    for (int i = 0; i < result.length(); i++) {
+                        JSONObject remoteData = result.getJSONObject(i);
+                        ((RegisterContract.Presenter) presenter).saveRegistrationForm(remoteData.toString(), false);
+                    }
+                } catch (JSONException e) {
+                    Timber.e(e, "Error parsing remote JSON array.");
+                }
+            } else {
+                Timber.e("Error pulling the data.");
+            }
+        }
+    }
+
+
+
+
+        private JSONObject transformKafkaData(String kafkaJson) {
+        try {
+            if (StringUtils.isBlank(locationId)) {
+                locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+                Triple<String, String, String> triple = Triple.of("anc_register", "", locationId);
+                interactor.getNextUniqueId(triple, (RegisterContract.InteractorCallBack) this);
+            }
+
+            JSONObject kafkaData = new JSONObject(kafkaJson);
+
+            String randomStudyId = generateRandomStudyId();
+
+            String randomANCId = generateRandomANCId();
+
+            String formattedDob = "01-01-2000";
+
+            JSONObject step1 = new JSONObject();
+            step1.put("title", "ANC Registration");
+
+            JSONArray fields = new JSONArray();
+
+            String dobString = kafkaData.optString("dateofbirth", "");
+
+            DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
+            Date dobDate = dateFormat.parse(dobString);
+
+            Calendar dobCal = Calendar.getInstance();
+            dobCal.setTime(dobDate);
+            Calendar todayCal = Calendar.getInstance();
+            int age = todayCal.get(Calendar.YEAR) - dobCal.get(Calendar.YEAR);
+            if (todayCal.get(Calendar.DAY_OF_YEAR) < dobCal.get(Calendar.DAY_OF_YEAR)) {
+                age--;
+            }
+
+            try {
+
+                DateFormat targetFormat = new SimpleDateFormat("dd-MM-yyyy");
+                formattedDob = targetFormat.format(dobDate);
+                System.out.println("Formatted DOB: " + formattedDob);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            fields.put(new JSONObject().put("key", "wom_image").put("type", "choose_image").put("uploadButtonText", "Take a picture of the woman"));
+            fields.put(new JSONObject().put("key", "anc_id").put("openmrs_entity_parent", "").put("openmrs_entity", "person_identifier").put("openmrs_entity_id", "ANC_ID").put("type", "edit_text").put("read_only", "false").put("value", code + "/" + randomANCId/* + " SC+"*/));
+            fields.put(new JSONObject().put("key", "study_id").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "study_id").put("type", "edit_text").put("read_only", "false").put("hint", "Study ID").put("value", kafkaData.optString("hmiscode", "")));
+            fields.put(new JSONObject().put("key", "first_name").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "first_name").put("type", "edit_text").put("hint", "First name").put("edit_type", "name").put("v_regex", new JSONObject().put("value", "[A-Za-z\\s\\.\\-]*").put("err", "Please enter a valid name")).put("v_required", new JSONObject().put("value", true).put("err", "Enter a First name")).put("value", kafkaData.optString("firstname", "")));
+            fields.put(new JSONObject().put("key", "maiden_name").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "maiden_name").put("type", "edit_text").put("hint", "Maiden Name").put("edit_type", "name").put("v_regex", new JSONObject().put("value", "[A-Za-z\\s\\.\\-]*").put("err", "Please enter a valid name")).put("value", ""));
+            fields.put(new JSONObject().put("key", "last_name").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "last_name").put("type", "edit_text").put("hint", "Last name").put("edit_type", "name").put("v_regex", new JSONObject().put("value", "[A-Za-z\\s\\.\\-]*").put("err", "Please enter a valid name")).put("v_required", new JSONObject().put("value", true).put("err", "Enter a Last name")).put("value", kafkaData.optString("surname", "")));
+            fields.put(new JSONObject().put("key", "nrc").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "nrc").put("type", "edit_text").put("hint", "NRC number").put("v_regex", new JSONObject().put("value", "Blank").put("err", "Number must take the Correct format")).put("value", ""));
+            fields.put(new JSONObject().put("key", "dob").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "birthdate").put("type", "hidden").put("value", formattedDob).put("calculation", new JSONObject().put("rules-engine", new JSONObject().put("ex-rules", new JSONObject().put("rules-file", "registration_calculation_rules.yml")))));
+            fields.put(new JSONObject().put("key", "dob_calculated").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "hidden").put("value", "0").put("calculation", new JSONObject().put("rules-engine", new JSONObject().put("ex-rules", new JSONObject().put("rules-file", "registration_calculation_rules.yml")))).put("step", "step1").put("is-rule-check", true));
+            fields.put(new JSONObject().put("key", "dob_entered").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "date_picker").put("hint", "Date of birth (DOB)").put("expanded", false).put("duration", new JSONObject().put("label", "Age")).put("min_date", "today-100y").put("max_date", "today-10y").put("relevance", new JSONObject().put("step1:dob_unknown", new JSONObject().put("ex-checkbox", new JSONArray().put(new JSONObject().put("not", new JSONArray().put("dob_unknown")))))).put("v_required", new JSONObject().put("value", true).put("err", "Specify Age")).put("is_visible", true).put("step", "step1").put("is-rule-check", true).put("value", kafkaData.optString("dateofbirth", "")));
+            fields.put(new JSONObject().put("key", "dob_unknown").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "birthdate_estimated").put("type", "check_box").put("options", new JSONArray().put(new JSONObject().put("key", "dob_unknown").put("text", "DOB unknown?").put("text_size", "18px").put("value", "false").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", ""))).put("is-rule-check", false));
+            fields.put(new JSONObject().put("key", "age").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "age").put("type", "hidden").put("value", age).put("calculation", new JSONObject().put("rules-engine", new JSONObject().put("ex-rules", new JSONObject().put("rules-file", "registration_calculation_rules.yml")))));
+            fields.put(new JSONObject().put("key", "age_calculated").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "hidden").put("value", age).put("calculation", new JSONObject().put("rules-engine", new JSONObject().put("ex-rules", new JSONObject().put("rules-file", "registration_calculation_rules.yml")))));
+            fields.put(new JSONObject().put("key", "age_entered").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "age").put("type", "edit_text").put("value", age).put("hint", "Age").put("v_numeric", new JSONObject().put("value", "true").put("err", "Age must be a number")).put("v_min", new JSONObject().put("value", "10").put("err", "Age must be equal to or greater than 10")).put("v_max", new JSONObject().put("value", "49").put("err", "Age must be equal or less than 49")).put("relevance", new JSONObject().put("step1:dob_unknown", new JSONObject().put("ex-checkbox", new JSONArray().put(new JSONObject().put("and", new JSONArray().put("dob_unknown")))))).put("v_required", new JSONObject().put("value", true).put("err", "Enter the Woman Age")).put("is_visible", false).put("step", "step1").put("is-rule-check", true));
+            fields.put(new JSONObject().put("key", "gender").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "gender").put("type", "hidden").put("value", "F"));
+            fields.put(new JSONObject().put("key", "educ_level").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "educ_level").put("type", "native_radio").put("label", "Level of education").put("options", new JSONArray().put(new JSONObject().put("key", "none").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "none").put("text", "None")).put(new JSONObject().put("key", "primary").put("text", "Primary").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "primary")).put(new JSONObject().put("key", "secondary").put("text", "Secondary").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "secondary")).put(new JSONObject().put("key", "tertiary").put("text", "Tertiary").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "tertiary")).put(new JSONObject().put("key", "adult").put("text", "Adult literacy").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "adult"))).put("v_required", new JSONObject().put("value", true).put("err", "Select a level of education")).put("value", kafkaData.optString("educationallevel", "").toLowerCase()));
+            fields.put(new JSONObject().put("key", "religion").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "religion").put("type", "native_radio").put("label", "Religion").put("options", new JSONArray().put(new JSONObject().put("key", "christianity").put("text", "Christianity").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "christianity")).put(new JSONObject().put("key", "muslim").put("text", "Muslim").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "muslim")).put(new JSONObject().put("key", "other").put("text", "Other").put("openmrs_entity_parent", "").put("openmrs_entity", "concept").put("openmrs_entity_id", "other"))).put("v_required", new JSONObject().put("value", true).put("err", "Select Religion")).put("value", ""));
+            fields.put(new JSONObject().put("key", "phone_number").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "phone_number").put("type", "edit_text").put("hint", "Phone Number").put("v_numeric", new JSONObject().put("value", "true").put("err", "Phone Number must be numeric")).put("v_required", new JSONObject().put("value", true).put("err", "Enter the Phone Number")).put("value", kafkaData.optString("mobilephonenumber", "")));
+            fields.put(new JSONObject().put("key", "phone_number_alternative").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "phone_number_alt").put("type", "edit_text").put("hint", "Phone Number (alternative)").put("v_numeric", new JSONObject().put("value", "true").put("err", "Phone Number must be numeric")).put("value", "2"));
+            fields.put(new JSONObject().put("key", "patient_identifier").put("openmrs_entity_parent", "").put("openmrs_entity", "person_identifier").put("openmrs_entity_id", "zeir_id").put("type", "hidden").put("value", "ZEIR ID"));
+            fields.put(new JSONObject().put("key", "mother_guardian_number").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "mother_guardian_number").put("type", "hidden").put("value", ""));
+            fields.put(new JSONObject().put("key", "same_as_primary_phone_number").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "check_box").put("label", "Same as primary phone number").put("options", new JSONArray().put(new JSONObject().put("key", "same_as_primary_phone_number").put("text", "").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "")).put(new JSONObject().put("key", "v_required").put("value", true).put("err", "Select if the same as primary phone number"))));
+            fields.put(new JSONObject().put("key", "relationship_to_child").put("openmrs_entity_parent", "").put("openmrs_entity", "relationship").put("openmrs_entity_id", "relationship").put("type", "hidden").put("value", "Mother").put("v_required", new JSONObject().put("value", true).put("err", "Select the Relationship to child")).put("is-rule-check", true));
+            fields.put(new JSONObject().put("key", "death_date").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "death_date").put("type", "hidden").put("value", "0").put("v_required", new JSONObject().put("value", true).put("err", "Specify death date")).put("is-rule-check", true));
+            fields.put(new JSONObject().put("key", "death_date_unknown").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "check_box").put("options", new JSONArray().put(new JSONObject().put("key", "death_date_unknown").put("text", "Death date unknown?").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "")).put(new JSONObject().put("key", "v_required").put("value", true).put("err", "Specify if death date is unknown"))));
+            fields.put(new JSONObject().put("key", "hiv_status").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "hiv_status").put("type", "hidden").put("value", ""));
+            fields.put(new JSONObject().put("key", "next_contact").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "next_contact").put("type", "date_picker").put("hint", "Next Contact").put("value", ""));
+            fields.put(new JSONObject().put("key", "next_contact_date").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "next_contact_date").put("type", "date_picker").put("hint", "Next Contact Date").put("value", ""));
+            fields.put(new JSONObject().put("key", "cohabitants").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "check_box").put("label", "cohabitants").put("options", new JSONArray().put(new JSONObject().put("key", "cohabitants").put("text", "").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "")).put(new JSONObject().put("key", "v_required").put("value", true).put("err", "cohabitants"))));
+            fields.put(new JSONObject().put("key", "sc_id").put("openmrs_entity_parent", "").put("openmrs_entity", "person_identifier").put("openmrs_entity_id", "sc_id").put("type", "edit_text").put("hint", "SmartCare Plus ID").put("value", kafkaData.optString("clientuuid", "")));
+
+
+            step1.put("fields", fields);
+
+            JSONObject metadata = new JSONObject();
+            metadata.put("start", new JSONObject().put("value", getCurrentTimestamp()));
+            metadata.put("end", new JSONObject().put("value", getCurrentTimestamp()));
+            metadata.put("today", new JSONObject().put("value", getCurrentDate()));
+            metadata.put("encounter_location", locationId);
+
+            JSONObject mainData = new JSONObject();
+            mainData.put("count", "1");
+            mainData.put("encounter_type", "ANC Registration");
+            mainData.put("entity_id", kafkaData.optString("clientuuid", ""));
+            mainData.put("metadata", metadata);
+            mainData.put("step1", step1);
+
+            return mainData;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return createDefaultData();
+        }
+    }
+
+    private String generateRandomStudyId() {
+        Random random = new Random();
+        return String.valueOf(1000000000 + random.nextInt(900000000));
+    }
+
+    private String generateRandomANCId() {
+        Random random = new Random();
+        return String.valueOf(100000 + random.nextInt(900000));
+    }
+
+    /*private String getUniqueIdForANC() {
+        String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+        //JSONObject metadata = jsonString.getJSONObject(ANCJsonFormUtils.METADATA);
+        Triple<String, String, String> triple = Triple.of("anc_registration", "", locationId);
+        String uniqueId = interactor.getNextUniqueId(triple, (RegisterContract.InteractorCallBack) this);
+        return uniqueId;
+    }*/
+
+
+
+    private JSONObject createDefaultData() {
+        JSONObject defaultData = new JSONObject();
+
+        try {
+            defaultData.put("count", "1");
+            defaultData.put("encounter_type", "ANC Registration");
+            defaultData.put("entity_id", "");
+            defaultData.put("metadata", new JSONObject());
+            defaultData.put("step1", new JSONObject().put("fields", new JSONArray()));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return defaultData;
+    }
+
+
+
+    private String mapEducationLevel(String level) {
+        switch(level.toLowerCase()) {
+            case "certificate graduate": return "tertiary";
+            case "junior secondary": return "secondary";
+            case "senior secondary": return "secondary";
+            case "none": return "none";
+            default: return "none";
+        }
+    }
+
+    private String mapOccupation(String occupation, String educationLevel) {
+        if (educationLevel.equalsIgnoreCase("none")) {
+            switch(occupation.toLowerCase()) {
+                case "unemployed": return "unemployed_redacted";
+                case "formal employment": return "formal_employment_redacted";
+                case "informal employment": return "informal_employment_other_redacted";
+                default: return "unemployed_redacted";
+            }
+        } else {
+            switch(occupation.toLowerCase()) {
+                case "unemployed": return "unemployed";
+                case "teacher": return "formal_employment";
+                case "other": return "informal_employment_other";
+                default: return "unemployed";
+            }
+        }
+    }
+
+
+    private String getCurrentDate() {
+        return new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == AllConstants.BARCODE.BARCODE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -1267,7 +1527,10 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                     JSONObject form = new JSONObject(jsonString);
                     switch (form.getString(ANCJsonFormUtils.ENCOUNTER_TYPE)) {
                         case ConstantsUtils.EventTypeUtils.REGISTRATION:
+
                             ((RegisterContract.Presenter) presenter).saveRegistrationForm(jsonString, false);
+
+
                             String tag_string_req = "req_login";
                             String url = "https://textit.com/api/v2/contacts.json";
 
@@ -1662,6 +1925,26 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     public void onSyncComplete(FetchStatus fetchStatus) {
         Toast.makeText(context, "Attempting to save monthly reports data", Toast.LENGTH_SHORT).show();
         loadReports();
+        JSONObject remoteData = remoteRegister();
+        if (remoteData != null) {
+            String remoteString = remoteData.toString();
+            Timber.d("Remote Data JSON String: %s", remoteString);
+
+            if (StringUtils.isNotBlank(remoteString)) {
+                try {
+                    JSONObject remoteJson = new JSONObject(remoteString);
+                    Timber.d("Remote JSON Structure: %s", remoteJson.toString(2));
+
+                    ((RegisterContract.Presenter) presenter).saveRegistrationForm(remoteJson.toString(), false);
+                } catch (JSONException e) {
+                    Timber.e(e, "Error parsing remote JSON string.");
+                }
+            } else {
+                Timber.e("Remote data string is blank.");
+            }
+        } else {
+            Timber.e("Remote data is null.");
+        }
     }
 }
 

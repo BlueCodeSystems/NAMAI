@@ -25,10 +25,14 @@ import androidx.core.app.ActivityCompat;
 import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.anc.BuildConfig;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.BaseHomeRegisterActivity;
 import org.smartregister.anc.library.activity.SiteCharacteristicsEnterActivity;
+import org.smartregister.anc.library.contract.RegisterContract;
 import org.smartregister.anc.library.event.ViewConfigurationSyncCompleteEvent;
 import org.smartregister.anc.library.util.ConstantsUtils;
 import org.smartregister.anc.library.util.Utils;
@@ -38,7 +42,17 @@ import org.smartregister.util.PermissionUtils;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import okhttp3.ResponseBody;
+
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import timber.log.Timber;
 
@@ -47,6 +61,7 @@ import timber.log.Timber;
  */
 public class LoginActivity extends BaseLoginActivity implements BaseLoginContract.View {
 
+    private static final String BASE_URL = "http://102.23.123.28:5069";
     static boolean allfiles = false;
     @Override
     protected void onResume() {
@@ -113,6 +128,8 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
 
         finish();
     }
+
+
 
     private void gotToHomeRegister(boolean remote) {
         Intent intent = new Intent(this, BaseHomeRegisterActivity.class);

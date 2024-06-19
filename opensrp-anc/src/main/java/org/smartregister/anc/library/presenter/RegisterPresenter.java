@@ -172,9 +172,10 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
     @Override
     public void saveRegistrationForm(String jsonString, boolean isEditMode) {
         try {
-            getView().showProgressDialog(R.string.saving_dialog_title);
+            //getView().showProgressDialog(R.string.saving_dialog_title);
             Pair<Client, Event> pair = model.processRegistration(jsonString);
             if (pair == null) {
+                interactor.saveRegistration(pair, jsonString, isEditMode, this);
                 return;
             }
 

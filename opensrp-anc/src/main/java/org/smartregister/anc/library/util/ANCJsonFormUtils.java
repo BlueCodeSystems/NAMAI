@@ -297,9 +297,11 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             JSONObject metadata = ANCJsonFormUtils.getJSONObject(jsonForm, METADATA);
             addLastInteractedWith(fields);
             getDobStrings(fields);
-            String previousVisitsMap = initializeFirstContactValues(fields);
-            processLocationFields(fields);
-
+            String previousVisitsMap = null;
+            if(fields != null) {
+                previousVisitsMap = initializeFirstContactValues(fields);
+                processLocationFields(fields);
+            }
             FormTag formTag = getFormTag(allSharedPreferences);
 
             Client baseClient = org.smartregister.util.JsonFormUtils.createBaseClient(fields, formTag, entityId);
