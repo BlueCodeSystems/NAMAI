@@ -168,6 +168,10 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
             getView().startFormActivity(form);
         }
     }
+    
+    public void fetchSCUniqueId(Triple triple){
+        interactor.getNextUniqueId(triple, this);
+    }
 
     @Override
     public void saveRegistrationForm(String jsonString, boolean isEditMode) {
@@ -175,7 +179,6 @@ public class RegisterPresenter implements RegisterContract.Presenter, RegisterCo
             //getView().showProgressDialog(R.string.saving_dialog_title);
             Pair<Client, Event> pair = model.processRegistration(jsonString);
             if (pair == null) {
-                interactor.saveRegistration(pair, jsonString, isEditMode, this);
                 return;
             }
 

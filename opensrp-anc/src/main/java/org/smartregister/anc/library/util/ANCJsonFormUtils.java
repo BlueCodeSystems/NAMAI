@@ -297,11 +297,10 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             JSONObject metadata = ANCJsonFormUtils.getJSONObject(jsonForm, METADATA);
             addLastInteractedWith(fields);
             getDobStrings(fields);
-            String previousVisitsMap = null;
-            if(fields != null) {
-                previousVisitsMap = initializeFirstContactValues(fields);
-                processLocationFields(fields);
-            }
+
+            String previousVisitsMap = initializeFirstContactValues(fields);
+            processLocationFields(fields);
+
             FormTag formTag = getFormTag(allSharedPreferences);
 
             Client baseClient = org.smartregister.util.JsonFormUtils.createBaseClient(fields, formTag, entityId);
@@ -411,16 +410,19 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             }
         }
         JSONObject nextContactJSONObject = getFieldJSONObject(fields, DBConstantsUtils.KeyUtils.NEXT_CONTACT);
-        if (nextContactJSONObject.has(JsonFormConstants.VALUE) &&
-                "".equals(nextContactJSONObject.getString(JsonFormConstants.VALUE))) {
-            nextContactJSONObject.put(ANCJsonFormUtils.VALUE, nextContact);
-        }
+
+            if (nextContactJSONObject.has(JsonFormConstants.VALUE) &&
+                    "".equals(nextContactJSONObject.getString(JsonFormConstants.VALUE))) {
+                nextContactJSONObject.put(ANCJsonFormUtils.VALUE, nextContact);
+            }
+
 
         JSONObject nextContactDateJSONObject = getFieldJSONObject(fields, DBConstantsUtils.KeyUtils.NEXT_CONTACT_DATE);
-        if (nextContactDateJSONObject.has(JsonFormConstants.VALUE) &&
-                "".equals(nextContactDateJSONObject.getString(JsonFormConstants.VALUE))) {
-            nextContactDateJSONObject.put(ANCJsonFormUtils.VALUE, nextContactDate);
-        }
+            if (nextContactDateJSONObject.has(JsonFormConstants.VALUE) &&
+                    "".equals(nextContactDateJSONObject.getString(JsonFormConstants.VALUE))) {
+                nextContactDateJSONObject.put(ANCJsonFormUtils.VALUE, nextContactDate);
+            }
+
 
         return strGroup;
     }

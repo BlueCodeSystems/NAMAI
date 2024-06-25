@@ -61,6 +61,7 @@ import org.smartregister.anc.library.fragment.HomeRegisterFragment;
 import org.smartregister.anc.library.fragment.LibraryFragment;
 import org.smartregister.anc.library.fragment.MeFragment;
 import org.smartregister.anc.library.fragment.SortFilterFragment;
+import org.smartregister.anc.library.interactor.RegisterInteractor;
 import org.smartregister.anc.library.presenter.RegisterPresenter;
 import org.smartregister.anc.library.repository.PatientRepository;
 import org.smartregister.anc.library.util.ANCFormUtils;
@@ -99,6 +100,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import timber.log.Timber;
@@ -157,12 +162,18 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     public static String phone;
     String locationId =  null;
 
+    private static final long TIME_WINDOW = TimeUnit.MINUTES.toMillis(15);
+    private static volatile long lastRunTime = 0;
+    private static final AtomicBoolean canRun = new AtomicBoolean(true);
+    //private static final JSONArray transformedArray = new JSONArray();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recordBirthAlertDialog = createAlertDialog();
         createAttentionFlagsAlertDialog();
         this.context = BaseHomeRegisterActivity.this;
+        interactor = new RegisterInteractor();
         SyncStatusBroadcastReceiver.init(this);
         SyncStatusBroadcastReceiver.getInstance().addSyncStatusListener(this);
 
@@ -1282,17 +1293,33 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
                     JSONObject clientData = jsonArray.getJSONObject(i);
 
-                    String locationString = clientData.optString("facilityname", "");
+                    String locationString = clientData.optString("hmiscode", "");
+                    if (locationString.length() >= 4) {
+                        locationString = locationString.substring(0, 4);
+                    }
 
-                    //if(locationString == locationId){
+                    /*if(locationString == code){
                         JSONObject transformedData = transformKafkaData(clientData.toString());
                         transformedArray.put(transformedData);
-                        return transformedArray;
+                    Timber.d("Remote Data JSON Array: %s", transformedArray.toString(2));
+                    }*/
+
+
+
+                    //if (locationString.equals(code)) {
+                            JSONObject transformedData = transformKafkaData(clientData.toString());
+                            transformedArray.put(transformedData);
+                            try {
+                                Timber.d("Remote Data JSON Array: %s", transformedArray.toString(2));
+                            } catch (Exception e) {
+                                Timber.e(e, "Error transforming data");
+                            }
                     //}
 
                     /*JSONObject transformedData = transformKafkaData(clientData.toString());
                     transformedArray.put(transformedData);*/
                 }
+                return transformedArray;
                 /*return transformedArray;*/
 
             } catch (Exception e) {
@@ -1327,9 +1354,18 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         try {
             if (StringUtils.isBlank(locationId)) {
                 locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
-                Triple<String, String, String> triple = Triple.of("anc_register", "", locationId);
-                interactor.getNextUniqueId(triple, (RegisterContract.InteractorCallBack) this);
+                //interactor.getNextUniqueId(triple, (RegisterContract.InteractorCallBack) this);
             }
+
+
+
+            //Triple<String, String, String> triple = Triple.of("anc_register", "", locationId);
+
+            //interactor.getNextUniqueId(triple, (RegisterContract.InteractorCallBack) this);
+
+
+            //RegisterPresenter.fetchSCUniqueId(triple);
+            //String UniqueId;
 
             JSONObject kafkaData = new JSONObject(kafkaJson);
 
@@ -1369,7 +1405,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
 
             fields.put(new JSONObject().put("key", "wom_image").put("type", "choose_image").put("uploadButtonText", "Take a picture of the woman"));
-            fields.put(new JSONObject().put("key", "anc_id").put("openmrs_entity_parent", "").put("openmrs_entity", "person_identifier").put("openmrs_entity_id", "ANC_ID").put("type", "edit_text").put("read_only", "false").put("value", code + "/" + randomANCId/* + " SC+"*/));
+            fields.put(new JSONObject().put("key", "anc_id").put("openmrs_entity_parent", "").put("openmrs_entity", "person_identifier").put("openmrs_entity_id", "ANC_ID").put("type", "edit_text").put("read_only", "false").put("value", code + "/" + randomANCId + "/24"));
             fields.put(new JSONObject().put("key", "study_id").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "study_id").put("type", "edit_text").put("read_only", "false").put("hint", "Study ID").put("value", kafkaData.optString("hmiscode", "")));
             fields.put(new JSONObject().put("key", "first_name").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "first_name").put("type", "edit_text").put("hint", "First name").put("edit_type", "name").put("v_regex", new JSONObject().put("value", "[A-Za-z\\s\\.\\-]*").put("err", "Please enter a valid name")).put("v_required", new JSONObject().put("value", true).put("err", "Enter a First name")).put("value", kafkaData.optString("firstname", "")));
             fields.put(new JSONObject().put("key", "maiden_name").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "maiden_name").put("type", "edit_text").put("hint", "Maiden Name").put("edit_type", "name").put("v_regex", new JSONObject().put("value", "[A-Za-z\\s\\.\\-]*").put("err", "Please enter a valid name")).put("value", ""));
@@ -1394,8 +1430,8 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             fields.put(new JSONObject().put("key", "death_date").put("openmrs_entity_parent", "").put("openmrs_entity", "person").put("openmrs_entity_id", "death_date").put("type", "hidden").put("value", "0").put("v_required", new JSONObject().put("value", true).put("err", "Specify death date")).put("is-rule-check", true));
             fields.put(new JSONObject().put("key", "death_date_unknown").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "check_box").put("options", new JSONArray().put(new JSONObject().put("key", "death_date_unknown").put("text", "Death date unknown?").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "")).put(new JSONObject().put("key", "v_required").put("value", true).put("err", "Specify if death date is unknown"))));
             fields.put(new JSONObject().put("key", "hiv_status").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "hiv_status").put("type", "hidden").put("value", ""));
-            fields.put(new JSONObject().put("key", "next_contact").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "next_contact").put("type", "date_picker").put("hint", "Next Contact").put("value", ""));
-            fields.put(new JSONObject().put("key", "next_contact_date").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "next_contact_date").put("type", "date_picker").put("hint", "Next Contact Date").put("value", ""));
+            fields.put(new JSONObject().put("key", "next_contact").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "next_contact").put("type", "date_picker").put("hint", "Next Contact").put("value", "1"));
+            fields.put(new JSONObject().put("key", "next_contact_date").put("openmrs_entity_parent", "").put("openmrs_entity", "person_attribute").put("openmrs_entity_id", "next_contact_date").put("type", "date_picker").put("hint", "Next Contact Date").put("value", "2024-10-10"));
             fields.put(new JSONObject().put("key", "cohabitants").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "").put("type", "check_box").put("label", "cohabitants").put("options", new JSONArray().put(new JSONObject().put("key", "cohabitants").put("text", "").put("openmrs_entity_parent", "").put("openmrs_entity", "").put("openmrs_entity_id", "")).put(new JSONObject().put("key", "v_required").put("value", true).put("err", "cohabitants"))));
             fields.put(new JSONObject().put("key", "sc_id").put("openmrs_entity_parent", "").put("openmrs_entity", "person_identifier").put("openmrs_entity_id", "sc_id").put("type", "edit_text").put("hint", "SmartCare Plus ID").put("value", kafkaData.optString("clientuuid", "")));
 
@@ -1409,6 +1445,8 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             metadata.put("encounter_location", locationId);
 
             JSONObject mainData = new JSONObject();
+            mainData.put("_id",  kafkaData.optString("clientuuid", ""));
+            mainData.put("_rev", "v1");
             mainData.put("count", "1");
             mainData.put("encounter_type", "ANC Registration");
             mainData.put("entity_id", kafkaData.optString("clientuuid", ""));
@@ -1904,11 +1942,11 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
         for (String data : TotalData) {
             if (data == null || data.isEmpty()) {
                 System.out.println("Data collection is not complete");
-                return false;  // Found an empty or null element
+                return false;
             }
         }
         System.out.println("Data collection has been completed");
-        return true;  // All elements are filled with data
+        return true;
     }
 
     @Override
@@ -1925,26 +1963,16 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     public void onSyncComplete(FetchStatus fetchStatus) {
         Toast.makeText(context, "Attempting to save monthly reports data", Toast.LENGTH_SHORT).show();
         loadReports();
-        JSONObject remoteData = remoteRegister();
-        if (remoteData != null) {
-            String remoteString = remoteData.toString();
-            Timber.d("Remote Data JSON String: %s", remoteString);
-
-            if (StringUtils.isNotBlank(remoteString)) {
-                try {
-                    JSONObject remoteJson = new JSONObject(remoteString);
-                    Timber.d("Remote JSON Structure: %s", remoteJson.toString(2));
-
-                    ((RegisterContract.Presenter) presenter).saveRegistrationForm(remoteJson.toString(), false);
-                } catch (JSONException e) {
-                    Timber.e(e, "Error parsing remote JSON string.");
-                }
-            } else {
-                Timber.e("Remote data string is blank.");
-            }
+        long currentTime = System.currentTimeMillis();
+        /*if (canRun.get() && (currentTime - lastRunTime) >= TIME_WINDOW) {
+            canRun.set(false);
+            lastRunTime = currentTime;*/
+            remoteRegister();
+            /*ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+            scheduler.schedule(() -> canRun.set(true), TIME_WINDOW, TimeUnit.MILLISECONDS);
         } else {
-            Timber.e("Remote data is null.");
-        }
+            System.out.println("New users already created for window");
+        }*/
     }
 }
 
