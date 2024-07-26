@@ -45,7 +45,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -70,7 +70,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       }
@@ -88,7 +88,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       }
@@ -117,6 +117,14 @@
           "openmrs_entity_id": "165299AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
         },
         {
+          "key": "declined",
+          "text": "Declined"
+        },
+        {
+          "key": "not_available",
+          "text": "Not available"
+        },
+        {
           "key": "other",
           "text": "Other(specify)",
           "openmrs_entity_parent": "161476AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -127,12 +135,12 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -147,7 +155,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       }
@@ -163,7 +171,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "syphilis_calculation_rules.yml"
           }
         }
       }
@@ -180,19 +188,19 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "syphilis_calculation_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_syphilis_sub_form.step1.syphilis_test_date.v_required.err}}"
       }
     },
@@ -230,12 +238,12 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -264,13 +272,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       }
@@ -300,13 +308,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       }
@@ -336,13 +344,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       }
@@ -358,7 +366,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "syphilis_calculation_rules.yml"
           }
         }
       }
@@ -376,10 +384,21 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "syphilis_relevance_rules.yml"
           }
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "info"
     }
   ],
   "count": 1,

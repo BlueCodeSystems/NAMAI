@@ -62,6 +62,13 @@
           }
         },
         {
+          "column_name": "sc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.sc_id"
+          }
+        },
+        {
           "column_name": "alt_name",
           "type": "Event",
           "json_mapping": {
@@ -102,6 +109,13 @@
           "type": "Client",
           "json_mapping": {
             "field": "attributes.previous_contact_status"
+          }
+        },
+        {
+          "column_name": "sc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.sc_id"
           }
         },
         {
@@ -186,6 +200,13 @@
           "type": "Client",
           "json_mapping": {
             "field": "attributes.cohabitants"
+          }
+        },
+        {
+          "column_name": "sc_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.sc_id"
           }
         },
         {

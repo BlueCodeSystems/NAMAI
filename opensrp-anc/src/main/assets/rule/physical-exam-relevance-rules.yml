@@ -107,28 +107,28 @@ actions:
 name: step5_fetal_movement
 description: Fetal movement
 priority: 1
-condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 20)"
+condition: "(global_gest_age != '' && global_gest_age >= 20)"
 actions:
   - "isRelevant = true"
 ---
 name: step5_no_of_fetuses_label
 description: No of Fetuses Label
 priority: 1
-condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26) && (!step5_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
+condition: "(global_gest_age != '' && global_gest_age >= 26) && (!step5_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
 actions:
   - "isRelevant = true"
 ---
 name: step5_no_of_fetuses
 description: No of Fetuses
 priority: 1
-condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26) && (!step5_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
+condition: "(global_gest_age != '' && global_gest_age >= 26) && (!step5_no_of_fetuses_unknown.contains('no_of_fetuses_unknown'))"
 actions:
   - "isRelevant = true"
 ---
 name: step5_no_of_fetuses_unknown
 description: No of Fetuses unknown
 priority: 1
-condition: "(global_gest_age_openmrs != '' && global_gest_age_openmrs >= 26)"
+condition: "(global_gest_age != '' && global_gest_age >= 26)"
 actions:
   - "isRelevant = true"
 ---
@@ -149,7 +149,7 @@ actions:
 name: step5_toaster27
 description: No fetal heartbeat observed. Refer to hospital.
 priority: 1
-condition: "(step5_fetal_heartbeat == 'no' && (global_gest_age_openmrs != '' && global_gest_age_openmrs >= 20))"
+condition: "(step5_fetal_heartbeat == 'no' && (global_gest_age != '' && global_gest_age >= 20))"
 actions:
   - "isRelevant = true"
 ---
@@ -408,56 +408,56 @@ actions:
 name: step5_fetal_heartbeat
 description: Fetal heartbeat
 priority: 1
-condition: "global_gest_age_openmrs >= 26"
+condition: "global_gest_age >= 26"
 actions:
   - "isRelevant = true"
 ---
 name: step5_sfh_label
 description: SFH label
 priority: 1
-condition: "(global_gest_age_openmrs >= 20 && global_gest_age_openmrs <= 45)"
+condition: "(global_gest_age >= 20 && global_gest_age <= 45)"
 actions:
   - "isRelevant = true"
 ---
 name: step5_sfh
 description: SFH
 priority: 1
-condition: "(global_gest_age_openmrs >= 20 && global_gest_age_openmrs <= 45)"
+condition: "(global_gest_age >= 20 && global_gest_age <= 45)"
 actions:
   - "isRelevant = true"
 ---
 name: step5_hof
 description: HOF
 priority: 1
-condition: " (global_gest_age_openmrs >= 12)"
+condition: "global_gest_age > 11"
 actions:
   - "isRelevant = true"
 ---
 name: step5_hof_label
 description: HOF label
 priority: 1
-condition: "(global_gest_age_openmrs >= 12)"
+condition: "global_gest_age > 11"
 actions:
   - "isRelevant = true"
 ---
 name: step5_fetal_presentation
 description: Fetal movement
 priority: 1
-condition: "global_gest_age_openmrs >= 26"
+condition: "global_gest_age > 25"
 actions:
   - "isRelevant = true"
 ---
 name: step5_descent
 description: Descent
 priority: 1
-condition: "((global_gest_age_openmrs >= 26)&&(step5_fetal_presentation.contains('cephalic')))"
+condition: "((global_gest_age > 25)&&(step5_fetal_presentation.contains('cephalic')))"
 actions:
   - "isRelevant = true"
 ---
 name: step5_baby_lie
 description: Baby lie
 priority: 1
-condition: "(global_gest_age_openmrs >= 26)"
+condition: "global_gest_age > 25"
 actions:
   - "isRelevant = true"
 
@@ -465,7 +465,7 @@ actions:
 name: step2_toaster1
 description: toaster1
 priority: 1
-condition: "(!step2_bmi.isEmpty()) && (step2_current_weight != '')"
+condition: "(!step2_bmi.isEmpty()) && (global_gest_age < 12)"
 actions:
   - "isRelevant = true"
 
@@ -497,7 +497,7 @@ actions:
 name: step2_test_diabetes_over_ga_toaster
 description: test_diabetes_over_ga_toaster
 priority: 1
-condition: "(!step2_bmi.isEmpty()) && (step2_bmi >= 30) && (global_gest_age_openmrs >= 24)"
+condition: "(!step2_bmi.isEmpty()) && (step2_bmi >= 30) && (global_gest_age >= 24)"
 actions:
   - "isRelevant = true"
 
@@ -505,7 +505,7 @@ actions:
 name: step2_test_diabetes_under_ga_toaster
 description: test_diabetes_under_ga_toaster
 priority: 1
-condition: "(!step2_bmi.isEmpty()) && (step2_bmi >= 30) && (global_gest_age_openmrs < 24)"
+condition: "(!step2_bmi.isEmpty()) && (step2_bmi >= 30) && (global_gest_age < 24)"
 actions:
   - "isRelevant = true"
 

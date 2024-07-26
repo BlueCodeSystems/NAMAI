@@ -47,7 +47,13 @@ public class LastContactAdapter extends RecyclerView.Adapter<LastContactAdapter.
             LastContactDetailsWrapper lastContactDetails = lastContactDetailsList.get(position);
             Facts facts = lastContactDetails.getFacts();
 
-            String gestAge = facts.get(ConstantsUtils.GEST_AGE_OPENMRS);
+            String resultGA = facts.get("gest_age");
+            String gestAge = null;
+
+            if(resultGA != null && resultGA.length() > 2){
+                gestAge = resultGA.substring(0, resultGA.length() - 2);
+            }
+
             if (TextUtils.isEmpty(gestAge)) {
                 gestAge = "";
             }

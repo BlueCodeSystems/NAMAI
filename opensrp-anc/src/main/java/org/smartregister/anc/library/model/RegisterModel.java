@@ -39,7 +39,7 @@ public class RegisterModel implements RegisterContract.Model {
 
     @Override
     public String getLocationId(String locationName) {
-        return LocationHelper.getInstance().getOpenMrsLocationId(locationName);
+        return LocationHelper.getInstance().getOpenMrsLocationId(locationName).replaceAll("_", "");
     }
 
     @Override

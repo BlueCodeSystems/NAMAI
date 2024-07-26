@@ -296,7 +296,6 @@ fields:
 
   - template: "{{profile_contact_test.tb_test.tb_test_result}}: {tb_test_result}"
     relevance: "tb_test_result != '' && helper.compareDateAgainstContactDate(tb_test_date, contact_date)"
-test_results: "['tb_test_result: TB test tests results']"
 
 ---
 sub_group: other_tests_results

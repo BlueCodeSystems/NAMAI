@@ -1,42 +1,30 @@
 ---
 properties_file_name: "profile_overview"
 group: overview_of_pregnancy
-sub_group: demographic_info
+sub_group: client_details
 fields:
-  - template: "{{profile_overview.overview_of_pregnancy.demographic_info.occupation}}: {occupation_value}"
-    relevance: "occupation.contains('informal_employment_sex_worker')"
-    isRedFont: "true"
+  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.provider_name}}: {provider_name}"
+    relevance: "provider_name != ''"
 
----
-sub_group: current_pregnancy
-fields:
+  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.provider_phone_number}}: {provider_phone_number}"
+    relevance: "provider_phone_number != ''"
+
   - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.ga}}: {gest_age}"
     relevance: "gest_age != ''"
     isRedFont: "gest_age > 40"
 
+  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.ga_days}}: {gest_age_days}"
+    relevance: "gest_age_days != ''"
+
   - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.edd}}: {edd}"
     relevance: "edd != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.ultrasound_date}}: {ultrasound_date}"
-    relevance: "ultrasound_date != ''"
+  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.lmp}}: {lmp_known_date}"
+    relevance: "lmp_known_date != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.no_of_fetuses}}: {no_of_fetuses}"
-    relevance: "no_of_fetuses != ''"
-    isRedFont: "no_of_fetuses > 1"
+  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.fetal_presentation}}: {baby_lie_value}"
+    relevance: "baby_lie_value != ''"
 
-  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.fetal_presentation}}: {fetal_presentation}"
-    relevance: "fetal_presentation != ''"
-
-  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.amniotic_fluid}}: {amniotic_fluid}"
-    relevance: "amniotic_fluid != ''"
-
-  - template: "{{profile_overview.overview_of_pregnancy.current_pregnancy.placenta_location}}: {placenta_location}"
-    relevance: "placenta_location != ''"
-    isRedFont: "placenta_location.contains('Previa')"
-
----
-sub_group: obstetric_history
-fields:
   - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.gravida}}: {total_gravida}"
     relevance: "total_gravida != ''"
     isRedFont: "total_gravida >= 5"
@@ -44,42 +32,11 @@ fields:
   - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.parity}}: {parity}"
     relevance: "parity != ''"
     isRedFont: "parity >= 5"
-
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.no_of_pregnancies_lost_ended}}: {miscarriages_abortions}"
-    relevance: "miscarriages_abortions != ''"
-    isRedFont: "miscarriages_abortions > 1"
-
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.no_of_stillbirths}}: {stillbirths}"
-    relevance: "stillbirths != ''"
-    isRedFont: "stillbirths > 0"
-
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.no_of_c_sections}}: {c_sections}"
-    relevance: "c_sections != ''"
-    isRedFont: "stillbirths > 0"
-
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.past_pregnancy_problems}}: {prev_preg_comps_value}, {prev_preg_comps_other}"
-    relevance: "!prev_preg_comps.isEmpty() && (!prev_preg_comps.contains('dont_know') && !prev_preg_comps.contains('none'))"
-    isRedFont: "true"
-
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.past_pregnancy_problems}}: {prev_preg_comps_value}, {prev_preg_comps_other}"
-    relevance: "!prev_preg_comps.isEmpty() && prev_preg_comps.contains('none')"
-    isRedFont: "false"
-
-  - template: "{{profile_overview.overview_of_pregnancy.obstetric_history.past_substances_used}}: {substances_used_value},{substances_used_other}"
-    relevance: "(!substances_used.contains('none') && !substances_used.isEmpty())"
-    isRedFont: "true"
-
 ---
-sub_group: medical_history
+sub_group: past_medical_history
 fields:
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.blood_type}}: {blood_type_value}"
-    relevance: "blood_type != ''"
-
-  - template: "{{profile_overview.overview_of_pregnancy.medical_history.allergies}}: {allergies_value}"
-    relevance: "allergies != ''"
-
   - template: "{{profile_overview.overview_of_pregnancy.medical_history.surgeries}}: {surgeries_value}"
-    relevance: "surgeries_value != ''"
+    relevance: "surgeries_value != '' && !surgeries_value.contains('None')"
 
   - template: "{{profile_overview.overview_of_pregnancy.medical_history.chronic_health_conditions}}: {health_conditions_value}"
     relevance: "!health_conditions.isEmpty() && !health_conditions.contains('none') && !health_conditions.contains('dont_know')"
@@ -89,14 +46,14 @@ fields:
     isRedFont: "true"
 
 ---
-sub_group: weight
+sub_group: body_mass_index
 fields:
   - template: "{{profile_overview.overview_of_pregnancy.weight.bmi}}: {bmi}"
-    relevance: "bmi != ''"
+    relevance: "bmi > 1"
     isRedFont: "bmi < 18.5 || bmi >= 25"
 
   - template: "{{profile_overview.overview_of_pregnancy.weight.weight_category}}: {weight_cat}"
-    relevance: "weight_cat !=''"
+    relevance: "weight_cat > 1 && weight_cat.contains('Underweight') || weight_cat.contains('Overweight') || weight_cat.contains('Obese')"
     isRedFont: "weight_cat.contains('Underweight') || weight_cat.contains('Overweight') || weight_cat.contains('Obese')"
 
   - template: "{{profile_overview.overview_of_pregnancy.weight.expected_weight_gain_during_the_pregnancy}}: {exp_weight_gain} kg"
@@ -106,10 +63,10 @@ fields:
     relevance: "tot_weight_gain != ''"
 
 ---
-sub_group: medications
+sub_group: treatment
 fields:
   - template: "{{profile_overview.overview_of_pregnancy.medications.current_medications}}: {medications_value}"
-    relevance: "medications_value != ''"
+    relevance: "medications_value != '' && !medications_value.contains('None')"
 
   - template: "{{profile_overview.overview_of_pregnancy.medications.medications_prescribed}}: {medications_prescribed}"
     relevance: "medications_prescribed !='' "
@@ -135,72 +92,8 @@ fields:
   - template: "{{profile_overview.overview_of_pregnancy.medications.penicillin_compliance}}: {penicillin_comply}"
     relevance: "penicillin_comply != ''"
 ---
-group: hospital_referral_reasons
+sub_group: vitals
 fields:
-  - template: "{{profile_overview.hospital_referral_reasons.woman_referred_to_hospital}}"
-    relevance: "emergency_referal == 'Yes'"
-
-  - template: "Referral feedback: {referral_feedback}"
-    relevance: "referral_feedback != ''"
-
-  - template: "{{profile_overview.hospital_referral_reasons.woman_not_referred_to_hospital}}: {referred_hosp_notdone}"
-    relevance: "emergency_referal == 'No'"
-    isRedFont: "true"
-
-  - template: "Referral reason: {referal_reason}"
-    relevance: "!referal_reason.isEmpty()"
-
-  - template: "Other reason: {other_reason}"
-    relevance: "!other_reason.isEmpty()"
-
-  - template: "Pre-existing: {pre_existing_medic_value}"
-    relevance: "!pre_existing_medic.isEmpty()"
-
-  - template: "Other complications: {other_complications_value}"
-    relevance: "!other_complications.isEmpty()"
-
-  - template: "Specific diagnosis: {diagnostics_specify_value}"
-    relevance: "!diagnostics_specify.isEmpty()"
-
-  - template: "Treatment : {treatment}"
-    relevance: "!treatment.isEmpty()"
-
-  - template: "Receiving: {receiving}"
-    relevance: "!receiving.isEmpty()"
-
-  - template: "Provider Name: {provider_name}"
-    relevance: "emergency_referal.contains('yes')"
-
-  - template: "Provider phone number: {provider_phone_number}"
-    relevance: "!provider_phone_number.isEmpty()"
-
-  - template: "Referral notes: {referral_notes}"
-    relevance: "!referral_notes.isEmpty()"
-
-  - template: "Date of referral: {date_referral}"
-    relevance: "!date_referral.isEmpty()"
-
-  - template: "Date scheduled: {date_scheduled}"
-    relevance: "!date_scheduled.isEmpty()"
-
-  - template: "{{profile_overview.hospital_referral_reasons.danger_signs}}: {danger_signs_value}"
-    relevance: "!danger_signs.contains('danger_none') && !danger_signs.isEmpty()"
-
-  - template: "{{profile_overview.hospital_referral_reasons.other_signs}}: {other_ds}"
-    relevance: "!danger_signs.contains('danger_none') && other_ds != ''"
-
-  - template: "{{profile_overview.hospital_referral_reasons.severe_hypertension}}: {bp_systolic_repeat}/{bp_diastolic_repeat} mmHg"
-    relevance: "severe_hypertension == 1 && global_contact_no == 1"
-
-  - template: "{{profile_overview.hospital_referral_reasons.hypertension_and_symptom_of_severe_pre_eclampsia}}: {symp_sev_preeclampsia_value}"
-    relevance: "hypertension == 1 && symp_sev_preeclampsia_value != '' && symp_sev_preeclampsia_value != 'none'"
-
-  - template: "{{profile_overview.hospital_referral_reasons.pre_eclampsia_diagnosis}}"
-    relevance: "preeclampsia == 1 && global_contact_no == 1"
-
-  - template: "{{profile_overview.hospital_referral_reasons.severe_pre_eclampsia_diagnosis}}"
-    relevance: "severe_preeclampsia == 1 && global_contact_no == 1"
-
   - template: "{{profile_overview.hospital_referral_reasons.fever}}: {body_temp_repeat}ºC"
     relevance: "body_temp_repeat >= 38"
     isRedFont: "true"
@@ -211,22 +104,6 @@ fields:
   - template: "{{profile_overview.hospital_referral_reasons.respiratory_distress}}: {respiratory_exam_abnormal_value}"
     relevance: "respiratory_exam_abnormal != ''"
 
-  - template: "{{profile_overview.hospital_referral_reasons.low_oximetry}}: {oximetry}%"
-    relevance: "oximetry < 92"
-    isRedFont: "true"
-
-  - template: "{{profile_overview.hospital_referral_reasons.abnormal_cardiac_exam}}: {cardiac_exam_abnormal_value}"
-    relevance: "!cardiac_exam_abnormal.contains('none')"
-
-  - template: "{{profile_overview.hospital_referral_reasons.abnormal_breast_exam}}: {breast_exam_abnormal_value}"
-    relevance: "!breast_exam_abnormal.contains('none')"
-
-  - template: "{{profile_overview.hospital_referral_reasons.abnormal_abdominal_exam}}: {abdominal_exam_abnormal_value}"
-    relevance: "!abdominal_exam_abnormal.contains('none')"
-
-  - template: "{{profile_overview.hospital_referral_reasons.abnormal_pelvic_exam}}: {pelvic_exam_abnormal_value}"
-    relevance: "!pelvic_exam_abnormal.contains('none')"
-
   - template: "{{profile_overview.hospital_referral_reasons.no_fetal_heartbeat_observed}}"
     relevance: "fetal_heartbeat == 'No'"
     isRedFont: "true"
@@ -235,44 +112,8 @@ fields:
     relevance: "fetal_heart_rate_repeat < 100 || fetal_heart_rate_repeat > 180"
 
 ---
-group: risk_and_diagnoses
+sub_group: laboratory_results
 fields:
-  - template: "High daily consumption of caffeine: {caffeine_intake_value}"
-    relevance: "caffeine_intake != '' && !caffeine_intake.contains('none')"
-    isRedFont: "true"
-
-  - template: "Tobacco user or recently quit: {tobacco_user}"
-    relevance: "tobacco_user != '' && tobacco_user != 'no'"
-    isRedFont: "true"
-
-  - template: "Second-hand exposure to tobacco smoke: {shs_exposure}"
-    relevance: "shs_exposure == 'yes'"
-    isRedFont: "true"
-
-  - template: "Woman and her partner(s) do not use condoms: {condom_use}"
-    relevance: "condom_use == 'no'"
-    isRedFont: "true"
-
-  - template: "Alcohol / substances currently using: {alcohol_substance_use_value}, {other_substance_use_value}"
-    relevance: "!alcohol_substance_use.isEmpty() && !alcohol_substance_use.contains('none')"
-    isRedFont: "true"
-
-  - template: "Reduced or no fetal movement perceived by woman: {mat_percept_fetal_move}"
-    relevance: "mat_percept_fetal_move != '' && mat_percept_fetal_move != 'normal_fetal_move'"
-    isRedFont: "true"
-
-  - template: "Pre-eclampsia risk: {preeclampsia_risk}"
-    relevance: "preeclampsia_risk == 1"
-    isRedFont: "true"
-
-  - template: "HIV risk: {date}"
-    relevance: "hiv_risk == 1"
-    isRedFont: "true"
-
-  - template: "Diabetes risk: {date} "
-    relevance: "gdm_risk == 1"
-    isRedFont: "true"
-
   - template: "Hypertension: {date}"
     relevance: "hypertension == 1"
     isRedFont: "true"
@@ -281,28 +122,12 @@ fields:
     relevance: "severe_hypertension == 1"
     isRedFont: "true"
 
-  - template: "Pre-eclampsia: {date}"
-    relevance: "preeclampsia == 1"
-    isRedFont: "true"
-
-  - template: "Severe pre-eclampsia: {date}"
-    relevance: "severe_preeclampsia == 1"
-    isRedFont: "true"
-
-  - template: "Rh factor negative: {date}: {date}"
-    relevance: "rh_factor == 'negative'"
-    isRedFont: "true"
-
   - template: "HIV positive: {date}"
     relevance: "hiv_positive == 1"
     isRedFont: "true"
 
   - template: "Hepatitis B positive: {date}"
     relevance: "hepb_positive == 1"
-    isRedFont: "true"
-
-  - template: "Hepatitis C positive: {date}"
-    relevance: "hepc_positive == 1"
     isRedFont: "true"
 
   - template: "Syphilis positive: {date}"
@@ -333,68 +158,11 @@ fields:
     relevance: "tb_screening_result == 'positive'"
     isRedFont: "true"
 
-
 ---
-group: physiological_symptoms
+sub_group: symptoms
 fields:
   - template: "{{profile_overview.physiological_symptoms.physiological_symptoms}}: {phys_symptoms_value}"
-    relevance: "phys_symptoms_value != ''"
+    relevance: "phys_symptoms_value != '' && !phys_symptoms_value.contains('None')"
   - template: "Persisting physiological symptoms: {phys_symptoms_persist_value}"
     relevance: "phys_symptoms_persist != ''"
     isRedFont: "true"
-
----
-group: birth_plan_counselling
-fields:
-  - template: "{{profile_overview.birth_plan_counseling.planned_birth_place}}: {delivery_place_value}"
-    relevance: "delivery_place != ''"
-
-  - template: "{{profile_overview.birth_plan_counseling.fp_method_accepted}}: {family_planning_type_value}"
-    relevance: "family_planning_type_value != ''"
-
----
-group: malaria_prophylaxis
-fields:
-  - template: "{{profile_overview.malaria_prophylaxis.iptp_sp_dose_1}}: {date}"
-    relevance: "iptp_sp1 == 'Done'"
-
-  - template: "{{profile_overview.malaria_prophylaxis.iptp_sp_dose_2}}: {date}"
-    relevance: "iptp_sp2 == 'Done'"
-
-  - template: "{{profile_overview.malaria_prophylaxis.iptp_sp_dose_3}}: {date}"
-    relevance: "iptp_sp3 == 'Done'"
-
----
-group: immunisation_status
-fields:
-  - template: "{{profile_overview.immunisation_status.tt_immunisation_status}}: {tt_immun_status_value}"
-    relevance: "tt_immun_status_value != ''"
-    isRedFont: "tt_immun_status == 'ttcv_not_received' || tt_immun_status == 'unknown'"
-
-  - template: "{{profile_overview.immunisation_status.tt_immunisation_number}}: {underimmunized_doses}"
-    relevance: "underimmunized_doses != '' && tt1_date == 'not_done' || tt2_date == 'not_done'"
-
-  - template: "Number of TTVC doses: {tt1_dose_no}"
-    relevance: "tt1_dose_no != ''"
-
-  - template: "Protection status: Fully Protected"
-    relevance: "tt_immun_status == '3_doses' || tt1_dose_no == '4'"
-
-  - template: "Protection status: Unprotected"
-    relevance: "underimmunized_doses < '2' && tt_immun_status != ''"
-
-  - template: "Protection status: Protected"
-    relevance: "underimmunized_doses > '1' && tt_immun_status != ''"
-
-  - template: "{{profile_overview.immunisation_status.tt_dose_1}}: {tt1_date_value}"
-    relevance: "tt1_date == 'done_today' || tt1_date == 'done_earlier'"
-
-  - template: "{{profile_overview.immunisation_status.tt_dose_2}}: {tt2_date_value}"
-    relevance: "tt2_date == 'done_today' || tt2_date == 'done_earlier'"
-
-  - template: "{{profile_overview.immunisation_status.flu_immunisation_status}}: {flu_immun_status_value}"
-    relevance: "flu_immun_status != ''"
-    isRedFont: "flu_immun_status == 'seasonal_flu_dose_missing' || flu_immun_status == 'unknown'"
-
-  - template: "{{profile_overview.immunisation_status.flu_dose}}: {flu_date_value}"
-    relevance: "flu_date == 'done_today' || flu_date == 'done_earlier'"

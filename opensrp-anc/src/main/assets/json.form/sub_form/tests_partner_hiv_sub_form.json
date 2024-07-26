@@ -146,7 +146,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "hiv_calculation_rules.yml"
           }
         }
       }
@@ -163,19 +163,19 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hiv_relevance_rules.yml"
           }
         }
       },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "hiv_calculation_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Partner HIV test date required"
       }
     },
@@ -211,13 +211,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "{{tests_partner_hiv_sub_form.step1.hiv_test_partner_result.v_required.err}}"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hiv_relevance_rules.yml"
           }
         }
       }
@@ -231,7 +231,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "hiv_calculation_rules.yml"
           }
         }
       }
@@ -260,7 +260,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "hiv_calculation_rules.yml"
           }
         }
       }
@@ -278,10 +278,21 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hiv_relevance_rules.yml"
           }
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "info"
     }
   ],
   "count": 1,

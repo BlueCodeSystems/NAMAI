@@ -222,6 +222,8 @@ public class HomeRegisterFragment extends BaseRegisterFragment implements Regist
             Timber.i("Total Register Count %d", clientAdapter.getTotalcount());
             clientAdapter.setCurrentlimit(20);
             clientAdapter.setCurrentoffset(0);
+            //BaseRegisterFragment.onSyncComplete
+            //BaseHomeRegisterActivity.loadReports();
         } catch (Exception e) {
             Timber.e(e);
         }

@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Hepatitis B test is required"
       }
     },
@@ -88,13 +88,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Hepatitis B test not done reason is required"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       }
@@ -110,7 +110,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       }
@@ -126,7 +126,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "hepatitis_b_calculation_rules.yml"
           }
         }
       }
@@ -143,19 +143,19 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "hepatitis_b_calculation_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Hep B test date is required"
       }
     },
@@ -193,12 +193,12 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Hep B test type is required"
       }
     },
@@ -227,13 +227,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "BsAg laboratory-based immunoassay is required"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       }
@@ -263,13 +263,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "HBsAg rapid diagnostic test is required"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       }
@@ -299,13 +299,13 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "(DBS) HBsAg test is required"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       }
@@ -321,7 +321,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "hepatitis_b_calculation_rules.yml"
           }
         }
       }
@@ -339,7 +339,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       }
@@ -355,10 +355,21 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "hepatitis_b_relevance_rules.yml"
           }
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "info"
     }
   ],
   "count": 1,

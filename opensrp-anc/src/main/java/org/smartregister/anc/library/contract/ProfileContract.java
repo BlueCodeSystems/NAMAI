@@ -40,7 +40,7 @@ public interface ProfileContract {
 
         void setProfileAge(String age);
 
-        void setProfileGestationAge(String gestationAge);
+        void setProfileGestationAge(String gestationAge, String gest_age_days_profile);
 
         void setProfileImage(String baseEntityId);
 

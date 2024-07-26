@@ -25,7 +25,7 @@ jacoco {
 // This variables are used by the version code & name generators
 ext.versionMajor = 1
 ext.versionMinor = 0
-ext.versionPatch = 0
+ext.versionPatch = 6
 ext.versionClassifier =
         ext.isSnapshot = false
 ext.minimumSdkVersion = androidMinSdkVersion
@@ -106,6 +106,13 @@ android {
                 buildConfigField "String", "FLURRY_API_KEY", "\"sample_key\""
             }
 
+            if (properties != null && properties.containsKey("textit.api.key")) {
+                buildConfigField "String", "TEXTIT_API_KEY", properties["textit.api.key"]
+            } else {
+                println("Textit API key config variables is not set in your local.properties")
+                buildConfigField "String", "TEXTIT_API_KEY", "\"sample_key\""
+            }
+
             if (properties != null && properties.containsKey("oauth.client.id")) {
                 buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id"]
 
@@ -143,7 +150,7 @@ android {
             minifyEnabled false
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
-            resValue "string", 'opensrp_url', '"https://opensrp.ecap.bluecodeltd.com/opensrp/"'
+            resValue "string", 'opensrp_url', '"https://opensrp.namai.bluecodeltd.com/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -159,7 +166,7 @@ android {
         }
 
         debug {
-            resValue "string", 'opensrp_url', '"https://opensrp.ecap.bluecodeltd.com/opensrp/"'
+            resValue "string", 'opensrp_url', '"https://opensrp.namai.bluecodeltd.com/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -279,7 +286,7 @@ android {
  */
 private Integer generateVersionCode() {
     //return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch This bit will be activated after we are sure of the clients minimum sdk version.
-    return ext.versionMajor * 10005 + ext.versionMinor * 100 + ext.versionPatch
+    return ext.versionMajor * 10045 + ext.versionMinor * 100 + ext.versionPatch
 }
 
 /**
@@ -288,7 +295,7 @@ private Integer generateVersionCode() {
  * @return version name
  */
 private String generateVersionName() {
-    String versionName = "namai_anc_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"+"-beta9"
+    String versionName = "namai_zm_"+"${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
     if (ext.versionClassifier == null && ext.isSnapshot) {
         ext.versionClassifier = "SNAPSHOT"
     }
@@ -364,8 +371,11 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife:10.2.3'
     implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
     implementation 'commons-validator:commons-validator:1.7'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.2.0'
     implementation 'com.google.guava:guava:30.0-jre'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -384,8 +394,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'org.jeasy:easy-rules-core:3.3.0'
     implementation 'org.jeasy:easy-rules-mvel:3.3.0'
-    implementation 'com.flurry.android:analytics:11.6.0@aar'
-    implementation 'com.flurry.android:analytics:11.6.0@aar'
+    implementation 'com.flurry.android:analytics:14.0.0@aar'
+    implementation 'com.flurry.android:analytics:14.0.0@aar'
     implementation 'androidx.multidex:multidex:2.0.1'
 // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:28.3.1')

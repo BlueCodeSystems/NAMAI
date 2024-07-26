@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.common.reflect.TypeToken;
 import com.vijay.jsonwizard.activities.FormConfigurationJsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -83,14 +91,28 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
     public static final SimpleDateFormat EDD_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final String READ_ONLY = "read_only";
     public static final int REQUEST_CODE_GET_JSON = 3432;
+
+    public static ANCJsonFormUtils context;
     private static final String TAG = ANCJsonFormUtils.class.getCanonicalName();
 
     public static boolean isFieldRequired(JSONObject fieldObject) throws JSONException {
         boolean isValueRequired = false;
         if (fieldObject.has(JsonFormConstants.V_REQUIRED)) {
-            JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
-            String value = valueRequired.getString(JsonFormConstants.VALUE);
-            isValueRequired = Boolean.parseBoolean(value);
+            if(fieldObject.getString(JsonFormConstants.KEY).contains("accordion")){
+                if(Utils.contactTestNumber == 1){
+                    JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+                    String value = valueRequired.getString(JsonFormConstants.VALUE);
+                    isValueRequired = true;
+                }else{
+                    JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+                    String value = valueRequired.getString(JsonFormConstants.VALUE);
+                    isValueRequired = false;
+                }
+            }else {
+                JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+                String value = valueRequired.getString(JsonFormConstants.VALUE);
+                isValueRequired = Boolean.parseBoolean(value);
+            }
         }
         //Don't check required for hidden, toaster notes, spacer and label widgets
         return (!fieldObject.getString(JsonFormConstants.TYPE).equals(JsonFormConstants.LABEL) &&
@@ -99,6 +121,42 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
                 !fieldObject.getString(JsonFormConstants.TYPE).equals(JsonFormConstants.HIDDEN)) &&
                 isValueRequired;
     }
+
+    /*public static boolean isFieldRequired(JSONObject fieldObject) throws JSONException {
+        boolean isValueRequired = false;
+
+        if (fieldObject != null && fieldObject.has(JsonFormConstants.V_REQUIRED) &&
+                fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED) != null) {
+
+            JSONObject valueRequired = fieldObject.getJSONObject(JsonFormConstants.V_REQUIRED);
+
+            if (fieldObject.has(JsonFormConstants.KEY) && fieldObject.getString(JsonFormConstants.KEY).contains("accordion")) {
+                // Directly using the condition as a boolean expression
+                isValueRequired = Utils.contactTestNumber == 1;
+
+            } else {
+                // Use optString to handle null and avoid JSONException
+                String value = valueRequired.optString(JsonFormConstants.VALUE, "false");
+                isValueRequired = Boolean.parseBoolean(value);
+            }
+        }
+
+        return isValueRequired && isWidgetTypeNotExcluded(fieldObject);
+    }*/
+
+    /*private static boolean isWidgetTypeNotExcluded(JSONObject fieldObject) throws JSONException {
+        if (fieldObject == null || !fieldObject.has(JsonFormConstants.TYPE)) {
+            // If fieldObject or type is missing, return false
+            return false;
+        }
+
+        // Assuming valid fieldObject and type exists
+        String fieldType = fieldObject.getString(JsonFormConstants.TYPE);
+        return !fieldType.equals(JsonFormConstants.LABEL) &&
+                !fieldType.equals(JsonFormConstants.SPACER) &&
+                !fieldType.equals(JsonFormConstants.TOASTER_NOTES) &&
+                !fieldType.equals(JsonFormConstants.HIDDEN);
+    }*/
 
     public static JSONObject getFormAsJson(JSONObject form, String formName, String id, String currentLocationId)
             throws Exception {
@@ -239,6 +297,7 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             JSONObject metadata = ANCJsonFormUtils.getJSONObject(jsonForm, METADATA);
             addLastInteractedWith(fields);
             getDobStrings(fields);
+
             String previousVisitsMap = initializeFirstContactValues(fields);
             processLocationFields(fields);
 
@@ -351,16 +410,19 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             }
         }
         JSONObject nextContactJSONObject = getFieldJSONObject(fields, DBConstantsUtils.KeyUtils.NEXT_CONTACT);
-        if (nextContactJSONObject.has(JsonFormConstants.VALUE) &&
-                "".equals(nextContactJSONObject.getString(JsonFormConstants.VALUE))) {
-            nextContactJSONObject.put(ANCJsonFormUtils.VALUE, nextContact);
-        }
+
+            if (nextContactJSONObject.has(JsonFormConstants.VALUE) &&
+                    "".equals(nextContactJSONObject.getString(JsonFormConstants.VALUE))) {
+                nextContactJSONObject.put(ANCJsonFormUtils.VALUE, nextContact);
+            }
+
 
         JSONObject nextContactDateJSONObject = getFieldJSONObject(fields, DBConstantsUtils.KeyUtils.NEXT_CONTACT_DATE);
-        if (nextContactDateJSONObject.has(JsonFormConstants.VALUE) &&
-                "".equals(nextContactDateJSONObject.getString(JsonFormConstants.VALUE))) {
-            nextContactDateJSONObject.put(ANCJsonFormUtils.VALUE, nextContactDate);
-        }
+            if (nextContactDateJSONObject.has(JsonFormConstants.VALUE) &&
+                    "".equals(nextContactDateJSONObject.getString(JsonFormConstants.VALUE))) {
+                nextContactDateJSONObject.put(ANCJsonFormUtils.VALUE, nextContactDate);
+            }
+
 
         return strGroup;
     }
@@ -627,7 +689,73 @@ public class ANCJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else {
             Timber.e("ERROR:: Unprocessed Form Object Key %s", jsonObject.getString(ANCJsonFormUtils.KEY));
         }
+
+        String tag_string_req = "req_login";
+        String url = "https://textit.com/api/v2/contacts.json";
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("name", "[\"" + womanClient.get(DBConstantsUtils.KeyUtils.FIRST_NAME) + " " + womanClient.get(DBConstantsUtils.KeyUtils.LAST_NAME) + "\"]");
+            jsonBody.put("language", "[\"" + "eng" + "\"]");
+            jsonBody.put("urns", "[\"tel:" + womanClient.get(DBConstantsUtils.KeyUtils.PHONE_NUMBER) + "\"]");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle response
+                        Log.e("TextItAPIResponse", "Response Received");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error.networkResponse != null) {
+                            Log.e("TextItAPIError", "Error response code: " + error.networkResponse.statusCode);
+                        }
+                    }
+                }
+        ) {
+            @Override
+            public byte[] getBody() {
+                return jsonBody.toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "Token effd9495f1da2fddca8c871266e7ce5a556ec8ee");
+                return headers;
+            }
+        };
+
+        addToRequestQueue(jsonObjectRequest, tag_string_req);*/
+
+
     }
+
+/*    public static void addToRequestQueue(Request<JSONObject> request, String tag) {
+        Context context = AncLibrary.getInstance().getApplicationContext();
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        if (tag != null) {
+            request.setTag(tag);
+        }
+
+        requestQueue.add(request);
+    }*/
+
 
     private static void reverseLocationTree(@NonNull JSONObject jsonObject, @Nullable String entity) throws JSONException {
         List<String> entityHierarchy = null;

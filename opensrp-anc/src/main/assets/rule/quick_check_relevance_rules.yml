@@ -124,6 +124,14 @@ actions:
   - "isRelevant = true"
 
 ---
+name: step1_provider_phone_number
+description: provider_phone_number
+priority: 1
+condition: "step1_emergency_referal.contains('yes')"
+actions:
+  - "isRelevant = true"
+
+---
 name: step1_miscarriage_label
 description: miscarriage_label
 priority: 1

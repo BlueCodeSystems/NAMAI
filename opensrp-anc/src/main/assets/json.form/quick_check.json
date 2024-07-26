@@ -1,5 +1,5 @@
 {
-  "validate_on_submit": false,
+  "validate_on_submit": true,
   "display_scroll_bars": true,
   "count": "1",
   "encounter_type": "Rapid Assessment and Management",
@@ -65,7 +65,7 @@
         "value": "today",
         "hint": "Contact Date",
         "expanded": false,
-        "min_date": "today-20y",
+        "min_date": "today-49y",
         "max_date": "today",
         "v_required": {
           "value": "true",
@@ -993,7 +993,18 @@
         "openmrs_entity_id": "provider_name",
         "type": "edit_text",
         "hint": "Name of Provider",
+        "value": "",
         "edit_type": "name",
+        "read_only": "true"
+      },
+      {
+        "key": "provider_phone_number",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "provider_phone_number",
+        "type": "edit_text",
+        "hint": "Phone number of Provider",
+        "value": "",
         "read_only": "true"
       },
       {
@@ -1002,33 +1013,6 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "register_id",
         "type": "hidden"
-      },
-      {
-        "key": "provider_phone_number",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "provider_phone_number",
-        "type": "edit_text",
-        "hint": "Providers phone number",
-        "v_numeric": {
-          "value": "true",
-          "err": "Enter number"
-        },
-        "v_regex": {
-          "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
-          "err": "Number must start with 097|096|095|077|076 and must have be 10 digits in length"
-        },
-        "relevance": {
-          "step1:emergency_referal": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "yes"
-                ]
-              }
-            ]
-          }
-        }
       },
       {
         "key": "referral_notes",

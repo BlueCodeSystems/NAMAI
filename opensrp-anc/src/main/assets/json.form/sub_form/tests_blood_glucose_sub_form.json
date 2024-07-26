@@ -45,7 +45,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -89,7 +89,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please select an option"
       },
       "relevance": {
@@ -130,7 +130,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       }
@@ -147,19 +147,19 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Select the date of the glucose test"
       }
     },
@@ -197,12 +197,12 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -214,26 +214,18 @@
       "type": "edit_text",
       "hint": "Fasting plasma glucose results (mmol/l)",
       "edit_type": "number",
-      "v_min": {
-        "value": "3.5",
-        "err": "Fasting plasma glucose results must be greater than or equal to 3.5"
-      },
-      "v_max": {
-        "value": "6.5",
-        "err": "Fasting plasma glucose results must be less than or equal to 6.5"
-      },
       "v_numeric": {
         "value": "true",
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the fasting plasma glucose test"
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -246,26 +238,18 @@
       "type": "edit_text",
       "hint": "75g OGTT - fasting glucose results (mmol/l)",
       "edit_type": "number",
-      "v_min": {
-        "value": "0",
-        "err": "75g OGTT - fasting glucose results must be greater than or equal to 30"
-      },
-      "v_max": {
-        "value": "30",
-        "err": "75g OGTT - fasting glucose results must be less than or equal to 500"
-      },
       "v_numeric": {
         "value": "true",
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the initial 75g OGTT - fasting glucose."
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -278,26 +262,18 @@
       "type": "edit_text",
       "hint": "1 hr results (mmol/l)",
       "edit_type": "number",
-      "v_min": {
-        "value": "0",
-        "err": "The result for the 75g OGTT - 1 hr must be greater than or equal to 30"
-      },
-      "v_max": {
-        "value": "30",
-        "err": "The result for the 75g OGTT - 1 hr must be less than or equal to 500"
-      },
       "v_numeric": {
         "value": "true",
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the 75g OGTT - fasting glucose (1 hr)."
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -310,26 +286,18 @@
       "type": "edit_text",
       "hint": "2 hr results (mmol/l)",
       "edit_type": "number",
-      "v_min": {
-        "value": "0",
-        "err": "The result for the 75g OGTT - 2 hr must be greater than or equal to 0"
-      },
-      "v_max": {
-        "value": "30",
-        "err": "The result for the 75g OGTT - 2 hr must be less than or equal to 30"
-      },
       "v_numeric": {
         "value": "true",
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the 75g OGTT - fasting glucose (2 hr)."
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -342,26 +310,18 @@
       "type": "edit_text",
       "hint": "Random plasma glucose results (mmol/l)",
       "edit_type": "number",
-      "v_min": {
-        "value": "3.5",
-        "err": "The result for the random plasma glucose test must be greater than or equal to 3.5"
-      },
-      "v_max": {
-        "value": "10",
-        "err": "The result for the random plasma glucose test must be less than or equal to 10"
-      },
       "v_numeric": {
         "value": "true",
         "err": "Enter a numeric value"
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Enter the result for the random plasma glucose test."
       },
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -377,7 +337,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       }
@@ -393,7 +353,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "blood_glucose_calculation_rules.yml"
           }
         }
       }
@@ -411,7 +371,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -429,7 +389,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
@@ -446,10 +406,21 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "blood_glucose_relevance_rules.yml"
           }
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "info"
     }
   ],
   "count": 1,

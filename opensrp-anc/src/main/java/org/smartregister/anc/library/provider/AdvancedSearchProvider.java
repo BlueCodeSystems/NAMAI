@@ -176,14 +176,18 @@ public class AdvancedSearchProvider implements RecyclerViewProvider<AdvancedSear
         {
             if(Utils.getGestationAgeFromEDDate(edd) <= 40) {
                 fillValue(viewHolder.ga, String.format(context.getString(R.string.ga_text), Utils.getGestationAgeFromEDDate(edd)));
+                fillValue((viewHolder.ga_days),
+                        String.format(context.getString(R.string.ga_days_text), Utils.getGestationDaysFromEDDate(edd)));
             }
             else
             {
                 fillValue(viewHolder.ga,"");
+                fillValue(viewHolder.ga_days, "");
             }
         }
         else
             fillValue(viewHolder.ga,"");
+        fillValue(viewHolder.ga_days, "");
 
 
         fillValue(viewHolder.patientName, WordUtils.capitalize(patientName));
@@ -249,6 +253,7 @@ public class AdvancedSearchProvider implements RecyclerViewProvider<AdvancedSear
         public TextView patientName;
         public TextView age;
         public TextView ga;
+        public TextView ga_days;
         public TextView ancId;
         public TextView risk;
 
@@ -264,6 +269,7 @@ public class AdvancedSearchProvider implements RecyclerViewProvider<AdvancedSear
             patientName = itemView.findViewById(R.id.patient_name);
             age = itemView.findViewById(R.id.age);
             ga = itemView.findViewById(R.id.ga);
+            ga_days = itemView.findViewById(R.id.ga_days);
             ancId = itemView.findViewById(R.id.anc_id);
             risk = itemView.findViewById(R.id.risk);
             profile = itemView.findViewById(R.id.profile);

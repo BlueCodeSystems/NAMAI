@@ -44,7 +44,7 @@
         }
       ],
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "TB screening status is required"
       }
     },
@@ -67,7 +67,7 @@
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "tb_test_calculation_rules.yml"
           }
         }
       }
@@ -84,19 +84,19 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "tb_test_relevance_rules.yml"
           }
         }
       },
       "calculation": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_calculation_rules.yml"
+            "rules-file": "tb_test_calculation_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Please record the date TB screening was done"
       }
     },
@@ -127,12 +127,12 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "tb_test_relevance_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -174,7 +174,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "please enter value"
       }
     },
@@ -240,12 +240,12 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "tb_test_relevance_rules.yml"
           }
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Reason why tb screen was not done is required"
       }
     },
@@ -260,7 +260,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "tb_test_relevance_rules.yml"
           }
         }
       }
@@ -296,7 +296,7 @@
         }
       },
       "v_required": {
-        "value": true,
+        "value": false,
         "err": "Tb screen result is required"
       }
     },
@@ -313,7 +313,7 @@
       "relevance": {
         "rules-engine": {
           "ex-rules": {
-            "rules-file": "tests_relevance_rules.yml"
+            "rules-file": "tb_test_relevance_rules.yml"
           }
         }
       }
@@ -351,6 +351,17 @@
           "ex": "equalTo(., \"mtb_resistant\")"
         }
       }
+    },
+    {
+      "key": "back_data_toaster",
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_entity_id": "",
+      "type": "toaster_notes",
+      "text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_text": "Use 'Done earlier' and match date to date used under 'Contact Date'!",
+      "toaster_info_title": "Use correct date for tests!",
+      "toaster_type": "info"
     }
   ],
   "count": 1,

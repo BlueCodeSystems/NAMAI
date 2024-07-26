@@ -68,13 +68,9 @@
         "openmrs_entity": "person_identifier",
         "openmrs_entity_id": "ANC_ID",
         "type": "edit_text",
-        "read_only": "true",
+        "read_only": "false",
         "hint": "{{anc_register.step1.anc_id.hint}}",
-        "value": "0",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.anc_id.v_required.err}}"
-        }
+        "value": "0"
       },
       {
         "key": "study_id",
@@ -82,7 +78,7 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "study_id",
         "type": "edit_text",
-        "read_only": "true",
+        "read_only": "false",
         "hint": "Study ID"
       },
 
@@ -94,13 +90,13 @@
         "type": "edit_text",
         "hint": "{{anc_register.step1.first_name.hint}}",
         "edit_type": "name",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.first_name.v_required.err}}"
-        },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "{{anc_register.step1.first_name.v_regex.err}}"
+        },
+        "v_required": {
+          "value": true,
+          "err": "Enter a First name"
         }
       },
       {
@@ -111,10 +107,6 @@
         "type": "edit_text",
         "hint": "Maiden Name",
         "edit_type": "name",
-        "v_required": {
-          "value": "false",
-          "err": "Please enter the Maiden Name"
-        },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "Please enter a valid name"
@@ -128,13 +120,13 @@
         "type": "edit_text",
         "hint": "{{anc_register.step1.last_name.hint}}",
         "edit_type": "name",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.last_name.v_required.err}}"
-        },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "{{anc_register.step1.last_name.v_regex.err}}"
+        },
+        "v_required": {
+          "value": true,
+          "err": "Enter a Last name"
         }
       },
       {
@@ -144,10 +136,6 @@
         "openmrs_entity_id": "nrc",
         "type": "edit_text",
         "hint": "{{anc_register.step1.nrc.hint}}",
-        "v_required": {
-          "value": "false",
-          "err": "{{anc_register.step1.nrc.v_required.err}}"
-        },
         "v_regex": {
           "value": "([0-9]{6}/[0-9]{2}/[0-9])|\\s*",
           "err": "Number must take the format of ######/##/#"
@@ -196,10 +184,6 @@
         },
         "min_date": "today-100y",
         "max_date": "today-10y",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.dob_entered.v_required.err}}"
-        },
         "relevance": {
           "step1:dob_unknown": {
             "ex-checkbox": [
@@ -210,6 +194,10 @@
               }
             ]
           }
+        },
+        "v_required": {
+          "value": true,
+          "err": "Specify Age"
         }
       },
       {
@@ -291,8 +279,8 @@
           }
         },
         "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.age_entered.v_required.err}}"
+          "value": true,
+          "err": "Enter the Woman Age"
         }
       },
       {
@@ -339,10 +327,7 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "tertiary"
           }
-        ],
-        "v_required": {
-          "value": false
-        }
+        ]
       },
       {
         "key": "marital_status",
@@ -394,10 +379,7 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "widowed"
           }
-        ],
-        "v_required": {
-          "value": false
-        }
+        ]
       },
       {
         "key": "occupation",
@@ -435,19 +417,8 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "informal_employment_other"
-          },
-          {
-            "key": "other",
-            "text": "Other",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "other"
           }
         ],
-        "v_required": {
-          "value": true,
-          "err": "please state occupation"
-        },
         "relevance": {
           "step1:educ_level": {
             "type": "string",
@@ -484,65 +455,13 @@
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "informal_employment_other_redacted"
-          },
-          {
-            "key": "other_redacted",
-            "text": "Other",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "other_redacted"
           }
         ],
-        "v_required": {
-          "value": false
-        },
         "relevance": {
           "step1:educ_level": {
             "type": "string",
             "ex": "equalTo(.,\"none\")"
           }
-        }
-      },
-      {
-        "key": "occupation_other",
-        "openmrs_entity_parent": "occupation_other",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "occupation_other",
-        "type": "edit_text",
-        "hint": "Other",
-        "edit_type": "name",
-        "relevance": {
-          "step1:occupation": {
-            "type": "string",
-            "ex": "equalTo(., \"other\")"
-          }
-        },
-        "v_required": {
-          "value": false
-        },
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*"
-        }
-      },
-      {
-        "key": "occupation_other_redacted",
-        "openmrs_entity_parent": "occupation_other_redacted",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "occupation_other_redacted",
-        "type": "edit_text",
-        "hint": "Other",
-        "edit_type": "name",
-        "relevance": {
-          "step1:occupation_redacted": {
-            "type": "string",
-            "ex": "equalTo(., \"other_redacted\")"
-          }
-        },
-        "v_required": {
-          "value": false
-        },
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*"
         }
       },
       {
@@ -568,11 +487,7 @@
             "openmrs_entity": "",
             "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
-        ],
-        "v_required": {
-          "value": false,
-          "err": "{{anc_register.step1.reminders.v_required.err}}"
-        }
+        ]
       },
       {
         "key": "home_address",
@@ -581,11 +496,7 @@
         "openmrs_entity_id": "address2",
         "type": "edit_text",
         "hint": "{{anc_register.step1.home_address.hint}}",
-        "edit_type": "name",
-        "v_required": {
-          "value": "true",
-          "err": "{{anc_register.step1.home_address.v_required.err}}"
-        }
+        "edit_type": "name"
       },
       {
         "key": "landmark",
@@ -594,11 +505,7 @@
         "openmrs_entity_id": "landmark",
         "type": "edit_text",
         "hint": "Landmark",
-        "edit_type": "name",
-        "v_required": {
-          "value": "false",
-          "err": "Please a enter a Landmark"
-        }
+        "edit_type": "name"
       },
       {
         "key": "phone_number",
@@ -611,42 +518,9 @@
           "value": "true",
           "err": "{{anc_register.step1.phone_number.v_numeric.err}}"
         },
-        "v_required": {
-          "value": "false",
-          "err": "{{anc_register.step1.phone_number.v_required.err}}"
-        },
         "v_regex": {
           "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
           "err": "Number must must be a total of 10 digits in length"
-        }
-      },
-      {
-        "key": "reminders",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "163164AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_register.step1.reminders.label}}",
-        "label_info_text": "{{anc_register.step1.reminders.label_info_text}}",
-        "label_text_style": "normal",
-        "text_color": "#000000",
-        "options": [
-          {
-            "key": "yes",
-            "text": "{{anc_register.step1.reminders.options.yes.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "no",
-            "text": "{{anc_register.step1.reminders.options.no.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{anc_register.step1.reminders.v_required.err}}"
         }
       },
       {
@@ -769,7 +643,7 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "cohabitants",
         "openmrs_data_type": "select multiple",
-        "label": "Co-habitants",
+        "label": "Person(s) the client lives with",
         "label_info_text": "Who does the client live with? It is important to know whether client lives with parents, other family members, a partner, friends, etc.",
         "type": "check_box",
         "exclusive": [
@@ -868,11 +742,39 @@
             "text": "Outside catchment area",
             "text_color": "#000000"
           }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "Please select origin"
+        ]
+      },
+      {
+        "key": "sc_id",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "sc_id",
+        "type": "edit_text",
+        "read_only": "false",
+        "hint": "Enter the client's SmartCare Plus ID",
+        "value": "",
+        "v_regex": {
+          "value": "[0-9A-Za-z\\s\\.\\-\\/]*",
+          "err": "{{anc_register.step1.alt_name.v_regex.err}}"
         }
+      },
+      {
+        "key": "consent_given",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "consent_given",
+        "type": "check_box",
+        "options": [
+          {
+            "key": "consent_given_true",
+            "text": "Consent given?",
+            "text_size": "18px",
+            "value": "true",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
+        ]
       },
       {
         "key": "next_contact",

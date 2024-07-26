@@ -47,9 +47,6 @@ fields:
   - template: "{{contact_summary.hospital_referral.provider_name}}: {provider_name}"
     relevance: "emergency_referal.contains('yes')"
 
-  - template: "{{contact_summary.hospital_referral.provider_phone_number}}: {provider_phone_number}"
-    relevance: "!provider_phone_number.isEmpty()"
-
   - template: "{{contact_summary.hospital_referral.treatment}}: {referral_notes}"
     relevance: "!referral_notes.isEmpty()"
 
@@ -113,17 +110,23 @@ fields:
   - template: "{{contact_summary.demographic_info.occupation}}: {occupation_value}"
     relevance: "occupation_value != ''"
 
-  - template: "{{contact_summary.demographic_info.discordant}}: {discordant_out}"
+  - template: "{{contact_summary.demographic_info.discordant}}: {discordant_set}"
     relevance: "discordant_set != ''"
 
 ---
 group: current_pregnancy
 fields:
   - template: "{{contact_summary.current_pregnancy.ga}}: {gest_age}"
-    relevance: "gest_age !='' "
+    relevance: "gest_age !=''"
+
+  - template: "{{contact_summary.current_pregnancy.ga_days}}: {gest_age_days}"
+    relevance: "gest_age_days !=''"
 
   - template: "{{contact_summary.current_pregnancy.edd}}: {edd}"
-    relevance: "edd != '' "
+    relevance: "edd != ''"
+
+  - template: "{{contact_summary.current_pregnancy.lmp}}: {lmp_known_date}"
+    relevance: "lmp_known_date != ''"
 
   - template: "{{contact_summary.current_pregnancy.ultrasound_date}}: {ultrasound_date}"
     relevance: "ultrasound_date != ''"
@@ -131,8 +134,8 @@ fields:
   - template: "{{contact_summary.current_pregnancy.no_of_fetuses}}: {no_of_fetuses}"
     relevance: "no_of_fetuses != ''"
 
-  - template: "{{contact_summary.current_pregnancy.fetal_presentation}}: {fetal_presentation_value}"
-    relevance: "fetal_presentation != ''"
+  - template: "{{contact_summary.current_pregnancy.fetal_presentation}}: {baby_lie_value}"
+    relevance: "baby_lie_value != ''"
 
   - template: "{{contact_summary.current_pregnancy.amniotic_fluid}}: {amniotic_fluid_value}"
     relevance: "amniotic_fluid != ''"
@@ -245,7 +248,7 @@ fields:
 group: medications
 fields:
 
-  - template: "{{contact_summary.medications.current_medications}}: {medications_value}"
+  - template: "{{contact_summary.medications.current_medications}}: {medications}"
     relevance: "!medications_value.isEmpty()"
 
   - template: "{{contact_summary.medications.medications_prescribed}}: {vita_supp_value}, {mag_calc_value}, {nausea_pharma_value}, {antacid_value}, {penicillin_value}, {antibiotic_value}, {prep_value}, {iptp_sp1}, {ifa_value}, {ifa_medication_value}, {aspirin_comply_value}, {calcium}, {mebendazole}, {fansidar}, {co_trimoxazole}"
@@ -421,10 +424,10 @@ fields:
     relevance: "first_weight != ''"
 
   - template: "{{contact_summary.height_and_weight.bmi}} = {bmi}"
-    relevance: "bmi != ''"
+    relevance: "bmi != '' && bmi > 1"
 
   - template: "{{contact_summary.height_and_weight.weight_category}}: {weight_cat}"
-    relevance: "weight_cat !=''"
+    relevance: "weight_cat !='' && bmi > 1"
 
   - template: "{{contact_summary.height_and_weight.weight_gain_during_pregnancy}}: {exp_weight_gain}"
     relevance: "exp_weight_gain != ''"
@@ -433,7 +436,7 @@ fields:
     relevance: "current_weight != ''"
 
   - template: "{{contact_summary.height_and_weight.weight_gain_per_last_contact}}: {weight_gain} kg"
-    relevance: "weight_gain != ''"
+    relevance: "weight_gain != '' && weight_gain > 1"
 
   - template: "{{contact_summary.height_and_weight.total_weight_pregnancy}}: {tot_weight_gain} kg"
     relevance: "tot_weight_gain != ''"
@@ -567,10 +570,10 @@ fields:
   - template: "{{contact_summary.maternal_exam.sfh}}: {sfh} cm"
     relevance: "sfh != ''"
 
-  - template: "{{contact_summary.maternal_exam.fetal_movement_felt}}: {fetal_movement}"
+  - template: "{{contact_summary.maternal_exam.fetal_movement_felt}}: {fetal_movement_value}"
     relevance: "fetal_movement != ''"
 
-  - template: "{{contact_summary.maternal_exam.fetal_heartbeat_present}}: {fetal_heartbeat}"
+  - template: "{{contact_summary.maternal_exam.fetal_heartbeat_present}}: {fetal_heartbeat_value}"
     relevance: "fetal_heartbeat != ''"
 
   - template: "{{contact_summary.maternal_exam.fetal_heart_rate}}: {fetal_heart_rate} bpm"

@@ -69,7 +69,7 @@
         "min_date": "today-20y",
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify date of contact"
         }
       },
@@ -112,7 +112,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         }
       },
@@ -363,7 +363,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.specific_complaint.v_required.err}}"
         },
         "relevance": {
@@ -524,7 +524,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.danger_signs.v_required.err}}"
         },
         "relevance": {
@@ -583,7 +583,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -663,7 +663,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -795,7 +795,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -883,7 +883,7 @@
           }
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{anc_quick_check.step1.contact_reason.v_required.err}}"
         },
         "relevance": {
@@ -1009,26 +1009,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "provider_phone_number",
         "type": "edit_text",
-        "hint": "Providers phone number",
-        "v_numeric": {
-          "value": "true",
-          "err": "Enter number"
-        },
-        "v_regex": {
-          "value": "(0([9]{1}[5-7]{1}|[7]{1}[6/7]{1})[0-9]{7})|s*",
-          "err": "Number must start with 097|096|095|077|076 and must have be 10 digits in length"
-        },
-        "relevance": {
-          "step1:emergency_referal": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "yes"
-                ]
-              }
-            ]
-          }
-        }
+        "hint": "Providers phone number"
       },
       {
         "key": "referral_notes",
@@ -1081,7 +1062,7 @@
         "min_date": "today-20y",
         "max_date": "today",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify date of referral"
         },
         "relevance": {
@@ -1108,7 +1089,7 @@
         "min_date": "today-5y",
         "max_date": "today+5y",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please specify date of schedule"
         },
         "relevance": {
@@ -1196,7 +1177,7 @@
         "text": "No. of live births",
         "text_color": "#000000",
         "v_required": {
-          "value": true
+          "value": false
         },
         "relevance": {
           "rules-engine": {
@@ -1249,7 +1230,7 @@
         "text": "No. of Still  births",
         "text_color": "#000000",
         "v_required": {
-          "value": true
+          "value": false
         },
         "relevance": {
           "rules-engine": {
@@ -1302,7 +1283,7 @@
         "text": " No. of Miscarriages",
         "text_color": "#000000",
         "v_required": {
-          "value": true
+          "value": false
         },
         "relevance": {
           "rules-engine": {

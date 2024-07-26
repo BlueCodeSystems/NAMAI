@@ -102,11 +102,13 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
     public static Boolean symTimed = false;
     public static Instant startProfile;
     public static Instant startSymptoms;
+    public static int contactTestNumber;
     public static Instant startPhysical;
     public static Instant startTests;
     public static Instant startCounselling;
     public String gest_age_ref_yes;
     public int routineCount = 0;
+    public static Contact checkRAM;
 
     @Override
     protected void onResume() {
@@ -279,6 +281,8 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         Contact contact5 = contacts.get(4);
         Contact contact6 = contacts.get(5);
 
+        checkRAM = contacts.get(0);
+
         if (contact1.getRequiredFields() == null) {
             requiredFields.setVisibility(View.GONE);
             completeLayout.setVisibility(View.GONE);
@@ -333,8 +337,14 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
         }
 
         if (contact5.getRequiredFields() == null) {
-            requiredFields5.setVisibility(View.GONE);
-            completeLayout5.setVisibility(View.GONE);
+            if(contactNo != 1) {
+                contact5.setRequiredFields(0);
+                completeLayout5.setVisibility(View.VISIBLE);
+                requiredFields5.setVisibility(View.GONE);
+            }else {
+                requiredFields5.setVisibility(View.GONE);
+                completeLayout5.setVisibility(View.GONE);
+            }
         } else if (contact5.getRequiredFields() == 0) {
             Utils.testsTime(contact5);
             completeLayout5.setVisibility(View.VISIBLE);
@@ -441,6 +451,10 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
             presenter.startForm(contacts.get(4));
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 startTests = Instant.now();
+                contactTestNumber = contactNo;
+                //JSONObject form = Utils.testForm(contacts.get(4));
+                //JSONObject contactTest = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_tests");
+                //contactTest.put(JsonFormUtils.VALUE, contactTestNumber);
             }
         }else if (i == R.id.counselling){
             presenter.startForm(contacts.get(5));
@@ -879,10 +893,15 @@ public class MainContactActivity extends BaseContactActivity implements ContactC
                 String mapValue = getMapValue(defaultKey);
 
                 if (mapValue != null) {
-                    fieldObject.put(JsonFormConstants.VALUE, mapValue);
-                    fieldObject.put(JsonFormConstants.EDITABLE, editableFields.contains(defaultKey));
-                    fieldObject.put(JsonFormConstants.READ_ONLY, editableFields.contains(defaultKey));
-                }
+                    if(defaultKey.contains("initial_sfh") || defaultKey.contains("date_sfh_recorded") || defaultKey.contains("dating_chosen") || defaultKey.contains("discordant_set")) {
+                        fieldObject.put(JsonFormConstants.VALUE, mapValue);
+                        fieldObject.put(JsonFormConstants.EDITABLE, editableFields.contains(defaultKey));
+                    } else{
+                            fieldObject.put(JsonFormConstants.VALUE, mapValue);
+                            fieldObject.put(JsonFormConstants.EDITABLE, editableFields.contains(defaultKey));
+                            fieldObject.put(JsonFormConstants.READ_ONLY, editableFields.contains(defaultKey));
+                        }
+                    }
 
             }
 

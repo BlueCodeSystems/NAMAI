@@ -123,7 +123,9 @@ public class ANCJsonFormFragmentPresenter extends JsonFormFragmentPresenter {
         for (Location location : locations) {
 
             codes.put(location.getId());
-            String locationName = Utils.getLocationLocalizedName(location, jsonFormView);
+            String semiLocationName = Utils.getLocationLocalizedName(location, jsonFormView);
+
+            String locationName = semiLocationName.replaceAll("_", "");
 
             values.put(locationName);
         }

@@ -1,5 +1,5 @@
 {
-  "validate_on_submit": false,
+  "validate_on_submit": true,
   "display_scroll_bars": true,
   "skip_blank_steps": true,
   "count": "4",
@@ -804,7 +804,7 @@
       {
         "key": "toaster3",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "Counseling regarding condom",
+        "openmrs_entity": "Counselling regarding condom",
         "openmrs_entity_id": "161594",
         "type": "toaster_notes",
         "text": "{{anc_symptoms_follow_up.step2.toaster3.text}}",

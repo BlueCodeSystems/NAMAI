@@ -485,14 +485,14 @@
         "label_text_style": "bold",
         "options": [
           {
-            "key": "yes",
+            "key": "done",
             "text": "{{anc_counselling_treatment.step1.referred_hosp.options.yes.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
             "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           },
           {
-            "key": "no",
+            "key": "not_done",
             "text": "{{anc_counselling_treatment.step1.referred_hosp.options.no.text}}",
             "openmrs_entity_parent": "",
             "openmrs_entity": "concept",
@@ -553,7 +553,7 @@
             "ex-checkbox": [
               {
                 "or": [
-                  "no"
+                  "not_done"
                 ]
               }
             ]
@@ -576,13 +576,32 @@
         }
       },
       {
-        "key": "danger_signs_ref_toaster_one",
+        "key": "treatment",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "toaster_notes",
-        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive therapy and Treatment section.",
-        "toaster_type": "problem",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "treatment",
+        "type": "native_radio",
+        "label": "Any treatment given before referral",
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "yes"
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": "no"
+          }
+        ],
+        "v_required": {
+          "value": "false",
+          "err": "Please fill in"
+        },
         "relevance": {
           "step1:referred_hosp": {
             "ex-checkbox": [
@@ -596,10 +615,169 @@
         }
       },
       {
+        "key": "treatment_specify",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "treatment_specify",
+        "type": "edit_text",
+        "hint": "Specify treatment given",
+        "edit_type": "edit_text",
+        "v_required": {
+          "value": false,
+          "err": "Specify treatment given"
+        },
+        "relevance": {
+          "step1:treatment": {
+            "type": "string",
+            "ex": "equalTo(., \"yes\")"
+          }
+        }
+      },
+      {
+        "key": "receiving",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "receiving",
+        "type": "edit_text",
+        "hint": "Receiving Facility",
+        "edit_type": "name",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "referral_notes",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "referral_notes",
+        "type": "edit_text",
+        "hint": "Referral notes",
+        "edit_type": "name",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "referral_feedback",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "referral_feedback",
+        "type": "edit_text",
+        "hint": "Referral feedback",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "date_referral",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "date_referral",
+        "type": "date_picker",
+        "value": "today",
+        "hint": "Date referral was made",
+        "expanded": false,
+        "min_date": "today-20y",
+        "max_date": "today",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify date of referral"
+        },
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "date_scheduled",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "date_scheduled",
+        "type": "date_picker",
+        "value": "today",
+        "hint": "Date of scheduled referral",
+        "expanded": false,
+        "min_date": "today-5y",
+        "max_date": "today+5y",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify date of schedule"
+        },
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "yes"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "key": "danger_signs_ref_toaster_one",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "",
+        "type": "toaster_notes",
+        "text": "Remember to return to Rapid Assessment and Management and fill in the referral form when you are done filling in the Counselling, Preventive therapy and Treatment section.",
+        "toaster_type": "problem",
+        "relevance": {
+          "step1:referred_hosp": {
+            "ex-checkbox": [
+              {
+                "or": [
+                  "done"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
         "key": "time_counselling",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "time_counselling",
+        "type": "hidden"
+      },
+      {
+        "key": "contact_time",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "contact_time",
         "type": "hidden"
       }
     ]
@@ -3330,9 +3508,12 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "159758AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
+        "type": "check_box",
         "label": "{{anc_counselling_treatment.step7.delivery_place.label}}",
         "label_text_style": "bold",
+        "exclusive": [
+          "facility"
+        ],
         "options": [
           {
             "key": "facility",
@@ -5087,6 +5268,11 @@
             "value": false
           },
           {
+            "key": "not_due",
+            "text": "Not yet due",
+            "value": false
+          },
+          {
             "key": "other",
             "text": "Other (specify)",
             "value": false
@@ -5184,25 +5370,6 @@
         }
       },
       {
-        "key": "other_reason_co_trimoxazole_no",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "other_reason_mebendazole_no",
-        "type": "edit_text",
-        "hint": "Other reason(Specify)",
-        "edit_type": "name",
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*",
-          "err": " can only contain letters"
-        },
-        "relevance": {
-          "step10:reason_co_trimoxazole_no": {
-            "type": "string",
-            "ex": "equalTo(., \"other\")"
-          }
-        }
-      },
-      {
         "key": "mebendazole",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -5218,6 +5385,36 @@
           {
             "key": "no",
             "text": "No"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "mebendazole_subsequent_contacts",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "mebendazole_subsequent_contacts",
+        "type": "native_radio",
+        "label": "Deworming (Mebendazole 500mg PO Stat)",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "mebendazole",
+            "text": "Yes"
+          },
+          {
+            "key": "no",
+            "text": "No"
+          },
+          {
+            "key": "already",
+            "text": "Already received"
           }
         ],
         "relevance": {
@@ -5253,6 +5450,11 @@
             "value": false
           },
           {
+            "key": "not_due",
+            "text": "Not yet due",
+            "value": false
+          },
+          {
             "key": "other",
             "text": "Other (specify)",
             "value": false
@@ -5275,6 +5477,63 @@
         "edit_type": "name",
         "relevance": {
           "step10:reason_mebendazole_no": {
+            "type": "string",
+            "ex": "equalTo(., \"other\")"
+          }
+        }
+      },
+      {
+        "key": "reason_mebendazole_no_subsequent",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "reason_mebendazole_no_subsequent",
+        "openmrs_data_type": "select one",
+        "type": "native_radio",
+        "label": "Reasons no mebendazole",
+        "label_text_style": "bold",
+        "hint": "Reasons no mebendazole",
+        "exclusive": [
+          "none"
+        ],
+        "options": [
+          {
+            "key": "expired",
+            "text": "Expired",
+            "value": false
+          },
+          {
+            "key": "out_of_stock",
+            "text": "Out of stock",
+            "value": false
+          },
+          {
+            "key": "not_due",
+            "text": "Not yet due",
+            "value": false
+          },
+          {
+            "key": "other",
+            "text": "Other (specify)",
+            "value": false
+          }
+        ],
+        "relevance": {
+          "step10:mebendazole_subsequent_contacts": {
+            "type": "string",
+            "ex": "equalTo(., \"no\")"
+          }
+        }
+      },
+      {
+        "key": "other_reason_mebendazole_no_subsequent",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "other_reason_mebendazole_no_subsequent",
+        "type": "edit_text",
+        "hint": "Other reason(Specify)",
+        "edit_type": "name",
+        "relevance": {
+          "step10:reason_mebendazole_no_subsequent": {
             "type": "string",
             "ex": "equalTo(., \"other\")"
           }
@@ -5825,6 +6084,38 @@
         }
       },
       {
+        "key": "inh_prophylaxis",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "",
+        "type": "native_radio",
+        "label": "INH Prophylaxis?",
+        "label_text_style": "bold",
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity_parent": "",
+            "openmrs_entity": "concept",
+            "openmrs_entity_id": ""
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "ct_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "started_art",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
@@ -6061,7 +6352,7 @@
             "ex-checkbox": [
               {
                 "or": [
-                  "yes"
+                  "done"
                 ]
               }
             ]

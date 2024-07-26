@@ -42,6 +42,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.jeasy.rules.api.Facts;
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.Weeks;
 import org.joda.time.format.DateTimeFormat;
@@ -117,7 +118,11 @@ public class Utils extends org.smartregister.util.Utils {
     public static Instant startRam = null;
     public static String baseEntityId;
     public static String refIDstring;
-    static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+    public static String locationId = AncLibrary.getInstance().getContext().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
+
+    public static String adjContactDate;
+
+    public static int contactTestNumber;
 
     static ContactModel baseContactModel = new ContactModel();
 
@@ -236,6 +241,7 @@ public class Utils extends org.smartregister.util.Utils {
             PartialContact partialContactRequest = new PartialContact();
             partialContactRequest.setBaseEntityId(baseEntityId);
             partialContactRequest.setContactNo(quickCheck.getContactNumber());
+            contactTestNumber = quickCheck.getContactNumber();
             partialContactRequest.setType(quickCheck.getFormName());
 
             JSONObject form = baseContactModel.getFormAsJson(quickCheck.getFormName(), baseEntityId, locationId);
@@ -250,11 +256,16 @@ public class Utils extends org.smartregister.util.Utils {
             if(form.optString("encounter_type").equals("Rapid Assessment and Management")){
                 JSONObject ccname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_name");
                 JSONObject smNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"register_id");
-                //JSONObject phnNumber = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
+                JSONObject phnNumber = JsonFormUtils.getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"provider_phone_number");
+                String dbname = BaseHomeRegisterActivity.getName();
+                String phone = BaseHomeRegisterActivity.getPhone();
+                ccname.put(JsonFormUtils.VALUE, dbname);
+                phnNumber.put(JsonFormUtils.VALUE, phone);
+
                 smNumber.put(JsonFormUtils.VALUE, personObjectClient.get("register_id"));
                 refIDstring = personObjectClient.get("register_id");
                 //phnNumber.put(JsonFormUtils.VALUE, personObjectClient.get("phone_number"));
-                ccname.put(JsonFormUtils.VALUE, name);
+                //ccname.put(JsonFormUtils.VALUE, name);
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     startRam = Instant.now();
@@ -351,8 +362,13 @@ public class Utils extends org.smartregister.util.Utils {
                     Duration timeElapsedCounselling = Duration.between(MainContactActivity.startCounselling, endCounselling);
 
                     JSONObject durCou = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_counselling");
+                    JSONObject fullContact = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_time");
 
                     durCou.put(JsonFormUtils.VALUE, timeElapsedCounselling.toString());
+
+                    Duration totalContactTime = Duration.between(Utils.startRam, endCounselling);
+
+                    fullContact.put(JsonFormUtils.VALUE, totalContactTime.toString());
 
                     MainContactActivity.couTimed = true;
                     System.out.println("Time taken: " + timeElapsedCounselling.toMillis() + " milliseconds");
@@ -373,6 +389,10 @@ public class Utils extends org.smartregister.util.Utils {
 
                     JSONObject durTes = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "time_tests");
 
+                    //JSONObject contactTest = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "contact_tests");
+
+                    //contactTest.put(JsonFormUtils.VALUE, contactTestNumber);
+
                     durTes.put(JsonFormUtils.VALUE, timeElapsedTests.toString());
 
                     MainContactActivity.tesTimed = true;
@@ -381,6 +401,10 @@ public class Utils extends org.smartregister.util.Utils {
             }
         }
     }
+/*    public static JSONObject testForm(Contact contact5) throws Exception {
+        JSONObject form = baseContactModel.getFormAsJson(contact5.getFormName(), baseEntityId, locationId);
+        return form;
+    }*/
 
     public static void symptomsTime(Contact contact3) throws Exception {
         if(MainContactActivity.symTimed==false)
@@ -641,6 +665,24 @@ public class Utils extends org.smartregister.util.Utils {
         }
     }
 
+    public static int getGestationDaysFromEDDate(String expectedDeliveryDate) {
+        try {
+            if (!"0".equals(expectedDeliveryDate) && expectedDeliveryDate.length() > 0) {
+                LocalDate expectedDate = SQLITE_DATE_DF.parseLocalDate(expectedDeliveryDate);
+                LocalDate lmpDate = expectedDate.minusWeeks(ConstantsUtils.DELIVERY_DATE_WEEKS);
+
+                Weeks weeks = Weeks.weeksBetween(lmpDate, LocalDate.now());
+                int totalDays = weeks.getWeeks() * 7 + Days.daysBetween(lmpDate.plusWeeks(weeks.getWeeks()), LocalDate.now()).getDays();
+                return totalDays % 7;
+            } else {
+                return 0;
+            }
+        } catch (IllegalArgumentException e) {
+            Timber.e(e, " --> getGestationDaysFromEDDate");
+            return 0;
+        }
+    }
+
     public static String reverseHyphenSeperatedValues(String rawString, String outputSeparator) {
         if (StringUtils.isNotBlank(rawString)) {
             String resultString = rawString;
@@ -651,6 +693,7 @@ public class Utils extends org.smartregister.util.Utils {
         }
         return "";
     }
+
 
     private static String getDisplayTemplate(Context context, String alertStatus,
                                              boolean isProfile) {
@@ -747,9 +790,9 @@ public class Utils extends org.smartregister.util.Utils {
                         dueButton.setBackground(context.getResources().getDrawable(R.drawable.contact_disabled));
                         dueButton.setBackground(context.getResources().getDrawable(R.drawable.contact_disabled));
                         dueButton.setTextColor(context.getResources().getColor(R.color.dark_grey));
-                        dueButton.setText(String.format(context.getString(R.string.contact_recorded_today_no_break),
-                                Utils.getTodayContact(String.valueOf(buttonAlertStatus.nextContact))));
-                        break;
+//                        dueButton.setText(String.format(context.getString(R.string.contact_recorded_today_no_break),
+//                                Utils.getTodayContact(String.valueOf(buttonAlertStatus.nextContact))));
+//                        break;
                     default:
                         dueButton.setBackground(context.getResources().getDrawable(R.drawable.contact_due));
                         dueButton.setTextColor(context.getResources().getColor(R.color.vaccine_blue_bg_st));
@@ -1021,6 +1064,8 @@ public class Utils extends org.smartregister.util.Utils {
 
             String contactDate = jsonSingleVisitObject.optString(ConstantsUtils.JsonFormKeyUtils.VISIT_DATE);
 
+            adjContactDate = contactDate;
+
             Facts entries = new Facts();
 
             entries.put(ConstantsUtils.CONTACT_DATE, contactDate);
@@ -1217,7 +1262,7 @@ public class Utils extends org.smartregister.util.Utils {
         layoutDocument.add(new Paragraph(headerDetails).setHorizontalAlignment(horizontalAlignment));
     }
 
-    private final String getAppPath(Context context) {
+    public static final String getAppPath(Context context) {
         File dir = new File(Environment.getExternalStorageDirectory()+ File.separator + context.getResources().getString(R.string.app_name) + File.separator);
         if (!dir.exists()) {
             dir.mkdir();
@@ -1324,7 +1369,7 @@ public class Utils extends org.smartregister.util.Utils {
 
         int identifier = jsonFormView.getResources().getIdentifier(id, ConstantsUtils.IdentifierUtils.STRING_IDENTIFIEER,
                 jsonFormView.getApplicationContext().getPackageName());
-        String locationName = location.getProperties().getName();
+        String locationName = location.getProperties().getName().replaceAll("_", "");
         if (identifier != 0) {
             locationName = jsonFormView.getResources().getString(identifier);
         }
