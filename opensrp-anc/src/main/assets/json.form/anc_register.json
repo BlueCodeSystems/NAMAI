@@ -524,31 +524,6 @@
         }
       },
       {
-        "key": "reminders",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "163164AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "native_radio",
-        "label": "{{anc_register.step1.reminders.label}}",
-        "label_info_text": "{{anc_register.step1.reminders.label_info_text}}",
-        "label_text_style": "normal",
-        "text_color": "#000000",
-        "options": [
-          {
-            "key": "yes",
-            "text": "{{anc_register.step1.reminders.options.yes.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "no",
-            "text": "{{anc_register.step1.reminders.options.no.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        ]
-      },
-      {
         "key": "alt_name",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",

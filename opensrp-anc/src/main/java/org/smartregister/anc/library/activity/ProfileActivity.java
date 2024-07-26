@@ -177,6 +177,9 @@ public class ProfileActivity extends BaseProfileActivity implements ProfileContr
             JSONArray urnsArray = new JSONArray();
             urnsArray.put("tel:" + "+26" + phoneNumber);
             jsonBody.put("urns", urnsArray);
+            JSONArray groupsArray = new JSONArray();
+            groupsArray.put("3ad12a51-bf7f-4cac-ab2e-79871d8527f8");
+            jsonBody.put("groups", groupsArray);
 
             /*JSONObject fields = new JSONObject();
             fields.put("day_of_next_appointment", nextContactDate);

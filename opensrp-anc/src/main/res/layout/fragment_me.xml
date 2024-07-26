@@ -567,6 +567,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/register_search_bar_margin"
                     android:text="@string/data_synced"
+                    android:visibility="gone"
+                    android:textColor="@color/dark_grey_text"
+                    android:textSize="@dimen/login_build_text_view_textSize"
+                    android:typeface="sans" />
+
+                <TextView
+                    android:id="@+id/synced_data_manual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/register_search_bar_margin"
+                    android:text="Data synced: "
                     android:textColor="@color/dark_grey_text"
                     android:textSize="@dimen/login_build_text_view_textSize"
                     android:typeface="sans" />

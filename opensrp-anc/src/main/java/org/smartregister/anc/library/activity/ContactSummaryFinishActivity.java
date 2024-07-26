@@ -1,18 +1,26 @@
 package org.smartregister.anc.library.activity;
 
+import static org.smartregister.anc.library.activity.BaseHomeRegisterActivity.context;
 import static org.smartregister.utils.PropertiesConverter.gson;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,10 +60,15 @@ import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import timber.log.Timber;
 
@@ -85,10 +98,16 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
     private String firstName;
     private String lastName;
     private String nextContactNo;
+
     private String nextContactDate;
+    private String nextContactDateEdited;
+    private String contactDoneDate;
     private String lastContactDate;
     private String diastolicBloodPressure;
     private String systolicBloodPressure;
+    private String lmpedd;
+    private String gest;
+    private String contactDate;
     private String medications;
     private String danger_signs;
     private String expectedDueDate;
@@ -264,6 +283,86 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
         super.onResume();
         /*if(isPermissionGranted())
         {*/
+
+        Context context = this;
+
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.set_next_contact, null);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(view);
+
+        Button yes = view.findViewById(R.id.save_date);
+        EditText NextDate = view.findViewById(R.id.add_next_contact);
+
+
+        final AlertDialog dialog = builder.create();
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams param = window.getAttributes();
+            param.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+            window.setAttributes(param);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        }
+
+        yes.setOnClickListener(v -> {
+            String next_value = NextDate.getText().toString();
+            if (next_value != null) {
+                nextContactDateEdited = next_value;
+                JSONObject jsonBody = new JSONObject();
+                try {
+
+                    jsonBody.put("name", firstName + " " + lastName);
+                    jsonBody.put("language", "eng");
+                    JSONArray urnsArray = new JSONArray();
+                    urnsArray.put("tel:" + "+26" + phoneNumber);
+                    jsonBody.put("urns", urnsArray);
+
+                    JSONArray groupsArray = new JSONArray();
+                    groupsArray.put("3ad12a51-bf7f-4cac-ab2e-79871d8527f8");
+                    jsonBody.put("groups", groupsArray);
+
+                    JSONObject fields = new JSONObject();
+                    fields.put("day_of_next_appointment", nextContactDate);
+                    fields.put("next_contact_text", nextContactDateEdited);
+                    if(nextContactNo.contains("0")||nextContactNo.contains("1")||nextContactNo.contains("2")||nextContactNo.contains("3")) {
+                        fields.put("first_antenatal_appointment", contactDate);
+                    }
+                    fields.put("next_antenatal_appointment", (nextContactNo + 1));
+
+                    if(!nextContactNo.contains("0") && !nextContactNo.contains("1")){
+                        fields.put("after_antenatal_appointment", (contactDate + 1));
+                    }
+
+                    fields.put("blood_pressure", (systolicBloodPressure + "/" + diastolicBloodPressure));
+                    fields.put("danger_signs", danger_signs);
+                    fields.put("medicines", medications);
+
+                    String edd = "12-12-2024";
+
+                    if(lmpedd != null){
+                        edd = lmpedd;
+                    }
+                    fields.put("post_due_date", (edd));
+                    fields.put("post_due_date_text", (edd));
+
+                    jsonBody.put("fields", fields);
+                    //fieldsObject.put("day_of_next_appointment", nextContactDate);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String tag_string_req = "req_login";
+
+                getTextitJson(phoneNumber, tag_string_req, jsonBody);
+                dialog.dismiss();
+
+            }
+
+        });
+
+        dialog.show();
            loadContactSummaryData();
         //}
     }
@@ -301,6 +400,34 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
                 systolicBloodPressure = bpSystolicValue;
                 System.out.println("BP Systolic Value: " + bpSystolicValue);
             }
+
+            int lmpeddindex = jsonString.indexOf("{ edd");
+            if (lmpeddindex != -1) {
+                int start = jsonString.indexOf(":", lmpeddindex) + 1;
+                int end = jsonString.indexOf("}", start);
+                String lmpeddValue = jsonString.substring(start, end).trim();
+                lmpedd = lmpeddValue;
+                System.out.println("lmp edd: " + lmpeddValue);
+            }
+
+            int gestindex = jsonString.indexOf("{ gest_age");
+            if (gestindex != -1) {
+                int start = jsonString.indexOf(":", gestindex) + 1;
+                int end = jsonString.indexOf("}", start);
+                String gestValue = jsonString.substring(start, end).trim();
+                gest = gestValue;
+                System.out.println("{ gest_age" + gestValue);
+            }
+
+            int contactdateindex = jsonString.indexOf("contact_date");
+            if (contactdateindex != -1) {
+                int start = jsonString.indexOf(":", contactdateindex) + 1;
+                int end = jsonString.indexOf("}", start);
+                String contactDateValue = jsonString.substring(start, end).trim();
+                contactDate = contactDateValue;
+                System.out.println("contact date: " + contactDateValue);
+            }
+
 
             int bpDiastolicIndex = jsonString.indexOf("bp_diastolic");
             if (bpDiastolicIndex != -1) {
@@ -353,56 +480,87 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
 
             int danger_signsIndex = jsonString.indexOf("danger_signs");
             if (danger_signsIndex != -1) {
-                int start = jsonString.indexOf(":", danger_signsIndex) + 1;
-                int end = jsonString.indexOf("}", start);
+                int start = jsonString.indexOf("[", danger_signsIndex);
+                int end = jsonString.indexOf("]", start) + 1; // Include the closing bracket
                 String danger_signsValue = jsonString.substring(start, end).trim();
-                danger_signs = danger_signsValue;
-                System.out.println("BP Diastolic Value: " + danger_signsValue);
+
+                Pattern pattern = Pattern.compile("\"text\":\"(.*?)\"");
+                Matcher matcher = pattern.matcher(danger_signsValue);
+                StringBuilder extractedTexts = new StringBuilder();
+
+                while (matcher.find()) {
+                    if (extractedTexts.length() > 0) {
+                        extractedTexts.append(", ");
+                    }
+                    extractedTexts.append(matcher.group(1));
+                }
+
+                danger_signs = extractedTexts.toString();
+                System.out.println("Danger Signs: " + danger_signs);
             }
 
             detailMap = (HashMap<String, String>) getIntent().getSerializableExtra(ConstantsUtils.IntentKeyUtils.CLIENT_MAP);
             contactMap = (HashMap<String, String>) getIntent().getSerializableExtra(ConstantsUtils.JsonFormKeyUtils.PREVIOUS_VISITS);
-            nextContactNo = String.valueOf(Utils.getTodayContact(detailMap.get(DBConstantsUtils.KeyUtils.NEXT_CONTACT)) + 1);
             firstName = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.FIRST_NAME));
             lastName = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.LAST_NAME));
             phoneNumber = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.PHONE_NUMBER));
-            nextContactDate = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.NEXT_CONTACT_DATE));
+            //nextContactDate = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.NEXT_CONTACT_DATE));
+            contactDoneDate = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.VISIT_START_DATE));
             lastContactDate = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.LAST_CONTACT_RECORD_DATE));
             expectedDueDate = String.valueOf(detailMap.get(DBConstantsUtils.KeyUtils.EDD));
 
 
-            JSONObject jsonBody = new JSONObject();
-            try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = sdf.parse(contactDate);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
 
-                jsonBody.put("name", firstName + " " + lastName);
-                jsonBody.put("language", "eng");
-                JSONArray urnsArray = new JSONArray();
-                urnsArray.put("tel:" + "+26" + phoneNumber);
-                jsonBody.put("urns", urnsArray);
+            nextContactNo = String.valueOf(Utils.getTodayContact(detailMap.get(DBConstantsUtils.KeyUtils.NEXT_CONTACT)) + 2);
 
-                JSONObject fields = new JSONObject();
-                fields.put("day_of_next_appointment", nextContactDate);
-                fields.put("next_antenatal_appointment", (nextContactNo + 1));
-                fields.put("blood_pressure", (systolicBloodPressure + "/" + diastolicBloodPressure));
+            int ncn = Integer.parseInt(nextContactNo);
 
-                fields.put("danger_signs", (danger_signs));
+            float gestationalAgeFloat = Float.parseFloat(gest);
+            int ga = (int) gestationalAgeFloat;
 
-                fields.put("medicines", (medications));
 
-                fields.put("post_due_date", (expectedDueDate));
-
-                jsonBody.put("fields", fields);
-                //fieldsObject.put("day_of_next_appointment", nextContactDate);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            if (ncn < 2 && ga < 22) {
+                if (ga < 17) {
+                    int weeksToAdd = 20 - ga;
+                    calendar.add(Calendar.WEEK_OF_YEAR, weeksToAdd);
+                } else if (ga >= 17 && ga < 18) {
+                    int weeksToAdd = 22 - ga;
+                    calendar.add(Calendar.WEEK_OF_YEAR, weeksToAdd);
+                } else if (ga >= 18 && ga < 24) {
+                    int weeksToAdd = 26 - ga;
+                    calendar.add(Calendar.WEEK_OF_YEAR, weeksToAdd);
+                } else if (ga >= 24 && ga < 34) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 4);
+                } else if (ga >= 34 && ga < 40) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 2);
+                }
+            } else {
+                if (ga % 2 != 0) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 1);
+                }
+                if (ga < 17) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 20 - ga);
+                } else if (ga >= 17 && ga < 18) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 22 - ga);
+                } else if (ga >= 18 && ga < 24) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 26 - ga);
+                } else if (ga >= 24 && ga < 34) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 4);
+                } else if (ga >= 34 && ga < 40) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 2);
+                }
             }
 
-            String tag_string_req = "req_login";
-
-            getTextitJson(phoneNumber, tag_string_req, jsonBody);
+            nextContactDate = sdf.format(calendar.getTime());
+            System.out.println("Next Contact Date: " + nextContactDate);
 
 
         }
+
 
         Iterable<Object> ruleObjects = AncLibrary.getInstance().readYaml(FilePathUtils.FileUtils.CONTACT_SUMMARY);
 

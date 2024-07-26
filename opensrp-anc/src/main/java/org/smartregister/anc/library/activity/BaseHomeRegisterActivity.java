@@ -149,6 +149,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     private static ImageView hia2ReportingImage;
     private static TextView hia2ReportingText;
+    private static TextView syncText;
     private static ProgressBar reportProgress;
 
     public static String username;
@@ -356,6 +357,17 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             nrcSP = code;
         }
         return nrcSP;
+    }
+
+    public static String getSyncTime(){
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String syncSP = sp.getString("synctime", "Data synced: unsynced");
+
+        syncText = MeFragment.changedView.findViewById(R.id.synced_data_manual);
+        syncText.setText(syncSP);
+
+        return syncSP;
     }
 
 
@@ -1298,15 +1310,19 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                         locationString = locationString.substring(0, 4);
                     }
 
+
                     /*if(locationString == code){
                         JSONObject transformedData = transformKafkaData(clientData.toString());
                         transformedArray.put(transformedData);
                     Timber.d("Remote Data JSON Array: %s", transformedArray.toString(2));
                     }*/
 
+                    String fcode = getFacilityID();
 
 
-                    //if (locationString.equals(code)) {
+
+
+                    if (locationString.equals(fcode)) {
                             JSONObject transformedData = transformKafkaData(clientData.toString());
                             transformedArray.put(transformedData);
                             try {
@@ -1314,7 +1330,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                             } catch (Exception e) {
                                 Timber.e(e, "Error transforming data");
                             }
-                    //}
+                    }
 
                     /*JSONObject transformedData = transformKafkaData(clientData.toString());
                     transformedArray.put(transformedData);*/
@@ -1685,7 +1701,6 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
             setSelectedBottomBarMenuItem(org.smartregister.R.id.action_library);
         }
 
-        //if (getFacilityID() == formatedLocation.getText().toString()) {}
     }
 
     @Override
@@ -1951,7 +1966,7 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
 
     @Override
     public void onSyncStart() {
-
+        getSyncTime();
     }
 
     @Override
@@ -1963,17 +1978,20 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
     public void onSyncComplete(FetchStatus fetchStatus) {
         Toast.makeText(context, "Attempting to save monthly reports data", Toast.LENGTH_SHORT).show();
         loadReports();
+        remoteRegister();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
         long currentTime = System.currentTimeMillis();
-        /*if (canRun.get() && (currentTime - lastRunTime) >= TIME_WINDOW) {
-            canRun.set(false);
-            lastRunTime = currentTime;*/
-            remoteRegister();
-            /*ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-            scheduler.schedule(() -> canRun.set(true), TIME_WINDOW, TimeUnit.MILLISECONDS);
-        } else {
-            System.out.println("New users already created for window");
-        }*/
+        Date currentDate = new Date(currentTime);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy 'at' hh:mm a");
+        String syncedTime = dateFormat.format(currentDate);
+        String setSyncTime = "Data synced: " + syncedTime;
+        String syncSP = setSyncTime;
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("synctime", syncSP);
+        edit.commit();
+        //finish();
+        getSyncTime();
     }
 }
-
-
