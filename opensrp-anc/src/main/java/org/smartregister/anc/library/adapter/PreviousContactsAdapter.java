@@ -86,7 +86,7 @@ public class PreviousContactsAdapter extends RecyclerView.Adapter<PreviousContac
         addOtherRuleObjects(contactFacts);
         addAttentionFlagsRuleObjects(facts);
 
-        Date lastContactDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        Date lastContactDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
                 .parse(String.valueOf(contactFacts.asMap().get(ConstantsUtils.CONTACT_DATE)));
 
         String displayContactDate = new SimpleDateFormat("dd MMM " + "yyyy", Locale.getDefault()).format(lastContactDate);

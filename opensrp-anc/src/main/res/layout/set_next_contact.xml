@@ -4,8 +4,6 @@
     android:orientation="vertical"
     android:padding="@dimen/referral_dialog_padding">
 
-
-
     <org.smartregister.view.customcontrols.CustomFontTextView
         android:id="@+id/txt_title_label"
         style="@style/CustomFontTextViewStyle.ClientList"
@@ -14,12 +12,12 @@
         android:layout_marginBottom="10dp"
         android:lines="2"
         android:paddingStart="0dp"
-        android:text="Please enter the Next Contact Date"
+        android:text="Please enter the Next Appointment Date"
         android:textColor="@color/text_black"
         android:textSize="22sp"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/add_next_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,11 +39,10 @@
         android:background="@color/transparent"
         android:gravity="center"
         android:paddingStart="@dimen/referral_dialog_padding"
-        android:text="save"
+        android:text="Save"
         android:textAllCaps="false"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/text_black"
         android:textSize="@dimen/referral_dialog_text_size" />
-
 
 </LinearLayout>

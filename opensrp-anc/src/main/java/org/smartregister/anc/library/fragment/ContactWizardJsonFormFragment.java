@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -37,7 +36,6 @@ import com.vijay.jsonwizard.utils.PropertyManager;
 import org.json.JSONObject;
 import org.smartregister.anc.library.R;
 import org.smartregister.anc.library.activity.ContactJsonFormActivity;
-import org.smartregister.anc.library.activity.InputFilterMinMax;
 import org.smartregister.anc.library.activity.MainContactActivity;
 import org.smartregister.anc.library.activity.TestsActivity;
 import org.smartregister.anc.library.domain.Contact;
@@ -485,7 +483,7 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
         }
     }
 
-    public static void updateEndProperties(PropertyManager propertyManager, JSONObject form)
+    public static void updateEndProperties(long duration, PropertyManager propertyManager, JSONObject form)
             throws Exception {
         if (form.has(METADATA_PROPERTY)) {
             if (form.getJSONObject(METADATA_PROPERTY).has("end")) {
@@ -496,6 +494,33 @@ public class ContactWizardJsonFormFragment extends JsonWizardFormFragment {
                     value = "";
                 }
                 end.put(JsonFormConstants.VALUE, value);
+            }
+
+            if (form.getJSONObject(METADATA_PROPERTY).has("duration")) {
+                Calendar calendar = Calendar.getInstance();
+                JSONObject contactduration = form.getJSONObject(METADATA_PROPERTY).getJSONObject("duration");
+                long millisInSecond = 1000;
+                long millisInMinute = 60 * millisInSecond;
+                long millisInHour = 60 * millisInMinute;
+                long millisInDay = 24 * millisInHour;
+
+                long days = duration / millisInDay;
+                duration %= millisInDay;
+
+                long hours = duration / millisInHour;
+                duration %= millisInHour;
+
+                long minutes = duration / millisInMinute;
+                duration %= millisInMinute;
+
+                long seconds = duration / millisInSecond;
+
+                System.out.println("Days: " + days);
+                System.out.println("Hours: " + hours);
+                System.out.println("Minutes: " + minutes);
+                System.out.println("Seconds: " + seconds);
+                String timetaken = String.valueOf(days + "d" + hours + "h" + minutes + "m" + seconds + "s");
+                contactduration.put(JsonFormConstants.VALUE, timetaken);
             }
 
             if (form.getJSONObject(METADATA_PROPERTY).has("today")) {

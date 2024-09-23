@@ -5,13 +5,21 @@ import static org.smartregister.utils.PropertiesConverter.gson;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,9 +28,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -55,6 +65,7 @@ import org.smartregister.anc.library.util.FilePathUtils;
 import org.smartregister.anc.library.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.util.PermissionUtils;
+import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
@@ -66,6 +77,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -281,8 +293,6 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
     @Override
     public void onResume() {
         super.onResume();
-        /*if(isPermissionGranted())
-        {*/
 
         Context context = this;
 
@@ -292,11 +302,27 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(view);
 
-        Button yes = view.findViewById(R.id.save_date);
-        EditText NextDate = view.findViewById(R.id.add_next_contact);
+        CustomFontTextView textView = view.findViewById(R.id.txt_title_label);
 
+        String text = "Please enter the Next Appointment Date";
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(text);
+        spannableStringBuilder.append(" *");
+
+        spannableStringBuilder.setSpan(
+                new ForegroundColorSpan(Color.RED),
+                spannableStringBuilder.length() - 1,
+                spannableStringBuilder.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+
+        textView.setText(spannableStringBuilder);
+
+        Button yes = view.findViewById(R.id.save_date);
+        TextView nextDate = view.findViewById(R.id.add_next_contact);
 
         final AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
         Window window = dialog.getWindow();
         if (window != null) {
@@ -306,13 +332,29 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
             window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         }
 
+        nextDate.setOnClickListener(v -> {
+            final Calendar calendar = Calendar.getInstance();
+            DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, monthOfYear);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+                    nextDate.setText(sdf.format(calendar.getTime()));
+                }
+            };
+            new DatePickerDialog(context, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+        });
+
         yes.setOnClickListener(v -> {
-            String next_value = NextDate.getText().toString();
-            if (next_value != null) {
+            String next_value = nextDate.getText().toString();
+            if (next_value == null || next_value.isEmpty()) {
+                Toast.makeText(context, "Please select a date", Toast.LENGTH_SHORT).show();
+            } else {
                 nextContactDateEdited = next_value;
                 JSONObject jsonBody = new JSONObject();
                 try {
-
                     jsonBody.put("name", firstName + " " + lastName);
                     jsonBody.put("language", "eng");
                     JSONArray urnsArray = new JSONArray();
@@ -326,12 +368,12 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
                     JSONObject fields = new JSONObject();
                     fields.put("day_of_next_appointment", nextContactDate);
                     fields.put("next_contact_text", nextContactDateEdited);
-                    if(nextContactNo.contains("0")||nextContactNo.contains("1")||nextContactNo.contains("2")||nextContactNo.contains("3")) {
+                    if (nextContactNo.contains("0") || nextContactNo.contains("1") || nextContactNo.contains("2") || nextContactNo.contains("3")) {
                         fields.put("first_antenatal_appointment", contactDate);
                     }
                     fields.put("next_antenatal_appointment", (nextContactNo + 1));
 
-                    if(!nextContactNo.contains("0") && !nextContactNo.contains("1")){
+                    if (!nextContactNo.contains("0") && !nextContactNo.contains("1")) {
                         fields.put("after_antenatal_appointment", (contactDate + 1));
                     }
 
@@ -341,31 +383,46 @@ public class ContactSummaryFinishActivity extends BaseProfileActivity implements
 
                     String edd = "12-12-2024";
 
-                    if(lmpedd != null){
+                    if (lmpedd != null) {
                         edd = lmpedd;
                     }
                     fields.put("post_due_date", (edd));
                     fields.put("post_due_date_text", (edd));
 
                     jsonBody.put("fields", fields);
-                    //fieldsObject.put("day_of_next_appointment", nextContactDate);
+
+                    String tag_string_req = "req_login";
+
+                    getTextitJson(phoneNumber, tag_string_req, jsonBody);
+                    dialog.dismiss();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                String tag_string_req = "req_login";
-
-                getTextitJson(phoneNumber, tag_string_req, jsonBody);
-                dialog.dismiss();
-
             }
+        });
 
+
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    PatientRepository.updateEDDDate(baseEntityId, null); //Reset EDD
+                    back();
+                    dialog.dismiss();
+                    return true;
+                }
+                return false;
+            }
         });
 
         dialog.show();
-           loadContactSummaryData();
-        //}
+        loadContactSummaryData();
     }
+
+    public void back(){
+        super.onBackPressed();
+    }
+
 
     @Override
     protected int getViewLayoutId() {

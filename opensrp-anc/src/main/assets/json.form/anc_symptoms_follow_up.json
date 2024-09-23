@@ -53,6 +53,12 @@
       "openmrs_data_type": "end",
       "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     },
+    "duration": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "duration",
+      "openmrs_entity_id": "duration"
+    },
     "today": {
       "openmrs_entity_parent": "",
       "openmrs_entity": "encounter",

@@ -3,7 +3,10 @@ package org.smartregister.anc.library.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.InputFilter;
+import android.view.MotionEvent;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
@@ -47,13 +50,55 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
     private ProgressDialog progressDialog;
     private String formName;
     public String dangerValid;
+    private long startTime = 0L;
+    private long pausedTime = 0L;
+    private boolean isPaused = false;
+    private Handler inactivityHandler;
+    private Runnable inactivityRunnable;
+    private static final long INACTIVITY_TIMEOUT = 30000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent() != null) {
             formName = getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.FORM_NAME);
         }
+        startTime = SystemClock.elapsedRealtime();
+        setupInactivityHandler();
         super.onCreate(savedInstanceState);
+    }
+
+    private void setupInactivityHandler() {
+        inactivityHandler = new Handler();
+        inactivityRunnable = new Runnable() {
+            @Override
+            public void run() {
+                pauseTimer();
+            }
+        };
+        resetInactivityTimer();
+    }
+
+    private void resetInactivityTimer() {
+        inactivityHandler.removeCallbacks(inactivityRunnable);
+        inactivityHandler.postDelayed(inactivityRunnable, INACTIVITY_TIMEOUT);
+    }
+
+    private void pauseTimer() {
+        if (!isPaused) {
+            pausedTime = SystemClock.elapsedRealtime();
+            isPaused = true;
+            Timber.i("Timer paused due to inactivity.");
+        }
+    }
+
+    private void resumeTimer() {
+        if (isPaused) {
+            long resumeTime = SystemClock.elapsedRealtime();
+            startTime += (resumeTime - pausedTime);
+            isPaused = false;
+            Timber.i("Timer resumed after inactivity.");
+        }
     }
 
     @Override
@@ -186,11 +231,27 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
     @Override
     public void onPause() {
         super.onPause();
+        pauseTimer();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        resetInactivityTimer();
+        return super.dispatchTouchEvent(event);
+    }
+
+    private long getTimeSpentInActivity() {
+        if (isPaused) {
+            return pausedTime - startTime;
+        } else {
+            return SystemClock.elapsedRealtime() - startTime;
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        resumeTimer();
         if (getIntent() != null) {
             formName = getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.FORM_NAME);
         }
@@ -291,7 +352,9 @@ public class ContactJsonFormActivity extends FormConfigurationJsonFormActivity {
      */
     public void proceedToMainContactPage() {
         try {
-            ContactWizardJsonFormFragment.updateEndProperties(propertyManager, getmJSONObject());
+            long duration = getTimeSpentInActivity();
+            Timber.i("Total time spent in activity: %d ms", duration);
+            ContactWizardJsonFormFragment.updateEndProperties(duration, propertyManager, getmJSONObject());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

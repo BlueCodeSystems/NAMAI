@@ -48,20 +48,25 @@ public class LastContactAdapter extends RecyclerView.Adapter<LastContactAdapter.
             Facts facts = lastContactDetails.getFacts();
 
             String resultGA = facts.get("gest_age");
+            String resultContactNo = facts.get("contact_no");
             String gestAge = null;
 
             if(resultGA != null && resultGA.length() > 2){
                 gestAge = resultGA.substring(0, resultGA.length() - 2);
             }
 
-            if (TextUtils.isEmpty(gestAge)) {
+            /*if (TextUtils.isEmpty(gestAge)) {
                 gestAge = "";
-            }
+            }*/
 
             String contactNo = "";
-            if (!lastContactDetails.getContactNo().contains("-")) {
-                contactNo = lastContactDetails.getContactNo();
+
+            if(resultContactNo != null) {
+                contactNo = resultContactNo;
             }
+            /*if (!lastContactDetails.getContactNo().contains("-")) {
+                contactNo = lastContactDetails.getContactNo();
+            }*/
 
             if (!StringUtils.isEmpty(gestAge)) {
                 viewHolder.contactTextView.setText(
