@@ -91,7 +91,10 @@ public class ReportActivity3 extends AppCompatActivity {
         monthNumber = getIntent().getExtras().getString("month_number");
         reportType = getIntent().getExtras().getString("report_type");
 
-        txtPeriod.setText(monthName + " 2023");
+        Calendar mcurrentDate = Calendar.getInstance();
+        int mYear = mcurrentDate.get(Calendar.YEAR);
+
+        txtPeriod.setText(monthName + " " + mYear);
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());

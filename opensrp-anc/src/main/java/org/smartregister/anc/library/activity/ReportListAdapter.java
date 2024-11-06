@@ -16,6 +16,7 @@ import org.smartregister.anc.library.domain.AttentionFlag;
 import org.smartregister.anc.library.model.AttentionFlagModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import android.widget.Toast;
 
@@ -50,9 +51,11 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
 
         final MonthModel month = months.get(position);
 
+        Calendar mcurrentDate = Calendar.getInstance();
+        int mYear = mcurrentDate.get(Calendar.YEAR);
 
 
-        holder.txtMonthName.setText(month.getMonthName() + " 2023 Report");
+        holder.txtMonthName.setText(month.getMonthName() + " " + mYear + " Report");
 
         holder.monthLayout.setOnClickListener(v -> {
 

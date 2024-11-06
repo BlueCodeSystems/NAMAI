@@ -1579,96 +1579,100 @@ public class BaseHomeRegisterActivity extends BaseRegisterActivity implements Re
                 Timber.d(jsonString);
                 if (StringUtils.isNotBlank(jsonString)) {
                     JSONObject form = new JSONObject(jsonString);
-                    switch (form.getString(ANCJsonFormUtils.ENCOUNTER_TYPE)) {
-                        case ConstantsUtils.EventTypeUtils.REGISTRATION:
+                    //String location = String.valueOf(getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"encounter_location"));
 
-                            ((RegisterContract.Presenter) presenter).saveRegistrationForm(jsonString, false);
+                        switch (form.getString(ANCJsonFormUtils.ENCOUNTER_TYPE)) {
+                            case ConstantsUtils.EventTypeUtils.REGISTRATION:
 
-
-                            String tag_string_req = "req_login";
-                            String url = "https://textit.com/api/v2/contacts.json";
-
-                            JSONObject jsonBody = new JSONObject();
-                            try {
-                                JSONObject fname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"first_name");
-                                JSONObject lname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"last_name");
-                                JSONObject pnum = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"),"phone_number");
-
-                                String firstName = fname.getString(ANCJsonFormUtils.VALUE);
-                                String lastName = lname.getString(ANCJsonFormUtils.VALUE);
-                                String phoneNumber = "+260" + pnum.getString(ANCJsonFormUtils.VALUE);
-
-                                jsonBody.put("uuid", firstName + " " + lastName);
+                                ((RegisterContract.Presenter) presenter).saveRegistrationForm(jsonString, false);
 
 
-                                jsonBody.put("name", firstName + " " + lastName);
-                                jsonBody.put("language", "eng");
-                                JSONArray urnsArray = new JSONArray();
-                                urnsArray.put("tel:" + phoneNumber);
-                                jsonBody.put("urns", urnsArray);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                                if(!jsonString.contains("happy_woman_health_center")) {
+                                    String tag_string_req = "req_login";
+                                    String url = "https://textit.com/api/v2/contacts.json";
 
-                            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                                    Request.Method.POST,
-                                    url,
-                                    jsonBody,
-                                    new Response.Listener<JSONObject>() {
-                                        @Override
-                                        public void onResponse(JSONObject response) {
-                                            Log.e("TextItAPIResponse", "Response Received: " + response.toString());
-                                        }
-                                    },
-                                    new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            if (error.networkResponse != null) {
-                                                Log.e("TextItAPIError", "Error response code: " + error.networkResponse.statusCode);
+                                    JSONObject jsonBody = new JSONObject();
+                                    try {
+                                        JSONObject fname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "first_name");
+                                        JSONObject lname = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "last_name");
+                                        JSONObject pnum = getFieldJSONObject(form.getJSONObject("step1").getJSONArray("fields"), "phone_number");
+
+                                        String firstName = fname.getString(ANCJsonFormUtils.VALUE);
+                                        String lastName = lname.getString(ANCJsonFormUtils.VALUE);
+                                        String phoneNumber = "+260" + pnum.getString(ANCJsonFormUtils.VALUE);
+
+                                        jsonBody.put("uuid", firstName + " " + lastName);
+
+
+                                        jsonBody.put("name", firstName + " " + lastName);
+                                        jsonBody.put("language", "eng");
+                                        JSONArray urnsArray = new JSONArray();
+                                        urnsArray.put("tel:" + phoneNumber);
+                                        jsonBody.put("urns", urnsArray);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                                            Request.Method.POST,
+                                            url,
+                                            jsonBody,
+                                            new Response.Listener<JSONObject>() {
+                                                @Override
+                                                public void onResponse(JSONObject response) {
+                                                    Log.e("TextItAPIResponse", "Response Received: " + response.toString());
+                                                }
+                                            },
+                                            new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    if (error.networkResponse != null) {
+                                                        Log.e("TextItAPIError", "Error response code: " + error.networkResponse.statusCode);
+                                                    }
+                                                }
                                             }
+                                    ) {
+                                        @Override
+                                        public byte[] getBody() {
+                                            return jsonBody.toString().getBytes();
                                         }
-                                    }
-                            ) {
-                                @Override
-                                public byte[] getBody() {
-                                    return jsonBody.toString().getBytes();
+
+                                        @Override
+                                        public String getBodyContentType() {
+                                            return "application/json";
+                                        }
+
+                                        @Override
+                                        public Map<String, String> getHeaders() throws AuthFailureError {
+                                            String apiKey = BuildConfig.TEXTIT_API_KEY;
+                                            HashMap<String, String> headers = new HashMap<String, String>();
+                                            if (apiKey != null) {
+                                                headers.put("Authorization", apiKey);
+                                            }
+                                            return headers;
+                                        }
+                                    };
+                                    addToJSONRequestQueue(jsonObjectRequest, tag_string_req);
+                                    break;
                                 }
 
-                                @Override
-                                public String getBodyContentType() {
-                                    return "application/json";
-                                }
+                            case ConstantsUtils.EventTypeUtils.CLOSE:
+                                ((RegisterContract.Presenter) presenter).closeAncRecord(jsonString);
+                                break;
+                            case ConstantsUtils.EventTypeUtils.QUICK_CHECK:
+                                Contact contact = new Contact();
+                                contact.setContactNumber(getIntent().getIntExtra(ConstantsUtils.IntentKeyUtils.CONTACT_NO, 0));
+                                ANCFormUtils
+                                        .persistPartial(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID), contact);
+                                PatientRepository
+                                        .updateContactVisitStartDate(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID),
+                                                Utils.getDBDateToday());
 
-                                @Override
-                                public Map<String, String> getHeaders() throws AuthFailureError {
-                                    String apiKey = BuildConfig.TEXTIT_API_KEY;
-                                    HashMap<String, String> headers = new HashMap<String, String>();
-                                    if(apiKey != null) {
-                                        headers.put("Authorization", apiKey);
-                                    }
-                                    return headers;
-                                }
-                            };
-
-                            addToJSONRequestQueue(jsonObjectRequest, tag_string_req);
-                            break;
-                        case ConstantsUtils.EventTypeUtils.CLOSE:
-                            ((RegisterContract.Presenter) presenter).closeAncRecord(jsonString);
-                            break;
-                        case ConstantsUtils.EventTypeUtils.QUICK_CHECK:
-                            Contact contact = new Contact();
-                            contact.setContactNumber(getIntent().getIntExtra(ConstantsUtils.IntentKeyUtils.CONTACT_NO, 0));
-                            ANCFormUtils
-                                    .persistPartial(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID), contact);
-                            PatientRepository
-                                    .updateContactVisitStartDate(getIntent().getStringExtra(ConstantsUtils.IntentKeyUtils.BASE_ENTITY_ID),
-                                            Utils.getDBDateToday());
-
-                            Date currentTime = Calendar.getInstance().getTime();
-                            break;
-                        default:
-                            break;
-                    }
+                                Date currentTime = Calendar.getInstance().getTime();
+                                break;
+                            default:
+                                break;
+                        }
                 }
             } catch (Exception e) {
                 Timber.e(e, "%s --> onActivityResultExtended()", this.getClass().getCanonicalName());
